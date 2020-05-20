@@ -1,0 +1,35 @@
+<section class="works" id="works">
+	<div class="works__text">
+		<div class="works__text--recent">My recent</div>
+		<div class="works__text--works">WORKS</div>
+		<div class="works__text--sub">Created with passion</div>
+	</div>
+	<div class="mockup">
+		<img src="{{ asset('build/images/mockup.png')}}" alt=""/>
+		
+		{# Add Arrows #}
+		<div class="swiper-button-next"></div>
+		<div class="swiper-button-prev"></div>
+		{# Swiper #}
+		<div class="swiper-container">
+			<div class="swiper-wrapper">
+			{# Loads images from back-end via JS script from index.html.twig #}
+			{% for image in images %}
+				<div class="swiper-slide slide{{ loop.index|first }}" data-background="{{ image }}">
+					<div class="slide__caption">
+						<p class="slide__text">Some text</p>
+						<p class="slide__text--description">Some description</p>
+					</div>
+				</div>
+			{% endfor %}
+			</div>
+		</div>
+	</div>
+
+	{# Mouse scoller #}
+	<div class="scroll pt-5">
+		<i class="fas fa-chevron-down normal"></i>
+		<i class="fas fa-chevron-down smaller"></i>
+		<i class="fas fa-chevron-down tiny"></i>
+	</div>
+</section>

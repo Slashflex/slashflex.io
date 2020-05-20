@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ title }}
+{% endblock %}
+
+{% block body %}
+	<div class="logo">
+		<a href="/" class="logo__text">/ FLX</a>
+	</div>
+
+	{# Collapse button #}
+	<button class="navbar-toggler first-button open-nav" type="button">
+		<div class="animated-icon">
+			<span></span>
+			<span></span>
+			<span></span>
+		</div>
+	</button>
+
+	{# Header #}
+	<header>
+		<div class="hero">
+			<h1 class="hero__text">Slashflex</h1>
+			<div class="hero__chess1"></div>
+			<div class="hero__chess2"></div>
+			<div class="hero__chess3"></div>
+		</div>
+
+		<div id="parallax"></div>
+	</header>
+
+	{# Section About #}
+	{% include "partials/_section_about.html.twig" %}
+
+	{# Section Stack #}
+	{% include "partials/_section_stack.html.twig" %}
+
+	{# Section Works #}
+	{% include "partials/_section_works.html.twig" %}
+
+	{# Section Works #}
+	{% include "partials/_footer.html.twig" %}
+
+	{# Bottom Navigation #}
+	{% include "partials/_bottom_nav.html.twig" %}
+{% endblock %}
+
+{% block javascripts %}
+	<script type="text/javascript">
+    // Takes Array from back-end and adds a background-image as data attribute
+    (function background() {
+      for (let i = 1; i < {{ images|length }}; i++) {
+        var img = $(`.slide${[i]}`);
+        img.css('background-image', function () {
+          var bg = (`url(${$(this).data('background')})`);
+          return bg;
+        });
+      }
+    })();
+	</script>
+{% endblock %}
