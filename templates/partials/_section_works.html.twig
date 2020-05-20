@@ -14,11 +14,11 @@
 		<div class="swiper-container">
 			<div class="swiper-wrapper">
 			{# Loads images from back-end via JS script from index.html.twig #}
-			{% for image in images %}
-				<div class="swiper-slide slide{{ loop.index|first }}" data-background="{{ image }}">
+			{% for project in projects %}
+				<div class="swiper-slide slide{{ loop.index|first }}" data-background="{{ project.mainImage }}">
 					<div class="slide__caption">
-						<p class="slide__text">Some text</p>
-						<p class="slide__text--description">Some description</p>
+						<p class="slide__text">{{ project.title }}</p>
+						<p class="slide__text--description">{{ project.introduction|u.truncate(30, '...') }}</p>
 					</div>
 				</div>
 			{% endfor %}

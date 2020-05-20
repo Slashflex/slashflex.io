@@ -48,15 +48,27 @@
 
 {% block javascripts %}
 	<script type="text/javascript">
-    // Takes Array from back-end and adds a background-image as data attribute
-    (function background() {
-      for (let i = 1; i < {{ images|length }}; i++) {
-        var img = $(`.slide${[i]}`);
-        img.css('background-image', function () {
-          var bg = (`url(${$(this).data('background')})`);
-          return bg;
-        });
-      }
-    })();
+	  // Symfony webpack encore bundle fix for SCSS not rendering background-image url(s)
+	
+	  // IIFE that takes Array from back-end and adds a background-image based on data attribute
+	  (() => {
+	    // Loops through each project
+	    for (let i = 1; i <= {{ projects|length }}; i++) {
+	      // Increments class
+	      var img = $(`.slide${[i]}`);
+
+		  // Sets background-image property base on data attribute		
+		  img.css('background-image', function () {
+			var bg = ('url(' + $(this).data('background') + ')');
+			return bg;
+		  });
+
+		  // Sets cover property to background-image
+	      img.css('background-size', function () {
+		    var cover = 'cover';
+		    return cover;
+	      });
+	    }
+      })();
 	</script>
 {% endblock %}

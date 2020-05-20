@@ -2,33 +2,30 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\ProjectRepository;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
 {
+    private $projectRepository;
+
+    public function __construct(ProjectRepository $projectRepository)
+    {
+        $this->projectRepository = $projectRepository;
+    }
+
     /**
      * @Route("/", name="home")
      */
     public function index()
     {
-        $arr = [
-            'https://i.picsum.photos/id/645/1200/600.jpg',
-            'https://i.picsum.photos/id/445/1200/600.jpg',
-            'https://i.picsum.photos/id/345/1200/600.jpg',
-            'https://i.picsum.photos/id/215/1200/600.jpg',
-            'https://i.picsum.photos/id/212/1200/600.jpg',
-            'https://i.picsum.photos/id/214/1200/600.jpg',
-            'https://i.picsum.photos/id/213/1200/600.jpg',
-            'https://i.picsum.photos/id/217/1200/600.jpg',
-            'https://i.picsum.photos/id/220/1200/600.jpg',
-            'https://i.picsum.photos/id/232/1200/600.jpg',
-            'https://i.picsum.photos/id/45/1200/600.jpg'
-        ];
+        // Retrieve all projects from database
+        $projects = $this->projectRepository->findAll();
 
         return $this->render('home/index.html.twig', [
             'title' => 'David Saoud | /FLX',
-            'images' => $arr
+            'projects' => $projects
         ]);
     }
 }
