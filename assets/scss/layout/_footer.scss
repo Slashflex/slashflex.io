@@ -1,0 +1,40 @@
+/* Footer */
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 55vh;
+  background: $color-secondary;
+  color: $color-white;
+  z-index: -1;
+  box-shadow: inset 0px 3px 16px 0px rgba($color-black, 0.75);
+  text-align: justify;
+
+  &__title {
+    font-size: 2rem;
+  }
+
+  &__slashflex {
+    font-size: 3rem;
+    font-weight: 800;
+    color: $color-tertiary;
+    transition: all 0.9s;
+    font-family: "Montserrat", Sans-serif;
+
+    &:hover {
+      text-shadow: 0 0 1vw $color-tertiary;
+    }
+  }
+}
+
+.bottomNav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background-color: $color-secondary;
+  width: 100vw;
+  height: 33vh;
+  display: none;
+  z-index: 2;
+}

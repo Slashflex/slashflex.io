@@ -1,0 +1,69 @@
+header {
+  display: flex;
+  height: 100vh;
+}
+.hero {
+  width: 60%;
+  max-height: 18vh;
+  align-self: center;
+  margin: 0 auto 6rem auto;
+
+  &__text {
+    font-family: "Montserrat", Sans-serif;
+    font-stretch: expanded;
+    font-size: 9vw;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: $color-white;
+    background-color: $color-secondary;
+
+    animation: movingH1 10s infinite;
+    text-align: center;
+  }
+
+  &__chess1 {
+    position: relative;
+    height: 56vh;
+    // background-image: url(https://i.imgur.com/uzGWJgS.png);
+    background-image: url(../../images/chess_1.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-position: 50% 50%;
+    background-size: 38%;
+    top: 95%;
+    left: 84%;
+    transform: translate(-50%, -17%);
+    animation: chess1 250s infinite;
+    width: 26vw;
+  }
+
+  &__chess2 {
+    position: relative;
+    height: 56vh;
+    background-image: url(../../images/chess_2-1.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-position: 38% 61%;
+    background-size: 40%;
+    bottom: 200%;
+    left: 20%;
+    transform: translate(-50%, -138%);
+    width: 26vw;
+    animation: chess2 100s infinite;
+  }
+
+  &__chess3 {
+    position: relative;
+    height: 95vh;
+    background-image: url(../../images/chess_3-1.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-position: 50% 50%;
+    background-size: 40%;
+    bottom: 400%;
+    left: 75%;
+    width: 32%;
+    transform: translate(-50%, -192%);
+    animation: chess3 100s infinite;
+  }
+}

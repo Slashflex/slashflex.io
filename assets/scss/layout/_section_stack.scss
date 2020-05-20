@@ -1,0 +1,34 @@
+/* Stack */
+.stack {
+  min-height: 100vh;
+
+  &__text {
+    text-align: center;
+    padding-top: 5rem;
+
+    &--recent {
+      text-transform: uppercase;
+      font-size: 2rem;
+      text-align: center;
+      font-weight: 100;
+      margin-bottom: -2rem;
+      position: relative;
+    }
+
+    &--stack {
+      font-size: 3rem;
+      font-weight: 800;
+      font-family: "Montserrat", Sans-serif;
+      margin-bottom: -4.7rem;
+      position: relative;
+    }
+
+    &--sub {
+      font-size: 3rem;
+      text-transform: uppercase;
+      line-height: 1;
+      color: rgb(218, 218, 218);
+      letter-spacing: 2px;
+    }
+  }
+}
