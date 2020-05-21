@@ -8,7 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=ProjectRepository::class)
+ * @ORM\Entity(repositoryClass="App\Repository\ProjectsRepository")
  */
 class Project
 {
@@ -55,7 +55,7 @@ class Project
     private $created_at;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Image::class, inversedBy="projects")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Image", inversedBy="projects", orphanRemoval=true)
      */
     private $image;
 

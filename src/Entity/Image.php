@@ -8,7 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=ImageRepository::class)
+ * @ORM\Entity(repositoryClass="App\Repository\ImagesRepository")
  */
 class Image
 {
@@ -25,7 +25,7 @@ class Image
     private $url;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Project::class, mappedBy="image")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Project", mappedBy="image")
      */
     private $projects;
 

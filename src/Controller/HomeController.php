@@ -24,7 +24,7 @@ class HomeController extends AbstractController
         $projects = $this->projectRepository->findAll();
 
         return $this->render('home/index.html.twig', [
-            'title' => 'David Saoud | /FLX',
+            'title' => '/FLX | Home',
             'projects' => $projects
         ]);
     }

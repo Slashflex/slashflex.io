@@ -1,4 +1,3 @@
-// Reduce .hero max-height based on .hero__text width
 $(document).ready(() => {
   // Off menu
   $(".open-nav").click(function () {
@@ -20,29 +19,31 @@ $(document).ready(() => {
     e.preventDefault();
   });
 
-  // Parallax events
-  (function () {
-    // Add event listener
-    document.addEventListener("mousemove", parallax);
-    const chess1 = document.querySelector(".hero__chess1");
-    const chess2 = document.querySelector(".hero__chess2");
-    const chess3 = document.querySelector(".hero__chess3");
-
-    // Magic happens here
-    function parallax(e) {
-      let width = window.innerWidth / 2;
-      let height = window.innerHeight / 2;
-      let mouseX = e.clientX;
-      let mouseY = e.clientY;
-      let depth = `${50 - (mouseX - width) * 0.01}% ${
-        50 - (mouseY - height) * 0.01
-      }%`;
-
-      chess1.style.backgroundPosition = depth;
-      chess2.style.backgroundPosition = depth;
-      chess3.style.backgroundPosition = depth;
-    }
-  })();
+  // Sets parallax effect only on root page
+  if (window.location.pathname == '/') {
+    // Parallax events
+    (() => {
+      // Add event listener
+      document.addEventListener("mousemove", parallax);
+      const chess1 = document.querySelector(".hero__chess1");
+      const chess2 = document.querySelector(".hero__chess2");
+      const chess3 = document.querySelector(".hero__chess3");
+  
+      // Magic happens here
+      function parallax(e) {
+        let width = window.innerWidth / 2;
+        let height = window.innerHeight / 2;
+        let mouseX = e.clientX;
+        let mouseY = e.clientY;
+        let depth = `${50 - (mouseX - width) * 0.01}% ${50 - (mouseY - height) * 0.01}%`;
+  
+        chess1.style.backgroundPosition = depth;
+        chess2.style.backgroundPosition = depth;
+        chess3.style.backgroundPosition = depth;
+      }
+    })();
+  }
+  
 
   // Swiper
   var swiper = new Swiper(".swiper-container", {
@@ -63,4 +64,32 @@ $(document).ready(() => {
       return false;
     });
   })();
+
+  // Auto expand textarea as user input grows
+  document.addEventListener(
+    'input',
+    e => {
+      if (e.target.tagName.toLowerCase() !== 'textarea') return;
+      autoExpand(e.target);
+    },
+    false
+  );
+
+  const autoExpand = field => {
+    // Reset field height
+    field.style.height = 'inherit';
+
+    // Get the computed styles for the element
+    const computed = window.getComputedStyle(field);
+
+    // Calculate the height
+    const height =
+      parseInt(computed.getPropertyValue('border-top-width'), 10) +
+      parseInt(computed.getPropertyValue('padding-top'), 10) +
+      field.scrollHeight +
+      parseInt(computed.getPropertyValue('padding-bottom'), 10) +
+      parseInt(computed.getPropertyValue('border-bottom-width'), 10);
+
+    field.style.height = `${height}px`;
+  };
 });

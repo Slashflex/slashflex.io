@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block body %}
+	<table>
+		<thead>
+			<tr>
+				<th>Title</th>
+				<th>Introduction</th>
+				<th>Content 1</th>
+				<th>Content 2</th>
+				<th>Content 3</th>
+				<th>Main Image</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				{% for project in projects %}
+					<td>{{ project.title }}</td>
+					<td>{{ project.introduction }}</td>
+					<td>{{ project.content1 }}</td>
+					<td>{{ project.content2 }}</td>
+					<td>{{ project.content3 }}</td>
+					<td><img src="{{ project.mainImage }}" alt="" style="width: 10%"></td>
+				{% endfor %}
+			</tr>
+            <hr>
+		</tbody>
+	</table>
+{% endblock %}

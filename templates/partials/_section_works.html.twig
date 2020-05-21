@@ -7,13 +7,14 @@
 	<div class="mockup">
 		<img src="{{ asset('build/images/mockup.png')}}" alt=""/>
 		
-		{# Add Arrows #}
+		<!-- Swiper control arrows -->
 		<div class="swiper-button-next"></div>
 		<div class="swiper-button-prev"></div>
-		{# Swiper #}
+		
+		<!-- Swiper -->
 		<div class="swiper-container">
 			<div class="swiper-wrapper">
-			{# Loads images from back-end via JS script from index.html.twig #}
+			<!-- Loads images from back-end via a JS script from index.html.twig -->
 			{% for project in projects %}
 				<div class="swiper-slide slide{{ loop.index|first }}" data-background="{{ project.mainImage }}">
 					<div class="slide__caption">
@@ -26,7 +27,7 @@
 		</div>
 	</div>
 
-	{# Mouse scoller #}
+	<!-- Mouse scoller -->
 	<div class="scroll pt-5">
 		<i class="fas fa-chevron-down normal"></i>
 		<i class="fas fa-chevron-down smaller"></i>
