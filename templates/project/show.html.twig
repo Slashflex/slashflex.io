@@ -47,6 +47,15 @@
                     </a>
                 </div>
             </div>
+
+            <div class="col-md-4">
+                <p>{{ project.content1 }}</p>
+                <p>{{ project.content2 }}</p>
+                <p>{{ project.content3 }}</p>
+                {% for content in project.content %}
+                    <p>{{ content }}</p>
+                {% endfor %}
+            </div>
         </div>
     </div>
 {% endblock %}

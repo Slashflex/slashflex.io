@@ -13,7 +13,7 @@
 			<h2 class="heading-secondary text-center mb3">
 				Create a new project
 			</h2>
-			{% form_theme form 'project/_images-collection.html.twig' %}
+			{% form_theme form with ['project/_images-collection.html.twig', 'project/_fields-collection.html.twig'] %}
 			{{ form_start(form, {'attr': {'class': 'w-100 m-auto'}}) }}
 			<div class="row">
 				<div class="col-md-6">
@@ -34,9 +34,7 @@
 						{{ form_errors(form.content_1) }}
 						{{ form_widget(form.content_1, {'attr': { 'class': 'form-control form-control-lg' }}) }}
 					</div>
-				</div>
-
-				<div class="col-md-6">
+				
 					<div class="form-group">
 						<label for="content-field">Contenu</label>
 						{{ form_errors(form.content_2) }}
@@ -54,7 +52,9 @@
 						{{ form_errors(form.main_image) }}
 						{{ form_widget(form.main_image, {'attr': { 'class': 'form-control form-control-lg' }}) }}
 					</div>
+				</div>
 
+				<div class="col-md-6">
 					{% block project_images_widget %}
 						{{ form_widget(form) }}
 					{% endblock %}

@@ -13,7 +13,7 @@
 			<h2 class="heading-secondary text-center mb3">
 				Edit {{ project.title }}
 			</h2>
-			{% form_theme form 'project/_images-collection.html.twig' %}
+			{% form_theme form with ['project/_images-collection.html.twig', 'project/_fields-collection.html.twig'] %}
 			{{ form_start(form, {'attr': {'class': 'w-100 m-auto'}}) }}
 			<div class="row">
 				<div class="col-md-6">

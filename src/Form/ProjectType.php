@@ -25,6 +25,12 @@ class ProjectType extends AbstractType
                 'entry_type' => ImageType::class,
                 'allow_add' => true,
                 'allow_delete' => true
+            ])
+            ->add('content', CollectionType::class, [
+                'label' => false,
+                'entry_type' => FieldType::class,
+                'allow_add' => true,
+                'allow_delete' => true
             ]);
     }
 

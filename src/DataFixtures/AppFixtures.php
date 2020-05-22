@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Field;
 use App\Entity\Project;
 use App\Entity\Image;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -43,6 +44,18 @@ class AppFixtures extends Fixture
 
                 $manager->persist($image);
             }
+
+            for ($k = 1; $k <= mt_rand(1, 15); $k++) {
+                $paragraphs = $faker->paragraphs(mt_rand(1, 10), true);
+
+                $field = new Field();
+                $field
+                    ->setContent($paragraphs)
+                    ->addProject($project);
+
+                $manager->persist($field);
+            }
+
             $manager->persist($project);
         }
         $manager->flush();

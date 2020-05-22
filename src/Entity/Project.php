@@ -65,9 +65,15 @@ class Project
      */
     private $slug;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Field::class, inversedBy="projects", orphanRemoval=true)
+     */
+    private $content;
+
     public function __construct()
     {
         $this->image = new ArrayCollection();
+        $this->content = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -217,5 +223,31 @@ class Project
     public function __toString()
     {
         return $this->getMainImage();
+    }
+
+    /**
+     * @return Collection|Field[]
+     */
+    public function getContent(): Collection
+    {
+        return $this->content;
+    }
+
+    public function addContent(Field $content): self
+    {
+        if (!$this->content->contains($content)) {
+            $this->content[] = $content;
+        }
+
+        return $this;
+    }
+
+    public function removeContent(Field $content): self
+    {
+        if ($this->content->contains($content)) {
+            $this->content->removeElement($content);
+        }
+
+        return $this;
     }
 }
