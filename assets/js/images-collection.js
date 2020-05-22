@@ -5,7 +5,6 @@ $(document).ready(function () {
     const template = $("#project_image")
       .data("prototype")
       .replace(/__name__/g, index);
-    console.log(template);
     $("#project_image").append(template);
     $("#widgets-counter").val(index + 1);
 
