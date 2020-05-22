@@ -28,7 +28,7 @@ class ProjectController extends AbstractController
     /**
      * @Route("/projects/new", name="new_project")
      */
-    public function new(Request $request, EntityManagerInterface $entityManager)
+    public function new(Request $request, EntityManagerInterface $manager)
     {
         $project = new Project();
 
@@ -44,14 +44,19 @@ class ProjectController extends AbstractController
 
             foreach ($project->getImage() as $image) {
                 $image->addProject($project);
-                $entityManager->persist($image);
+                $manager->persist($image);
+            }
+
+            foreach ($project->getContent() as $content) {
+                $content->addProject($project);
+                $manager->persist($content);
             }
 
             $project->setCreatedAt($currentDate);
             $project->initializeSlug();
 
-            $entityManager->persist($project);
-            $entityManager->flush();
+            $manager->persist($project);
+            $manager->flush();
 
             $this->addFlash(
                 'success',
@@ -80,6 +85,12 @@ class ProjectController extends AbstractController
                 $image->addProject($project);
                 $manager->persist($image);
             }
+
+            foreach ($project->getContent() as $content) {
+                $content->addProject($project);
+                $manager->persist($content);
+            }
+
             // Retrieve updated slug on form submission
             $title = $request->request->get('project')['title'];
             $project->updateSlug($title);
