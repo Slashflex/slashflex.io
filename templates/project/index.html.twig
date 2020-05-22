@@ -1,31 +1,33 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ title }}{% endblock %}
+{% block title %}Vos Annonces
+{% endblock %}
 
 {% block body %}
-	<table>
-		<thead>
-			<tr>
-				<th>Title</th>
-				<th>Introduction</th>
-				<th>Content 1</th>
-				<th>Content 2</th>
-				<th>Content 3</th>
-				<th>Main Image</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				{% for project in projects %}
-					<td>{{ project.title }}</td>
-					<td>{{ project.introduction }}</td>
-					<td>{{ project.content1 }}</td>
-					<td>{{ project.content2 }}</td>
-					<td>{{ project.content3 }}</td>
-					<td><img src="{{ project.mainImage }}" alt="" style="width: 10%"></td>
-				{% endfor %}
-			</tr>
-            <hr>
-		</tbody>
-	</table>
+	{% for message in app.flashes('success') %}
+		<div class="flash-notice alert-success">
+			{{ message }}
+		</div>
+	{% endfor %}
+
+	<div class="container mt-5">
+		<h1 class="text-center mb-5">Les dernnières annonces</h1>
+		<div class="row justify-content-start">
+			{% for project in projects %}
+				<div class="card mb-5 mx-auto" style="width: 18rem">
+					<img src="{{ project.mainImage }}" class="card-img-top" alt="{{ project.title }}">
+					<div class="card-body">
+						<h5 class="card-title">{{ project.title }}</h5>
+						<p class="card-text">{{ project.introduction }}</p>
+						{# <p class="card-text">{{ tronquer(a.introduction, 10) }}</p> #}
+						<div class="d-flex justify-content-between">
+							<a href="{{ path('single_project', {'slug': project.slug }) }}" class="btn__main">Show</a>
+							<a href="{{ path('edit_project', {'slug': project.slug }) }}" class="btn__main">Edit</a>
+							<a href="{{ path('delete_project', {'slug': project.slug }) }}" class="btn__main">Delete</a>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
 {% endblock %}

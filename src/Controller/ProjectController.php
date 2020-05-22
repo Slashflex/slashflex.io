@@ -26,7 +26,7 @@ class ProjectController extends AbstractController
     }
 
     /**
-     * @Route("/project/new", name="new_project")
+     * @Route("/projects/new", name="new_project")
      */
     public function new(Request $request, EntityManagerInterface $entityManager)
     {
@@ -48,6 +48,7 @@ class ProjectController extends AbstractController
             }
 
             $project->setCreatedAt($currentDate);
+            $project->initializeSlug();
 
             $entityManager->persist($project);
             $entityManager->flush();
@@ -64,5 +65,73 @@ class ProjectController extends AbstractController
             'title' => '/FLX | New Project',
             'form' => $form->createView()
         ]);
+    }
+
+    /**
+     * @Route("/projects/{slug}/editer", name="edit_project")
+     */
+    public function edit(Project $project, Request $request, EntityManagerInterface $manager)
+    {
+        $form = $this->createForm(ProjectType::class, $project);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            foreach ($project->getImage() as $image) {
+                $image->addProject($project);
+                $manager->persist($image);
+            }
+            // Retrieve updated slug on form submission
+            $title = $request->request->get('project')['title'];
+            $project->updateSlug($title);
+
+            $manager->persist($project);
+            $manager->flush();
+
+            $this->addFlash(
+                'success',
+                'Votre project a bien été mise à jour'
+            );
+
+            return $this->redirectToRoute('single_project', [
+                'slug' => $project->getSlug()
+            ]);
+        }
+
+        return $this->render('project/edit.html.twig', [
+            'title' => '/FLX | ' . $project->getTitle(),
+            'form' => $form->createView(),
+            'project' => $project
+        ]);
+    }
+
+    /**
+     * Shows a single project
+     * 
+     * @Route("/projects/{slug}", name="single_project")
+     */
+    public function show(Project $project)
+    {
+        return $this->render('project/show.html.twig', [
+            'title' => '/FLX | ' . $project->getTitle(),
+            'project' => $project
+        ]);
+    }
+
+    /**
+     * Delete a project
+     * 
+     * @Route("/projects/{slug}/delete", name="delete_project")
+     */
+    public function delete(EntityManagerInterface $manager, Project $project)
+    {
+        $manager->remove($project);
+        $manager->flush();
+
+        $this->addFlash(
+            'success',
+            'Votre project a bien été supprimée'
+        );
+
+        return $this->redirectToRoute('show_projects');
     }
 }

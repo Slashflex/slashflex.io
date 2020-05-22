@@ -21,14 +21,17 @@ class AppFixtures extends Fixture
             $randomImage = 'https://i.picsum.photos/id/' . mt_rand(1, 689) . '/800/400.jpg';
             $project = new Project();
 
+            $title = $faker->word(3);
+
             $project
-                ->setTitle($faker->word(3))
+                ->setTitle($title)
                 ->setIntroduction($faker->sentence(9))
                 ->setContent1($faker->sentence(18))
                 ->setContent2($faker->sentence(22))
                 ->setContent3($faker->sentence(44))
                 ->setMainImage($randomImage)
-                ->setCreatedAt($currentDate);
+                ->setCreatedAt($currentDate)
+                ->initializeSlug($title);
 
             for ($j = 1; $j <= mt_rand(1, 10); $j++) {
                 $randomImage = 'https://i.picsum.photos/id/' . mt_rand(1, 689) . '/800/400.jpg';
