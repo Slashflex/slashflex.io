@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20200520102056 extends AbstractMigration
+final class Version20200522095939 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -24,7 +24,7 @@ final class Version20200520102056 extends AbstractMigration
 
         $this->addSql('CREATE SEQUENCE project_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
         $this->addSql('CREATE SEQUENCE image_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
-        $this->addSql('CREATE TABLE project (id INT NOT NULL, title VARCHAR(255) NOT NULL, introduction TEXT NOT NULL, content_1 TEXT NOT NULL, content_2 TEXT NOT NULL, content_3 TEXT NOT NULL, main_image VARCHAR(255) NOT NULL, created_at VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE project (id INT NOT NULL, title VARCHAR(255) NOT NULL, introduction TEXT NOT NULL, content_1 TEXT NOT NULL, content_2 TEXT NOT NULL, content_3 TEXT NOT NULL, main_image VARCHAR(255) NOT NULL, created_at VARCHAR(255) NOT NULL, slug VARCHAR(255) NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE TABLE project_image (project_id INT NOT NULL, image_id INT NOT NULL, PRIMARY KEY(project_id, image_id))');
         $this->addSql('CREATE INDEX IDX_D6680DC1166D1F9C ON project_image (project_id)');
         $this->addSql('CREATE INDEX IDX_D6680DC13DA5256D ON project_image (image_id)');
