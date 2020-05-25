@@ -92,4 +92,16 @@ $(document).ready(() => {
 
     field.style.height = `${height}px`;
   };
+
+
+  // Admin collapsible content
+  $('.users__list--btn').click(function() {
+    $('.users__list').addClass('show');
+    $('.projects__list').removeClass('show');
+  }); 
+
+  $('.projects__list--btn').click(function() {
+    $('.projects__list').addClass('show');
+    $('.users__list').removeClass('show');
+  }); 
 });
