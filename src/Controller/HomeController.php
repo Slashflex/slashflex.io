@@ -2,15 +2,22 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
+use App\Form\UserType;
+use App\Repository\RoleRepository;
 use App\Repository\ProjectRepository;
+use DateTime;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class HomeController extends AbstractController
 {
     private $projectRepository;
 
-    public function __construct(ProjectRepository $projectRepository)
+    public function __construct(ProjectRepository $projectRepository, RoleRepository $roleRepository)
     {
         $this->projectRepository = $projectRepository;
     }

@@ -11,13 +11,14 @@ body {
   background: $color-white;
   color: $color-secondary;
   margin-bottom: 55vh; // Hidden Footer
+  
+  min-height: 100vh;
 }
 
 html {
   scroll-behavior: smooth;
   box-sizing: border-box;
   
-  // This defines what 1rem is
   // This defines what 1rem is
   font-size: 62.5%; // 1rem = 10px;  10px/16px = 62.5%
 

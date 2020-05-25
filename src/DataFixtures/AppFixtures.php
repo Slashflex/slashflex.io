@@ -2,15 +2,25 @@
 
 namespace App\DataFixtures;
 
+use Faker\Factory;
+use App\Entity\User;
 use App\Entity\Field;
-use App\Entity\Project;
 use App\Entity\Image;
+use App\Entity\Project;
+use App\Entity\Role;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
-use Faker\Factory;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AppFixtures extends Fixture
 {
+    private $passwordEncoder;
+
+    public function __construct(UserPasswordEncoderInterface $passwordEncoder)
+    {
+        $this->passwordEncoder = $passwordEncoder;
+    }
+
     public function load(ObjectManager $manager)
     {
         $faker = Factory::create('fr-Fr');
@@ -18,6 +28,7 @@ class AppFixtures extends Fixture
         setlocale(LC_TIME, 'fr_FR.utf8', 'fra');
         $currentDate = 'Le '  . strftime("%A %d %B %Y") . ' à ' . strftime("%H:%M");
 
+        // Populate the database with fake project, fake images and fake paragraphs
         for ($i = 1; $i <= 6; $i++) {
             $randomImage = 'https://i.picsum.photos/id/' . mt_rand(1, 689) . '/800/400.jpg';
             $project = new Project();
@@ -58,6 +69,51 @@ class AppFixtures extends Fixture
 
             $manager->persist($project);
         }
+
+        // Create an admin role
+        $roleAdmin = new Role();
+        $roleAdmin->setName('ROLE_ADMIN');
+
+        // Create a user role
+        $roleUser = new Role();
+        $roleUser->setName('ROLE_USER');
+
+        $manager->persist($roleAdmin);
+        $manager->persist($roleUser);
+
+        for ($l = 1; $l < mt_rand(1, 12); $l++) {
+            $user = new User();
+
+            $user
+                ->setFirstname($faker->firstName())
+                ->setLastname($faker->lastname())
+                ->setDescription($faker->sentence())
+                ->setEmail($faker->email())
+                ->setPassword($this->passwordEncoder->encodePassword($user, 'mdp'))
+                ->setLogin($faker->userName())
+                ->setCreatedAt($currentDate)
+                ->addRoleUser($roleUser)
+                ->initializeSlug();
+
+            $manager->persist($user);
+        }
+
+        // Setup an admin
+        $admin = new User();
+
+        $admin
+            ->setFirstname('David')
+            ->setLastname('Saoud')
+            ->setEmail('pro.davidsaoud@gmail.com')
+            ->setPassword($this->passwordEncoder->encodePassword($admin, 'SupralePGM2019.'))
+            ->setDescription('Creator of https://slashflex.io')
+            ->setLogin('Slashflex')
+            ->addRoleUser($roleAdmin)
+            ->setCreatedAt($currentDate)
+            ->initializeSlug();
+
+        $manager->persist($admin);
+
         $manager->flush();
     }
 }

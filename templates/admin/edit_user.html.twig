@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ title }}
+{% endblock %}
+
+{% block body %}
+	<!-- Logo and Nav -->
+	{% include "partials/_top_buttons.html.twig" %}
+
+	<div class="create container">
+		<div class="create__form mx-auto">
+			<h2 class="heading-secondary text-center mb3">
+				Edit {{ user.firstName|capitalize }} {{ user.lastName|capitalize }}
+			</h2>
+			{{ form_start(form, {'attr': {'class': 'w-100 m-auto'}}) }}
+			<div class="row">
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="title-field">First name</label>
+						{{ form_errors(form.firstname) }}
+						{{ form_widget(form.firstname, {'attr': { 'class': 'form-control form-control-lg' }}) }}
+					</div>
+
+					<div class="form-group">
+						<label for="introduction-field">Last name</label>
+						{{ form_errors(form.lastname) }}
+						{{ form_widget(form.lastname, {'attr': { 'class': 'form-control form-control-lg' }}) }}
+					</div>
+
+					<div class="form-group">
+						<label for="content-field">Password</label>
+						{{ form_errors(form.password) }}
+						{{ form_widget(form.password, {'attr': { 'class': 'form-control form-control-lg' }}) }}
+					</div>
+
+					<div class="form-group">
+						<label for="content-field">Description</label>
+						{{ form_errors(form.description) }}
+						{{ form_widget(form.description, {'attr': { 'class': 'form-control form-control-lg' }}) }}
+					</div>
+
+					<div class="form-group">
+						<label for="content-field">Login</label>
+						{{ form_errors(form.login) }}
+						{{ form_widget(form.login, {'attr': { 'class': 'form-control form-control-lg' }}) }}
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<button type="submit" class="btn btn-primary mx-auto d-block">Edit project</button>
+			</div>
+			{{ form_end(form) }}
+		</div>
+	</div>
+	<!-- Section Works -->
+	{% include "partials/_footer.html.twig" %}
+
+	<!-- Bottom Navigation -->
+	{% include "partials/_bottom_nav.html.twig" %}
+{% endblock %}
