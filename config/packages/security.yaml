@@ -19,14 +19,14 @@ security:
             security: false
 
         admin:
-            pattern: ^/admin
+            pattern: ^/
             anonymous: true
             provider: app_user_provider
 
             form_login:
                 login_path: admin_signin
                 check_path: admin_signin
-                default_target_path: admin
+                default_target_path: /
 
             logout:
                 path: logout
