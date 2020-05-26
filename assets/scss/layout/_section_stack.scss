@@ -8,11 +8,21 @@
 
     &--recent {
       text-transform: uppercase;
-      font-size: 2rem;
+      // font-size: 2rem;
       text-align: center;
       font-weight: 100;
       margin-bottom: -2rem;
       position: relative;
+
+      // @include respond(phone) {
+      //   @include fontsize(19);
+      // }
+      @include respond(tab-port) {
+        @include fontsize(22);
+      }
+      @include respond(desktop) {
+        @include fontsize(25);
+      }
     }
 
     &--stack {

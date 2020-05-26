@@ -5,12 +5,18 @@
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: #111;
+  background-color: $color-secondary;
   overflow-x: hidden;
   transition: 0.5s;
-  padding-top: 60px;
-//   width: 100px;
-//   margin-left: 100px;
+  padding-top: 30px;
+
+  @include respond(tab-land) {
+    height: 80px;
+    width: 100%;
+    padding-top: 0px;
+
+    overflow-y: hidden;
+  }
 }
 
 .sidenav a {
@@ -38,4 +44,32 @@
   margin-left: 100px;
   transition: margin-left 0.5s;
   padding: 16px;
+
+  @include respond(tab-land) {
+    padding-top: 6rem;
+    margin-left: 0px;
+  }
+
+  @include respond(tab-port) {
+    padding-top: 12rem;
+    margin-left: 0px;
+  }
+}
+
+.nav__list {
+
+  @include respond(tab-land) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
+  }
+
+  @include respond(tab-port) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
+  }
+  
 }

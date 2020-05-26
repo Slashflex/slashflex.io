@@ -55,7 +55,6 @@
 .swiper-slide {
   text-align: center;
   font-size: 18px;
-  // background: rgb(204, 18, 18);
   display: -webkit-box;
   display: -ms-flexbox;
   display: -webkit-flex;
@@ -124,6 +123,54 @@
   transform: translateY(5.5rem) translateX(-9rem);
 }
 .slide4:hover .slide__text {
+  opacity: 1;
+  transform: translateY(7rem) translateX(-9rem);
+}
+.slide5:hover .slide__text--description {
+  opacity: 1;
+  transform: translateY(5.5rem) translateX(-9rem);
+}
+.slide5:hover .slide__text {
+  opacity: 1;
+  transform: translateY(7rem) translateX(-9rem);
+}
+.slide6:hover .slide__text--description {
+  opacity: 1;
+  transform: translateY(5.5rem) translateX(-9rem);
+}
+.slide6:hover .slide__text {
+  opacity: 1;
+  transform: translateY(7rem) translateX(-9rem);
+}
+.slide7:hover .slide__text--description {
+  opacity: 1;
+  transform: translateY(5.5rem) translateX(-9rem);
+}
+.slide7:hover .slide__text {
+  opacity: 1;
+  transform: translateY(7rem) translateX(-9rem);
+}
+.slide8:hover .slide__text--description {
+  opacity: 1;
+  transform: translateY(5.5rem) translateX(-9rem);
+}
+.slide8:hover .slide__text {
+  opacity: 1;
+  transform: translateY(7rem) translateX(-9rem);
+}
+.slide9:hover .slide__text--description {
+  opacity: 1;
+  transform: translateY(5.5rem) translateX(-9rem);
+}
+.slide9:hover .slide__text {
+  opacity: 1;
+  transform: translateY(7rem) translateX(-9rem);
+}
+.slide10:hover .slide__text--description {
+  opacity: 1;
+  transform: translateY(5.5rem) translateX(-9rem);
+}
+.slide10:hover .slide__text {
   opacity: 1;
   transform: translateY(7rem) translateX(-9rem);
 }
