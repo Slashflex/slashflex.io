@@ -1,0 +1,21 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+<div class="404 mb-5" style="position: absolute; top: 35%; left: 50%; transform: translate(-50%, -50%);">
+    <div class="gif mx-auto" style="width: 70%">
+        <img src="https://i.imgur.com/qhMbkGi.jpg" alt="" class="mx-auto w-100">
+    </div>
+
+    <div class="hero" style="width: 100%">
+        <div class="hero__text">
+            <p style="font-size: 13rem">404</p>
+        </div>
+        <p class="text-center" style="font-size: 10rem;">oops!</p>
+    </div>
+
+    <div class="go-home text-center">
+        <a href="{{ path('home') }}"><i class="fas fa-chevron-left"></i> Go home</a>
+    </div>
+</div>
+    
+{% endblock %}

@@ -18,4 +18,4 @@
         {{ encore_entry_link_tags('app') }}
         {% block stylesheets %}{% endblock %}
     </head>
-    <body>
+    <body {% if app.request.attributes.get('_route') == 'home' %} style="margin-bottom: 55vh"{% endif %}>

@@ -40,11 +40,6 @@ class AdminController extends AbstractController
         $users = $this->userRepository->findAll();
         $projects = $this->projectRepository->findAll();
 
-        // foreach ($projects->getImage() as $image) {
-        // dd($projects->getImage());
-        // return $image;
-        // }
-
         return $this->render('admin/index.html.twig', [
             'title' => '/FLX | Admin dashboard',
             'users' => $users,
@@ -245,5 +240,15 @@ class AdminController extends AbstractController
         );
 
         return $this->redirectToRoute('admin');
+    }
+
+    /**
+     * @Route("/404", name="not_found")
+     */
+    public function notFound()
+    {
+        return $this->render('bundles/TwigBundle/Exception/error403.html.twig', [
+            'title' => '/FLX | Page not found',
+        ]);
     }
 }

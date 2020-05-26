@@ -1,4 +1,6 @@
 security:
+    access_denied_url: /404
+
     encoders:
         App\Entity\User:
             algorithm: bcrypt

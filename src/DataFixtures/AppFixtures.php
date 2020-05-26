@@ -101,17 +101,22 @@ class AppFixtures extends Fixture
         // Setup an admin
         $admin = new User();
 
+        $password = $_ENV['DB_PASSWORD'];
+        $email = $_ENV['DB_EMAIL'];
+        $firstname = $_ENV['DB_FIRSTNAME'];
+        $lastname = $_ENV['DB_LASTNAME'];
+
         $admin
-            ->setFirstname('David')
-            ->setLastname('Saoud')
-            ->setEmail('pro.davidsaoud@gmail.com')
-            ->setPassword($this->passwordEncoder->encodePassword($admin, 'SupralePGM2019.'))
+            ->setFirstname($firstname)
+            ->setLastname($lastname)
+            ->setEmail($email)
+            ->setPassword($this->passwordEncoder->encodePassword($admin, $password))
             ->setDescription('Creator of https://slashflex.io')
             ->setLogin('Slashflex')
             ->addRoleUser($roleAdmin)
             ->setCreatedAt($currentDate)
             ->initializeSlug();
-
+        dd($admin);
         $manager->persist($admin);
 
         $manager->flush();
