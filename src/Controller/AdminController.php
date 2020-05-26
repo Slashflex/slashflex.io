@@ -6,7 +6,6 @@ use App\Entity\User;
 use App\Form\UserType;
 use App\Entity\Project;
 use App\Form\ProjectType;
-use App\Repository\RoleRepository;
 use App\Repository\UserRepository;
 use App\Repository\ProjectRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -14,26 +13,28 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class AdminController extends AbstractController
 {
     private $projectRepository;
     private $userRepository;
-    private $roleRepository;
     private $passwordEncoder;
     private $manager;
 
-    public function __construct(EntityManagerInterface $manager, UserPasswordEncoderInterface $passwordEncoder, ProjectRepository $projectRepository, UserRepository $userRepository, RoleRepository $roleRepository)
+    public function __construct(EntityManagerInterface $manager, UserPasswordEncoderInterface $passwordEncoder, ProjectRepository $projectRepository, UserRepository $userRepository)
     {
         $this->projectRepository = $projectRepository;
         $this->userRepository = $userRepository;
-        $this->roleRepository = $roleRepository;
         $this->passwordEncoder = $passwordEncoder;
         $this->manager = $manager;
     }
 
     /**
+     * Admin dashboard
+     * 
      * @Route("/admin", name="admin")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function index()
     {
@@ -48,6 +49,8 @@ class AdminController extends AbstractController
     }
 
     /**
+     * Admin connexion form
+     * 
      * @Route("/admin/sign-in", name="admin_signin")
      */
     public function adminSignIn()
@@ -58,51 +61,12 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/admin/sign-up", name="admin_signup")
-     */
-    public function adminSignUp(Request $request)
-    {
-        $admin = new User();
-
-        // Define locale 
-        setlocale(LC_TIME, 'fr_FR.utf8', 'fra');
-        // Concat date and time
-        $currentDate = 'Le '  . strftime("%A %d %B %Y") . ' à ' . strftime("%H:%M");
-
-        $form = $this->createForm(UserType::class, $admin);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $hash = $this->passwordEncoder->encodePassword($admin, $admin->getPassword());
-
-            $admin
-                ->setCreatedAt($currentDate)
-                ->setPassword($hash)
-                ->initializeSlug();
-
-            $this->manager->persist($admin);
-            $this->manager->flush();
-
-            return $this->redirectToRoute('admin');
-        }
-
-        return $this->render('admin/sign-up.html.twig', [
-            'title' => '/FLX | Admin Sign-up',
-            'form' => $form->createView()
-        ]);
-    }
-
-    /**
-     * @Route("/logout", name="logout")
-     */
-    public function logout()
-    {
-    }
-
-    /**
+     * Create a new project
+     * 
      * @Route("/admin/project/new", name="new_project")
+     * @IsGranted("ROLE_ADMIN")
      */
-    public function newProject(Request $request, EntityManagerInterface $manager)
+    public function newProject(Request $request)
     {
         $project = new Project();
 
@@ -118,19 +82,19 @@ class AdminController extends AbstractController
 
             foreach ($project->getImage() as $image) {
                 $image->addProject($project);
-                $manager->persist($image);
+                $this->manager->persist($image);
             }
 
             foreach ($project->getContent() as $content) {
                 $content->addProject($project);
-                $manager->persist($content);
+                $this->manager->persist($content);
             }
 
             $project->setCreatedAt($currentDate);
             $project->initializeSlug();
 
-            $manager->persist($project);
-            $manager->flush();
+            $this->manager->persist($project);
+            $this->manager->flush();
 
             $this->addFlash(
                 'success',
@@ -147,9 +111,12 @@ class AdminController extends AbstractController
     }
 
     /**
+     * Edit a user
+     * 
      * @Route("/admin/user/{slug}/edit", name="edit_user")
+     * @IsGranted("ROLE_ADMIN")
      */
-    public function editUser(User $user, Request $request, EntityManagerInterface $manager)
+    public function editUser(User $user, Request $request)
     {
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
@@ -161,8 +128,8 @@ class AdminController extends AbstractController
                 ->setPassword($hash)
                 ->updateSlug();
 
-            $manager->persist($user);
-            $manager->flush();
+            $this->manager->persist($user);
+            $this->manager->flush();
 
             $this->addFlash(
                 'success',
@@ -182,9 +149,12 @@ class AdminController extends AbstractController
     }
 
     /**
+     * Edit a project
+     * 
      * @Route("/admin/project/{slug}/edit", name="edit_project")
+     * @IsGranted("ROLE_ADMIN")
      */
-    public function editProject(Project $project, Request $request, EntityManagerInterface $manager)
+    public function editProject(Project $project, Request $request)
     {
         $form = $this->createForm(ProjectType::class, $project);
         $form->handleRequest($request);
@@ -192,20 +162,20 @@ class AdminController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             foreach ($project->getImage() as $image) {
                 $image->addProject($project);
-                $manager->persist($image);
+                $this->manager->persist($image);
             }
 
             foreach ($project->getContent() as $content) {
                 $content->addProject($project);
-                $manager->persist($content);
+                $this->manager->persist($content);
             }
 
             // Retrieve updated slug on form submission
             $title = $request->request->get('project')['title'];
             $project->updateSlug($title);
 
-            $manager->persist($project);
-            $manager->flush();
+            $this->manager->persist($project);
+            $this->manager->flush();
 
             $this->addFlash(
                 'success',
@@ -228,11 +198,12 @@ class AdminController extends AbstractController
      * Delete a project
      * 
      * @Route("/admin/project/{slug}/delete", name="delete_project")
+     * @IsGranted("ROLE_ADMIN")
      */
-    public function delete(EntityManagerInterface $manager, Project $project)
+    public function delete(Project $project)
     {
-        $manager->remove($project);
-        $manager->flush();
+        $this->manager->remove($project);
+        $this->manager->flush();
 
         $this->addFlash(
             'success',
@@ -243,12 +214,11 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/404", name="not_found")
+     * Logout path
+     * 
+     * @Route("/logout", name="logout")
      */
-    public function notFound()
+    public function logout()
     {
-        return $this->render('bundles/TwigBundle/Exception/error403.html.twig', [
-            'title' => '/FLX | Page not found',
-        ]);
     }
 }

@@ -2,16 +2,11 @@
 
 namespace App\Controller;
 
-use App\Entity\User;
-use App\Form\UserType;
 use App\Repository\RoleRepository;
 use App\Repository\ProjectRepository;
-use DateTime;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class HomeController extends AbstractController
 {
@@ -33,6 +28,18 @@ class HomeController extends AbstractController
         return $this->render('home/index.html.twig', [
             'title' => '/FLX | Home',
             'projects' => $projects
+        ]);
+    }
+
+    /**
+     * Page not found or access denied (non admin)
+     * 
+     * @Route("/404", name="not_found")
+     */
+    public function notFound()
+    {
+        return $this->render('bundles/TwigBundle/Exception/error403.html.twig', [
+            'title' => '/FLX | Page not found',
         ]);
     }
 }

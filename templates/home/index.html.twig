@@ -47,7 +47,7 @@
 	    for (let i = 1; i <= {{ projects|length }}; i++) {
 	      // Increments class
 	      var img = $(`.slide${[i]}`);
-
+		  var hover = $(`.slide${[i]}`);	
 		  // Sets background-image property base on data attribute		
 		  img.css('background-image', function () {
 			var bg = ('url(' + $(this).data('background') + ')');

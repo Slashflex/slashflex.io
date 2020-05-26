@@ -24,9 +24,15 @@
 			<li class="bottomNav__item">
 				<a href="{{ path('new_project') }}" class="bottomNav__link">Add a project</a>
 			</li>
+			{% if not app.user %}
 			<li class="bottomNav__item">
 				<a href="{{ path('admin_signin') }}" class="bottomNav__link">Connexion Admin</a>
 			</li>
+			{% else %}
+			<li class="bottomNav__item">
+				<a href="{{ path('logout') }}" class="bottomNav__link">Logout</a>
+			</li>
+			{% endif %}
 		</ul>
 	</nav>
 </div>
