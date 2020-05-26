@@ -54,14 +54,14 @@ header {
 
   &__chess3 {
     position: relative;
-    height: 95vh;
+    height: 90vh;
     background-image: url(../../images/chess_3-1.png);
     background-repeat: no-repeat;
     background-position: center;
     background-position: 50% 50%;
     background-size: 40%;
     bottom: 400%;
-    left: 75%;
+    left: 65%;
     width: 32%;
     transform: translate(-50%, -192%);
     animation: chess3 100s infinite;

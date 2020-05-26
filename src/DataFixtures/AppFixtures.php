@@ -116,7 +116,7 @@ class AppFixtures extends Fixture
             ->addRoleUser($roleAdmin)
             ->setCreatedAt($currentDate)
             ->initializeSlug();
-        dd($admin);
+
         $manager->persist($admin);
 
         $manager->flush();
