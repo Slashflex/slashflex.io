@@ -1,33 +1,15 @@
 $(document).ready(() => {
-  // Off menu
-  $(".open-nav").click(function () {
-    $(".bottomNav").slideDown(850);
-  });
 
-  $(".close").click(function () {
-    $(".bottomNav").slideUp(850);
-  });
-
-  // Burger
-  $(".first-button").on("click", function (e) {
-    $(".animated-icon").toggleClass("open");
-    setInterval(() => {
-      if ($(".animated-icon").toggleClass("open")) {
-        $(".animated-icon").removeClass("open");
-      }
-    }, 500);
-    e.preventDefault();
-  });
 
   // Sets parallax effect only on root page
   if (window.location.pathname == '/') {
     // Parallax events
     (() => {
       // Add event listener
-      document.addEventListener("mousemove", parallax);
-      const chess1 = document.querySelector(".hero__chess1");
-      const chess2 = document.querySelector(".hero__chess2");
-      const chess3 = document.querySelector(".hero__chess3");
+      document.addEventListener('mousemove', parallax);
+      const chess1 = document.querySelector('.hero__chess1');
+      const chess2 = document.querySelector('.hero__chess2');
+      const chess3 = document.querySelector('.hero__chess3');
   
       // Magic happens here
       function parallax(e) {
@@ -46,21 +28,21 @@ $(document).ready(() => {
   
 
   // Swiper
-  var swiper = new Swiper(".swiper-container", {
+  var swiper = new Swiper('.swiper-container', {
     loop: true,
     pagination: {
-      el: ".swiper-pagination",
-      type: "progressbar",
+      el: '.swiper-pagination',
+      type: 'progressbar',
     },
     navigation: {
-      nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev",
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
     },
   });
 
   // Disable right click on everything
   (() => {
-    $(document).on("contextmenu", "*", () => {
+    $(document).on('contextmenu', '*', () => {
       return false;
     });
   })();
@@ -104,4 +86,17 @@ $(document).ready(() => {
     $('.projects__list').addClass('show');
     $('.users__list').removeClass('show');
   }); 
+
+  // Full screen navigation toggle
+  $('.toggle-menu').click(function () {
+    $(this).toggleClass('active');
+    $('#menu').toggleClass('open');
+  });
+
+  if (window.location.pathname == '/admin') {
+    $('.toggle-menu span').css('background-color', 'white');
+    if ($(this).hasClass('open')) {
+      $('.toggle-menu span').css('background-color', 'white');
+    }
+  }
 });
