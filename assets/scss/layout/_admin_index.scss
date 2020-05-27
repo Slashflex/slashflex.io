@@ -49,11 +49,6 @@
     padding-top: 6rem;
     margin-left: 0px;
   }
-
-  @include respond(tab-port) {
-    padding-top: 12rem;
-    margin-left: 0px;
-  }
 }
 
 .nav__list {
@@ -64,12 +59,4 @@
     align-items: center;
     height: 80px;
   }
-
-  @include respond(tab-port) {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 80px;
-  }
-  
 }
