@@ -9,7 +9,17 @@
 	<nav class="main-nav">
 		<ul class="main-nav__list">
 			<li class="main-nav__item"><a href="{{ path('home') }}" class="main-nav__link">Home</a></li>
-			<li class="main-nav__item"><a href="#" class="main-nav__link">Contact</a></li>
+			{% if app.user and app.user.roleUser[0].name == 'ROLE_ADMIN' %}
+				{% if app.request.attributes.get('_route') == 'new_project' %}
+				<li class="main-nav__item">
+					<a href="{{ path('admin') }}" class="main-nav__link">Dashboard</a>
+				</li>
+				{% else %}
+				<li class="main-nav__item">
+					<a href="{{ path('new_project') }}" class="main-nav__link">New project</a>
+				</li>
+				{% endif %}
+			{% endif %}
 			{% if app.user %}
 			<li class="main-nav__item">
 				<a href="{{ path('user') }}" class="main-nav__link">Profile</a>
@@ -21,11 +31,13 @@
 			<li class="main-nav__item">
 				<a href="{{ path('app_register') }}" class="main-nav__link">Register</a>
 			</li>
-			{# {% else %} #}
 			<li class="main-nav__item">
 				<a href="{{ path('user_signin') }}" class="main-nav__link">Login</a>
 			</li>
 			{% endif %}
+			<li class="main-nav__item">
+				<a href="#" class="main-nav__link">Contact</a>
+			</li>
 		</ul>
 	</nav>
 
