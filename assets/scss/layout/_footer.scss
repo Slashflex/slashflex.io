@@ -26,15 +26,10 @@
       text-shadow: 0 0 1vw $color-tertiary;
     }
   }
-}
 
-.bottomNav {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  background-color: $color-secondary;
-  width: 100vw;
-  height: 33vh;
-  display: none;
-  z-index: 2;
+  &__link {
+    &:hover {
+      text-decoration: none;
+    }
+  }
 }

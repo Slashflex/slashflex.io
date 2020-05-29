@@ -1,32 +1,42 @@
 {% extends 'base.html.twig' %}
 
-{% block titre %}{{ title }}{% endblock %}
+{% block titre %}
+	{{ title }}
+{% endblock %}
 
 {% block body %}
-    <!-- Logo -->
+	<!-- Logo -->
 	{% include "partials/_top_buttons.html.twig" %}
 
 	<!-- Fullscreen Navigation -->
 	{% include "partials/_fullscreen_nav.html.twig" %}
-    
-    <div class="container">
-        <div class="row">
-            <h1>Connectez vous à votre compte</h1>
 
-            <form method="post" class="bg-light p-5">
-                <div class="form-group">
-                    <label for="email">Votre email</label>
-                    <input name="_username" type="text" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Entrer votre email">
+	<div class="container">
+        <form method="POST" class="form" autocomplete="off">
+            <div class="u-margin-bottom-medium">
+                <h1 class="heading__secondary">
+                    Log in to your account
+                </h1>
+            </div>
+
+            <div class="form__group">
+                <input type="email" name="_username" class="form__input" placeholder="Email address" id="email" required>
+                <label for="email" class="form__label">Email address</label>
+            </div>
+
+            <div class="form__group">
+                <input type="password" name="_password" class="form__input" placeholder="Password" id="password" required>
+                <label for="password" class="form__label">Password</label>
+            </div>
+
+            <div class="form__group">
+                <div class="btn__stroke--login">
+                    <button class="btn__stroke--text">Login &rarr;</button>
                 </div>
-                <div class="form-group">
-                    <label for="mot-de-passe">Mot de passe</label>
-                    <input name="_password" type="password" class="form-control" id="mot-de-passe" placeholder="Entrez votre mot de passe">
-                </div>
-                <button type="submit" class="btn btn-primary">Connexion</button>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
 
-    <!-- Footer -->
+	<!-- Footer -->
 	{% include "partials/_footer.html.twig" %}
 {% endblock %}
