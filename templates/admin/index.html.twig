@@ -5,6 +5,9 @@
 {% endblock %}
 
 {% block body %}
+    <!-- Logo -->
+	{% include "partials/_top_buttons.html.twig" %}
+
 	<!-- Fullscreen Navigation -->
 	{% include "partials/_fullscreen_nav.html.twig" %}
 	
@@ -13,36 +16,6 @@
 			{{ message }}
 		</div>
 	{% endfor %}
-
-	<div id="sidenav" class="sidenav">
-		<ul class="nav__list">
-			<li class="nav__item">
-				<a href="#" class="users__list--btn">
-					<i class="fas fa-user"></i>
-				</a>
-			</li>
-			<li class="nav__item">
-				<a href="#" class="projects__list--btn">
-					<i class="fas fa-server"></i>
-				</a>
-			</li>
-			<li class="nav__item">
-				<a href="#">
-					<i class="fas fa-newspaper"></i>
-				</a>
-			</li>
-			<li class="nav__item">
-				<a href="{{ path('home') }}">
-					<i class="fas fa-home"></i>
-				</a>
-			</li>
-			<li class="nav__item">
-				<a href="{{ path('logout') }}">
-					<i class="fas fa-sign-out-alt"></i>
-				</a>
-			</li>
-		</ul>
-	</div>
 
 	<div id="main">
 		<div class="accordion" id="accordion">
@@ -57,17 +30,17 @@
 						class="row">
 						<!--Card-->
 						{% for user in users %}
-							<div class="col-12 col-lg-6">
-								<div class="card m-3">
+							<div class="col-12 col-lg-3">
+								<div class="card card__bg m-3">
 									<img src="..." class="card-img-top" alt="...">
 									<div class="card-body">
-										<h5 class="card-title">{{ user.firstname }}
+										<h5 class="card-title card__title">{{ user.firstname }}
 											{{ user.lastname }}</h5>
-										<p class="card-text">{{ user.description }}</p>
-										<div class="d-flex justify-content-between">
-											<p class=" font-weight-bold">{{ user.email }}</p>
-											<a href="#" class="btn btn-success">Show</a>
-										</div>
+										<p class="card-text card__description">{{ user.description }}</p>
+										{# <div class="d-flex justify-content-center"> #}
+											<p class="font-weight-bold card__email">{{ user.email }}</p>
+										{# </div> #}
+										<a href="#" class="btn btn-success">Show</a>
 									</div>
 								</div>
 							</div>
@@ -88,12 +61,12 @@
 							class="row">
 							<!--Card-->
 							{% for project in projects %}
-								<div class="col-12 col-lg-6">
-									<div class="card m-3">
+								<div class="col-12 col-lg-3">
+									<div class="card card__bg m-3">
 										<img src="{{ project.mainImage }}" class="card-img-top" alt="...">
 										<div class="card-body">
-											<h5 class="card-title">{{ project.title }}</h5>
-											<p class="card-text">{{ project.introduction|u.truncate(30, '...') }}</p>
+											<h5 class="card-title card__title">{{ project.title }}</h5>
+											<p class="card-text card__description">{{ project.introduction|u.truncate(30, '...') }}</p>
 											<div class="d-flex justify-content-between">
 												<a href="{{ path('single_project', {'slug': project.slug}) }}" class="btn btn-success">Show</a>
 												<a href="{{ path('edit_project', {'slug': project.slug}) }}" class="btn btn-primary">Edit</a>
@@ -109,18 +82,9 @@
 			</div>
 		</div>
 	</div>
-{% endblock %}
-{% block javascripts %}
-	<script type="text/javascript">
-		// Admin menu
-function openNav() {
-document.getElementById("sidenav").style.width = "250px";
-document.getElementById("main").style.marginLeft = "250px";
-}
 
-function closeNav() {
-document.getElementById("sidenav").style.width = "100px";
-document.getElementById("main").style.marginLeft = "100px";
-}
-	</script>
+    <!-- Footer -->
+	{% include "partials/_footer.html.twig" %}
 {% endblock %}
+
+{% block javascripts %}{% endblock %}

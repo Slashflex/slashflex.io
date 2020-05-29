@@ -75,28 +75,9 @@ $(document).ready(() => {
     field.style.height = `${height}px`;
   };
 
-
-  // Admin collapsible content
-  $('.users__list--btn').click(function() {
-    $('.users__list').addClass('show');
-    $('.projects__list').removeClass('show');
-  }); 
-
-  $('.projects__list--btn').click(function() {
-    $('.projects__list').addClass('show');
-    $('.users__list').removeClass('show');
-  }); 
-
   // Full screen navigation toggle
   $('.toggle-menu').click(function () {
     $(this).toggleClass('active');
     $('#menu').toggleClass('open');
   });
-
-  if (window.location.pathname == '/admin') {
-    $('.toggle-menu span').css('background-color', 'white');
-    if ($(this).hasClass('open')) {
-      $('.toggle-menu span').css('background-color', 'white');
-    }
-  }
 });
