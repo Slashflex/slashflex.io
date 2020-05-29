@@ -14,8 +14,9 @@
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous" />
         
         {# <link href="{{ asset('build/app.css') }}" rel="stylesheet"> #}
+        
         <!-- Custom CSS compiled from SCSS -->
         {{ encore_entry_link_tags('app') }}
         {% block stylesheets %}{% endblock %}
     </head>
-    <body {% if app.request.attributes.get('_route') == 'home' %} style="margin-bottom: 40vh"{% endif %}>
+    <body>

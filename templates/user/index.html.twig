@@ -11,15 +11,16 @@
 	<!-- Fullscreen Navigation -->
 	{% include "partials/_fullscreen_nav.html.twig" %}
 
-    <h1>Register</h1>
+    <h1>Hello {{ user }}</h1>
+    <p>Email : {{ user.email }}</p>
 
-    {{ form_start(registrationForm) }}
-        {{ form_widget(registrationForm) }}
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+    {% if app.user.roleUser[0].name == 'ROLE_ADMIN' %}
+        <a href="{{ path('admin') }}">Dashboard</a>
+    {% endif %}
     
 	<!-- Footer -->
 	{% include "partials/_footer.html.twig" %}
 {% endblock %}
 
 {% block javascripts %}{% endblock %}
+

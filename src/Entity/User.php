@@ -80,6 +80,11 @@ class User implements UserInterface
         $this->roleUser = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return ucfirst($this->firstname) . ' ' . ucfirst($this->lastname);
+    }
+
     public function getId(): ?int
     {
         return $this->id;

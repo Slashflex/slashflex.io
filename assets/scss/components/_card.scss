@@ -49,3 +49,11 @@
   text-align: center;
   margin-top: 1rem;
 }
+
+/* Admin dashboard */
+.card {
+
+  &__title, &__description, &__email {
+    color: $color-white
+  }
+}

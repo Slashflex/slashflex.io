@@ -1,4 +1,3 @@
-<!-- Navigation Button Menu -->
 <nav class="nav">
 	<button class="toggle-menu">
 		<span class="toggle-menu--line"></span>
@@ -11,16 +10,20 @@
 		<ul class="main-nav__list">
 			<li class="main-nav__item"><a href="{{ path('home') }}" class="main-nav__link">Home</a></li>
 			<li class="main-nav__item"><a href="#" class="main-nav__link">Contact</a></li>
-			{% if not app.user %}
+			{% if app.user %}
 			<li class="main-nav__item">
-				<a href="{{ path('admin_signin') }}" class="main-nav__link">Connexion Admin</a>
-			</li>
-			{% else %}
-			<li class="main-nav__item">
-				<a href="{{ path('admin') }}" class="main-nav__link">Admin Dashboard</a>
+				<a href="{{ path('user') }}" class="main-nav__link">Profile</a>
 			</li>
 			<li class="main-nav__item">
 				<a href="{{ path('logout') }}" class="main-nav__link">Logout</a>
+			</li>
+			{% elseif not app.user %}
+			<li class="main-nav__item">
+				<a href="{{ path('app_register') }}" class="main-nav__link">Register</a>
+			</li>
+			{# {% else %} #}
+			<li class="main-nav__item">
+				<a href="{{ path('user_signin') }}" class="main-nav__link">Login</a>
 			</li>
 			{% endif %}
 		</ul>

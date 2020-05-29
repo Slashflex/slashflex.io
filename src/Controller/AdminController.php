@@ -53,7 +53,7 @@ class AdminController extends AbstractController
      * 
      * @Route("/admin/sign-in", name="admin_signin")
      */
-    public function adminSignIn()
+    public function adminLogin()
     {
         return $this->render('admin/sign-in.html.twig', [
             'title' => '/FLX | Admin Sign-in',
