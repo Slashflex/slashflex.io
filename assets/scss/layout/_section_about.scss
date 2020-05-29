@@ -3,7 +3,7 @@
   display: flex;
   justify-content: center;
   padding: 10rem 0;
-  height: 75vh;
+  // height: 75vh;
   position: relative;
 
   &__right {
@@ -13,17 +13,17 @@
     background-position: center;
     height: 23vh;
 
-    @include respond(tab-land) {
-      margin-top: 5rem;
-    }
+    // @include respond(tab-land) {
+    //   margin-top: 5rem;
+    // }
 
-    @include respond(tab-port) {
-      margin-top: 5rem;
-    }
+    // @include respond(tab-port) {
+    //   margin-top: 5rem;
+    // }
 
-    @include respond(phone) {
-      margin-top: 5rem;
-    }
+    // @include respond(phone) {
+    //   margin-top: 5rem;
+    // }
   }
 
   &__left {

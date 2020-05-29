@@ -22,13 +22,12 @@
 			<div class="card z-depth-0 bordered">
 				<div class="card-header" id="headingOne2">
 					<h3 data-toggle="collapse" data-target="#users-list" aria-expanded="true" aria-controls="users-list">
-						Users list
+						<i class="fas fa-users"></i> Users list
 					</h3>
 				</div>
 				<div id="users-list" class="collapse users__list" aria-labelledby="headingOne2" data-parent="#accordion">
-					<div
-						class="row">
-						<!--Card-->
+					<div class="row">
+						<!-- Card -->
 						{% for user in users %}
 							<div class="col-12 col-lg-3">
 								<div class="card card__bg m-3">
@@ -52,14 +51,13 @@
 			<div class="card z-depth-0 bordered">
 				<div class="card-header" id="headingTwo2">
 					<h3 data-toggle="collapse" data-target="#projects-list" aria-expanded="false" aria-controls="projects-list">
-						Projects list
+						<i class="fas fa-project-diagram"></i> Projects list
 					</h3>
 				</div>
 				<div id="projects-list" class="collapse projects__list" aria-labelledby="headingTwo2" data-parent="#accordion">
 					<div class="card-body">
-						<div
-							class="row">
-							<!--Card-->
+						<div class="row">
+							<!-- Card -->
 							{% for project in projects %}
 								<div class="col-12 col-lg-3">
 									<div class="card card__bg m-3">

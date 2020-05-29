@@ -1,13 +1,14 @@
 {% block _project_image_widget %}
-    <p>Ajoutez vos images</p>
-
     {{ form_widget(form) }}
 
     <input type="hidden" id="widgets-counter" value="0">
 
-    <div class="form-group">
-        <a class="btn btn-primary text-white" id="add-images-btn">
-            + Ajouter une image
+    <div class="form-group form__add--btn">
+        <a class="logo__text" id="add-images-btn">
+            + Image
+        </a>
+        <a class="logo__text" id="add-content-btn">
+            + Field
         </a>
     </div>
 {% endblock %}
@@ -17,8 +18,9 @@
 {% endblock %}
 
 {% block _project_image_entry_widget %}
-    <div class="form-group" id="block_{{ id }}">
-        {{ form_widget(form.url, {'attr': { 'class': 'form-control form-control-lg' }}) }}
-        <button type="button" data-action="delete" data-target="#block_{{ id }}" class="btn btn-danger">X</button>
+    <div class="form__group form-group" id="block_{{ id }}">
+        {{ form_widget(form.url, {'attr': { 'class': 'form__input', 'placeholder': 'Image Url', 'id': 'url' }}) }}
+        <label for="url" class="form__label">Image Url</label>
+        <button type="button" data-action="delete" data-target="#block_{{ id }}" class="btn btn-danger delete_{{ id }}">X</button>
     </div>
 {% endblock %}

@@ -72,7 +72,8 @@
 }
 
 .btn {
-
+  cursor: pointer;
+  
   &__footer {
     margin-top: 1.5rem;
     transition: all 0.5s;
@@ -91,6 +92,7 @@
       padding: 0.7em 1.2em;
 
       &:hover {
+        text-decoration: none;
         &::before {
           right: 80%;
           text-decoration: none;
@@ -142,7 +144,19 @@
       text-align: center;
     }
 
+    &--login {
+      margin-top: 0;
+
+      @include respond(phone) {
+        text-align: center;
+      }
+      @include respond(tab-port) {
+        text-align: center;
+      }
+    }
+
     &--text {
+      text-decoration: none;
       color: $color-secondary;
       position: relative;
       background: none;
@@ -162,6 +176,9 @@
         @include fontsize(10);
       }
 
+      &:hover {
+        text-decoration: none;
+      }
       &::before {
         content: "";
         display: block;
@@ -204,6 +221,28 @@
           text-decoration: none;
         }
       }
+    }
+  }
+
+  &__new {
+    cursor: pointer;
+    color: $color-white;
+    text-transform: uppercase;
+    font-weight: bold;
+    border: none;
+    padding: .6rem 1.5rem;
+    border-radius: 50px;
+    background: $color-secondary;
+    box-shadow: 20px 20px 60px $color-gray-btn, 
+                -20px -20px 60px $color-white;
+    transition: all .7s;
+
+    &:hover {
+      background-color: $color-white;
+      color: $color-secondary;
+      box-shadow: -4px 16px 44px $color-gray-btn, 
+                  -3px -20px 7px $color-white;
+      transform: scale(1.1);
     }
   }
 }
