@@ -1,23 +1,33 @@
 .form {
   margin: 0 auto;
-  width: 70%;
+  width: 40%;
   padding-top: 6rem;
-//   &__group:not(:last-child) {
-//     margin-bottom: 2rem;
-//   }
+
+    &__group:not(:last-child) {
+      margin-bottom: 2rem;
+    }
+
+  @include respond(tab-land) {
+    width: 50%;
+  }
 
   &__input {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-family: inherit;
     color: $color-white;
-    padding: .5rem .7rem;
-    border-radius: 2px;
+    padding: 0.5rem 0.7rem;
+    border-radius: .2rem;
     background-color: $color-secondary;
     border: none;
-    border-bottom: 3px solid transparent;
+    border-bottom: .3rem solid transparent;
     width: 100%;
     display: block;
     transition: all 0.3s;
+
+    &::selection {
+      background-color: $color-white;
+      color: $color-secondary;
+    }
 
     @include respond(tab-port) {
       width: 100%;
@@ -26,11 +36,11 @@
     &:focus {
       outline: none;
       box-shadow: 0 1rem 2rem rgba($color-black, 0.1);
-      border-bottom: 3px solid $alert-success;
+      border-bottom: .3rem solid $alert-success;
     }
 
     &:focus:invalid {
-      border-bottom: 3px solid $alert-error;
+      border-bottom: .3rem solid $alert-error;
     }
 
     &::-webkit-input-placeholder {
@@ -54,16 +64,63 @@
   }
 
   &__add {
-
     &--btn {
       display: flex;
       justify-content: space-between;
     }
   }
+
+  &__radio-group {
+    display: inline-block;
+    width: 100%;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  &__radio-input {
+    display: none;
+  }
+
+  &__radio-label {
+    font-size: $default-font-size;
+    cursor: pointer;
+    position: relative;
+    padding-left: 4.5rem;
+  }
+
+  &__radio-button {
+    height: 2rem;
+    width: 2rem;
+    border: .5rem solid $color-secondary;
+    border-radius: 50%;
+    display: inline-block;
+    position: absolute;
+    left: 0;
+
+    &::after {
+      content: "";
+      display: block;
+      height: 1rem;
+      width: 1rem;
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: $color-tertiary;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+  }
+
+  &__radio-input:checked ~ &__radio-label &__radio-button::after {
+    opacity: 1;
+  }
 }
 
-@for $i from 0 through 20 {
-  #project_image_#{$i}_url, #project_content_#{$i}_content {
+@for $i from 0 through 30 {
+  #project_image_#{$i}_url,
+  #project_content_#{$i}_content {
     float: left;
     width: 80%;
     border-bottom-right-radius: 0px;
@@ -74,18 +131,30 @@
     float: left;
     width: 20%;
     margin-top: -2.3rem;
-    padding: .91rem;
+    padding: .45rem;
     border-radius: 0px;
+
+    @include respond(tab-land) {
+      padding: .35rem;
+    }
+    @include respond(tab-port) {
+      padding: .4rem;
+    }
   }
   .delete_project_content_#{$i} {
     float: left;
     width: 20%;
     margin-top: -2.3rem;
-    padding: 2.43rem;
+    padding: 2rem;
     border-radius: 0px;
+
+    @include respond(tab-port) {
+      padding: 2.15rem;
+    }
   }
 
-  #block_project_image_#{$i}::after, #block_project_content_#{$i}::after  {
+  #block_project_image_#{$i}::after,
+  #block_project_content_#{$i}::after {
     content: "";
     clear: both;
     display: table;
@@ -93,5 +162,5 @@
 }
 
 #block_project_image_0 {
-  margin-top: -.75rem;
+  margin-top: -0.75rem;
 }

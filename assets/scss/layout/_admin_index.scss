@@ -1,7 +1,9 @@
 #main {
   transition: margin-left 0.5s;
-  padding: 16px;
+  padding: 1.6rem;
   padding-top: 6rem;
+
+  padding-bottom: 8rem;
 }
 
 .nav__list {
@@ -10,7 +12,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 80px;
+    height: 8rem;
   }
 }
 
@@ -22,7 +24,7 @@
 
   &:hover, &:focus, &:active {
     background: #ffffff;
-    box-shadow: 20px 20px 60px #d9d9d9, -20px -20px 60px #ffffff;
+    box-shadow: 2rem 2rem 6rem #d9d9d9, -2rem -2rem 6rem #ffffff;
   }
 }
 

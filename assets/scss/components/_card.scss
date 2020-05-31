@@ -28,7 +28,7 @@
   transform-style: preserve-3d;
   color: $color-white;
   perspective: 100rem;
-  box-shadow: 2px 4px 8px 1px rgba($color-secondary, 0.4);
+  box-shadow: .2rem .4rem .8rem .1rem rgba($color-secondary, 0.4);
 }
 .back {
   background-color: #ffbe41;
@@ -36,15 +36,15 @@
 
   & p {
     font-size: 2rem;
-    transform: translateZ(50px);
+    transform: translateZ(5rem);
 
     &:last-child {
-      transform: translateZ(50px);
+      transform: translateZ(5rem);
     }
   }
 }
 .front > p {
-  transform: translateZ(50px);
+  transform: translateZ(5rem);
   font-size: 2rem;
   text-align: center;
   margin-top: 1rem;

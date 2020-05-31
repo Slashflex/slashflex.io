@@ -1,10 +1,10 @@
 @keyframes movingH1 {
   0% {
-    transform: perspective(500px) translateZ(0px);
+    transform: perspective(50rem) translateZ(0px);
   }
 
   100% {
-    transform: perspective(0px) translateZ(130px);
+    transform: perspective(0px) translateZ(13rem);
   }
 }
 

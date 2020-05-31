@@ -3,27 +3,23 @@
   display: flex;
   justify-content: center;
   padding: 10rem 0;
-  // height: 75vh;
   position: relative;
 
-  &__right {
-    background-image: url(../../images/mf_doom.jpg);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    height: 23vh;
+  filter: drop-shadow(-5mm 2mm 10mm #d7d6d6);
 
-    // @include respond(tab-land) {
-    //   margin-top: 5rem;
-    // }
+  // &__right {
+  //   background-image: url(../../images/room.png);
+  // }
+  &__right img {
+    width: 100%;
+    margin-top: -14rem;
 
-    // @include respond(tab-port) {
-    //   margin-top: 5rem;
-    // }
-
-    // @include respond(phone) {
-    //   margin-top: 5rem;
-    // }
+    @include respond(tab-port) {
+      margin-top: -8rem;
+    }
+    @include respond(phone) {
+      margin-top: -4rem;
+    }
   }
 
   &__left {
@@ -43,35 +39,20 @@
 
     &--text {
       color: $color-gray;
-      // font-size: 1.8rem;
+      font-size: 1.4rem;
       text-align: justify;
-
-      @include respond(phone) {
-        @include fontsize(22);
-      }
-      @include respond(tab-port) {
-        @include fontsize(18);
-      }
-      @include respond(desktop) {
-        @include fontsize(10);
-      }
     }
 
     &--title {
       color: $color-secondary;
       font-family: "Montserrat", Sans-serif;
       font-weight: 800;
+      font-size: 3rem;
       margin-bottom: 1.5rem;
 
       @include respond(phone) {
-        @include fontsize(30);
-      }
-      @include respond(tab-port) {
+        font-size: 2.5rem;
         text-align: center;
-        @include fontsize(21);
-      }
-      @include respond(desktop) {
-        @include fontsize(20);
       }
     }
   }

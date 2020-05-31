@@ -96,9 +96,9 @@
     content: "";
     display: block;
     height: 0.18rem;
-    left: calc(50% - 13px);
+    left: calc(50% - 1.3rem);
     position: absolute;
-    top: calc(50% - 1px);
+    top: calc(50% - .1rem);
     transform-origin: 50% 50%;
     transition: background-color 0.2s ease-in-out, top 0.2s 0.2s ease-out,
       transform 0.2s linear;
@@ -149,41 +149,71 @@
   }
 }
 
-
 .menu-footer {
-  padding: 2rem 2rem 5rem;
+  padding-bottom: 1rem;
   bottom: 0;
   left: 0;
   position: absolute;
   right: 0;
 
   .footer-nav {
-
     &__list {
       display: inline-block;
       list-style: none;
       margin: 0;
       padding: 0;
     }
-  
+
     &__item {
       display: inline;
       margin: 0 1rem;
     }
-  
+
     &__link {
       color: $color-white;
       text-decoration: none;
       text-transform: uppercase;
-      font-size: 2rem;
+      font-size: 4rem;
+
+      @include respond(tab-land) {
+        font-size: 3rem;
+      }
     }
 
     &__icon {
-      transition: all .5s;
+      transition: all 0.5s;
 
       &:hover {
         transform: scale(1.4) rotate(10deg);
         color: $color-secondary;
+      }
+    }
+
+    &__icons {
+      width: 100%;
+      text-align: center;
+    }
+
+    &__social {
+      color: $color-white;
+      text-decoration: none;
+      text-transform: uppercase;
+      font-size: 3rem;
+
+      @include respond(phone) {
+        font-size: 2rem;
+      }
+      @include respond(tab-port) {
+        font-size: 2.2rem;
+      }
+    }
+
+    &__menu {
+      transition: all 0.5s;
+
+      &:hover {
+        transform: scale(1.4) rotate(10deg);
+        color: $color-tertiary;
       }
     }
   }

@@ -1,6 +1,6 @@
 .logo {
   font-family: "Montserrat", Sans-serif;
-  // font-size: 1.5rem;
+  font-size: 1.5rem;
   position: fixed;
   top: 1.7rem;
   left: 1rem;
@@ -14,16 +14,6 @@
     text-decoration: none;
     border: 0.2em solid currentColor;
     padding: 0.2em 0.6em;
-
-    @include respond(phone) {
-      @include fontsize(22);
-    }
-    @include respond(tab-port) {
-      @include fontsize(18);
-    }
-    @include respond(desktop) {
-      @include fontsize(14);
-    }
 
     &::before {
       content: "";
@@ -166,16 +156,6 @@
       border: 0.2em solid currentColor;
       padding: 0.7em 1.2em;
 
-      @include respond(phone) {
-        @include fontsize(15);
-      }
-      @include respond(tab-port) {
-        @include fontsize(16);
-      }
-      @include respond(desktop) {
-        @include fontsize(10);
-      }
-
       &:hover {
         text-decoration: none;
       }
@@ -231,18 +211,36 @@
     font-weight: bold;
     border: none;
     padding: .6rem 1.5rem;
-    border-radius: 50px;
+    border-radius: 5rem;
     background: $color-secondary;
-    box-shadow: 20px 20px 60px $color-gray-btn, 
-                -20px -20px 60px $color-white;
+    box-shadow: 2rem 2rem 6rem $color-gray-btn, 
+                -2rem -2rem 6rem $color-white;
     transition: all .7s;
 
     &:hover {
       background-color: $color-white;
       color: $color-secondary;
-      box-shadow: -4px 16px 44px $color-gray-btn, 
-                  -3px -20px 7px $color-white;
+      box-shadow: -.4rem 1.6rem 4.4rem $color-gray-btn, 
+                  -.3rem -2rem .7rem $color-white;
       transform: scale(1.1);
+    }
+  }
+
+  &__add {
+    cursor: pointer;
+    color: $color-secondary;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: .6rem 1.5rem;
+    border-radius: 5rem;
+    background: $color-tertiary;
+    box-shadow: -.4rem .1rem 1rem $color-gray-btn;
+    transition: all .7s;
+
+    &:hover {
+      background-color: $color-secondary;
+      color: $color-tertiary !important;
+      box-shadow: 2rem 2rem 6rem $color-gray-btn;
     }
   }
 }
@@ -266,9 +264,9 @@
   & span {
     display: block;
     position: absolute;
-    height: 3px;
+    height: .3rem;
     width: 100%;
-    border-radius: 9px;
+    border-radius: .9rem;
     opacity: 1;
     left: 0;
     -webkit-transform: rotate(0deg);
@@ -286,18 +284,18 @@
     }
 
     &:nth-child(2) {
-      top: 10px;
+      top: 1rem;
     }
 
     &:nth-child(3) {
-      top: 20px;
+      top: 2rem;
     }
   }
 }
 
 .animated-icon.open {
   & span:nth-child(1) {
-    top: 11px;
+    top: 1.1rem;
     -webkit-transform: rotate(135deg);
     -moz-transform: rotate(135deg);
     -o-transform: rotate(135deg);
@@ -305,10 +303,10 @@
   }
   & span:nth-child(2) {
     opacity: 0;
-    left: -60px;
+    left: -6rem;
   }
   & span:nth-child(3) {
-    top: 11px;
+    top: 1.1rem;
     -webkit-transform: rotate(-135deg);
     -moz-transform: rotate(-135deg);
     -o-transform: rotate(-135deg);
