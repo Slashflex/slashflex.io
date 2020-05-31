@@ -29,7 +29,7 @@ class UserController extends AbstractController
     public function userLogin()
     {
         return $this->render('user/sign-in.html.twig', [
-            'title' => '/FLX | Connexion'
+            'title' => '/FLX | Login'
         ]);
     }
 }
