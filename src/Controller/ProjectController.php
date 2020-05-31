@@ -24,4 +24,19 @@ class ProjectController extends AbstractController
             'project' => $project
         ]);
     }
+
+    /**
+     * Shows all projects
+     * 
+     * @Route("/projects", name="projects")
+     */
+    public function index(ProjectRepository $projectRepository)
+    {
+        $projects = $projectRepository->findAll();
+
+        return $this->render('project/index.html.twig', [
+            'title' => '/FLX | Projects',
+            'projects' => $projects
+        ]);
+    }
 }
