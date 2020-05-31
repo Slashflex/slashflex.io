@@ -79,10 +79,14 @@ $(document).ready(() => {
     $(this).toggleClass('active');
     $('#menu').toggleClass('open');
   });
+
+  // Flash message
+  setInterval(function() {
+    $('.flash-notice').slideUp().fadeOut();
+  }, 3000)
 });
 
-console.log(window.location.pathname)
-// Loader
+// Loader only on root page
 if (window.location.pathname == '/') {
   var sentence = [
     '“Knowledge is power.” – <i style="color: #585858; font-size: 1.9rem">Francis Bacon</i>',
