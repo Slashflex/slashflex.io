@@ -3,6 +3,12 @@
 {% block titre %}{{ project.title }}{% endblock %}
 
 {% block body %}
+	<!-- Logo -->
+	{% include "partials/_top_buttons.html.twig" %}
+
+	<!-- Fullscreen Navigation -->
+	{% include "partials/_fullscreen_nav.html.twig" %}
+
     {% for message in app.flashes('success') %}
         <div class="flash-notice alert-success">
             {{ message }}
@@ -58,4 +64,7 @@
             </div>
         </div>
     </div>
+
+	<!-- Footer -->
+	{% include "partials/_footer.html.twig" %}
 {% endblock %}
