@@ -5,21 +5,71 @@
 {% endblock %}
 
 {% block body %}
-    <!-- Logo -->
+	<!-- Logo -->
 	{% include "partials/_top_buttons.html.twig" %}
 
 	<!-- Fullscreen Navigation -->
 	{% include "partials/_fullscreen_nav.html.twig" %}
 
-    <h1>Register</h1>
+	<div class="create container">
+		<div class="create__form mx-auto pt-5 mt-5">
+			<h1 class="heading__secondary">
+				Register a new account
+			</h1>
+			{{ form_start(registrationForm, {'attr': {'class': 'form m-auto', 'autocomplete': 'off' }}) }}
+			<div class="row">
+				<div class="col-12 col-lg-6 mx-auto">
+					<div class="form__group">
+						{{ form_widget(registrationForm.email, {'attr': { 'type': 'email', 'class': 'form__input', 'placeholder': 'Email', 'id': 'email' }}) }}
+						<label for="email" class="form__label">Email</label>
+					</div>
 
-    {{ form_start(registrationForm) }}
-        {{ form_widget(registrationForm) }}
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
-    
+					<div class="form__group">
+						{{ form_widget(registrationForm.plainPassword, {'attr': { 'type': 'password', 'class': 'form__input', 'placeholder': 'Password', 'id': 'password' }}) }}
+						<label for="password" class="form__label">Password</label>
+					</div>
+
+					<div class="form__group">
+						{{ form_widget(registrationForm.firstname, {'attr': { 'type': 'text', 'class': 'form__input', 'placeholder': 'Firstname', 'id': 'firstname' }}) }}
+						<label for="firstname" class="form__label">Firstname</label>
+					</div>
+
+					<div class="form__group">
+						{{ form_widget(registrationForm.lastname, {'attr': { 'type': 'text', 'class': 'form__input', 'placeholder': 'Lastname', 'id': 'lastname' }}) }}
+						<label for="lastname" class="form__label">Lastname</label>
+					</div>
+
+					<div class="form__group">
+						{{ form_widget(registrationForm.description, {'attr': { 'type': 'text', 'class': 'form__input', 'placeholder': 'Description', 'id': 'description' }}) }}
+						<label for="description" class="form__label">Description</label>
+					</div>
+
+					<div class="form__group">
+						{{ form_widget(registrationForm.login, {'attr': { 'type': 'text', 'class': 'form__input', 'placeholder': 'Nickname', 'id': 'nickname' }}) }}
+						<label for="nickname" class="form__label">Nickname</label>
+					</div>
+
+                    <div class="form__group">
+						<div class="form__radio-group mt-4">
+							{{ form_widget(registrationForm.agreeTerms, {'attr': { 'class': 'form__radio-input', 'id': 'registration_form_agreeTerms' }}) }}
+							<label for="registration_form_agreeTerms" class="form__radio-label">
+								<span class="form__radio-button"></span>
+								Agree terms
+							</label>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<button type="submit" class="btn__new mx-auto d-block">Register</button>
+			</div>
+			{{ form_end(registrationForm) }}
+		</div>
+	</div>
+
 	<!-- Footer -->
 	{% include "partials/_footer.html.twig" %}
 {% endblock %}
 
-{% block javascripts %}{% endblock %}
+{# {% block javascripts %}{% endblock %} #}

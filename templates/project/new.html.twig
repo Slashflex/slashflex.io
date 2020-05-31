@@ -11,14 +11,14 @@
 	<!-- Fullscreen Navigation -->
 	{% include "partials/_fullscreen_nav.html.twig" %}
 
-	<div class="create container">
-		<div class="create__form mx-auto pt-5">
-			<h2 class="heading__secondary">
+	<div class="create container mt-5">
+		<div class="create__form mx-auto pt-5 pb-5">
+			<h1 class="heading__secondary">
 				Create a new project
-			</h2>
+			</h1>
 			{% form_theme form with ['project/_images-collection.html.twig', 'project/_fields-collection.html.twig'] %}
 			{{ form_start(form, {'attr': {'class': 'm-auto'}}) }}
-			<div class="row">
+			<div class="row mt-5">
 				<div class="col-12 col-lg-6">
 					<div class="form__group">
 						{{ form_widget(form.title, {'attr': { 'type': 'text', 'class': 'form__input', 'placeholder': 'Title', 'id': 'title' }}) }}
@@ -58,7 +58,7 @@
 				</div>
 			</div>
 
-			<div class="form-group">
+			<div class="form-group p-5">
 				<button type="submit" class="btn__new mx-auto d-block">Create</button>
 			</div>
 			{{ form_end(form) }}

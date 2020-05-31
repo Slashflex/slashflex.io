@@ -11,31 +11,29 @@
 	<!-- Fullscreen Navigation -->
 	{% include "partials/_fullscreen_nav.html.twig" %}
 
-	<div class="container">
-        <form method="POST" class="form" autocomplete="off">
-            <div class="u-margin-bottom-medium">
-                <h1 class="heading__secondary">
-                    Log in to your account
-                </h1>
-            </div>
+	<div class="create container">
+		<div class="pt-5 mt-5">
+			<h1 class="heading__secondary">
+				Log in to your account
+			</h1>
 
-            <div class="form__group">
-                <input type="email" name="_username" class="form__input" placeholder="Email address" id="email" required>
-                <label for="email" class="form__label">Email address</label>
-            </div>
+			<form method="POST" class="form" autocomplete="off">
+				<div class="form__group">
+					<input type="email" name="_username" class="form__input" placeholder="Email address" id="email" required>
+					<label for="email" class="form__label">Email address</label>
+				</div>
 
-            <div class="form__group">
-                <input type="password" name="_password" class="form__input" placeholder="Password" id="password" required>
-                <label for="password" class="form__label">Password</label>
-            </div>
+				<div class="form__group">
+					<input type="password" name="_password" class="form__input" placeholder="Password" id="password" required>
+					<label for="password" class="form__label">Password</label>
+				</div>
 
-            <div class="form__group">
-                <div class="btn__stroke--login">
-                    <button class="btn__stroke--text">Login &rarr;</button>
-                </div>
-            </div>
-        </form>
-    </div>
+				<div class="form-group">
+					<button type="submit" class="btn__new mx-auto d-block">Login</button>
+				</div>
+			</form>
+		</div>
+	</div>
 
 	<!-- Footer -->
 	{% include "partials/_footer.html.twig" %}

@@ -8,68 +8,63 @@
 	<!-- Logo and Nav -->
 	{% include "partials/_top_buttons.html.twig" %}
 
+	<!-- Fullscreen Navigation -->
+	{% include "partials/_fullscreen_nav.html.twig" %}
+
 	<div class="create container">
-		<div class="create__form mx-auto">
-			<h2 class="heading-secondary text-center mb3">
-				Edit {{ project.title }}
-			</h2>
+		<div class="create__form mx-auto pt-5 mt-5">
+			<h1 class="heading__secondary">
+				Edit this project
+			</h1>
 			{% form_theme form with ['project/_images-collection.html.twig', 'project/_fields-collection.html.twig'] %}
-			{{ form_start(form, {'attr': {'class': 'w-100 m-auto'}}) }}
+			{{ form_start(form, {'attr': {'class': 'm-auto'}}) }}
 			<div class="row">
-				<div class="col-md-6">
-					<div class="form-group">
-						<label for="title-field">Titre</label>
-						{{ form_errors(form.title) }}
-						{{ form_widget(form.title, {'attr': { 'class': 'form-control form-control-lg' }}) }}
+				<div class="col-12 col-lg-6">
+					<div class="form__group">
+						{{ form_widget(form.title, {'attr': { 'type': 'text', 'class': 'form__input', 'placeholder': 'Title', 'id': 'title' }}) }}
+						<label for="title" class="form__label">Title</label>
 					</div>
 
-					<div class="form-group">
-						<label for="introduction-field">Introduction</label>
-						{{ form_errors(form.introduction) }}
-						{{ form_widget(form.introduction, {'attr': { 'class': 'form-control form-control-lg' }}) }}
+					<div class="form__group">
+						{{ form_widget(form.introduction, {'attr': { 'type': 'text', 'class': 'form__input', 'placeholder': 'Introduction', 'id': 'introduction' }}) }}
+						<label for="introduction" class="form__label">Introduction</label>
 					</div>
 
-					<div class="form-group">
-						<label for="content-field">Contenu</label>
-						{{ form_errors(form.content_1) }}
-						{{ form_widget(form.content_1, {'attr': { 'class': 'form-control form-control-lg' }}) }}
+					<div class="form__group">
+						{{ form_widget(form.content_1, {'attr': { 'type': 'text', 'class': 'form__input', 'placeholder': 'Content', 'id': 'content_1' }}) }}
+						<label for="content_1" class="form__label">Content</label>
 					</div>
 
-					<div class="form-group">
-						<label for="content-field">Contenu</label>
-						{{ form_errors(form.content_2) }}
-						{{ form_widget(form.content_2, {'attr': { 'class': 'form-control form-control-lg' }}) }}
+					<div class="form__group">
+						{{ form_widget(form.content_2, {'attr': { 'type': 'text', 'class': 'form__input', 'placeholder': 'Content', 'id': 'content_2' }}) }}
+						<label for="content_2" class="form__label">Content</label>
 					</div>
 
-					<div class="form-group">
-						<label for="content-field">Contenu</label>
-						{{ form_errors(form.content_3) }}
-						{{ form_widget(form.content_3, {'attr': { 'class': 'form-control form-control-lg' }}) }}
+					<div class="form__group">
+						{{ form_widget(form.content_3, {'attr': { 'type': 'text', 'class': 'form__input', 'placeholder': 'Content', 'id': 'content_3' }}) }}
+						<label for="content_3" class="form__label">Content</label>
 					</div>
 
-					<div class="form-group">
-						<label for="image-field">Image de couverture</label>
-						{{ form_errors(form.main_image) }}
-						{{ form_widget(form.main_image, {'attr': { 'class': 'form-control form-control-lg' }}) }}
+					<div class="form__group">
+						{{ form_widget(form.main_image, {'attr': { 'type': 'text', 'class': 'form__input', 'placeholder': 'Main Image', 'id': 'main_image' }}) }}
+						<label for="main_image" class="form__label">Main Image</label>
 					</div>
 				</div>
 
-				<div class="col-md-6">
+				<div class="col-12 col-lg-6">
 					{% block project_images_widget %}
 						{{ form_widget(form) }}
 					{% endblock %}
 				</div>
 			</div>
 
-			<div class="form-group">
-				<button type="submit" class="btn btn-primary mx-auto d-block">Edit project</button>
+			<div class="form-group mt-5">
+				<button type="submit" class="btn__new mx-auto d-block px-5">Edit</button>
 			</div>
 			{{ form_end(form) }}
 		</div>
 	</div>
-	<!-- Section Works -->
-	{% include "partials/_footer.html.twig" %}
 
-	<!-- Bottom Navigation -->
-	{% include "partials/_bottom_nav.html.twig" %}
+	<!-- Footer -->
+	{% include "partials/_footer.html.twig" %}
 {% endblock %}
