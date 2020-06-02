@@ -83,7 +83,7 @@ $(document).ready(() => {
   // Flash message
   setInterval(function() {
     $('.flash-notice').slideUp().fadeOut();
-  }, 3000)
+  }, 3000);
 });
 
 // Loader only on root page
