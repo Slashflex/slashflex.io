@@ -14,8 +14,8 @@
             {{ message }}
         </div>
     {% endfor %}
-    
-    <header style="background-image: url('{{ project.mainImage }}'); background-repeat: no-repeat; background-size: cover; padding: 8rem;">
+
+    <header style="background-image: url('{{ project.mainImage }}'); background-repeat: no-repeat; background-size: cover; padding: 20rem; background-size: 50%; background-position: center;">
         <div class="container h-100">
             <div class="row h-100 align-items-center">
                 <div class="col-12 text-center project-intro">
@@ -28,40 +28,9 @@
 
     <div class="container">
         <div class="row mt-5 mb-5">
-            <div class="col-md-8">
-                <div id="carouselExampleIndicators" class="carousel slide wrapper" data-ride="carousel">
-                    <div class="carousel-inner">
-                        {% for image in project.image %}
-                            <div class="carousel-item {% if loop.first %}active{% endif %}">
-                                <img class="d-block w-100" src="{{ image.url }}" alt="First slide" data-idimage="{{ loop.index0 }}">
-                            </div>
-                        {% endfor %}
-                    </div>
-                    <ol class="carousel-indicators">
-                        {% for image in project.image %}
-                            <li data-target="#carouselExampleIndicators" data-slide-to="{{ loop.index0 }}" {% if loop.first %}class="active"{% endif %}></li>
-                        {% endfor %}
-                    </ol>
-
-                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Précédent</span>
-                    </a>
-                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Suivant</span>
-                    </a>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <p>{{ project.content1 }}</p>
-                <p>{{ project.content2 }}</p>
-                <p>{{ project.content3 }}</p>
-                {% for content in project.content %}
-                    <p>{{ content }}</p>
-                {% endfor %}
-            </div>
+            {{ project.content1|raw }}
+            {{ project.content2|raw }}
+            {{ project.content3|raw }}
         </div>
     </div>
 
