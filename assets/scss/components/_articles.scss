@@ -1,0 +1,100 @@
+// Shell
+.flag {
+  color: rgb(0, 204, 255);
+
+  &::selection {
+    background-color: $color-white;
+    color: $color-secondary;
+  }
+}
+.highlight {
+    background-color: $color-secondary;
+    color: $color-white;
+    padding: 0 .4rem;
+
+    &::selection {
+        background-color: $color-tertiary;
+        color: $color-secondary;
+      }
+}
+.sudo {
+  color: chartreuse;
+
+  &::selection {
+    background-color: $color-white;
+    color: $color-secondary;
+  }
+}
+// JS
+.var {
+  color: $alert-success;
+
+  &::selection {
+    background-color: $color-white;
+    color: $color-secondary;
+  }
+
+  &__name {
+    color: $color-white;
+  }
+  &__string {
+    color: $alert-error;
+  }
+  &__param {
+    color: $color-tertiary;
+  }
+  &__function {
+    color: rgb(241, 155, 169);
+  }
+}
+.language {
+  &-html {
+    font-size: 1.5rem;
+    margin: 2rem 0;
+  }
+  &-shell {
+    font-size: 1.3rem;
+    background-color: #27282c;
+    display: block;
+    padding: 1rem;
+  }
+  &__title {
+    font-size: 4rem;
+    margin-bottom: 5rem;
+  }
+  &__subtitle {
+    font-weight: bold;
+    font-size: 2.2rem;
+  }
+  &__heading5 {
+    font-weight: bold;
+    font-size: 1.8rem;
+  }
+}
+.separator {
+    margin: 2rem 0;
+    background-color: $color-tertiary;
+}
+code {
+  color: $color-white;
+  margin-bottom: 2rem;
+
+  &::selection {
+    background-color: $color-white;
+    color: $color-secondary;
+  }
+}
+.article {
+  &__content {
+    width: 100%;
+    margin: 0 auto;
+
+    @include respond(phone) {
+      width: 85%;
+    }
+  }
+}
+
+.ml-2-rem {
+  margin-left: 2rem;
+}
