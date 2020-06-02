@@ -7,9 +7,9 @@
 
   filter: drop-shadow(-5mm 2mm 10mm #d7d6d6);
 
-  // &__right {
-  //   background-image: url(../../images/room.png);
-  // }
+  &__right {
+    background-image: url(../../images/room.png);
+  }
   &__right img {
     width: 100%;
     margin-top: -14rem;
