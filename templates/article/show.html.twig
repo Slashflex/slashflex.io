@@ -1,0 +1,39 @@
+{% extends "base.html.twig" %}
+
+{% block titre %}{{ article.title }}{% endblock %}
+
+{% block body %}
+	<!-- Logo -->
+	{% include "partials/_top_buttons.html.twig" %}
+
+	<!-- Fullscreen Navigation -->
+	{% include "partials/_fullscreen_nav.html.twig" %}
+
+    {% for message in app.flashes('success') %}
+        <div class="flash-notice alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    <header style="background-image: url('{{ article.mainImage }}'); background-repeat: no-repeat; background-size: cover; padding: 20rem; background-size: 50%; background-position: center;">
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12 text-center article-intro">
+                    <h1>{{ article.title }}</h1>
+                    <p>{{ article.introduction }}</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="row mt-5 mb-5">
+            {{ article.content1|raw }}
+            {{ article.content2|raw }}
+            {{ article.content3|raw }}
+        </div>
+    </div>
+
+	<!-- Footer -->
+	{% include "partials/_footer.html.twig" %}
+{% endblock %}
