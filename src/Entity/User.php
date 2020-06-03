@@ -75,9 +75,21 @@ class User implements UserInterface
      */
     private $login;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Article::class, mappedBy="users")
+     */
+    private $articles;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Project::class, mappedBy="users")
+     */
+    private $projects;
+
     public function __construct()
     {
         $this->roleUser = new ArrayCollection();
+        $this->articles = new ArrayCollection();
+        $this->projects = new ArrayCollection();
     }
 
     public function __toString()
@@ -280,6 +292,68 @@ class User implements UserInterface
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Article[]
+     */
+    public function getArticles(): Collection
+    {
+        return $this->articles;
+    }
+
+    public function addArticle(Article $article): self
+    {
+        if (!$this->articles->contains($article)) {
+            $this->articles[] = $article;
+            $article->setUsers($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArticle(Article $article): self
+    {
+        if ($this->articles->contains($article)) {
+            $this->articles->removeElement($article);
+            // set the owning side to null (unless already changed)
+            if ($article->getUsers() === $this) {
+                $article->setUsers(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Project[]
+     */
+    public function getProjects(): Collection
+    {
+        return $this->projects;
+    }
+
+    public function addProject(Project $project): self
+    {
+        if (!$this->projects->contains($project)) {
+            $this->projects[] = $project;
+            $project->setUsers($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProject(Project $project): self
+    {
+        if ($this->projects->contains($project)) {
+            $this->projects->removeElement($project);
+            // set the owning side to null (unless already changed)
+            if ($project->getUsers() === $this) {
+                $project->setUsers(null);
+            }
+        }
 
         return $this;
     }
