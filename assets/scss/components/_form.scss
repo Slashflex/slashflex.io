@@ -120,14 +120,17 @@
 
 @for $i from 0 through 30 {
   #project_image_#{$i}_url,
-  #project_content_#{$i}_content {
+  #project_content_#{$i}_content,
+  #article_image_#{$i}_url,
+  #article_content_#{$i}_content {
     float: left;
     width: 80%;
     border-bottom-right-radius: 0px;
     border-top-right-radius: 0px;
   }
 
-  .delete_project_image_#{$i} {
+  .delete_project_image_#{$i},
+  .delete_article_image_#{$i} {
     float: left;
     width: 20%;
     margin-top: -2.3rem;
@@ -141,7 +144,8 @@
       padding: .4rem;
     }
   }
-  .delete_project_content_#{$i} {
+  .delete_project_content_#{$i},
+  .delete_article_content_#{$i} {
     float: left;
     width: 20%;
     margin-top: -2.3rem;
@@ -154,13 +158,16 @@
   }
 
   #block_project_image_#{$i}::after,
-  #block_project_content_#{$i}::after {
+  #block_project_content_#{$i}::after,
+  #block_article_image_#{$i}::after,
+  #block_article_content_#{$i}::after {
     content: "";
     clear: both;
     display: table;
   }
 }
 
-#block_project_image_0 {
+#block_project_image_0,
+#block_article_image_0 {
   margin-top: -0.75rem;
 }
