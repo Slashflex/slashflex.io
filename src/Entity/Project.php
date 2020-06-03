@@ -70,6 +70,11 @@ class Project
      */
     private $content;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="projects")
+     */
+    private $users;
+
     public function __construct()
     {
         $this->image = new ArrayCollection();
@@ -247,6 +252,18 @@ class Project
         if ($this->content->contains($content)) {
             $this->content->removeElement($content);
         }
+
+        return $this;
+    }
+
+    public function getUsers(): ?User
+    {
+        return $this->users;
+    }
+
+    public function setUsers(?User $users): self
+    {
+        $this->users = $users;
 
         return $this;
     }

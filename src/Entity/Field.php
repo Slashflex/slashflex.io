@@ -29,9 +29,15 @@ class Field
      */
     private $projects;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Article::class, mappedBy="content")
+     */
+    private $articles;
+
     public function __construct()
     {
         $this->projects = new ArrayCollection();
+        $this->articles = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -82,5 +88,33 @@ class Field
     public function __toString()
     {
         return $this->getContent();
+    }
+
+    /**
+     * @return Collection|Article[]
+     */
+    public function getArticles(): Collection
+    {
+        return $this->articles;
+    }
+
+    public function addArticle(Article $article): self
+    {
+        if (!$this->articles->contains($article)) {
+            $this->articles[] = $article;
+            $article->addContent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArticle(Article $article): self
+    {
+        if ($this->articles->contains($article)) {
+            $this->articles->removeElement($article);
+            $article->removeContent($this);
+        }
+
+        return $this;
     }
 }
