@@ -19,7 +19,6 @@
 
 	<div id="main">
 		<div class="accordion" id="accordion">
-
 			<!-- Users -->
 			<div class="card z-depth-0 bordered">
 				<div class="card-header" id="headingOne2">
@@ -31,17 +30,20 @@
 					<div class="row">
 						<!-- Card -->
 						{% for user in users %}
-							<div class="col-12 col-lg-3">
+							<div class="col-sm-6 col-md-6 col-lg-3">
 								<div class="card card__bg m-3">
 									<img src="..." class="card-img-top" alt="...">
 									<div class="card-body">
-										<h5 class="card-title card__title">{{ user.firstname }}
-											{{ user.lastname }}</h5>
-										<p class="card-text card__description">{{ user.description }}</p>
-										{# <div class="d-flex justify-content-center"> #}
-											<p class="font-weight-bold card__email">{{ user.email }}</p>
-										{# </div> #}
-										<a href="#" class="btn btn-success">Show</a>
+										<h5 class="card-title card__title">{{ user.firstname }} {{ user.lastname }}</h5>
+										<p class="card-text card__description">{{ user.description|u.truncate(45, ' ...') }}</p>
+										<p class="font-weight-bold card__email">{{ user.email }}</p>
+										<p class="card-text card__description">Created on {{ user.createdAt }}</p>
+
+										<div class="d-flex justify-content-between">
+											{# <a href="{{ path('single_project', {'slug': project.slug}) }}" class="btn btn-success">Show</a> #}
+											<a href="{{ path('edit_user', {'slug': user.slug}) }}" class="btn btn-primary">Edit</a>
+											<a href="{{ path('delete_user', {'slug': user.slug}) }}" class="btn btn-danger">Delete</a>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -62,12 +64,14 @@
 						<div class="row">
 							<!-- Card -->
 							{% for project in projects %}
-								<div class="col-12 col-lg-3">
+								{% set author = project.users %}
+								<div class="col-sm-6 col-md-6 col-lg-3">
 									<div class="card card__bg m-3">
 										<img src="{{ project.mainImage }}" class="card-img-top" alt="...">
 										<div class="card-body">
 											<h5 class="card-title card__title">{{ project.title }}</h5>
-											<p class="card-text card__description">{{ project.introduction|u.truncate(50, ' ...') }}</p>
+											<p class="card-text card__description">{{ project.introduction|u.truncate(45, ' ...') }}</p>
+											<p class="card-text card__description">Created by {{ author }} on {{ project.createdAt }}</p>
 											<div class="d-flex justify-content-between">
 												<a href="{{ path('single_project', {'slug': project.slug}) }}" class="btn btn-success">Show</a>
 												<a href="{{ path('edit_project', {'slug': project.slug}) }}" class="btn btn-primary">Edit</a>
@@ -93,22 +97,24 @@
 					<div class="card-body">
 						<div class="row">
 							<!-- Card -->
-							{# {% for article in articles %}
-								<div class="col-12 col-lg-3">
+							{% for article in articles %}
+								{% set author = article.users %}
+								<div class="col-sm-6 col-md-6 col-lg-3">
 									<div class="card card__bg m-3">
 										<img src="{{ article.mainImage }}" class="card-img-top" alt="...">
 										<div class="card-body">
 											<h5 class="card-title card__title">{{ article.title }}</h5>
 											<p class="card-text card__description">{{ article.introduction|u.truncate(50, ' ...') }}</p>
+											<p class="card-text">Created by {{ author }} on {{ article.createdAt }}</p>
 											<div class="d-flex justify-content-between">
-												<a href="{{ path('single_article', {'slug': article.slug}) }}" class="btn btn-success">Show</a>
-												<a href="{{ path('edit_article', {'slug': article.slug}) }}" class="btn btn-primary">Edit</a>
-												<a href="{{ path('delete_article', {'slug': article.slug}) }}" class="btn btn-danger">Delete</a>
+												<a href="{{ path('single_article', {'slug': article.slug }) }}" class="btn__main">Show</a>
+												<a href="{{ path('edit_article', {'slug': article.slug }) }}" class="btn__main">Edit</a>
+												<a href="{{ path('delete_article', {'slug': article.slug }) }}" class="btn__main">Delete</a>
 											</div>
 										</div>
 									</div>
 								</div>
-							{% endfor %} #}
+							{% endfor %}
 						</div>
 					</div>
 				</div>
