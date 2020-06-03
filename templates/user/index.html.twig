@@ -11,13 +11,17 @@
 	<!-- Fullscreen Navigation -->
 	{% include "partials/_fullscreen_nav.html.twig" %}
 
-    <h1>Hello {{ user }}</h1>
-    <p>Email : {{ user.email }}</p>
+    <div class="container">
+        <h1 class="text-center mt-5">Hello {{ user }}</h1>
 
-    {% if app.user.roleUser[0].name == 'ROLE_ADMIN' %}
-        <a href="{{ path('admin') }}">Dashboard</a>
-    {% endif %}
-    
+        <p>Email : {{ user.email }}</p>
+        <p>Account created on {{ user.createdAt }}</p>
+        <a href="{{ path('edit_me', {'slug': user.slug}) }}">Edit</a>
+        {% if app.user.roleUser[0].name == 'ROLE_ADMIN' %}
+            <a href="{{ path('admin') }}">Dashboard</a>
+        {% endif %}
+    </div>
+
 	<!-- Footer -->
 	{% include "partials/_footer.html.twig" %}
 {% endblock %}
