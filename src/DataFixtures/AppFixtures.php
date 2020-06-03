@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Article;
 use Faker\Factory;
 use App\Entity\User;
 use App\Entity\Field;
@@ -25,8 +26,33 @@ class AppFixtures extends Fixture
     {
         $faker = Factory::create('fr-Fr');
 
-        setlocale(LC_TIME, 'fr_FR.utf8', 'fra');
-        $currentDate = 'Le '  . strftime("%A %d %B %Y") . ' à ' . strftime("%H:%M");
+        setlocale(LC_TIME, 'en_US.utf8');
+        $currentDate = strftime("%A %d %B %Y") . ' at ' . strftime("%H:%M");
+
+        // Setup an admin
+        $admin = new User();
+
+        // Create an admin role
+        $roleAdmin = new Role();
+        $roleAdmin->setName('ROLE_ADMIN');
+
+        $password = $_ENV['DB_PASSWORD'];
+        $email = $_ENV['DB_EMAIL'];
+        $firstname = $_ENV['DB_FIRSTNAME'];
+        $lastname = $_ENV['DB_LASTNAME'];
+
+        $admin
+            ->setFirstname($firstname)
+            ->setLastname($lastname)
+            ->setEmail($email)
+            ->setPassword($this->passwordEncoder->encodePassword($admin, $password))
+            ->setDescription('Creator of https://slashflex.io')
+            ->setLogin('Slashflex')
+            ->addRoleUser($roleAdmin)
+            ->setCreatedAt($currentDate)
+            ->initializeSlug();
+
+        $manager->persist($admin);
 
         // Populate the database with fake project, fake images and fake paragraphs
         for ($i = 1; $i <= 6; $i++) {
@@ -41,6 +67,7 @@ class AppFixtures extends Fixture
                 ->setContent1($faker->sentence(18))
                 ->setContent2($faker->sentence(22))
                 ->setContent3($faker->sentence(44))
+                ->setUsers($admin)
                 ->setMainImage($randomImage)
                 ->setCreatedAt($currentDate)
                 ->initializeSlug($title);
@@ -70,9 +97,47 @@ class AppFixtures extends Fixture
             $manager->persist($project);
         }
 
-        // Create an admin role
-        $roleAdmin = new Role();
-        $roleAdmin->setName('ROLE_ADMIN');
+        for ($m = 1; $m <= 6; $m++) {
+            $randomImage = 'https://i.picsum.photos/id/' . mt_rand(1, 689) . '/800/400.jpg';
+            $article = new Article();
+
+            $title = $faker->word(3);
+
+            $article
+                ->setTitle($title)
+                ->setIntroduction($faker->sentence(9))
+                ->setContent1($faker->sentence(18))
+                ->setContent2($faker->sentence(22))
+                ->setContent3($faker->sentence(44))
+                ->setUsers($admin)
+                ->setMainImage($randomImage)
+                ->setCreatedAt($currentDate)
+                ->initializeSlug($title);
+
+            for ($n = 1; $n <= mt_rand(1, 10); $n++) {
+                $randomImage = 'https://i.picsum.photos/id/' . mt_rand(1, 689) . '/800/400.jpg';
+
+                $image = new Image();
+                $image
+                    ->setUrl($randomImage)
+                    ->addArticle($article);
+
+                $manager->persist($image);
+            }
+
+            for ($o = 1; $o <= mt_rand(1, 15); $o++) {
+                $paragraphs = $faker->paragraphs(mt_rand(1, 10), true);
+
+                $field = new Field();
+                $field
+                    ->setContent($paragraphs)
+                    ->addArticle($article);
+
+                $manager->persist($field);
+            }
+
+            $manager->persist($article);
+        }
 
         // Create a user role
         $roleUser = new Role();
@@ -97,27 +162,6 @@ class AppFixtures extends Fixture
 
             $manager->persist($user);
         }
-
-        // Setup an admin
-        $admin = new User();
-
-        $password = $_ENV['DB_PASSWORD'];
-        $email = $_ENV['DB_EMAIL'];
-        $firstname = $_ENV['DB_FIRSTNAME'];
-        $lastname = $_ENV['DB_LASTNAME'];
-
-        $admin
-            ->setFirstname($firstname)
-            ->setLastname($lastname)
-            ->setEmail($email)
-            ->setPassword($this->passwordEncoder->encodePassword($admin, $password))
-            ->setDescription('Creator of https://slashflex.io')
-            ->setLogin('Slashflex')
-            ->addRoleUser($roleAdmin)
-            ->setCreatedAt($currentDate)
-            ->initializeSlug();
-
-        $manager->persist($admin);
 
         $manager->flush();
     }
