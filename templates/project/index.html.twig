@@ -1,18 +1,27 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Vos Annonces
+{% block title %}{{ title }}
 {% endblock %}
 
 {% block body %}
+	<!-- Logo and Nav -->
+	{% include "partials/_top_buttons.html.twig" %}
+
+	<!-- Fullscreen Navigation -->
+	{% include "partials/_fullscreen_nav.html.twig" %}
+
 	<div class="container mt-5">
-		<h1 class="text-center mb-5">Les dernnières annonces</h1>
+		<h1 class="text-center mb-5">Projects</h1>
 		<div class="row justify-content-start">
 			{% for project in projects %}
-				<div class="card mb-5 mx-auto" style="width: 18rem">
+			{% set auteur = project.users %}
+			<div class="col-6 col-lg-3">
+				<div class="card m-3">
 					<img src="{{ project.mainImage }}" class="card-img-top" alt="{{ project.title }}">
 					<div class="card-body">
 						<h5 class="card-title">{{ project.title }}</h5>
-						<p class="card-text">{{ project.introduction }}</p>
+						<p class="card-text">{{ project.introduction|u.truncate(50, ' ...') }}</p>
+						<p class="card-text">Created by {{ auteur }} on {{ project.createdAt }}</p>
 						<div class="d-flex justify-content-between">
 							{# <a href="{{ path('single_project', {'slug': project.slug }) }}" class="btn__main">Show</a>
 							<a href="{{ path('edit_project', {'slug': project.slug }) }}" class="btn__main">Edit</a>
@@ -20,7 +29,11 @@
 						</div>
 					</div>
 				</div>
+			</div>
 			{% endfor %}
 		</div>
 	</div>
+
+	<!-- Footer -->
+	{% include "partials/_footer.html.twig" %}
 {% endblock %}
