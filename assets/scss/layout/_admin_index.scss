@@ -2,7 +2,6 @@
   transition: margin-left 0.5s;
   padding: 1.6rem;
   padding-top: 6rem;
-
   padding-bottom: 8rem;
 }
 
@@ -22,7 +21,9 @@
   transition: all .5s;
   cursor: pointer;
 
-  &:hover, &:focus, &:active {
+  &:hover, 
+  &:focus, 
+  &:active {
     background: #ffffff;
     box-shadow: 2rem 2rem 6rem #d9d9d9, -2rem -2rem 6rem #ffffff;
   }
@@ -32,7 +33,8 @@
   background-color: rgba(0,0,0,.03);
 }
 
-#headingTwo2, #headingOne2{
+#headingTwo2, 
+#headingOne2 {
   border-bottom: 0px solid transparent;
 }
 
