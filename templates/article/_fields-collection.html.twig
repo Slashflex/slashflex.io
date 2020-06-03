@@ -1,0 +1,17 @@
+{% block _article_content_widget %}
+    {{ form_widget(form) }}
+
+    <input type="hidden" id="content-counter" value="0">
+{% endblock %}
+
+{% block _article_content_entry_row %}
+    {{ form_widget(form) }}
+{% endblock %}
+
+{% block _article_content_entry_widget %}
+    <div class="form__group form-group" id="block_{{ id }}">
+        {{ form_widget(form.content, {'attr': { 'type': 'text', 'class': 'form__input form__input--url_{{ id }}', 'placeholder': 'Content', 'id': 'content' }}) }}
+        <label for="content" class="form__label">Content</label>
+        <button type="button" data-action="delete" data-target="#block_{{ id }}" class="btn btn-danger delete_{{ id }}"><i class="far fa-times-circle fa-2x"></i></button>
+    </div>
+{% endblock %}

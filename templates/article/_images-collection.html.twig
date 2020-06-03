@@ -1,0 +1,23 @@
+{% block _article_image_widget %}
+    {{ form_widget(form) }}
+
+    <input type="hidden" id="widgets-counter" value="0">
+
+    <div class="form-group form__add--btn">
+        <a class="btn__add mx-auto d-block" id="add-images-btn"><i class="fas fa-plus"></i> Image</a>
+        <a class="btn__add mx-auto d-block" id="add-content-btn"><i class="fas fa-plus"></i> Field
+        </a>
+    </div>
+{% endblock %}
+
+{% block _article_image_entry_row %}
+    {{ form_widget(form) }}
+{% endblock %}
+
+{% block _article_image_entry_widget %}
+    <div class="form__group form-group" id="block_{{ id }}">
+        {{ form_widget(form.url, {'attr': { 'class': 'form__input', 'placeholder': 'Image Url', 'id': 'url' }}) }}
+        <label for="url" class="form__label">Image Url</label>
+        <button type="button" data-action="delete" data-target="#block_{{ id }}" class="btn btn-danger delete_{{ id }}"><i class="far fa-times-circle fa-2x"></i></button>
+    </div>
+{% endblock %}
