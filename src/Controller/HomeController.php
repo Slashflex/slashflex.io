@@ -42,4 +42,13 @@ class HomeController extends AbstractController
             'title' => '/FLX | Page not found',
         ]);
     }
+
+    /**
+     * Logout path
+     * 
+     * @Route("/logout", name="logout")
+     */
+    public function logout()
+    {
+    }
 }
