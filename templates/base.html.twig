@@ -10,8 +10,18 @@
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
         <!-- Bootstrap core JavaScript -->
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
-        {{ encore_entry_script_tags('images-collection') }}
-        {{ encore_entry_script_tags('fields-collection') }}
+        
+        <!-- Loads scripts on specified routes -->
+        {% if app.request.attributes.get('_route') == 'new_project' or  app.request.attributes.get('_route') == 'edit_project' %}
+            {{ encore_entry_script_tags('project-images-collection') }}
+            {{ encore_entry_script_tags('project-fields-collection') }}
+        {% endif %}
+
+        {% if app.request.attributes.get('_route') == 'new_article' or  app.request.attributes.get('_route') == 'edit_article'  %}
+            {{ encore_entry_script_tags('article-images-collection') }} 
+            {{ encore_entry_script_tags('article-fields-collection') }}
+        {% endif %}
+
         {# {% if app.request.attributes.get('_route') == 'home' %} #}
             {{ encore_entry_script_tags('custom') }}
         {# {% endif %} #}
