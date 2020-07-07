@@ -56,24 +56,22 @@ class AppFixtures extends Fixture
 
         // Populate the database with fake project, fake images and fake paragraphs
         for ($i = 1; $i <= 6; $i++) {
-            $randomImage = 'https://i.picsum.photos/id/' . mt_rand(1, 689) . '/800/400.jpg';
             $project = new Project();
+            $randomImage = 'https://via.placeholder.com/800x500';
 
             $title = $faker->word(3);
 
             $project
                 ->setTitle($title)
-                ->setIntroduction($faker->sentence(9))
-                ->setContent1($faker->sentence(18))
-                ->setContent2($faker->sentence(22))
-                ->setContent3($faker->sentence(44))
-                ->setUsers($admin)
+                ->setIntroduction($faker->sentence(6))
+                ->setContent($faker->sentence(18))
                 ->setMainImage($randomImage)
+                ->setUsers($admin)
                 ->setCreatedAt($currentDate)
                 ->initializeSlug($title);
 
             for ($j = 1; $j <= mt_rand(1, 10); $j++) {
-                $randomImage = 'https://i.picsum.photos/id/' . mt_rand(1, 689) . '/800/400.jpg';
+                $randomImage = 'https://via.placeholder.com/800x500';
 
                 $image = new Image();
                 $image
@@ -88,8 +86,7 @@ class AppFixtures extends Fixture
 
                 $field = new Field();
                 $field
-                    ->setContent($paragraphs)
-                    ->addProject($project);
+                    ->setContent($paragraphs);
 
                 $manager->persist($field);
             }
@@ -98,7 +95,8 @@ class AppFixtures extends Fixture
         }
 
         for ($m = 1; $m <= 6; $m++) {
-            $randomImage = 'https://i.picsum.photos/id/' . mt_rand(1, 689) . '/800/400.jpg';
+            $randomImage = 'https://via.placeholder.com/800x500';
+
             $article = new Article();
 
             $title = $faker->word(3);
@@ -106,16 +104,16 @@ class AppFixtures extends Fixture
             $article
                 ->setTitle($title)
                 ->setIntroduction($faker->sentence(9))
-                ->setContent1($faker->sentence(18))
-                ->setContent2($faker->sentence(22))
-                ->setContent3($faker->sentence(44))
+                ->setContent($faker->sentence(18))
+                // ->setContent2($faker->sentence(22))
+                // ->setContent3($faker->sentence(44))
                 ->setUsers($admin)
                 ->setMainImage($randomImage)
                 ->setCreatedAt($currentDate)
                 ->initializeSlug($title);
 
             for ($n = 1; $n <= mt_rand(1, 10); $n++) {
-                $randomImage = 'https://i.picsum.photos/id/' . mt_rand(1, 689) . '/800/400.jpg';
+                $randomImage = 'https://via.placeholder.com/800x500';
 
                 $image = new Image();
                 $image
@@ -130,8 +128,7 @@ class AppFixtures extends Fixture
 
                 $field = new Field();
                 $field
-                    ->setContent($paragraphs)
-                    ->addArticle($article);
+                    ->setContent($paragraphs);
 
                 $manager->persist($field);
             }

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Project;
 use App\Form\ProjectType;
+use App\Repository\UserRepository;
 use App\Repository\ProjectRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,10 +15,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ProjectController extends AbstractController
 {
     private $manager;
+    private $userRepository;
 
-    public function __construct(EntityManagerInterface $manager)
+    public function __construct(EntityManagerInterface $manager, UserRepository $userRepository)
     {
         $this->manager = $manager;
+        $this->userRepository = $userRepository;
     }
     /**
      * Shows a single project
@@ -72,11 +75,6 @@ class ProjectController extends AbstractController
                 $this->manager->persist($image);
             }
 
-            foreach ($project->getContent() as $content) {
-                $content->addProject($project);
-                $this->manager->persist($content);
-            }
-
             $author = $this->userRepository->findOneBy(['email' => $_ENV['DB_EMAIL']]);
 
             $project
@@ -118,13 +116,9 @@ class ProjectController extends AbstractController
                 $this->manager->persist($image);
             }
 
-            foreach ($project->getContent() as $content) {
-                $content->addProject($project);
-                $this->manager->persist($content);
-            }
-
             // Retrieve updated slug on form submission
             $title = $request->request->get('project')['title'];
+
             $project->updateSlug($title);
 
             $this->manager->persist($project);

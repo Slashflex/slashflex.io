@@ -24,7 +24,7 @@ class RegistrationController extends AbstractController
         // Define locale 
         setlocale(LC_TIME, 'fr_FR.utf8', 'fra');
         // Concat date and time
-        $currentDate = 'Le '  . strftime("%A %d %B %Y") . ' à ' . strftime("%H:%M");
+        $currentDate = 'The '  . strftime("%A %d %B %Y") . ' at ' . strftime("%H:%M");
 
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);

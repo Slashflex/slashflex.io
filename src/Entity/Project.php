@@ -33,17 +33,7 @@ class Project
     /**
      * @ORM\Column(type="text")
      */
-    private $content_1;
-
-    /**
-     * @ORM\Column(type="text")
-     */
-    private $content_2;
-
-    /**
-     * @ORM\Column(type="text")
-     */
-    private $content_3;
+    private $content;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -64,11 +54,6 @@ class Project
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $slug;
-
-    /**
-     * @ORM\ManyToMany(targetEntity=Field::class, inversedBy="projects", orphanRemoval=true)
-     */
-    private $content;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="projects")
@@ -110,38 +95,14 @@ class Project
         return $this;
     }
 
-    public function getContent1(): ?string
+    public function getContent(): ?string
     {
-        return $this->content_1;
+        return $this->content;
     }
 
-    public function setContent1(string $content_1): self
+    public function setContent(string $content): self
     {
-        $this->content_1 = $content_1;
-
-        return $this;
-    }
-
-    public function getContent2(): ?string
-    {
-        return $this->content_2;
-    }
-
-    public function setContent2(string $content_2): self
-    {
-        $this->content_2 = $content_2;
-
-        return $this;
-    }
-
-    public function getContent3(): ?string
-    {
-        return $this->content_3;
-    }
-
-    public function setContent3(string $content_3): self
-    {
-        $this->content_3 = $content_3;
+        $this->content = $content;
 
         return $this;
     }
@@ -228,32 +189,6 @@ class Project
     public function __toString()
     {
         return $this->getMainImage();
-    }
-
-    /**
-     * @return Collection|Field[]
-     */
-    public function getContent(): Collection
-    {
-        return $this->content;
-    }
-
-    public function addContent(Field $content): self
-    {
-        if (!$this->content->contains($content)) {
-            $this->content[] = $content;
-        }
-
-        return $this;
-    }
-
-    public function removeContent(Field $content): self
-    {
-        if ($this->content->contains($content)) {
-            $this->content->removeElement($content);
-        }
-
-        return $this;
     }
 
     public function getUsers(): ?User

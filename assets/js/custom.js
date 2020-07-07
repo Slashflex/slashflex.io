@@ -26,6 +26,24 @@ $(document).ready(() => {
     })();
   }
 
+  $("#wrapper").mousemove(function (e) {
+    parallaxIt(e, ".keyF", -10);
+    parallaxIt(e, ".keyU", 10);
+    parallaxIt(e, ".keyK", -15);
+    parallaxIt(e, ".keyC", 15);
+  });
+  
+  const parallaxIt = (e, target, movement) => {
+    var $this = $("#wrapper");
+    var relX = e.pageX - $this.offset().left;
+    var relY = e.pageY - $this.offset().top;
+  
+    TweenMax.to(target, 1, {
+      x: ((relX - $this.width() / 2) / $this.width()) * movement,
+      y: ((relY - $this.height() / 2) / $this.height()) * movement,
+    });
+  };
+
   // Swiper
   var swiper = new Swiper('.swiper-container', {
     loop: true,
@@ -75,8 +93,13 @@ $(document).ready(() => {
   };
 
   // Full screen navigation toggle
-  $('.toggle-menu').click(function () {
+  $('#menu-toggle').click(function () {
     $(this).toggleClass('active');
+    if ($(this).hasClass('active')) {
+      $('.nav').css('position', 'static');
+    } else {
+      $('.nav').css('position', 'fixed');
+    }
     $('#menu').toggleClass('open');
   });
 
@@ -84,6 +107,36 @@ $(document).ready(() => {
   setInterval(function() {
     $('.flash-notice').slideUp().fadeOut();
   }, 3000);
+
+  // Flips cards with perspective
+  function flipCard(card, front, back, frontClass, backClass) {
+    let count = 0;
+    $(card).on('click', function() {
+      count++;
+      if (count === 1) {
+        $(front).addClass(frontClass);
+        $(back).addClass(backClass);
+        count++;
+      } else {
+        $(front).removeClass(frontClass);
+        $(back).removeClass(backClass);
+        count = 0;
+      }
+    });
+  }
+  for (let i = 0; i < 15; i++) {
+    const card = document.querySelector(`.card${[i]}`);
+    const front = document.querySelector(`.front${[i]}`);
+    const back = document.querySelector(`.back${[i]}`);
+    flipCard($(card), $(front), $(back), `front-visible-${[i]}`, `back-visible-${[i]}`);
+  }
+
+  if (window.location.pathname == '/projects') {
+    for (let i = 1; i < 15; i++) {
+      let back = document.querySelector(`.back${[i]}`);
+      $(back).css('background-color', '#27282c');
+    }
+  }
 });
 
 // Loader only on root page

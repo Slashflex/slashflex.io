@@ -71,7 +71,7 @@ class UserController extends AbstractController
 
             $this->addFlash(
                 'success',
-                'The profile of ' . ucfirst($user->getFirstname()) . ' ' . ucfirst($user->getLastname()) . ' has been updated'
+                'The profile of ' . $user->__ToString() . ' has been updated'
             );
 
             return $this->redirectToRoute('admin', [

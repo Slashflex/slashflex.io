@@ -9,6 +9,11 @@ if (!Encore.isRuntimeEnvironmentConfigured()) {
 Encore
     // directory where compiled assets will be stored
     .setOutputPath('public/build/')
+
+    .copyFiles({
+        from: './assets/images',
+        to: 'images/[path][name].[ext]'
+    })
     // public path used by the web server to access the output path
     .setPublicPath('/build')
     // only needed for CDN's or sub-directory deploy
@@ -25,10 +30,6 @@ Encore
      */
     .addEntry('app', './assets/js/app.js')
     .addEntry('custom', './assets/js/custom.js')
-    .addEntry('project-images-collection', './assets/js/project-images-collection.js')
-    .addEntry('project-fields-collection', './assets/js/project-fields-collection.js')
-    .addEntry('article-images-collection', './assets/js/article-images-collection.js')
-    .addEntry('article-fields-collection', './assets/js/article-fields-collection.js')
     //.addEntry('page2', './assets/js/page2.js')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
@@ -46,7 +47,7 @@ Encore
      * https://symfony.com/doc/current/frontend.html#adding-more-features
      */
     .cleanupOutputBeforeBuild()
-    .enableBuildNotifications()
+    // .enableBuildNotifications()
     .enableSourceMaps(!Encore.isProduction())
     // enables hashed filenames (e.g. app.abc123.css)
     .enableVersioning(Encore.isProduction())

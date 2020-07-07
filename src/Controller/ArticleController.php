@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Article;
 use App\Form\ArticleType;
 use App\Repository\ArticleRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,10 +15,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ArticleController extends AbstractController
 {
     private $manager;
+    private $userRepository;
 
-    public function __construct(EntityManagerInterface $manager)
+    public function __construct(EntityManagerInterface $manager, UserRepository $userRepository)
     {
         $this->manager = $manager;
+        $this->userRepository = $userRepository;
     }
     /**
      * Shows a single article
@@ -72,10 +75,10 @@ class ArticleController extends AbstractController
                 $this->manager->persist($image);
             }
 
-            foreach ($article->getContent() as $content) {
-                $content->addArticle($article);
-                $this->manager->persist($content);
-            }
+            // foreach ($article->getContent() as $content) {
+            //     $content->addArticle($article);
+            //     $this->manager->persist($content);
+            // }
 
             $author = $this->userRepository->findOneBy(['email' => $_ENV['DB_EMAIL']]);
 
@@ -118,10 +121,10 @@ class ArticleController extends AbstractController
                 $this->manager->persist($image);
             }
 
-            foreach ($article->getContent() as $content) {
-                $content->addArticle($article);
-                $this->manager->persist($content);
-            }
+            // foreach ($article->getContent() as $content) {
+            //     $content->addArticle($article);
+            //     $this->manager->persist($content);
+            // }
 
             // Retrieve updated slug on form submission
             $title = $request->request->get('article')['title'];

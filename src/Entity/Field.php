@@ -24,16 +24,6 @@ class Field
      */
     private $content;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Project", mappedBy="content")
-     */
-    private $projects;
-
-    /**
-     * @ORM\ManyToMany(targetEntity=Article::class, mappedBy="content")
-     */
-    private $articles;
-
     public function __construct()
     {
         $this->projects = new ArrayCollection();
@@ -57,64 +47,64 @@ class Field
         return $this;
     }
 
-    /**
-     * @return Collection|Project[]
-     */
-    public function getProjects(): Collection
-    {
-        return $this->projects;
-    }
+    // /**
+    //  * @return Collection|Project[]
+    //  */
+    // public function getProjects(): Collection
+    // {
+    //     return $this->projects;
+    // }
 
-    public function addProject(Project $project): self
-    {
-        if (!$this->projects->contains($project)) {
-            $this->projects[] = $project;
-            $project->addContent($this);
-        }
+    // public function addProject(Project $project): self
+    // {
+    //     if (!$this->projects->contains($project)) {
+    //         $this->projects[] = $project;
+    //         $project->addContent($this);
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function removeProject(Project $project): self
-    {
-        if ($this->projects->contains($project)) {
-            $this->projects->removeElement($project);
-            $project->removeContent($this);
-        }
+    // public function removeProject(Project $project): self
+    // {
+    //     if ($this->projects->contains($project)) {
+    //         $this->projects->removeElement($project);
+    //         $project->removeContent($this);
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function __toString()
     {
         return $this->getContent();
     }
 
-    /**
-     * @return Collection|Article[]
-     */
-    public function getArticles(): Collection
-    {
-        return $this->articles;
-    }
+    // /**
+    //  * @return Collection|Article[]
+    //  */
+    // public function getArticles(): Collection
+    // {
+    //     return $this->articles;
+    // }
 
-    public function addArticle(Article $article): self
-    {
-        if (!$this->articles->contains($article)) {
-            $this->articles[] = $article;
-            $article->addContent($this);
-        }
+    // public function addArticle(Article $article): self
+    // {
+    //     if (!$this->articles->contains($article)) {
+    //         $this->articles[] = $article;
+    //         $article->addContent($this);
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function removeArticle(Article $article): self
-    {
-        if ($this->articles->contains($article)) {
-            $this->articles->removeElement($article);
-            $article->removeContent($this);
-        }
+    // public function removeArticle(Article $article): self
+    // {
+    //     if ($this->articles->contains($article)) {
+    //         $this->articles->removeElement($article);
+    //         $article->removeContent($this);
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
 }
