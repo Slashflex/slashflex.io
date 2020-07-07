@@ -1,0 +1,94 @@
+.laptop {
+  display: block;
+  margin: 0 auto;
+  width: 38rem;
+}
+
+.keyF {
+  height: 11vh;
+  background-image: url(../../images/sites_f.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 80%;
+  width: 7%;
+  z-index: 2;
+  position: absolute;
+  left: 23%;
+  top: 55%;
+}
+
+.keyU {
+  height: 17vh;
+  background-image: url(/build/images/sites_u.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 82%;
+  width: 9%;
+  z-index: 2;
+  position: absolute;
+  left: 25%;
+  top: 35%;
+}
+
+.keyK {
+  height: 20vh;
+  background-image: url(../../images/sites_k.png);
+  background-repeat: no-repeat;
+  background-size: 100%;
+  width: 3%;
+  z-index: 2;
+  position: absolute;
+  left: 48%;
+  top: 29%;
+}
+
+.keyC {
+  height: 18vh;
+  background-image: url(../../images/sites_c.png);
+  background-repeat: no-repeat;
+  background-size: 100%;
+  width: 6%;
+  z-index: 1;
+  position: absolute;
+  left: 63%;
+  top: 40%;
+}
+
+#wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wrapper__sites {
+  position: absolute;
+  font-size: 12rem;
+  color: $color-tertiary;
+  font-family: "Montserrat", Sans-serif;
+  font-weight: 800;
+  animation: movingH1 20s infinite;
+  z-index: 2;
+  margin-top: 2.5rem;
+}
+
+.project {
+  &__title {
+    font-family: "Montserrat", Sans-serif;
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 2rem;
+  }
+
+  &__introduction {
+    color: $color-gray;
+    font-family: "Montserrat", Sans-serif;
+    font-size: 2.1rem;
+		font-weight: 400;
+		margin-bottom: 5rem;
+  }
+}

@@ -8,202 +8,44 @@
 
   &__text {
     color: $color-secondary;
-    position: relative;
-    background: none;
+    transition: all .5s;
     text-transform: uppercase;
-    text-decoration: none;
-    border: 0.2em solid currentColor;
-    padding: 0.2em 0.6em;
-
-    &::before {
-      content: "";
-      display: block;
-      position: absolute;
-      width: 10%;
-      background: $color-white;
-      height: 0.3em;
-      right: 20%;
-      top: -0.21em;
-      transform: skewX(-45deg);
-      -webkit-transition: all 0.45s cubic-bezier(0.86, 0, 0.07, 1);
-      transition: all 0.45s cubic-bezier(0.86, 0, 0.07, 1);
-    }
-
-    &::after {
-      content: "";
-      display: block;
-      position: absolute;
-      width: 10%;
-      background: $color-white;
-      height: 0.3em;
-      left: 20%;
-      bottom: -0.25em;
-      transform: skewX(-45deg);
-      -webkit-transition: all 0.45 cubic-bezier(0.86, 0, 0.07, 1);
-      transition: all 0.45s cubic-bezier(0.86, 0, 0.07, 1);
-    }
+    font-size: 2.5rem;
+    font-family: Montserrat, sans-serif;
+    font-weight: 700;
 
     &:hover {
-      color: $color-gray;
-      transition: all 0.5s;
+      color: $color-tertiary;
       text-decoration: none;
-
-      &::before {
-        right: 80%;
-        text-decoration: none;
-      }
-
-      &::after {
-        left: 80%;
-        text-decoration: none;
-      }
     }
   }
 }
 
 .btn {
   cursor: pointer;
-  
-  &__footer {
-    margin-top: 1.5rem;
-    transition: all 0.5s;
 
-    &:hover .btn__footer--text {
-      color: rgb(138, 138, 138);
-    }
+  &__footer--me {
+    text-align: center;
+    cursor: pointer;
+    width: 20%;
+    color: $color-secondary;
+    text-transform: uppercase;
+    font-weight: bold;
+    border: none;
+    padding: .4rem 1.2rem;
+    border-radius: .5rem;
+    background: $color-white;
+    box-shadow: 2rem 2rem 6rem $color-secondary;
+    transition: all .7s;
 
-    &--text {
-      position: relative;
-      background: none;
-      color: $color-white;
-      font-weight: 400;
-      text-decoration: none;
-      border: 0.2em solid $color-white;
-      padding: 0.7em 1.2em;
-
-      &:hover {
-        text-decoration: none;
-        &::before {
-          right: 80%;
-          text-decoration: none;
-        }
-
-        &::after {
-          left: 80%;
-          text-decoration: none;
-        }
-      }
-
-      &::before {
-        content: "";
-        display: block;
-        position: absolute;
-        width: 10%;
-        background: $color-secondary;
-        height: 0.3em;
-        right: 20%;
-        top: -0.21em;
-        transform: skewX(-45deg);
-        -webkit-transition: all 0.45s cubic-bezier(0.86, 0, 0.07, 1);
-        transition: all 0.45s cubic-bezier(0.86, 0, 0.07, 1);
-      }
-
-      &::after {
-        content: "";
-        display: block;
-        position: absolute;
-        width: 10%;
-        background: $color-secondary;
-        height: 0.3em;
-        left: 20%;
-        bottom: -0.25em;
-        transform: skewX(-45deg);
-        -webkit-transition: all 0.45 cubic-bezier(0.86, 0, 0.07, 1);
-        transition: all 0.45s cubic-bezier(0.86, 0, 0.07, 1);
-      }
-    }
-  }
-
-  &__stroke {
-    margin-top: 3.5rem;
-
-    @include respond(phone) {
-      text-align: center;
-    }
-    @include respond(tab-port) {
-      text-align: center;
-    }
-
-    &--login {
-      margin-top: 0;
-
-      @include respond(phone) {
-        text-align: center;
-      }
-      @include respond(tab-port) {
-        text-align: center;
-      }
-    }
-
-    &--text {
-      text-decoration: none;
+    &:hover {
+      background-color: $color-tertiary;
       color: $color-secondary;
-      position: relative;
-      background: none;
-      // font-size: 1.5rem;
-      font-weight: 400;
       text-decoration: none;
-      border: 0.2em solid currentColor;
-      padding: 0.7em 1.2em;
-
-      &:hover {
-        text-decoration: none;
-      }
-      &::before {
-        content: "";
-        display: block;
-        position: absolute;
-        width: 10%;
-        background: $color-white;
-        height: 0.3em;
-        right: 20%;
-        top: -0.21em;
-        transform: skewX(-45deg);
-        -webkit-transition: all 0.45s cubic-bezier(0.86, 0, 0.07, 1);
-        transition: all 0.45s cubic-bezier(0.86, 0, 0.07, 1);
-      }
-
-      &::after {
-        content: "";
-        display: block;
-        position: absolute;
-        width: 10%;
-        background: $color-white;
-        height: 0.3em;
-        left: 20%;
-        bottom: -0.25em;
-        transform: skewX(-45deg);
-        -webkit-transition: all 0.45 cubic-bezier(0.86, 0, 0.07, 1);
-        transition: all 0.45s cubic-bezier(0.86, 0, 0.07, 1);
-      }
-
-      &:hover {
-        color: $color-gray;
-        transition: all 0.5s;
-
-        &::before {
-          right: 80%;
-          text-decoration: none;
-        }
-
-        &::after {
-          left: 80%;
-          text-decoration: none;
-        }
-      }
+      box-shadow: -.4rem 1.6rem 4.4rem $color-secondary;
+      transform: scale(1.1);
     }
   }
-
   &__new {
     cursor: pointer;
     color: $color-white;
@@ -223,6 +65,90 @@
       box-shadow: -.4rem 1.6rem 4.4rem $color-gray-btn, 
                   -.3rem -2rem .7rem $color-white;
       transform: scale(1.1);
+    }
+
+    &--me {
+      text-align: center;
+      cursor: pointer;
+      width: 20%;
+      color: $color-white;
+      text-transform: uppercase;
+      font-weight: bold;
+      border: none;
+      padding: .6rem 1.5rem;
+      border-radius: .5rem;
+      background: $color-secondary;
+      box-shadow: 2rem 2rem 6rem $color-gray-btn;
+      transition: all .7s;
+
+      &:hover {
+        background-color: $color-white;
+        color: $color-secondary;
+        text-decoration: none;
+        box-shadow: -.4rem 1.6rem 4.4rem $color-gray-btn;
+        transform: scale(1.1);
+      }
+      &:not(:active) {
+        box-shadow: .5rem .5rem 1.5rem $color-gray;
+      }
+      &:active {
+        @include shadow-inset
+      }
+    }
+    
+    &--about {
+      text-align: center;
+      cursor: pointer;
+      color: $color-white;
+      text-transform: uppercase;
+      font-weight: bold;
+      border: none;
+      padding: .6rem 1.5rem;
+      border-radius: .5rem;
+      background: $color-secondary;
+      box-shadow: 2rem 2rem 6rem $color-gray-btn;
+      transition: all .7s;
+
+      &:hover {
+        background-color: $color-white;
+        color: $color-secondary;
+        text-decoration: none;
+        box-shadow: -.4rem 1.6rem 4.4rem $color-gray-btn;
+        transform: scale(1.1);
+      }
+      &:not(:active) {
+        box-shadow: .5rem .5rem 1.5rem $color-gray;
+      }
+      &:active {
+        @include shadow-inset
+      }
+      &-del {
+        text-align: center;
+        cursor: pointer;
+        color: $color-white;
+        text-transform: uppercase;
+        font-weight: bold;
+        border: none;
+        padding: .6rem 1.5rem;
+        border-radius: .5rem;
+        background: $alert-error;
+        box-shadow: 2rem 2rem 6rem $color-gray-btn;
+        transition: all .7s;
+  
+        &:hover {
+          background-color: $color-white;
+          color: $alert-error;
+          text-decoration: none;
+          box-shadow: -.4rem 1.6rem 4.4rem $color-gray-btn;
+          transform: scale(1.1);
+        }
+        &:not(:active) {
+          box-shadow: .5rem .5rem 1.5rem $color-gray;
+        }
+        &:active {
+          @include shadow-inset
+        }
+      }
     }
   }
 

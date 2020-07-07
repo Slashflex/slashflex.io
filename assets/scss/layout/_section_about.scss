@@ -5,20 +5,21 @@
   padding: 10rem 0;
   position: relative;
 
-
-  // &__right {
-  //   background-image: url(../../images/room.png);
-  // }
   &__right img {
     width: 100%;
     margin-top: -14rem;
     filter: drop-shadow(-9mm 0mm 6mm #d7d6d6);
 
+    @include respond(tab-land) {
+      // padding-top: -8rem;
+      margin-top: 0;
+    }
     @include respond(tab-port) {
-      margin-top: -8rem;
+      // padding-top: -8rem;
+      margin-top: 0;
     }
     @include respond(phone) {
-      margin-top: -4rem;
+      padding-top: -4rem;
     }
   }
 
@@ -39,13 +40,15 @@
 
     &--text {
       color: $color-gray;
-      font-size: 1.4rem;
+      font-size: 1.7rem;
       text-align: justify;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 400;
     }
 
     &--title {
       color: $color-secondary;
-      font-family: "Montserrat", Sans-serif;
+      font-family: 'Montserrat', sans-serif;
       font-weight: 800;
       font-size: 3rem;
       margin-bottom: 1.5rem;

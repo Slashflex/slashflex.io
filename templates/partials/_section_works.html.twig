@@ -17,10 +17,12 @@
 			<!-- Loads images from back-end via a JS script from index.html.twig -->
 			{% for project in projects %}
 				<div class="swiper-slide slide{{ loop.index|first }}" data-background="{{ project.mainImage }}">
-					<div class="slide__caption">
-						<p class="slide__text">{{ project.title }}</p>
-						<p class="slide__text--description">{{ project.introduction|u.truncate(30, '...') }}</p>
-					</div>
+					<a href="{{ path('single_project', {'slug': project.slug}) }}">
+						<div class="slide__caption">
+							<p class="slide__text">{{ project.title }}</p>
+							<p class="slide__text--description">{{ project.introduction|u.truncate(30, '...') }}</p>
+						</div>
+					</a>
 				</div>
 			{% endfor %}
 			</div>

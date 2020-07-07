@@ -4,6 +4,9 @@
   padding-top: 6rem;
   padding-bottom: 8rem;
 }
+.card-header {
+  color: $color-white;
+}
 
 .nav__list {
 
@@ -20,12 +23,15 @@
   margin-bottom: 2rem;
   transition: all .5s;
   cursor: pointer;
+  border-radius: 5px;
+  background-color: $color-secondary;
 
   &:hover, 
   &:focus, 
   &:active {
-    background: #ffffff;
-    box-shadow: 2rem 2rem 6rem #d9d9d9, -2rem -2rem 6rem #ffffff;
+    // background: #ffffff;
+    // box-shadow: 2rem 2rem 6rem #d9d9d9, -2rem -2rem 6rem #ffffff;
+    @include shadow;
   }
 }
 
@@ -39,5 +45,16 @@
 }
 
 .card__bg {
-  background-color: $color-secondary;
+  background-color: $color-white;
+}
+
+#accordion {
+  margin-top: 4rem;
+}
+
+.fa-crown {
+  color: $color-tertiary;
+  margin-left: 1rem;
+  font-size: 3.2rem;
+  float: right;
 }

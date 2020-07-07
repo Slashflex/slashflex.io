@@ -15,7 +15,7 @@
         </div>
     {% endfor %}
 
-    <header style="background-image: url('{{ project.mainImage }}'); background-repeat: no-repeat; background-size: cover; padding: 20rem; background-size: 50%; background-position: center;">
+    <header style="background-image: url('{{ project.mainImage }}'); background-repeat: no-repeat; background-size: cover; padding: 20rem 0; background-position: center">
         <div class="container h-100">
             <div class="row h-100 align-items-center">
                 <div class="col-12 text-center project-intro">
@@ -28,9 +28,7 @@
 
     <div class="container">
         <div class="row mt-5 mb-5">
-            {{ project.content1|raw }}
-            {{ project.content2|raw }}
-            {{ project.content3|raw }}
+            {{ project.content|raw }}
         </div>
     </div>
 

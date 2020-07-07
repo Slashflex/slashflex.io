@@ -32,17 +32,21 @@
 						{% for user in users %}
 							<div class="col-sm-6 col-md-6 col-lg-3">
 								<div class="card card__bg m-3">
-									<img src="..." class="card-img-top" alt="...">
+									{# <img src="{{ user.imageFile }}" class="card-img-top" alt="{{ user.__toString }}"> #}
 									<div class="card-body">
-										<h5 class="card-title card__title">{{ user.firstname }} {{ user.lastname }}</h5>
-										<p class="card-text card__description">{{ user.description|u.truncate(45, ' ...') }}</p>
+										{% if user.roleUser[0].name == 'ROLE_ADMIN' %}
+											<h5 class="card-title card__title">{{ user.__toString }} [ADMIN]<i class="fas fa-crown"></i></h5>
+										{% else %}
+											<h5 class="card-title card__title">{{ user.__toString }} [USER]</h5>
+										{% endif %}
+										<p class="card-text card__description">{{ user.description|u.truncate(40, ' ...') }}</p>
 										<p class="font-weight-bold card__email">{{ user.email }}</p>
 										<p class="card-text card__description">Created on {{ user.createdAt }}</p>
 
 										<div class="d-flex justify-content-between">
 											{# <a href="{{ path('single_project', {'slug': project.slug}) }}" class="btn btn-success">Show</a> #}
-											<a href="{{ path('edit_user', {'slug': user.slug}) }}" class="btn btn-primary">Edit</a>
-											<a href="{{ path('delete_user', {'slug': user.slug}) }}" class="btn btn-danger">Delete</a>
+											<a href="{{ path('edit_user', {'slug': user.slug}) }}" class="btn__new--about">Edit</a>
+											<a href="{{ path('delete_user', {'slug': user.slug}) }}" class="btn__new--about-del">Delete</a>
 										</div>
 									</div>
 								</div>
@@ -70,12 +74,12 @@
 										<img src="{{ project.mainImage }}" class="card-img-top" alt="...">
 										<div class="card-body">
 											<h5 class="card-title card__title">{{ project.title }}</h5>
-											<p class="card-text card__description">{{ project.introduction|u.truncate(45, ' ...') }}</p>
+											<p class="card-text card__description">{{ project.introduction|u.truncate(30, ' ...') }}</p>
 											<p class="card-text card__description">Created by {{ author }} on {{ project.createdAt }}</p>
 											<div class="d-flex justify-content-between">
-												<a href="{{ path('single_project', {'slug': project.slug}) }}" class="btn btn-success">Show</a>
-												<a href="{{ path('edit_project', {'slug': project.slug}) }}" class="btn btn-primary">Edit</a>
-												<a href="{{ path('delete_project', {'slug': project.slug}) }}" class="btn btn-danger">Delete</a>
+												<a href="{{ path('single_project', {'slug': project.slug}) }}" class="btn__new--about">Show</a>
+												<a href="{{ path('edit_project', {'slug': project.slug}) }}" class="btn__new--about">Edit</a>
+												<a href="{{ path('delete_project', {'slug': project.slug}) }}" class="btn__new--about-del">Delete</a>
 											</div>
 										</div>
 									</div>
@@ -107,9 +111,9 @@
 											<p class="card-text card__description">{{ article.introduction|u.truncate(50, ' ...') }}</p>
 											<p class="card-text">Created by {{ author }} on {{ article.createdAt }}</p>
 											<div class="d-flex justify-content-between">
-												<a href="{{ path('single_article', {'slug': article.slug }) }}" class="btn__main">Show</a>
-												<a href="{{ path('edit_article', {'slug': article.slug }) }}" class="btn__main">Edit</a>
-												<a href="{{ path('delete_article', {'slug': article.slug }) }}" class="btn__main">Delete</a>
+												<a href="{{ path('single_article', {'slug': article.slug }) }}" class="btn__new--about">Show</a>
+												<a href="{{ path('edit_article', {'slug': article.slug }) }}" class="btn__new--about">Edit</a>
+												<a href="{{ path('delete_article', {'slug': article.slug }) }}" class="btn__new--about-del">Delete</a>
 											</div>
 										</div>
 									</div>

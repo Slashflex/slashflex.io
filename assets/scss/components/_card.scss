@@ -2,58 +2,222 @@
 .cards {
   padding-top: 12rem;
 }
-.card__stack {
-  height: 20rem;
-  transform-style: preserve-3d;
-  position: relative;
-  transition: all 1s ease-in-out;
-  backface-visibility: hidden;
-  margin-bottom: 3rem;
-
-  &:hover {
-    transform: rotateX(180deg);
-  }
-}
-
-.front,
-.back {
-  position: absolute;
-  backface-visibility: hidden;
-  background-color: #212122;
-  height: 100%;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transform-style: preserve-3d;
-  color: $color-white;
-  perspective: 100rem;
-  box-shadow: .2rem .4rem .8rem .1rem rgba($color-secondary, 0.4);
-}
-.back {
-  background-color: #ffbe41;
-  transform: rotateX(180deg);
-
-  & p {
-    font-size: 2rem;
-    transform: translateZ(5rem);
-
-    &:last-child {
-      transform: translateZ(5rem);
-    }
-  }
-}
-.front > p {
-  transform: translateZ(5rem);
-  font-size: 2rem;
-  text-align: center;
-  margin-top: 1rem;
-}
 
 /* Admin dashboard */
 .card {
-
-  &__title, &__description, &__email {
-    color: $color-white
+  border: none;
+  
+  &__title,
+  &__description,
+  &__email {
+    color: $color-secondary;
   }
+
+  &-content {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    perspective: 100rem;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    transform: translateY(-50%) translateZ(5rem);
+    color: #fff;
+    text-align: center;
+
+    & h2 {
+      font-size: 2.5rem;
+      margin-bottom: .5rem;
+    }
+
+    & p {
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    &--image {
+      background-repeat: no-repeat; 
+      background-position: 50%;
+      background-size: cover;
+      width: 100%;
+      height: 100%;
+      border-radius: .5rem;
+      overflow: hidden;
+    }
+  }
+}
+
+.ribbon-wrapper {
+  width: 85px;
+  height: 88px;
+  overflow: hidden;
+  position: absolute;
+  top: -62px;
+  left: 25px;
+  opacity: 0;
+  transition: all .5s;
+
+  
+  @include respond(tab-land) {
+    top: -56px;
+    left: 33px;
+  }
+  @include respond(tab-port) {
+    top: -49px;
+    left: 33px;
+  }
+  @include respond(phone) {
+    top: -50px;
+    left: 18px;
+  }
+  @include respond(phone-small) {
+    top: -50px;
+    left: 16px;
+  }
+  .ribbon {
+    font: bold 1.5rem sans-serif;
+    color: #333;
+    text-align: center;
+    -webkit-transform: rotate(-45deg);
+    -moz-transform:    rotate(-45deg);
+    -ms-transform:     rotate(-45deg);
+    -o-transform:      rotate(-45deg);
+    transform:      rotate(-45deg);
+    position: relative;
+    padding: 7px 0;
+    top: 15px;
+    left: -30px;
+    width: 120px;
+    color: $color-secondary;
+    
+    @for $i from 1 to 5 {
+      &-#{$i} {
+        background-color: $color-white;
+      }
+    }
+  }
+}
+
+@for $i from 1 through 30 {
+  .card#{$i} {
+    perspective: 100rem;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    margin-bottom: 5rem;
+    width: 100%;
+    height: 17rem;
+    cursor: pointer;
+
+    &:hover .ribbon-wrapper {
+      opacity: 1;
+    }
+  }
+
+  .front#{$i} {
+    perspective: 100rem;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    width: 100%;
+    height: 20rem;
+    backface-visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-image: linear-gradient(to top,
+        $color-black 0%,
+        $color-secondary 52%,
+        $color-secondary 100%);
+    box-shadow: 0 2rem 4rem -1.4rem rgba($color-black, .4);
+    border-radius: .5rem;
+    z-index: 2;
+    transition: all 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0s;
+  }
+
+  .front#{$i} {
+    transform: rotateX(0deg);
+  }
+
+  .front#{$i}.vertical.front-visible-#{$i} {
+    transform: rotateX(180deg);
+    z-index: 2;
+  }
+
+  .back#{$i} {
+    perspective: 100rem;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    width: 100%;
+    height: 20rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-shadow: 0 2rem 4rem -1.4rem rgba(0, 0, 0, 0.4);
+    border-radius: .5rem;
+    z-index: 1;
+    transition: all 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0s;
+  }
+
+  .back#{$i}.vertical {
+    transform: rotateX(-180deg);
+  }
+
+  .back#{$i}.vertical.back-visible-#{$i} {
+    transform: rotateX(0deg);
+    z-index: 2;
+  }
+}
+
+.flips {
+  position: relative;
+}
+
+$max: 100;
+$step: 4;
+
+@for $i from 1 through ceil($max/$step) {
+  $value: ($i - 1)*$step + 1;
+  .back#{$value} { background-color: $color-tertiary; }
+}
+@for $i from 1 through ceil($max/$step) {
+  $value: ($i - 1)*$step + 2;
+  .back#{$value} { background-color: $alert-error; }
+}
+@for $i from 1 through ceil($max/$step) {
+  $value: ($i - 1)*$step + 3;
+  .back#{$value} { background-color: #65DE95; }
+}
+@for $i from 1 through ceil($max/$step) {
+  $value: ($i - 1)*$step + 4;
+  .back#{$value} { background-color: #6960C6; }
+}
+
+.card-content {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  perspective: 100rem;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  transform: translateY(-50%) translateZ(5rem);
+  color: #fff;
+  text-align: center;
+}
+
+.card-content h2 {
+  font-size: 2.5rem;
+  margin-bottom: .5rem;
+}
+
+.card-content p {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.card-content--image {
+  background-repeat: no-repeat; 
+  background-position: 50%;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  border-radius: .5rem;
+  overflow: hidden;
 }

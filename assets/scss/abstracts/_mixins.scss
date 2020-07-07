@@ -13,6 +13,13 @@
   transform: translate(-50%, -50%);
 }
 
+@mixin shadow {
+  box-shadow: -6px -6px 9px #fff, 6px 6px 9px rgba(#000, 0.4);
+}
+
+@mixin shadow-inset {
+  box-shadow: inset -6px -6px 9px #fff, inset 6px 6px 9px rgba(#000, 0.4);
+}
 // Media Query Manager
 /*
 0 - 600px:         Phone
@@ -32,6 +39,11 @@ $breakpoint argument choixes:
 1em = 16px
 */
 @mixin respond($breakpoint) {
+  @if $breakpoint == phone-small {
+    @media only screen and (max-width: 25em) {
+      @content;
+    } // phone-small = 400px / 16px = 25em
+  }
   @if $breakpoint == phone {
     @media only screen and (max-width: 37.5em) {
       @content;

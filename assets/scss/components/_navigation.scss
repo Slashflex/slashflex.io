@@ -42,6 +42,7 @@
       // https://www.binarymoon.co.uk/2014/02/fixing-css-transitions-in-google-chrome/
       -webkit-transform: translateZ(0);
       transition: opacity 0.3s ease-in-out;
+
       &:hover {
         opacity: 1;
       }
@@ -75,146 +76,127 @@
   }
 }
 
-// Hamburger menu toggler stuff below
-.toggle-menu {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  display: inline-block;
-  height: 5rem;
-  outline: none;
-  padding: 0;
-  pointer-events: auto;
-  top: -0.8rem;
-  right: 1rem;
+.nav {
   position: fixed;
-  width: 6rem;
-  z-index: 1110;
+  right: .2rem;
+  top: 0;
+  z-index: 100;
+}
 
-  &--line {
-    background-color: $color-secondary;
-    content: "";
-    display: block;
-    height: 0.18rem;
-    left: calc(50% - 1.3rem);
+#trigger {
+  position: absolute;
+  top: 2.5rem;
+  right: 2rem;
+  background: $color-secondary;
+  width: 30px;
+  height: 5px;
+  transition: .2s ease;
+  cursor: pointer;
+  z-index: 1;
+  height: 25px;
+  background: none;
+}
+
+#burger {
+  position: absolute;
+  top: 2.5rem;
+  right: 2rem;
+  background: $color-secondary;
+  width: 30px;
+  height: 5px;
+  transition: .2s ease;
+  cursor: pointer;
+  z-index: 1;
+
+  &:before {
     position: absolute;
-    top: calc(50% - .1rem);
-    transform-origin: 50% 50%;
-    transition: background-color 0.2s ease-in-out, top 0.2s 0.2s ease-out,
-      transform 0.2s linear;
-    width: 3rem;
-
-    &:before,
-    &:after {
-      background-color: $color-secondary;
-      content: "";
-      display: block;
-      height: 0.2rem;
-      position: absolute;
-      transform-origin: 50% 50%;
-      transition: background-color 0.2s ease-in-out, top 0.2s 0.2s ease-out,
-        transform 0.2s linear;
-      width: 3rem;
-    }
-
-    &:before {
-      top: 1.3rem;
-    }
-
-    &:after {
-      top: 0.6rem;
-    }
+    top: 2.5rem;
+    right: 2rem;
+    background: $color-secondary;
+    width: 30px;
+    height: 5px;
+    transition: .2s ease;
+    cursor: pointer;
+    z-index: 1;
+    content: " ";
+    top: 10px;
+    left: 0;
   }
 
-  &.active {
-    span {
-      background-color: transparent;
-      transition: background 0.2s ease-out;
+  &:after {
+    position: absolute;
+    top: 2.5rem;
+    right: 2rem;
+    background: $color-secondary;
+    width: 30px;
+    height: 5px;
+    transition: .2s ease;
+    cursor: pointer;
+    z-index: 1;
+    content: " ";
+    top: 20px;
+    left: 0;
+  }
+}
 
-      &:before,
-      &:after {
-        transition: top 0.2s ease-out, transform 0.2s 0.2s ease-out;
-      }
+#menu-toggle {
+  &:checked {
+    + {
+      #trigger {
+        + {
+          #burger {
+            top: 35px;
+            transform: rotate(180deg);
+            transition: transform .2s ease;
+            position: fixed;
+            z-index: 100000;
 
-      &:before {
-        top: 1.5rem;
-        transform: rotate3d(0, 0, 1, -45deg);
-      }
+            &:before {
+              width: 20px;
+              top: -9px;
+              left: -1px;
+              transform: rotate(-45deg) translateX(-5px);
+              transition: transform .2s ease;
+            }
 
-      &:after {
-        top: 2rem;
-        transform: rotate3d(0, 0, 1, 45deg);
+            &:after {
+              width: 20px;
+              top: 9px;
+              right: 1px;
+              transform: rotate(45deg) translateX(-5px);
+              transition: transform .2s ease;
+            }
+
+            + {
+              #menu {
+                animation: checked-anim 1s ease both;
+              }
+            }
+          }
+        }
+
+        ~ {
+          #menu {
+            >li {
+              display: block;
+            }
+          }
+        }
       }
     }
   }
 }
 
-.menu-footer {
-  padding-bottom: 1rem;
-  bottom: 0;
-  left: 0;
-  position: absolute;
-  right: 0;
+a {
+  display: block;
+}
 
-  .footer-nav {
-    &__list {
-      display: inline-block;
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
+[type="checkbox"] {
+  &:not(:checked) {
+    display: none;
+  }
 
-    &__item {
-      display: inline;
-      margin: 0 1rem;
-    }
-
-    &__link {
-      color: $color-white;
-      text-decoration: none;
-      text-transform: uppercase;
-      font-size: 4rem;
-
-      @include respond(tab-land) {
-        font-size: 3rem;
-      }
-    }
-
-    &__icon {
-      transition: all 0.5s;
-
-      &:hover {
-        transform: scale(1.4) rotate(10deg);
-        color: $color-secondary;
-      }
-    }
-
-    &__icons {
-      width: 100%;
-      text-align: center;
-    }
-
-    &__social {
-      color: $color-white;
-      text-decoration: none;
-      text-transform: uppercase;
-      font-size: 3rem;
-
-      @include respond(phone) {
-        font-size: 2rem;
-      }
-      @include respond(tab-port) {
-        font-size: 2.2rem;
-      }
-    }
-
-    &__menu {
-      transition: all 0.5s;
-
-      &:hover {
-        transform: scale(1.4) rotate(10deg);
-        color: $color-tertiary;
-      }
-    }
+  &:checked {
+    display: none;
   }
 }

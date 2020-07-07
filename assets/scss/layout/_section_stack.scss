@@ -8,9 +8,21 @@
     &--recent {
       text-transform: uppercase;
       font-size: 3.5rem;
-      text-align: center;
       font-weight: 100;
       margin-bottom: -3.4rem;
+      position: relative;
+
+      @include respond(phone) {
+        font-size: 2.5rem;
+        margin-bottom: -2.4rem;
+      }
+    }
+
+    &--projects {
+      text-transform: uppercase;
+      font-size: 3.5rem;
+      font-weight: 100;
+      margin-bottom: -1.4rem;
       position: relative;
 
       @include respond(phone) {

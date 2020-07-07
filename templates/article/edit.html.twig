@@ -16,7 +16,6 @@
 			<h1 class="heading__secondary">
 				Edit this article
 			</h1>
-			{% form_theme form with ['article/_images-collection.html.twig', 'article/_fields-collection.html.twig'] %}
 			{{ form_start(form, {'attr': {'class': 'm-auto'}}) }}
 			<div class="row">
 				<div class="col-12 col-lg-6">
@@ -31,18 +30,8 @@
 					</div>
 
 					<div class="form__group">
-						{{ form_widget(form.content_1, {'attr': { 'type': 'text', 'class': 'form__input', 'placeholder': 'Content', 'id': 'content_1' }}) }}
-						<label for="content_1" class="form__label">Content</label>
-					</div>
-
-					<div class="form__group">
-						{{ form_widget(form.content_2, {'attr': { 'type': 'text', 'class': 'form__input', 'placeholder': 'Content', 'id': 'content_2' }}) }}
-						<label for="content_2" class="form__label">Content</label>
-					</div>
-
-					<div class="form__group">
-						{{ form_widget(form.content_3, {'attr': { 'type': 'text', 'class': 'form__input', 'placeholder': 'Content', 'id': 'content_3' }}) }}
-						<label for="content_3" class="form__label">Content</label>
+						{{ form_widget(form.content, {'attr': { 'type': 'text', 'class': 'form__input', 'placeholder': 'Content', 'id': 'content' }}) }}
+						<label for="content" class="form__label">Content</label>
 					</div>
 
 					<div class="form__group">
@@ -50,16 +39,10 @@
 						<label for="main_image" class="form__label">Main Image</label>
 					</div>
 				</div>
-
-				<div class="col-12 col-lg-6">
-					{% block article_images_widget %}
-						{{ form_widget(form) }}
-					{% endblock %}
-				</div>
 			</div>
 
-			<div class="form-group mt-5">
-				<button type="submit" class="btn__new mx-auto d-block px-5">Edit</button>
+			<div class="form-group mt-5 pb-5">
+				<button type="submit" class="btn__new--about mx-auto d-block px-5">Edit</button>
 			</div>
 			{{ form_end(form) }}
 		</div>
