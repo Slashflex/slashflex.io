@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Repository\RoleRepository;
 use App\Repository\ProjectRepository;
+use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -11,10 +12,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class HomeController extends AbstractController
 {
     private $projectRepository;
+    private $userRepository;
 
-    public function __construct(ProjectRepository $projectRepository, RoleRepository $roleRepository)
+    public function __construct(ProjectRepository $projectRepository, UserRepository $userRepository)
     {
         $this->projectRepository = $projectRepository;
+        $this->userRepository = $userRepository;
     }
 
     /**
@@ -38,7 +41,7 @@ class HomeController extends AbstractController
      */
     public function notFound()
     {
-        return $this->render('bundles/TwigBundle/Exception/error403.html.twig', [
+        return $this->render('bundles/TwigBundle/Exception/error404.html.twig', [
             'title' => '/FLX | Page not found',
         ]);
     }
@@ -50,5 +53,21 @@ class HomeController extends AbstractController
      */
     public function logout()
     {
+    }
+
+    /**
+     * About path
+     * 
+     * @Route("/about-me", name="about")
+     */
+    public function about()
+    {
+        // Retrieve my informations from database
+        $user = $this->userRepository->findOneBy(['email' => $_ENV['DB_EMAIL']]);
+
+        return $this->render('user/about.html.twig', [
+            'title' => '/FLX | About',
+            'user' => $user
+        ]);
     }
 }

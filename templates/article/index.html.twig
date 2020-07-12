@@ -10,26 +10,55 @@
 	<!-- Fullscreen Navigation -->
 	{% include "partials/_fullscreen_nav.html.twig" %}
 
-	<div class="container mt-5">
-		<h1 class="text-center mb-5">Articles</h1>
-		<div class="row justify-content-start">
+	<header class="header__projects">
+        <div class="hero__projects">
+			<div class="round"></div>
+            <img src="/build/images/model.webp" class="model-human img-fluid" alt="">
+
+            <div id="wrapper">
+                <h1 class="wrapper__sites">Blog</h1>
+                <div class="keyF"></div>
+                <div class="keyU"></div>
+                <div class="keyK"></div>
+                <div class="keyC"></div>
+            </div>
+        </div>
+    </header>
+    
+	<section class="project">
+		<div class="container">
+			<h1 class="project__title">Think. Design. Create!</h1>
+			<p class="project__introduction">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tempora totam nemo id magni. Nesciunt quam optio ducimus, ipsam laboriosam nulla molestiae suscipit doloremque facere quisquam, minima ut distinctio hic quaerat necessitatibus nemo, id quasi blanditiis vitae assumenda. Ducimus asperiores eveniet praesentium eligendi quas facilis et omnis quo, fugit ratione placeat unde maxime adipisci magnam? Optio, rem minus. Ducimus, sunt tempore dolore rem nobis illo odio quis laborum saepe aut, provident quasi quisquam? Perferendis sapiente magnam veniam consectetur quos commodi!</p>
+		</div>
+
+		<div class="stack__text">
+			<div class="stack__text--projects">My recent</div>
+			<div class="stack__text--stack">ARTICLES</div>
+		</div>
+	</section>
+	
+	<div class="container">
+		<div class="row cards">
 			{% for article in articles %}
 			{% set auteur = article.users %}
-			<div class="col-6 col-lg-3">
-				<div class="card m-3">
-					<img src="{{ article.mainImage }}" class="card-img-top" alt="{{ article.title }}">
-					<div class="card-body">
-						<h5 class="card-title">{{ article.title }}</h5>
-						<p class="card-text">{{ article.introduction|u.truncate(50, ' ...') }}</p>
-						<p class="card-text">Created by {{ auteur }} on {{ article.createdAt }}</p>
-						<div class="d-flex justify-content-between">
-							<a href="{{ path('single_article', {'slug': article.slug }) }}" class="btn__main">Show</a>
-							{#<a href="{{ path('edit_project', {'slug': project.slug }) }}" class="btn__main">Edit</a>
-							<a href="{{ path('delete_project', {'slug': project.slug }) }}" class="btn__main">Delete</a> #}
+				<div class="col-12 col-lg-6"> 
+					<div class="card{{loop.index}}">
+						<div class="flips">
+							<div class="front{{loop.index}} vertical">
+								<div class="card-content--image" style="background-image: url({{ article.mainImage }})"></div>
+							</div>
+							<div class="back{{loop.index}} vertical">
+								<div class="card-content">
+									<h2>{{ article.title }}</h2>
+									<p>{{ article.introduction }}</p>
+									<div class="form-group">
+										<a href="{{ path('single_article', { 'slug': article.slug }) }}" class="button__login--showcase">Showcase</a>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
 			{% endfor %}
 		</div>
 	</div>

@@ -8,14 +8,41 @@
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem ipsa magni, quasi libero rem neque accusamus qui eveniet assumenda officiis praesentium impedit?
           </p>
           <div class="form-group">
-            <a href="/" class="btn__new--me">About Me</a>
+            <div class="goo-btn">
+              <svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="goo">
+                <defs>
+                    <filter id="goo">
+                      <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+                      <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo" />
+                      <feComposite in="SourceGraphic" in2="goo"/>
+                    </filter>
+                </defs>
+              </svg>
+
+              <span class="button--bubble__container">
+                <a href="{{ path('about') }}" class="button button--bubble">
+                    About Me
+                </a>
+                <span class="button--bubble__effect-container">
+                    <span class="circle top-left"></span>
+                    <span class="circle top-left"></span>
+                    <span class="circle top-left"></span>
+
+                    <span class="button effect-button"></span>
+
+                    <span class="circle bottom-right"></span>
+                    <span class="circle bottom-right"></span>
+                    <span class="circle bottom-right"></span>
+                </span>
+              </span>
+            </div>
           </div>
         </article>
       </div>
 
       <div class="col-12 col-lg-6">
         <article class="about__right">
-          <img src="{{ asset('build/images/room.png') }}" alt="" />
+          <img src="{{ asset('build/images/room.webp') }}" alt="" />
         </article>
       </div>
     </div>

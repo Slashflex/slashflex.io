@@ -45,8 +45,8 @@
 
 										<div class="d-flex justify-content-between">
 											{# <a href="{{ path('single_project', {'slug': project.slug}) }}" class="btn btn-success">Show</a> #}
-											<a href="{{ path('edit_user', {'slug': user.slug}) }}" class="btn__new--about">Edit</a>
-											<a href="{{ path('delete_user', {'slug': user.slug}) }}" class="btn__new--about-del">Delete</a>
+											<a href="{{ path('edit_user', {'slug': user.slug}) }}" class="button__login">Edit</a>
+											<a href="{{ path('delete_user', {'slug': user.slug}) }}" class="button__login--del"><i class="fas fa-trash-alt"></i></a>
 										</div>
 									</div>
 								</div>
@@ -77,9 +77,9 @@
 											<p class="card-text card__description">{{ project.introduction|u.truncate(30, ' ...') }}</p>
 											<p class="card-text card__description">Created by {{ author }} on {{ project.createdAt }}</p>
 											<div class="d-flex justify-content-between">
-												<a href="{{ path('single_project', {'slug': project.slug}) }}" class="btn__new--about">Show</a>
-												<a href="{{ path('edit_project', {'slug': project.slug}) }}" class="btn__new--about">Edit</a>
-												<a href="{{ path('delete_project', {'slug': project.slug}) }}" class="btn__new--about-del">Delete</a>
+												<a href="{{ path('single_project', {'slug': project.slug}) }}" class="button__login">Show</a>
+												<a href="{{ path('edit_project', {'slug': project.slug}) }}" class="button__login">Edit</a>
+												<a href="{{ path('delete_project', {'slug': project.slug}) }}" class="button__login--del"><i class="fas fa-trash-alt"></i></a>
 											</div>
 										</div>
 									</div>
@@ -111,9 +111,9 @@
 											<p class="card-text card__description">{{ article.introduction|u.truncate(50, ' ...') }}</p>
 											<p class="card-text">Created by {{ author }} on {{ article.createdAt }}</p>
 											<div class="d-flex justify-content-between">
-												<a href="{{ path('single_article', {'slug': article.slug }) }}" class="btn__new--about">Show</a>
-												<a href="{{ path('edit_article', {'slug': article.slug }) }}" class="btn__new--about">Edit</a>
-												<a href="{{ path('delete_article', {'slug': article.slug }) }}" class="btn__new--about-del">Delete</a>
+												<a href="{{ path('single_article', {'slug': article.slug }) }}" class="button__login">Show</a>
+												<a href="{{ path('edit_article', {'slug': article.slug }) }}" class="button__login">Edit</a>
+												<a href="{{ path('delete_article', {'slug': article.slug }) }}" class="button__login--del">Delete</a>
 											</div>
 										</div>
 									</div>

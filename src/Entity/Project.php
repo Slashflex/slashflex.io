@@ -63,7 +63,7 @@ class Project
     public function __construct()
     {
         $this->image = new ArrayCollection();
-        $this->content = new ArrayCollection();
+        // $this->content = new ArrayCollection();
     }
 
     public function getId(): ?int

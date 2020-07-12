@@ -1,23 +1,23 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ title }}
+{% block title %}
+	{{ title }}
 {% endblock %}
 
-
 {% block body %}
-	<!-- Logo and Nav -->
+    <!-- Logo -->
 	{% include "partials/_top_buttons.html.twig" %}
 
 	<!-- Fullscreen Navigation -->
 	{% include "partials/_fullscreen_nav.html.twig" %}
 
-	<header class="header__projects">
+    <header class="header__projects">
         <div class="hero__projects">
 			<div class="round"></div>
-            <img src="/build/images/sites_laptop.webp" class="model-laptop img-fluid" alt="">
+            <img src="/build/images/model.webp" class="model-human img-fluid" alt="">
 
             <div id="wrapper">
-                <h1 class="wrapper__sites">Projects</h1>
+                <h1 class="wrapper__sites">About Me</h1>
                 <div class="keyF"></div>
                 <div class="keyU"></div>
                 <div class="keyK"></div>
@@ -28,9 +28,12 @@
     
 	<section class="project">
 		<div class="container">
-			<h1 class="project__title">Think. Design. Create!</h1>
-			<p class="project__introduction">Bright style, elegance, refinement, and attention to detail – this is what I value in works of top-level designers. Because of this I always look for new ways to improve my skills and create meticulously designed websites. Although I have not done that many projects within the last couple of years, I sincerely hope this list will grow intensively soon. And yeah, I’m not very good at coding, that is clearly not my thing. But I always find decent solutions and even help my coders with solving their issues:) There is an old Jewish saying: “If you are not allowed to enter through the door, then enter through the window!”</p>
-		</div>
+			<h1 class="project__title">Just a couple of words</h1>
+			<p class="project__introduction mb-3">My name is David Saoud (aka Slashflex).</p>
+			<p class="project__introduction mb-3">I am a 36 y.o. web developper. It is a considerably large enterprise with a complex structure and well-developed network.</p>
+			<p class="project__introduction mb-3">Even though my job has many advantages and benefits, I also love to do things I am really passionate about. We live only once, which is why at the moment I am seeking opportunities to realize my full potential within the IT sector. This is a field I truly find fascinating and a field I believe will allow me to create awesome things!</p>
+			<p class="project__introduction">So I appreciate attractive job offers from web agencies, mobile developers, and startups!</p>
+        </div>
 
 		<div class="stack__text">
 			<div class="stack__text--projects">My recent</div>
@@ -38,7 +41,7 @@
 		</div>
 	</section>
 	
-	<div class="container">
+	{# <div class="container">
 		<div class="row cards">
 			{% for project in projects %}
 			{% set auteur = project.users %}
@@ -62,8 +65,11 @@
 				</div>
 			{% endfor %}
 		</div>
-	</div>
+	</div> #}
 
 	<!-- Footer -->
 	{% include "partials/_footer.html.twig" %}
 {% endblock %}
+
+{% block javascripts %}{% endblock %}
+

@@ -16,9 +16,9 @@
 
         <p>Email : {{ user.email }}</p>
         <p>Account created on {{ user.createdAt }}</p>
-        <a href="{{ path('edit_me', {'slug': user.slug}) }}">Edit</a>
+        <a href="{{ path('edit_me', {'slug': user.slug}) }}" class="button__login">Edit</a>
         {% if app.user.roleUser[0].name == 'ROLE_ADMIN' %}
-            <a href="{{ path('admin') }}">Dashboard</a>
+            <a href="{{ path('admin') }}" class="button__login">Dashboard</a>
         {% endif %}
     </div>
 
