@@ -17,13 +17,6 @@
   align-self: center;
   margin: 0 auto 6rem auto;
 
-  &__projects {
-    width: 85rem;
-    max-height: 18vh;
-    align-self: center;
-    margin: 0 auto;
-  }
-
   @include respond(tab-port) {
     width: 65rem;
   }
@@ -55,7 +48,7 @@
   &__chess1 {
     position: relative;
     height: 56vh;
-    background-image: url(../../images/chess_1.png);
+    background-image: url(/build/images/chess_1.webp);
     background-repeat: no-repeat;
     background-position: center;
     background-position: 50% 50%;
@@ -70,7 +63,7 @@
   &__chess2 {
     position: relative;
     height: 56vh;
-    background-image: url(../../images/chess_2-1.png);
+    background-image: url(/build/images/chess_2-1.webp);
     background-repeat: no-repeat;
     background-position: center;
     background-position: 38% 61%;
@@ -85,7 +78,7 @@
   &__chess3 {
     position: relative;
     height: 90vh;
-    background-image: url(../../images/chess_3-1.png);
+    background-image: url(/build/images/chess_3-1.webp);
     background-repeat: no-repeat;
     background-position: center;
     background-position: 50% 50%;

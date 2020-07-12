@@ -112,10 +112,9 @@
   -ms-flex-align: center;
   -webkit-align-items: center;
   align-items: center;
-
   transition: all 0.5s;
 }
-.swiper-slide:hover {
+.swiper-slide:hover, .swiper-slide:focus {
   box-shadow: inset -.9rem -20rem 15.9rem -6.5rem rgba($color-secondary, 0.75);
 }
 .slide__caption {
@@ -169,5 +168,5 @@
 
 /* Loads image to webpack */
 .mockup__img {
-  background-image: url(../../images/mockup.png);
+  background-image: url(/build/images/mockup.webp);
 }

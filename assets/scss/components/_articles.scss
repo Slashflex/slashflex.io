@@ -94,6 +94,44 @@ code {
     }
   }
 }
+.round {
+  display: none;
+  width: 15rem;
+  height: 15rem;
+  border-radius: 50%;
+  background-color: $color-tertiary;
+  position: absolute;
+  left: 50%;
+  margin-left: -7.5rem;
+  animation: movingH1 10s infinite;
+
+  @include respond (tab-port) {
+    display: block;
+    width: 28rem;
+    height: 28rem;
+    background-color: $color-secondary;
+    position: absolute;
+    left: 50%;
+    margin-left: -14rem;
+    margin-top: -1.5rem;
+  }
+  @include respond (phone) {
+    display: block;
+    position: absolute;
+    left: 50%;
+    margin-left: -7.5rem;
+    width: 15rem;
+    height: 15rem;
+    background-color: $color-tertiary;
+  }
+  @include respond (phone-small) {
+    display: block;
+    position: absolute;
+    left: 50%;
+    margin-left: -7.5rem;
+    background-color: $color-tertiary;
+  }
+}
 
 .ml-2-rem {
   margin-left: 2rem;

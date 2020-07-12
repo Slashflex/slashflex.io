@@ -1,12 +1,44 @@
-.laptop {
+.model-laptop {
   display: block;
   margin: 0 auto;
-  width: 38rem;
-}
+  width: 100%;
+  position: relative;
+  filter: drop-shadow(2px 4px 6px rgba($color-secondary, .7));
 
+  @include respond (tab-port) {
+    width: 65%;
+    filter: none;
+  }
+  @include respond (phone) {
+    width: 60%;
+    filter: none;
+  }
+  @include respond(phone-small) {
+    width: 57%;
+    filter: none;
+  }
+}
+.model-human {
+  display: block;
+  margin: 0 auto;
+  width: 60%;
+  position: relative;
+  filter: drop-shadow(2px 4px 6px rgba($color-secondary, .7));
+
+  @include respond (tab-port) {
+    width: 65%;
+  }
+  @include respond (phone) {
+    width: 90%;
+    filter: none;
+  }
+  @include respond(phone-small) {
+    width: 100%;
+  }
+}
 .keyF {
   height: 11vh;
-  background-image: url(../../images/sites_f.png);
+  background-image: url(/build/images/sites_f.webp);
   background-repeat: no-repeat;
   background-position: center;
   background-size: 80%;
@@ -19,7 +51,7 @@
 
 .keyU {
   height: 17vh;
-  background-image: url(/build/images/sites_u.png);
+  background-image: url(/build/images/sites_u.webp);
   background-repeat: no-repeat;
   background-position: center;
   background-size: 82%;
@@ -32,7 +64,7 @@
 
 .keyK {
   height: 20vh;
-  background-image: url(../../images/sites_k.png);
+  background-image: url(/build/images/sites_k.webp);
   background-repeat: no-repeat;
   background-size: 100%;
   width: 3%;
@@ -44,7 +76,7 @@
 
 .keyC {
   height: 18vh;
-  background-image: url(../../images/sites_c.png);
+  background-image: url(/build/images/sites_c.webp);
   background-repeat: no-repeat;
   background-size: 100%;
   width: 6%;
@@ -52,6 +84,12 @@
   position: absolute;
   left: 63%;
   top: 40%;
+}
+
+div[class^="key"] {
+  @include respond (phone) {
+    display: none;
+  }
 }
 
 #wrapper {
@@ -74,6 +112,28 @@
   animation: movingH1 20s infinite;
   z-index: 2;
   margin-top: 2.5rem;
+
+  @include respond (tab-land) {
+    font-size: 10rem;
+    margin-top: 0;
+    color: $color-tertiary;
+  }
+  @include respond (tab-port) {
+    font-size: 8rem;
+    margin-top: 0;
+  }
+
+  @include respond (phone) {
+    font-size: 4rem;
+    color: $color-secondary;
+    margin-top: -24rem;
+  }
+
+  @include respond (phone-small) {
+    font-size: 3rem;
+    color: $color-secondary;
+    margin-top: -17rem;
+  }
 }
 
 .project {

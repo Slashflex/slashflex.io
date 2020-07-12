@@ -46,56 +46,56 @@
   }
 }
 
-.ribbon-wrapper {
-  width: 85px;
-  height: 88px;
-  overflow: hidden;
-  position: absolute;
-  top: -62px;
-  left: 25px;
-  opacity: 0;
-  transition: all .5s;
+// .ribbon-wrapper {
+//   width: 85px;
+//   height: 88px;
+//   overflow: hidden;
+//   position: absolute;
+//   top: -62px;
+//   left: 25px;
+//   opacity: 0;
+//   transition: all .5s;
 
   
-  @include respond(tab-land) {
-    top: -56px;
-    left: 33px;
-  }
-  @include respond(tab-port) {
-    top: -49px;
-    left: 33px;
-  }
-  @include respond(phone) {
-    top: -50px;
-    left: 18px;
-  }
-  @include respond(phone-small) {
-    top: -50px;
-    left: 16px;
-  }
-  .ribbon {
-    font: bold 1.5rem sans-serif;
-    color: #333;
-    text-align: center;
-    -webkit-transform: rotate(-45deg);
-    -moz-transform:    rotate(-45deg);
-    -ms-transform:     rotate(-45deg);
-    -o-transform:      rotate(-45deg);
-    transform:      rotate(-45deg);
-    position: relative;
-    padding: 7px 0;
-    top: 15px;
-    left: -30px;
-    width: 120px;
-    color: $color-secondary;
+//   @include respond(tab-land) {
+//     top: -56px;
+//     left: 33px;
+//   }
+//   @include respond(tab-port) {
+//     top: -49px;
+//     left: 33px;
+//   }
+//   @include respond(phone) {
+//     top: -50px;
+//     left: 18px;
+//   }
+//   @include respond(phone-small) {
+//     top: -50px;
+//     left: 16px;
+//   }
+//   .ribbon {
+//     font: bold 1.5rem sans-serif;
+//     color: #333;
+//     text-align: center;
+//     -webkit-transform: rotate(-45deg);
+//     -moz-transform:    rotate(-45deg);
+//     -ms-transform:     rotate(-45deg);
+//     -o-transform:      rotate(-45deg);
+//     transform:      rotate(-45deg);
+//     position: relative;
+//     padding: 7px 0;
+//     top: 15px;
+//     left: -30px;
+//     width: 120px;
+//     color: $color-secondary;
     
-    @for $i from 1 to 5 {
-      &-#{$i} {
-        background-color: $color-white;
-      }
-    }
-  }
-}
+//     @for $i from 1 to 5 {
+//       &-#{$i} {
+//         background-color: $color-white;
+//       }
+//     }
+//   }
+// }
 
 @for $i from 1 through 30 {
   .card#{$i} {

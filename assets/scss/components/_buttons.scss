@@ -8,7 +8,7 @@
 
   &__text {
     color: $color-secondary;
-    transition: all .5s;
+    transition: all 0.5s;
     text-transform: uppercase;
     font-size: 2.5rem;
     font-family: Montserrat, sans-serif;
@@ -32,17 +32,15 @@
     text-transform: uppercase;
     font-weight: bold;
     border: none;
-    padding: .4rem 1.2rem;
-    border-radius: .5rem;
+    padding: 0.4rem 1.2rem;
+    border-radius: 0.5rem;
     background: $color-white;
     box-shadow: 2rem 2rem 6rem $color-secondary;
-    transition: all .7s;
+    transition: all 0.7s;
 
     &:hover {
-      background-color: $color-tertiary;
-      color: $color-secondary;
-      text-decoration: none;
-      box-shadow: -.4rem 1.6rem 4.4rem $color-secondary;
+      @include button-hover;
+      box-shadow: -0.4rem 1.6rem 4.4rem $color-secondary;
       transform: scale(1.1);
     }
   }
@@ -52,18 +50,17 @@
     text-transform: uppercase;
     font-weight: bold;
     border: none;
-    padding: .6rem 1.5rem;
+    padding: 0.6rem 1.5rem;
     border-radius: 5rem;
     background: $color-secondary;
-    box-shadow: 2rem 2rem 6rem $color-gray-btn, 
-                -2rem -2rem 6rem $color-white;
-    transition: all .7s;
+    box-shadow: 2rem 2rem 6rem $color-gray-btn, -2rem -2rem 6rem $color-white;
+    transition: all 0.7s;
 
     &:hover {
       background-color: $color-white;
       color: $color-secondary;
-      box-shadow: -.4rem 1.6rem 4.4rem $color-gray-btn, 
-                  -.3rem -2rem .7rem $color-white;
+      box-shadow: -0.4rem 1.6rem 4.4rem $color-gray-btn,
+        -0.3rem -2rem 0.7rem $color-white;
       transform: scale(1.1);
     }
 
@@ -75,183 +72,203 @@
       text-transform: uppercase;
       font-weight: bold;
       border: none;
-      padding: .6rem 1.5rem;
-      border-radius: .5rem;
+      padding: 0.6rem 1.5rem;
+      border-radius: 0.5rem;
       background: $color-secondary;
       box-shadow: 2rem 2rem 6rem $color-gray-btn;
-      transition: all .7s;
+      transition: all 0.7s;
 
       &:hover {
         background-color: $color-white;
         color: $color-secondary;
         text-decoration: none;
-        box-shadow: -.4rem 1.6rem 4.4rem $color-gray-btn;
+        box-shadow: -0.4rem 1.6rem 4.4rem $color-gray-btn;
         transform: scale(1.1);
       }
       &:not(:active) {
-        box-shadow: .5rem .5rem 1.5rem $color-gray;
+        box-shadow: 0.5rem 0.5rem 1.5rem $color-gray;
       }
       &:active {
-        @include shadow-inset
-      }
-    }
-    
-    &--about {
-      text-align: center;
-      cursor: pointer;
-      color: $color-white;
-      text-transform: uppercase;
-      font-weight: bold;
-      border: none;
-      padding: .6rem 1.5rem;
-      border-radius: .5rem;
-      background: $color-secondary;
-      box-shadow: 2rem 2rem 6rem $color-gray-btn;
-      transition: all .7s;
-
-      &:hover {
-        background-color: $color-white;
-        color: $color-secondary;
-        text-decoration: none;
-        box-shadow: -.4rem 1.6rem 4.4rem $color-gray-btn;
-        transform: scale(1.1);
-      }
-      &:not(:active) {
-        box-shadow: .5rem .5rem 1.5rem $color-gray;
-      }
-      &:active {
-        @include shadow-inset
-      }
-      &-del {
-        text-align: center;
-        cursor: pointer;
-        color: $color-white;
-        text-transform: uppercase;
-        font-weight: bold;
-        border: none;
-        padding: .6rem 1.5rem;
-        border-radius: .5rem;
-        background: $alert-error;
-        box-shadow: 2rem 2rem 6rem $color-gray-btn;
-        transition: all .7s;
-  
-        &:hover {
-          background-color: $color-white;
-          color: $alert-error;
-          text-decoration: none;
-          box-shadow: -.4rem 1.6rem 4.4rem $color-gray-btn;
-          transform: scale(1.1);
-        }
-        &:not(:active) {
-          box-shadow: .5rem .5rem 1.5rem $color-gray;
-        }
-        &:active {
-          @include shadow-inset
-        }
+        @include shadow-inset;
       }
     }
   }
+}
 
-  &__add {
-    cursor: pointer;
+/* TEST */
+.button {
+  -webkit-font-smoothing: antialiased;
+  background-color: $color-secondary;
+  border: none;
+  color: $color-white;
+  display: inline-block;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  text-decoration: none;
+  user-select: none;
+  letter-spacing: 1px;
+  color: $color-white;
+  padding: 1.3rem 2rem;
+  text-transform: uppercase;
+  transition: all 0.3s ease-out;
+
+  &:hover {
+    background-color: $color-tertiary;
     color: $color-secondary;
-    text-transform: uppercase;
-    font-weight: bold;
-    padding: .6rem 1.5rem;
-    border-radius: 5rem;
-    background: $color-tertiary;
-    box-shadow: -.4rem .1rem 1rem $color-gray-btn;
-    transition: all .7s;
+    text-decoration: none;
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+.button__login {
+  @include button;
+  background-color: $color-secondary;
+  color: $color-white;
+
+  &:hover {
+    background-color: $color-tertiary;
+    color: $color-secondary;
+    text-decoration: none;
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  &--del {
+    @include button;
+    color: $color-secondary;
+    background-color: $alert-error;
 
     &:hover {
-      background-color: $color-secondary;
-      color: $color-tertiary !important;
-      box-shadow: 2rem 2rem 6rem $color-gray-btn;
+      @include button-hover;
+      color: $color-secondary;
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+
+  &--showcase {
+    @include button;
+    background-color: $color-white;
+    color: $color-secondary;
+
+    &:hover {
+      @include button-hover;
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+
+  &--text {
+    @include button;
+    background-color: $color-white;
+    color: $color-secondary;
+
+    &:hover {
+      @include button-hover;
+    }
+
+    &:active {
+      transform: scale(0.95);
     }
   }
 }
 
-/* Burger menu */
-.animated-icon {
-  width: 3rem;
-  height: 2rem;
+.button--bubble {
   position: relative;
-  margin: 0px;
-  -webkit-transform: rotate(0deg);
-  -moz-transform: rotate(0deg);
-  -o-transform: rotate(0deg);
-  transform: rotate(0deg);
-  -webkit-transition: 0.5s ease-in-out;
-  -moz-transition: 0.5s ease-in-out;
-  -o-transition: 0.5s ease-in-out;
-  transition: 0.5s ease-in-out;
-  cursor: pointer;
-
-  & span {
-    display: block;
-    position: absolute;
-    height: .3rem;
-    width: 100%;
-    border-radius: .9rem;
-    opacity: 1;
-    left: 0;
-    -webkit-transform: rotate(0deg);
-    -moz-transform: rotate(0deg);
-    -o-transform: rotate(0deg);
-    transform: rotate(0deg);
-    -webkit-transition: 0.25s ease-in-out;
-    -moz-transition: 0.25s ease-in-out;
-    -o-transition: 0.25s ease-in-out;
-    transition: 0.25s ease-in-out;
-    background: $color-secondary;
-
-    &:nth-child(1) {
-      top: 0px;
-    }
-
-    &:nth-child(2) {
-      top: 1rem;
-    }
-
-    &:nth-child(3) {
-      top: 2rem;
-    }
-  }
-}
-
-.animated-icon.open {
-  & span:nth-child(1) {
-    top: 1.1rem;
-    -webkit-transform: rotate(135deg);
-    -moz-transform: rotate(135deg);
-    -o-transform: rotate(135deg);
-    transform: rotate(135deg);
-  }
-  & span:nth-child(2) {
-    opacity: 0;
-    left: -6rem;
-  }
-  & span:nth-child(3) {
-    top: 1.1rem;
-    -webkit-transform: rotate(-135deg);
-    -moz-transform: rotate(-135deg);
-    -o-transform: rotate(-135deg);
-    transform: rotate(-135deg);
-  }
-}
-
-.open-nav {
-  position: fixed;
-  right: 1rem;
-  top: 1rem;
   z-index: 2;
+  color: $color-white;
+  background: none;
+
+  &:hover {
+    background: none;
+
+    + {
+      .button--bubble__effect-container {
+        .circle {
+          background: $color-tertiary;
+        }
+        .button {
+          background: $color-tertiary;
+        }
+      }
+    }
+  }
+
+  &:active {
+    + {
+      .button--bubble__effect-container {
+        transform: scale(0.95);
+      }
+    }
+  }
+}
+.button--bubble__container {
+  position: relative;
+  display: inline-block;
+  top: 50%;
+  margin-top: -25px;
+
+  .effect-button {
+    position: absolute;
+    width: 50%;
+    height: 25%;
+    top: 50%;
+    left: 25%;
+    z-index: 1;
+    transform: translateY(-50%);
+    background: $color-secondary;
+    transition: background 0.1s ease-out;
+  }
+}
+.button--bubble__effect-container {
+  position: absolute;
+  display: block;
+  width: 200%;
+  height: 400%;
+  top: -150%;
+  left: -50%;
+  -webkit-filter: url("#goo");
+  filter: url("#goo");
+  transition: all 0.1s ease-out;
+  pointer-events: none;
+
+  .circle {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    border-radius: 15px;
+    background: $color-secondary;
+    transition: background 0.1s ease-out;
+  }
+
+  .circle.top-left {
+    top: 40%;
+    left: 27%;
+  }
+
+  .circle.bottom-right {
+    bottom: 40%;
+    right: 27%;
+  }
 }
 
-.close {
-  width: 100%;
-  margin-top: 1rem;
+.goo {
+  position: absolute;
+  visibility: hidden;
+  width: 1px;
+  height: 1px;
 
-  &__btn {
-    width: 1.5rem;
+  &-btn {
+    margin-top: 4rem;
   }
 }
