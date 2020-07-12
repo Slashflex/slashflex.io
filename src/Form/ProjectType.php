@@ -3,12 +3,11 @@
 namespace App\Form;
 
 use App\Entity\Project;
-use App\Form\ImageType;
-use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class ProjectType extends AbstractType
 {
@@ -18,14 +17,7 @@ class ProjectType extends AbstractType
             ->add('title')
             ->add('introduction')
             ->add('content', CKEditorType::class)
-            ->add('main_image')
-            // ->add('content', CollectionType::class, [
-            //     'label' => false,
-            //     'entry_type' => FieldType::class,
-            //     'allow_add' => true,
-            //     'allow_delete' => true
-            // ]);
-        ;
+            ->add('imageFile', VichImageType::class, ['label' => false]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

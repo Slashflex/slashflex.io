@@ -10,16 +10,23 @@
 
 	<!-- Fullscreen Navigation -->
 	{% include "partials/_fullscreen_nav.html.twig" %}
-
+    {% for message in app.flashes('success') %}
+		<div class="flash-notice alert-success">
+			{{ message }}
+		</div>
+	{% endfor %}
+    
     <div class="container">
         <h1 class="text-center mt-5">Hello {{ user }}</h1>
 
         <p>Email : {{ user.email }}</p>
         <p>Account created on {{ user.createdAt }}</p>
         <a href="{{ path('edit_me', {'slug': user.slug}) }}" class="button__login">Edit</a>
+        <a href="{{ path('upload_avatar', {'slug': user.slug}) }}" class="button__login">Upload avatar</a>
         {% if app.user.roleUser[0].name == 'ROLE_ADMIN' %}
             <a href="{{ path('admin') }}" class="button__login">Dashboard</a>
         {% endif %}
+        <img src="{{ asset('uploads/avatars/' ~ user.avatar) }}" alt="{{ user.__toString }}">
     </div>
 
 	<!-- Footer -->

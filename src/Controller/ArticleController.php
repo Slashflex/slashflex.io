@@ -70,16 +70,6 @@ class ArticleController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            foreach ($article->getImage() as $image) {
-                $image->addArticle($article);
-                $this->manager->persist($image);
-            }
-
-            // foreach ($article->getContent() as $content) {
-            //     $content->addArticle($article);
-            //     $this->manager->persist($content);
-            // }
-
             $author = $this->userRepository->findOneBy(['email' => $_ENV['DB_EMAIL']]);
 
             $article
@@ -116,16 +106,6 @@ class ArticleController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            foreach ($article->getImage() as $image) {
-                $image->addArticle($article);
-                $this->manager->persist($image);
-            }
-
-            // foreach ($article->getContent() as $content) {
-            //     $content->addArticle($article);
-            //     $this->manager->persist($content);
-            // }
-
             // Retrieve updated slug on form submission
             $title = $request->request->get('article')['title'];
             $article->updateSlug($title);

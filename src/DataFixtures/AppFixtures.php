@@ -2,15 +2,15 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Article;
 use Faker\Factory;
-use App\Entity\User;
-use App\Entity\Field;
-use App\Entity\Image;
-use App\Entity\Project;
 use App\Entity\Role;
+use App\Entity\User;
+use App\Entity\Article;
+use App\Entity\Project;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AppFixtures extends Fixture
@@ -29,6 +29,17 @@ class AppFixtures extends Fixture
         setlocale(LC_TIME, 'en_US.utf8');
         $currentDate = strftime("%A %d %B %Y") . ' at ' . strftime("%H:%M");
 
+        $src = __DIR__ . "/../../public/uploads/images/error-404.gif";
+
+        $file = new UploadedFile(
+            $src,
+            'error-404.gif',
+            'image/gif',
+            false,
+            true //  Set test mode true !!! " Local files are used in test mode hence the code should not enforce HTTP uploads."
+        );
+        $file2 = new File(__DIR__ . "/../../public/uploads/images/error-404.gif");
+
         // Setup an admin
         $admin = new User();
 
@@ -40,6 +51,9 @@ class AppFixtures extends Fixture
         $email = $_ENV['DB_EMAIL'];
         $firstname = $_ENV['DB_FIRSTNAME'];
         $lastname = $_ENV['DB_LASTNAME'];
+
+        // $admin->setImageName($file);
+        // $admin->setImageFile($file2);
 
         $admin
             ->setFirstname($firstname)
@@ -57,81 +71,46 @@ class AppFixtures extends Fixture
         // Populate the database with fake project, fake images and fake paragraphs
         for ($i = 1; $i <= 6; $i++) {
             $project = new Project();
-            $randomImage = 'https://via.placeholder.com/800x500';
 
             $title = $faker->word(3);
 
+            $src = __DIR__ . "/../../public/uploads/images/error-404.gif";
+
+            $file = new UploadedFile(
+                $src,
+                'error-404.gif',
+                'image/gif',
+                false,
+                true //  Set test mode true !!! " Local files are used in test mode hence the code should not enforce HTTP uploads."
+            );
+            $project->setImageName($file);
+            $file2 = new File(__DIR__ . "/../../public/uploads/images/error-404.gif");
+            $project->setImageFile($file2);
             $project
                 ->setTitle($title)
                 ->setIntroduction($faker->sentence(6))
                 ->setContent($faker->sentence(18))
-                ->setMainImage($randomImage)
                 ->setUsers($admin)
                 ->setCreatedAt($currentDate)
                 ->initializeSlug($title);
-
-            for ($j = 1; $j <= mt_rand(1, 10); $j++) {
-                $randomImage = 'https://via.placeholder.com/800x500';
-
-                $image = new Image();
-                $image
-                    ->setUrl($randomImage)
-                    ->addProject($project);
-
-                $manager->persist($image);
-            }
-
-            for ($k = 1; $k <= mt_rand(1, 15); $k++) {
-                $paragraphs = $faker->paragraphs(mt_rand(1, 10), true);
-
-                $field = new Field();
-                $field
-                    ->setContent($paragraphs);
-
-                $manager->persist($field);
-            }
 
             $manager->persist($project);
         }
 
         for ($m = 1; $m <= 6; $m++) {
-            $randomImage = 'https://via.placeholder.com/800x500';
-
             $article = new Article();
 
             $title = $faker->word(3);
 
+            $article->setImageName($file);
+            $article->setImageFile($file2);
             $article
                 ->setTitle($title)
                 ->setIntroduction($faker->sentence(9))
                 ->setContent($faker->sentence(18))
-                // ->setContent2($faker->sentence(22))
-                // ->setContent3($faker->sentence(44))
                 ->setUsers($admin)
-                ->setMainImage($randomImage)
                 ->setCreatedAt($currentDate)
                 ->initializeSlug($title);
-
-            for ($n = 1; $n <= mt_rand(1, 10); $n++) {
-                $randomImage = 'https://via.placeholder.com/800x500';
-
-                $image = new Image();
-                $image
-                    ->setUrl($randomImage)
-                    ->addArticle($article);
-
-                $manager->persist($image);
-            }
-
-            for ($o = 1; $o <= mt_rand(1, 15); $o++) {
-                $paragraphs = $faker->paragraphs(mt_rand(1, 10), true);
-
-                $field = new Field();
-                $field
-                    ->setContent($paragraphs);
-
-                $manager->persist($field);
-            }
 
             $manager->persist($article);
         }
@@ -146,6 +125,8 @@ class AppFixtures extends Fixture
         for ($l = 1; $l < mt_rand(1, 12); $l++) {
             $user = new User();
 
+            // $user->setImageName($file);
+            // $user->setImageFile($file2);
             $user
                 ->setFirstname($faker->firstName())
                 ->setLastname($faker->lastname())

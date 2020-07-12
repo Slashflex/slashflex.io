@@ -6,9 +6,8 @@ use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Form\CallbackTransformer;
+use Symfony\Component\Validator\Constraints\File;
 
 class UserType extends AbstractType
 {
@@ -20,7 +19,33 @@ class UserType extends AbstractType
             ->add('firstname')
             ->add('lastname')
             ->add('description')
-            ->add('login');
+            ->add('login')
+            ->add('avatar', FileType::class, [
+                'label' => false,
+
+                // unmapped means that this field is not associated to any entity property
+                'mapped' => false,
+
+                // make it optional so you don't have to re-upload the PDF file
+                // every time you edit the Product details
+                'required' => false,
+
+                // unmapped fields can't define their validation using annotations
+                // in the associated entity, so you can use the PHP constraint classes
+                'constraints' => [
+                    new File([
+                        'maxSize' => '1024k',
+                        'mimeTypes' => [
+                            'image/jpg',
+                            'image/jpeg',
+                            'image/gif',
+                            'image/webp',
+                            'image/png',
+                        ],
+                        'mimeTypesMessage' => 'Please upload a valid document (jpg|jpeg|gif|webp|png)',
+                    ])
+                ],
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

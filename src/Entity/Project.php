@@ -5,11 +5,13 @@ namespace App\Entity;
 use Cocur\Slugify\Slugify;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ProjectRepository;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProjectRepository")
+ * @Vich\Uploadable
  */
 class Project
 {
@@ -38,22 +40,35 @@ class Project
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $main_image;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
     private $created_at;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Image", inversedBy="projects", orphanRemoval=true)
-     */
-    private $image;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $slug;
+
+    /**
+     * NOTE: This is not a mapped field of entity metadata, just a simple property.
+     * 
+     * @Vich\UploadableField(mapping="images", fileNameProperty="imageName")
+     * 
+     * @var File|null
+     */
+    private $imageFile;
+
+    /**
+     * @ORM\Column(type="string")
+     *
+     * @var string|null
+     */
+    private $imageName;
+
+    /**
+     * @ORM\Column(type="datetime")
+     *
+     * @var \DateTimeInterface|null
+     */
+    private $updatedAt;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="projects")
@@ -107,17 +122,17 @@ class Project
         return $this;
     }
 
-    public function getMainImage(): ?string
-    {
-        return $this->main_image;
-    }
+    // public function getMainImage(): ?string
+    // {
+    //     return $this->main_image;
+    // }
 
-    public function setMainImage(string $main_image): self
-    {
-        $this->main_image = $main_image;
+    // public function setMainImage(string $main_image): self
+    // {
+    //     $this->main_image = $main_image;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function getCreatedAt(): ?string
     {
@@ -160,35 +175,9 @@ class Project
         return $this;
     }
 
-    /**
-     * @return Collection|Image[]
-     */
-    public function getImage(): Collection
-    {
-        return $this->image;
-    }
-
-    public function addImage(Image $image): self
-    {
-        if (!$this->image->contains($image)) {
-            $this->image[] = $image;
-        }
-
-        return $this;
-    }
-
-    public function removeImage(Image $image): self
-    {
-        if ($this->image->contains($image)) {
-            $this->image->removeElement($image);
-        }
-
-        return $this;
-    }
-
     public function __toString()
     {
-        return $this->getMainImage();
+        return $this->getTitle();
     }
 
     public function getUsers(): ?User
@@ -201,5 +190,40 @@ class Project
         $this->users = $users;
 
         return $this;
+    }
+
+    /**
+     * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
+     * of 'UploadedFile' is injected into this setter to trigger the update. If this
+     * bundle's configuration parameter 'inject_on_load' is set to 'true' this setter
+     * must be able to accept an instance of 'File' as the bundle will inject one here
+     * during Doctrine hydration.
+     *
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile|null $imageFile
+     */
+    public function setImageFile(?File $imageFile = null): void
+    {
+        $this->imageFile = $imageFile;
+
+        if (null !== $imageFile) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    public function setImageName(?string $imageName): void
+    {
+        $this->imageName = $imageName;
+    }
+
+    public function getImageName(): ?string
+    {
+        return $this->imageName;
     }
 }

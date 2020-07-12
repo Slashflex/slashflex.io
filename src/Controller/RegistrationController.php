@@ -37,6 +37,7 @@ class RegistrationController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             )
+                ->setAvatar('avatar.png')
                 ->addRoleUser($role)
                 ->setCreatedAt($currentDate)
                 ->initializeSlug();

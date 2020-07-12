@@ -55,7 +55,7 @@
 		  
 		  // Sets background-image property base on data attribute		
 		  img.css('background-image', function () {
-			var bg = ('url(' + $(this).data('background') + ')');
+			var bg = ('url(/uploads/images/' + $(this).data('background') + ')');
 			return bg;
 		  });
 
@@ -67,6 +67,11 @@
 
 		  img.css('background-position', function () {
 			  var position = 'center';
+			  return position;
+		  });
+
+		  img.css('background-repeat', function () {
+			  var position = 'no-repeat';
 			  return position;
 		  });
 

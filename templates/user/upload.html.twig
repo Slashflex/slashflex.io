@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ title }}
+{% endblock %}
+
+{% block body %}
+	<!-- Logo and Nav -->
+	{% include "partials/_top_buttons.html.twig" %}
+
+	<!-- Fullscreen Navigation -->
+	{% include "partials/_fullscreen_nav.html.twig" %}
+
+	<div class="create container">
+		<div class="create__form mx-auto pt-5 mt-5">
+			<h1 class="heading__secondary">
+				Edit this project
+			</h1>
+			{{ form_start(form, {'attr': {'class': 'm-auto'}}) }}
+			<div class="row">
+				<div class="col-12 col-lg-12">
+					<div class="form__group">
+						{{ form_widget(form.avatar, {'attr': { 'class': 'form__input', 'id': 'avatar' }}) }}
+						<label for="avatar" class="form__label">Avatar</label>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-group mt-5 pb-5">
+				<button type="submit" class="button__login mx-auto d-block px-5">Edit</button>
+			</div>
+			{{ form_end(form) }}
+		</div>
+	</div>
+
+	<!-- Footer -->
+	{% include "partials/_footer.html.twig" %}
+{% endblock %}

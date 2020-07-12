@@ -71,7 +71,7 @@
 								{% set author = project.users %}
 								<div class="col-sm-6 col-md-6 col-lg-3">
 									<div class="card card__bg m-3">
-										<img src="{{ project.mainImage }}" class="card-img-top" alt="...">
+										<img src="/uploads/images/{{ project.imageName }}" class="card-img-top" alt="...">
 										<div class="card-body">
 											<h5 class="card-title card__title">{{ project.title }}</h5>
 											<p class="card-text card__description">{{ project.introduction|u.truncate(30, ' ...') }}</p>
@@ -105,7 +105,7 @@
 								{% set author = article.users %}
 								<div class="col-sm-6 col-md-6 col-lg-3">
 									<div class="card card__bg m-3">
-										<img src="{{ article.mainImage }}" class="card-img-top" alt="...">
+										<img src="/uploads/images/{{ article.imageName }}" class="card-img-top" alt="...">
 										<div class="card-body">
 											<h5 class="card-title card__title">{{ article.title }}</h5>
 											<p class="card-text card__description">{{ article.introduction|u.truncate(50, ' ...') }}</p>

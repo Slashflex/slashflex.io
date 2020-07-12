@@ -4,20 +4,27 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
+use App\Form\AvatarType;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserController extends AbstractController
 {
+    private $userRepository;
     private $passwordEncoder;
     private $manager;
 
-    public function __construct(EntityManagerInterface $manager, UserPasswordEncoderInterface $passwordEncoder)
+    public function __construct(UserRepository $userRepository, EntityManagerInterface $manager, UserPasswordEncoderInterface $passwordEncoder)
     {
+        $this->userRepository = $userRepository;
         $this->passwordEncoder = $passwordEncoder;
         $this->manager = $manager;
     }
@@ -117,6 +124,61 @@ class UserController extends AbstractController
 
         return $this->render('user/edit_me.html.twig', [
             'title' => '/FLX | ' . $user->getSlug(),
+            'form' => $form->createView(),
+            'user' => $user
+        ]);
+    }
+
+    /**
+     * Add an avatar to user's profile
+     * 
+     * @Route("/me/{slug}/upload", name="upload_avatar")
+     */
+    public function addUserAvatar(User $user, Request $request, SluggerInterface $slugger)
+    {
+        $form = $this->createForm(UserType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            /** @var UploadedFile $avatarFile */
+            $avatarFile = $form->get('avatar')->getData();
+
+            // this condition is needed because the 'avatar' field is not required
+            // so the Avatar file must be processed only when a file is uploaded
+            if ($avatarFile) {
+                $originalFilename = pathinfo($avatarFile->getClientOriginalName(), PATHINFO_FILENAME);
+                // this is needed to safely include the file name as part of the URL
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename . '-' . $user->getId() . '.' . $avatarFile->guessExtension();
+
+                // Move the file to the directory where brochures are stored
+                try {
+                    $avatarFile->move(
+                        $this->getParameter('avatars_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+
+                // updates the 'avatar' property to store the file name
+                // instead of its contents
+                $user->setAvatar($newFilename);
+            }
+
+            $this->manager->persist($user);
+            $this->manager->flush();
+
+            $this->addFlash(
+                'success',
+                'Your avatar has been uploaded'
+            );
+
+            return $this->redirectToRoute('user');
+        }
+
+        return $this->render('user/upload.html.twig', [
+            'title' => '/FLX | ' . $user->__toString(),
             'form' => $form->createView(),
             'user' => $user
         ]);

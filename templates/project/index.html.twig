@@ -46,12 +46,12 @@
 					<div class="card{{loop.index}}">
 						<div class="flips">
 							<div class="front{{loop.index}} vertical">
-								<div class="card-content--image" style="background-image: url({{ project.mainImage }})"></div>
+								<div class="card-content--image" style="background-image: url(/uploads/images/{{ project.imageName }})"></div>
 							</div>
 							<div class="back{{loop.index}} vertical">
 								<div class="card-content">
-									<h2>Back</h2>
-									<p>Lorem ipsum</p>
+									<h2>{{project.title}}</h2>
+									<p>{{project.introduction}}</p>
 									<div class="form-group">
 										<a href="{{ path('single_project', { 'slug': project.slug }) }}" class="button__login--showcase">Showcase</a>
 									</div>

@@ -88,6 +88,23 @@ class User implements UserInterface
      */
     private $projects;
 
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $avatar;
+
+    public function getAvatar()
+    {
+        return $this->avatar;
+    }
+
+    public function setAvatar($avatar)
+    {
+        $this->avatar = $avatar;
+
+        return $this;
+    }
+
     public function __construct()
     {
         $this->roleUser = new ArrayCollection();

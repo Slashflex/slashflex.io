@@ -69,12 +69,6 @@ class ProjectController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
-            foreach ($project->getImage() as $image) {
-                $image->addProject($project);
-                $this->manager->persist($image);
-            }
-
             $author = $this->userRepository->findOneBy(['email' => $_ENV['DB_EMAIL']]);
 
             $project
@@ -111,11 +105,6 @@ class ProjectController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            foreach ($project->getImage() as $image) {
-                $image->addProject($project);
-                $this->manager->persist($image);
-            }
-
             // Retrieve updated slug on form submission
             $title = $request->request->get('project')['title'];
 

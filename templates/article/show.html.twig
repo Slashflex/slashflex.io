@@ -15,7 +15,7 @@
         </div>
     {% endfor %}
 
-    <header style="background-image: url('{{ article.mainImage }}'); background-repeat: no-repeat; background-size: cover; padding: 20rem; background-size: 50%; background-position: center;">
+    <header style="background-image: url('/uploads/images/{{ article.imageName }}'); background-repeat: no-repeat; background-size: cover; padding: 20rem; background-size: 50%; background-position: center;">
         <div class="container h-100">
             <div class="row h-100 align-items-center">
                 <div class="col-12 text-center article-intro">
@@ -29,8 +29,6 @@
     <div class="container">
         <div class="row mt-5 mb-5">
             {{ article.content|raw }}
-            {# {{ article.content2|raw }}
-            {{ article.content3|raw }} #}
         </div>
     </div>
 
