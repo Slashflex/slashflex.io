@@ -29,16 +29,16 @@ class AppFixtures extends Fixture
         setlocale(LC_TIME, 'en_US.utf8');
         $currentDate = strftime("%A %d %B %Y") . ' at ' . strftime("%H:%M");
 
-        $src = __DIR__ . "/../../public/uploads/images/error-404.gif";
+        // $src = __DIR__ . "/../../public/uploads/images/error-404.gif";
 
-        $file = new UploadedFile(
-            $src,
-            'error-404.gif',
-            'image/gif',
-            false,
-            true //  Set test mode true !!! " Local files are used in test mode hence the code should not enforce HTTP uploads."
-        );
-        $file2 = new File(__DIR__ . "/../../public/uploads/images/error-404.gif");
+        // $file = new UploadedFile(
+        //     $src,
+        //     'error-404.gif',
+        //     'image/gif',
+        //     false,
+        //     true //  Set test mode true !!! " Local files are used in test mode hence the code should not enforce HTTP uploads."
+        // );
+        // $file2 = new File(__DIR__ . "/../../public/uploads/images/error-404.gif");
 
         // Setup an admin
         $admin = new User();
@@ -52,8 +52,7 @@ class AppFixtures extends Fixture
         $firstname = $_ENV['DB_FIRSTNAME'];
         $lastname = $_ENV['DB_LASTNAME'];
 
-        // $admin->setImageName($file);
-        // $admin->setImageFile($file2);
+        $admin->setAvatar('avatar.png');
 
         $admin
             ->setFirstname($firstname)
@@ -125,8 +124,8 @@ class AppFixtures extends Fixture
         for ($l = 1; $l < mt_rand(1, 12); $l++) {
             $user = new User();
 
-            // $user->setImageName($file);
-            // $user->setImageFile($file2);
+            $user->setAvatar('avatar.png');
+
             $user
                 ->setFirstname($faker->firstName())
                 ->setLastname($faker->lastname())

@@ -7,6 +7,7 @@ use App\Form\UserType;
 use App\Form\AvatarType;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
@@ -145,18 +146,36 @@ class UserController extends AbstractController
 
             // this condition is needed because the 'avatar' field is not required
             // so the Avatar file must be processed only when a file is uploaded
+            if ($this->getUser()->getAvatar() != 'avatar.png') {
+                $user->setAvatar('avatar.png');
+            }
+            // dd(pathinfo($avatarFile->getClientOriginalName(), PATHINFO_FILENAME));
+
             if ($avatarFile) {
                 $originalFilename = pathinfo($avatarFile->getClientOriginalName(), PATHINFO_FILENAME);
                 // this is needed to safely include the file name as part of the URL
                 $safeFilename = $slugger->slug($originalFilename);
                 $newFilename = $safeFilename . '-' . $user->getId() . '.' . $avatarFile->guessExtension();
 
+                $fileSystem = new Filesystem();
                 // Move the file to the directory where brochures are stored
                 try {
-                    $avatarFile->move(
-                        $this->getParameter('avatars_directory'),
-                        $newFilename
-                    );
+                    // Retrieve document root
+                    $avatarDir = $_SERVER["DOCUMENT_ROOT"] . '/uploads/avatars/';
+                    // Create folder based on user's firtname and lastname
+                    $userDir = $avatarDir . $this->getUser()->__toString();
+
+                    // Remove old avatar ffrom user folder
+                    $fileSystem->remove([$userDir . '/', $user->getAvatar()]);
+
+                    if (!file_exists($userDir) || file_exists($userDir)) {
+                        $userFolder = $userDir;
+                        // Move the uploaded file to the current user avatar folder
+                        $avatarFile->move(
+                            $userFolder,
+                            $newFilename
+                        );
+                    }
                 } catch (FileException $e) {
                     // ... handle exception if something happens during file upload
                 }
