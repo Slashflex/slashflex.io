@@ -5,7 +5,9 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Repository\RoleRepository;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,7 +18,7 @@ class RegistrationController extends AbstractController
     /**
      * @Route("/register", name="app_register")
      */
-    public function register(RoleRepository $roleRepository, Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
+    public function register(RoleRepository $roleRepository, Request $request, UserPasswordEncoderInterface $passwordEncoder, MailerInterface $mailer): Response
     {
         $user = new User();
 
@@ -46,7 +48,25 @@ class RegistrationController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            // do anything else you need here, like send an email
+            $logo = $_SERVER['DOCUMENT_ROOT'] . '/build/images/email/logo.png';
+
+            // Send an email
+            $email = (new TemplatedEmail())
+                ->from($_ENV['DB_EMAIL'])
+                ->to($user->getEmail())
+                ->subject('Thanks for signing up!')
+                ->htmlTemplate('emails/welcome.html.twig')
+                ->context([
+                    'name' => $user->__toString(),
+                    'logo' => $logo
+                ]);
+
+            $mailer->send($email);
+
+            $this->addFlash(
+                'success',
+                'Your account has been successfully created'
+            );
 
             return $this->redirectToRoute('home');
         }
