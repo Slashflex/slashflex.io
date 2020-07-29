@@ -1,13 +1,22 @@
 $(document).ready(() => {
+  // Removes Download link
+  if (
+    window.location.pathname.endsWith("new") ||
+    window.location.pathname.endsWith("edit")
+  ) {
+    const download = document.querySelectorAll("a[download]");
+    download[1].style.display = "none";
+  }
+
   // Sets parallax effect only on root page
-  if (window.location.pathname == '/') {
+  if (window.location.pathname == "/") {
     // Parallax events
     (() => {
       // Add event listener
-      document.addEventListener('mousemove', parallax);
-      const chess1 = document.querySelector('.hero__chess1');
-      const chess2 = document.querySelector('.hero__chess2');
-      const chess3 = document.querySelector('.hero__chess3');
+      document.addEventListener("mousemove", parallax);
+      const chess1 = document.querySelector(".hero__chess1");
+      const chess2 = document.querySelector(".hero__chess2");
+      const chess3 = document.querySelector(".hero__chess3");
 
       // Magic happens here
       function parallax(e) {
@@ -38,12 +47,12 @@ $(document).ready(() => {
     parallaxIt(e, ".keyK", -15);
     parallaxIt(e, ".keyC", 15);
   });
-  
+
   const parallaxIt = (e, target, movement) => {
     var $this = $("#wrapper");
     var relX = e.pageX - $this.offset().left;
     var relY = e.pageY - $this.offset().top;
-  
+
     TweenMax.to(target, 1, {
       x: ((relX - $this.width() / 2) / $this.width()) * movement,
       y: ((relY - $this.height() / 2) / $this.height()) * movement,
@@ -51,30 +60,34 @@ $(document).ready(() => {
   };
 
   // Swiper
-  var swiper = new Swiper('.swiper-container', {
+  var swiper = new Swiper(".swiper-container", {
     loop: true,
     pagination: {
-      el: '.swiper-pagination',
-      type: 'progressbar',
+      el: ".swiper-pagination",
+      clickable: true,
+      type: "progressbar",
     },
     navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+    keyboard: {
+      enabled: true,
     },
   });
 
   // Disable right click on everything
   (() => {
-    $(document).on('contextmenu', '*', () => {
+    $(document).on("contextmenu", "*", () => {
       return false;
     });
   })();
 
   // Auto expand textarea as user input grows
   document.addEventListener(
-    'input',
+    "input",
     (e) => {
-      if (e.target.tagName.toLowerCase() !== 'textarea') return;
+      if (e.target.tagName.toLowerCase() !== "textarea") return;
       autoExpand(e.target);
     },
     false
@@ -82,42 +95,42 @@ $(document).ready(() => {
 
   const autoExpand = (field) => {
     // Reset field height
-    field.style.height = 'inherit';
+    field.style.height = "inherit";
 
     // Get the computed styles for the element
     const computed = window.getComputedStyle(field);
 
     // Calculate the height
     const height =
-      parseInt(computed.getPropertyValue('border-top-width'), 10) +
-      parseInt(computed.getPropertyValue('padding-top'), 10) +
+      parseInt(computed.getPropertyValue("border-top-width"), 10) +
+      parseInt(computed.getPropertyValue("padding-top"), 10) +
       field.scrollHeight +
-      parseInt(computed.getPropertyValue('padding-bottom'), 10) +
-      parseInt(computed.getPropertyValue('border-bottom-width'), 10);
+      parseInt(computed.getPropertyValue("padding-bottom"), 10) +
+      parseInt(computed.getPropertyValue("border-bottom-width"), 10);
 
     field.style.height = `${height}px`;
   };
 
   // Full screen navigation toggle
-  $('#menu-toggle').click(function () {
-    $(this).toggleClass('active');
-    if ($(this).hasClass('active')) {
-      $('.nav').css('position', 'static');
+  $("#menu-toggle").click(function () {
+    $(this).toggleClass("active");
+    if ($(this).hasClass("active")) {
+      $(".nav").css("position", "static");
     } else {
-      $('.nav').css('position', 'fixed');
+      $(".nav").css("position", "fixed");
     }
-    $('#menu').toggleClass('open');
+    $("#menu").toggleClass("open");
   });
 
   // Flash message
-  setInterval(function() {
-    $('.flash-notice').slideUp().fadeOut();
+  setInterval(function () {
+    $(".flash-notice").slideUp().fadeOut();
   }, 3000);
 
   // Flips cards with perspective
   function flipCard(card, front, back, frontClass, backClass) {
     let count = 0;
-    $(card).on('click', function() {
+    $(card).on("click", function () {
       count++;
       if (count === 1) {
         $(front).addClass(frontClass);
@@ -134,20 +147,30 @@ $(document).ready(() => {
     const card = document.querySelector(`.card${[i]}`);
     const front = document.querySelector(`.front${[i]}`);
     const back = document.querySelector(`.back${[i]}`);
-    flipCard($(card), $(front), $(back), `front-visible-${[i]}`, `back-visible-${[i]}`);
+    flipCard(
+      $(card),
+      $(front),
+      $(back),
+      `front-visible-${[i]}`,
+      `back-visible-${[i]}`
+    );
   }
 
-  if (window.location.pathname == '/projects') {
+  if (window.location.pathname == "/projects") {
     for (let i = 1; i < 15; i++) {
       let back = document.querySelector(`.back${[i]}`);
-      $(back).css('background-color', '#27282c');
+      $(back).css("background-color", "#27282c");
     }
-    $('.round').css('background-color', '#ffbe41');
+    $(".round").css("background-color", "#ffbe41");
   }
 });
 
 // Loader only on root page
-if (window.location.pathname == '/' || window.location.pathname == '/projects' || window.location.pathname == '/articles') {
+if (
+  window.location.pathname == "/" ||
+  window.location.pathname == "/projects" ||
+  window.location.pathname == "/articles"
+) {
   var sentence = [
     '“Knowledge is power.” – <i style="color: #585858; font-size: 1.9rem">Francis Bacon</i>',
     '“Simplicity is the soul of efficiency.” – <i style="color: #585858; font-size: 1.9rem">Austin Freeman</i>',
@@ -160,24 +183,24 @@ if (window.location.pathname == '/' || window.location.pathname == '/projects' |
     '“We meet again at last.” - <i style="color: #585858; font-size: 1.9rem">Darth Vader</i>',
   ]; // Get a random index from the array sentence
   var randomNumber = Math.floor(Math.random() * sentence.length); // Get a random sentence from randomNumber
-  
+
   var quote = sentence[randomNumber];
-  $('body').append(
+  $("body").append(
     '<div style="width: 100%; background: #27282c; color: #fff; margin-bottom: 40vh; height: 100%; position: fixed;" id="loading"><div class="loader"></div></div>'
   ); // Displays a random quote inside the loading div
-  
-  $('#loading').append(
+
+  $("#loading").append(
     '<p class="text-center h1" style="color: #ffbe41; margin-bottom: 33rem;">'.concat(
       quote,
-      '</p>'
+      "</p>"
     )
   );
-  $(window).on('load', function () {
+  $(window).on("load", function () {
     setTimeout(removeLoader, 600); // Wait for page load
   });
-  
+
   var removeLoader = function removeLoader() {
-    $('#loading').fadeOut(500, function () {
+    $("#loading").fadeOut(500, function () {
       // FadeOut complete. Remove the loading div
       $(this).remove(); // Makes page more lightweight
     });
@@ -187,12 +210,12 @@ if (window.location.pathname == '/' || window.location.pathname == '/projects' |
   $(".button--bubble").each(function () {
     var $circlesTopLeft = $(this).parent().find(".circle.top-left");
     var $circlesBottomRight = $(this).parent().find(".circle.bottom-right");
-  
+
     var tl = new TimelineLite();
     var tl2 = new TimelineLite();
-  
+
     var btTl = new TimelineLite({ paused: true });
-  
+
     tl.to($circlesTopLeft, 1.2, {
       x: -25,
       y: -25,
@@ -230,13 +253,13 @@ if (window.location.pathname == '/' || window.location.pathname == '/projects' |
       { scale: 0, x: "-=15", y: "+=5", opacity: 0 },
       "-=1"
     );
-  
+
     var tlBt1 = new TimelineLite();
     var tlBt2 = new TimelineLite();
-  
+
     tlBt1.set($circlesTopLeft, { x: 0, y: 0, rotation: -45 });
     tlBt1.add(tl);
-  
+
     tl2.set($circlesBottomRight, { x: 0, y: 0 });
     tl2.to($circlesBottomRight, 1.1, {
       x: 30,
@@ -274,10 +297,10 @@ if (window.location.pathname == '/' || window.location.pathname == '/projects' |
       { scale: 0, x: "+=15", y: "-=5", opacity: 0 },
       "-=1"
     );
-  
+
     tlBt2.set($circlesBottomRight, { x: 0, y: 0, rotation: 45 });
     tlBt2.add(tl2);
-  
+
     btTl.add(tlBt1);
     btTl.to(
       $(this).parent().find(".button.effect-button"),
@@ -292,9 +315,9 @@ if (window.location.pathname == '/' || window.location.pathname == '/projects' |
       { scale: 1, ease: Elastic.easeOut.config(1.2, 0.4) },
       1.2
     );
-  
+
     btTl.timeScale(2.6);
-  
+
     $(this).on("mouseover", function () {
       btTl.restart();
     });
