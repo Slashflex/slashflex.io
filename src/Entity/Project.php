@@ -2,16 +2,19 @@
 
 namespace App\Entity;
 
+use App\Entity\Attachment;
 use Cocur\Slugify\Slugify;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ProjectRepository;
-use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\HttpFoundation\File\File;
+use Doctrine\Common\Collections\ArrayCollection;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProjectRepository")
  * @Vich\Uploadable
+ * @ORM\HasLifecycleCallbacks()
  */
 class Project
 {
@@ -38,14 +41,43 @@ class Project
     private $content;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="datetime")
      */
-    private $created_at;
+    private $createdAt;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Attachment::class, mappedBy="project", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $attachments;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $slug;
+
+    /**
+     * @ORM\PrePersist
+     * @return void
+     */
+    public function prePersist()
+    {
+        if (empty($this->createdAt)) {
+            $this->createdAt = new \DateTime();
+        }
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
 
     /**
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
@@ -77,8 +109,42 @@ class Project
 
     public function __construct()
     {
-        $this->image = new ArrayCollection();
-        // $this->content = new ArrayCollection();
+        $this->imageName = new ArrayCollection();
+        $this->attachments = new ArrayCollection();
+    }
+
+    /**
+     * Add attachment
+     *
+     * @param \AppBundle\Entity\Attachment $attachment
+     *
+     * @return Project
+     */
+    public function addAttachment(Attachment $attachment)
+    {
+        $attachment->setProject($this);
+        $this->attachments[] = $attachment;
+
+        return $this;
+    }
+
+    /**
+     * Remove attachment
+     *
+     * @param \AppBundle\Entity\Attachment $attachment
+     */
+    public function removeAttachment(Attachment $attachment)
+    {
+        $this->attachments->removeElement($attachment);
+    }
+
+    /**
+     * Get attachments
+     *
+     */
+    public function getAttachments(): Collection
+    {
+        return $this->attachments;
     }
 
     public function getId(): ?int
@@ -122,32 +188,7 @@ class Project
         return $this;
     }
 
-    // public function getMainImage(): ?string
-    // {
-    //     return $this->main_image;
-    // }
-
-    // public function setMainImage(string $main_image): self
-    // {
-    //     $this->main_image = $main_image;
-
-    //     return $this;
-    // }
-
-    public function getCreatedAt(): ?string
-    {
-        return $this->created_at;
-    }
-
-    public function setCreatedAt(string $created_at): self
-    {
-        $this->created_at = $created_at;
-
-        return $this;
-    }
-
     /**
-     * @Orm\PrePersist
      * @ORM\PreUpdate
      */
     public function initializeSlug()
@@ -225,5 +266,13 @@ class Project
     public function getImageName(): ?string
     {
         return $this->imageName;
+    }
+
+    public function getDate()
+    {
+        $date = $this->getCreatedAt();
+
+        $result = "{$date->format('\o\n l jS F Y')} at {$date->format('H:i')}";
+        return $result;
     }
 }

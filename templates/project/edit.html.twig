@@ -16,6 +16,7 @@
 			<h1 class="heading__secondary">
 				Edit this project
 			</h1>
+			{% form_theme form 'partials/_images-collection.html.twig' %}
 			{{ form_start(form, {'attr': {'class': 'm-auto'}}) }}
 			<div class="row">
 				<div class="col-12 col-lg-12">
@@ -34,10 +35,13 @@
 						<label for="content" class="form__label">Content</label>
 					</div>
 
-					<div class="form__group">
+					{# <div class="form__group">
 						{{ form_widget(form, {'attr': { 'class': 'form__input', 'id': 'image_file' }}) }}
 						<label for="image_file" class="form__label">Image file</label>
-					</div>
+					</div> #}
+					{% block project_attachments_widget %}
+						{{ form_widget(form) }}
+					{% endblock %}
 				</div>
 			</div>
 
@@ -50,4 +54,8 @@
 
 	<!-- Footer -->
 	{% include "partials/_footer.html.twig" %}
+{% endblock %}
+
+{% block javascripts %}
+	{{ encore_entry_script_tags('images-collection') }}
 {% endblock %}

@@ -16,6 +16,7 @@
 			<h1 class="heading__secondary">
 				Create a new project
 			</h1>
+			{% form_theme form 'partials/_images-collection.html.twig' %}
 			{{ form_start(form, {'attr': {'class': 'm-auto'}}) }}
 			<div class="row mt-5">
 				<div class="col-12 col-lg-12">
@@ -35,9 +36,20 @@
 					</div>
 
 					<div class="form__group">
-						{{ form_widget(form, {'attr': { 'class': 'form__input', 'id': 'image_file' }}) }}
+						{{ form_widget(form.imageFile, {'attr': { 'class': 'form__input', 'id': 'image_file' }}) }}
 						<label for="image_file" class="form__label">Image file</label>
 					</div>
+
+					{# <div class="form__group">
+						{{ form_widget(form.attachments, {'attr': { 'class': 'form__input', 'id': 'image_file' }}) }}
+						<a href="#" id="add_attachment" data-prototype-add="div#project_attachments" class="btn btn-default btn-collection-add">
+							<i class="fa fa-plus" aria-hidden="true"></i> Add an image
+						</a>
+						<button type="button" data-action="delete">Delete</button>
+					</div> #}
+					{% block project_attachments_widget %}
+						{{ form_widget(form) }}
+					{% endblock %}
 				</div>
 			</div>
 
@@ -50,4 +62,8 @@
 
 	<!-- Footer -->
 	{% include "partials/_footer.html.twig" %}
+{% endblock %}
+
+{% block javascripts %}
+	{{ encore_entry_script_tags('images-collection') }}
 {% endblock %}
