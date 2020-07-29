@@ -182,6 +182,13 @@
     }
   }
 }
+.add-image {
+  cursor: pointer;
+  
+  &:hover {
+    color: $color-secondary !important;
+  }
+}
 
 .button--bubble {
   position: relative;

@@ -3,12 +3,26 @@
   width: 40%;
   padding-top: 6rem;
 
+  &__group:not(:last-child) {
+    margin-bottom: 2rem;
+  }
+
+  @include respond(tab-land) {
+    width: 50%;
+  }
+
+  &__registration {
+    margin: 0 auto;
+    width: 70%;
+    padding-top: 6rem;
+
     &__group:not(:last-child) {
       margin-bottom: 2rem;
     }
 
-  @include respond(tab-land) {
-    width: 50%;
+    @include respond(tab-land) {
+      width: 60%;
+    }
   }
 
   &__input {

@@ -121,18 +121,20 @@ div[class^="key"] {
   @include respond (tab-port) {
     font-size: 8rem;
     margin-top: 0;
+    color: $color-secondary;
   }
 
   @include respond (phone) {
-    font-size: 4rem;
-    color: $color-secondary;
-    margin-top: -24rem;
+    font-size: 6rem;
+    color: $color-tertiary;
+    filter: drop-shadow(5px 11px 12px black);
   }
 
   @include respond (phone-small) {
-    font-size: 3rem;
+    font-size: 4.5rem;
     color: $color-secondary;
     margin-top: -17rem;
+    filter: none;
   }
 }
 

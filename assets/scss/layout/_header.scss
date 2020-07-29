@@ -25,6 +25,52 @@
     width: 35rem;
   }
 
+  &__error {
+    max-height: 18vh;
+    align-self: center;
+    margin: 0 auto 6rem auto;
+
+    @include respond(tab-port) {
+      width: 65rem;
+    }
+
+    @include respond(phone) {
+      width: 20rem;
+    }
+  }
+
+  &__oops {
+    font-family: "Montserrat", Sans-serif;
+    font-weight: 800;
+    font-size: 10rem;
+
+    @include respond(phone) {
+      font-size: 5rem;
+    }
+
+    @include respond(phone-small) {
+      font-size: 5rem;
+    }
+  }
+
+  &__code {
+    background-color: $color-secondary;
+  }
+
+  &__home {
+    color: $color-gray;
+    font-size: 2rem;
+    transition: all 0.5s;
+
+    &:hover i,
+    &:hover {
+      text-decoration: none;
+      color: $color-secondary;
+      transform: scale(1.2) translateX(-0.5rem);
+      transition: all 0.5s;
+    }
+  }
+
   &__text {
     font-family: "Montserrat", Sans-serif;
     font-stretch: expanded;
@@ -90,9 +136,46 @@
     animation: chess3 100s infinite;
   }
 
-  &__chess1, &__chess2, &__chess3 {
+  &__chess1,
+  &__chess2,
+  &__chess3 {
     @include respond(tab-port) {
       display: none;
     }
+  }
+}
+
+.code {
+  &__401,
+  &__403,
+  &__404 {
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    @include respond(phone) {
+      top: 40%;
+    }
+
+    @include respond(phone-small) {
+      top: 50%;
+    }
+  }
+}
+
+.gif {
+  width: 50%;
+
+  @include respond(tab-port) {
+    width: 65%;
+  }
+
+  @include respond(phone) {
+    width: 40%;
+  }
+
+  @include respond(phone-small) {
+    width: 60%;
   }
 }
