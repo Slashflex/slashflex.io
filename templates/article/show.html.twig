@@ -1,6 +1,8 @@
 {% extends "base.html.twig" %}
 
-{% block titre %}{{ article.title }}{% endblock %}
+{% block titre %}
+	{{ article.title }}
+{% endblock %}
 
 {% block body %}
 	<!-- Logo -->
@@ -9,29 +11,163 @@
 	<!-- Fullscreen Navigation -->
 	{% include "partials/_fullscreen_nav.html.twig" %}
 
-    {% for message in app.flashes('success') %}
-        <div class="flash-notice alert-success">
-            {{ message }}
-        </div>
-    {% endfor %}
+	{% for message in app.flashes('success') %}
+		<div class="flash-notice alert-success">
+			{{ message }}
+		</div>
+	{% endfor %}
 
-    <header style="background-image: url('/uploads/images/{{ article.imageName }}'); background-repeat: no-repeat; background-size: cover; padding: 20rem; background-size: 50%; background-position: center;">
-        <div class="container h-100">
-            <div class="row h-100 align-items-center">
-                <div class="col-12 text-center article-intro">
-                    <h1>{{ article.title }}</h1>
-                    <p>{{ article.introduction }}</p>
-                </div>
-            </div>
-        </div>
-    </header>
+	<header style="background-image: url('/uploads/images/{{ article.imageName }}'); background-repeat: no-repeat; background-size: cover; padding: 20rem; background-size: 50%; background-position: center;">
+		<div class="container h-100">
+			<div class="row h-100 align-items-center">
+				<div class="col-12 text-center article-intro">
+					<h1>{{ article.title|capitalize }}</h1>
+					<p>{{ article.introduction|capitalize }}</p>
+				</div>
+			</div>
+		</div>
+	</header>
 
-    <div class="container">
-        <div class="row mt-5 mb-5">
-            {{ article.content|raw }}
-        </div>
-    </div>
+	<div class="container">
+		<div class="row mt-5 mb-5">
+			{{ article.content|raw }}
+		</div>
+		<hr class="separator">
+		<div class="row">
+			<h5 class="comments-counter">
+				{% set commentNumber = article.comments|length %}
+				{% if commentNumber == 1 %}
+					<p class="text-center"><i class="fas fa-comments"></i>
+					{{ commentNumber }} 
+					Comment</p>
+					{% if not app.user %}
+						<p>You need to be logged in to post a comment</p>
+					{% endif %}
+				{% elseif commentNumber >= 2 %}
+					<p class="text-center"><i class="fas fa-comments"></i>
+					{{ commentNumber }}	
+					Comments</p>
+					{% if not app.user %}
+						<p>You need to be logged in to post a comment</p>
+					{% endif %}
+				{% else %}
+					Be the first one to post a comment
+				{% endif %}
+			</h5>
 
+			<div class="comments user-info-comments col-lg-12">
+				{% for comment in article.comments %}
+					<div class="comment-wrap">
+						<div class="photo">
+							<div class="avatar" {% if comment.users.avatar != 'avatar.png' %} style="background-image: url(/uploads/avatars/{{ comment.users.firstName|lower }}-{{ comment.users.lastName|lower }}/{{ comment.users.avatar }})" {% else %} style="background-image: url(/uploads/avatars/{{ comment.users.avatar }})" {% endif %}></div>
+						</div>
+						<div class="comment-block">
+							<div class="comment-tile">{{ comment.users.__toString }} | Comment n°: {{ comment.id }}</div>
+							<p class="comment-text">{{ comment.content }}</p>
+							<div class="bottom-comment">
+								<div class="comment-date">
+									about {{ comment.createdAt|ago }}
+								</div>
+								<span class="d-flex justify-content-end float-right">
+									{% if app.user %}
+										<button id="loadComments-{{ comment.id }}" class="button__login d-block" style="background-color: #ffbe41; color: black;">Reply to comment {{ comment.id }}</button>  
+									{% endif %}
+								
+									{% if comment.users is same as(app.user) %}
+										<a href="{{ path('delete_comment', {'id': comment.id }) }}" class="button__login--del"><i class="fas fa-trash-alt"></i></a>
+									{% endif %}
+								</span>
+							</div>
+						</div>
+					</div>
+
+					<!-- Reply to Comment with given ID -->
+					<form action="" class="test" style="display: none" id="reply-comment-{{ comment.id }}">
+						<textarea type="text" name="reply[message]" id="commentID-{{ comment.id }}" style="color: white; width: 93%; float: right;" class="form__input d-block comment-block" ></textarea>
+						<label for="message" class="form__label">Message</label>
+
+						<input type="hidden" class="userId" name="reply[users_id]" value="{{ comment.users.id }}">
+						<input type="hidden" class="commID" name="reply[comment_id]" value="{{ comment.id }}">
+
+						<div class="form-group pt-2 pb-3">
+							<button type="submit" id="postReply-{{ comment.id }}" class="button__login mx-auto d-block">Reply</button>
+						</div>
+					</form>
+
+					<div class="comment-wrap-{{ comment.id }}" id="reply-{{ comment.id }}" style="width: 93%; float: right; margin-bottom: 1.5rem">
+						<!-- Fetch replies for each comment -->
+						<ul>
+						{% for reply in comment.getReplies %}
+							<li style="margin-bottom: 1.5rem">
+								<div class="photo">
+									<div class="avatar" {% if reply.getUsers.avatar != 'avatar.png' %} style="background-image: url(/uploads/avatars/{{ reply.getUsers.firstName|lower }}-{{ reply.getUsers.lastName|lower }}/{{ reply.getUsers.avatar }})" {% else %} style="background-image: url(/uploads/avatars/{{ reply.getUsers.avatar }})" {% endif %}></div>
+								</div>
+								<div class="comment-block" style="width: 100%;">
+									<div class="comment-tile">{{ reply.getUsers }} | Reply n°: {{ reply.id }}</div>
+									<p class="comment-text" style="word-break: break-word">{{ reply.message }}</p>
+									<div class="bottom-comment">
+										<div class="comment-date">
+											about {{ reply.createdAt|ago }}
+										</div>
+										<span class="d-flex justify-content-end">
+											<button type="submit" id="open-reply-form-{{ comment.id }}" class="button__login d-block" style="background-color: #ffbe41; color: black;">Reply to reply {{ reply.id }}</button>
+											{% if reply.users is same as(app.user) %}
+												<a href="{{ path('delete_reply', {'id': reply.id }) }}" class="button__login--del" id="delReply-{{ reply.id }}"><i class="fas fa-trash-alt"></i></a>
+											{% endif %}
+										</span>
+									</div>
+								</div>
+							</li>
+						{% endfor %}
+							<hr class="separator">
+						</ul>
+					</div>
+				{% endfor %}
+
+				{% if app.user %}
+					{{ form_start(form) }}
+						<div class="form__group">
+							{{ form_widget(form.content, {'attr': { 'class': 'form__input comment-block d-block', 'placeholder': 'Add comment...', 'id': 'content', 'cols': '10', 'rows': '5' }}) }}
+							<label for="content" class="form__label">Comment</label>
+						</div>
+
+						<div class="form-group">
+							<button type="submit" class="button__login mx-auto d-block">Publish</button>
+						</div>
+					{{ form_end(form) }}
+				{% endif %}
+   
 	<!-- Footer -->
 	{% include "partials/_footer.html.twig" %}
+{% endblock %}
+
+{% block javascripts %}
+	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+   	<script language="javascript">  
+		$(document).ready(function(){ 
+			for (let i = 0; i < 1000; i++) {
+
+				// Displays reply form
+				$(`#loadComments-${[i]}`).on('click', function() {
+					$(`#reply-comment-${[i]}`).toggle();
+				});
+
+				// POST request
+				$(`#postReply-${[i]}`).on('click', function(event) {
+					event.preventDefault();
+					
+					axios.post(`/api/reply/${[i]}`, {
+						message: $(`#commentID-${[i]}`).val()
+					})
+					.then(function (res) {
+						console.log(res);
+						$(`#reply-comment-${[i]}`).toggle();
+					})
+					.catch(function (err) {
+						alert(err);
+					});
+				});
+			}
+		});  
+   </script>
 {% endblock %}
