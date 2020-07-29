@@ -2,8 +2,12 @@
 
 namespace App\Entity;
 
+use DateTime;
 use App\Entity\Role;
+use App\Entity\Reply;
+use DateTimeInterface;
 use App\Entity\Article;
+use App\Entity\Comment;
 use App\Entity\Project;
 use Cocur\Slugify\Slugify;
 use Doctrine\ORM\Mapping as ORM;
@@ -17,6 +21,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\Table(name="`user`")
  * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
+ * @ORM\HasLifecycleCallbacks()
  */
 class User implements UserInterface
 {
@@ -69,9 +74,32 @@ class User implements UserInterface
     private $roleUser;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="datetime")
      */
     private $createdAt;
+
+    /**
+     * @ORM\PrePersist
+     * @return void
+     */
+    public function prePersist()
+    {
+        if (empty($this->createdAt)) {
+            $this->createdAt = new \DateTime();
+        }
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -93,6 +121,16 @@ class User implements UserInterface
      */
     private $avatar;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="users")
+     */
+    private $comments;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Reply::class, mappedBy="users")
+     */
+    private $replies;
+
     public function getAvatar()
     {
         return $this->avatar;
@@ -110,6 +148,8 @@ class User implements UserInterface
         $this->roleUser = new ArrayCollection();
         $this->articles = new ArrayCollection();
         $this->projects = new ArrayCollection();
+        $this->comments = new ArrayCollection();
+        $this->replies = new ArrayCollection();
     }
 
     public function __toString()
@@ -232,18 +272,6 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getCreatedAt(): ?string
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(string $createdAt): self
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
     public function getLogin(): ?string
     {
         return $this->login;
@@ -285,7 +313,6 @@ class User implements UserInterface
     }
 
     /**
-     * @Orm\PrePersist
      * @ORM\PreUpdate
      */
     public function initializeSlug()
@@ -376,5 +403,75 @@ class User implements UserInterface
         }
 
         return $this;
+    }
+
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setUsers($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): self
+    {
+        if ($this->comments->contains($comment)) {
+            $this->comments->removeElement($comment);
+            // set the owning side to null (unless already changed)
+            if ($comment->getUsers() === $this) {
+                $comment->setUsers(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Reply[]
+     */
+    public function getReplies(): Collection
+    {
+        return $this->replies;
+    }
+
+    public function addReply(Reply $reply): self
+    {
+        if (!$this->replies->contains($reply)) {
+            $this->replies[] = $reply;
+            $reply->setUsers($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReply(Reply $reply): self
+    {
+        if ($this->replies->contains($reply)) {
+            $this->replies->removeElement($reply);
+            // set the owning side to null (unless already changed)
+            if ($reply->getUsers() === $this) {
+                $reply->setUsers(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getDate()
+    {
+        $date = $this->getCreatedAt();
+
+        $result = "{$date->format('\o\n l jS F Y')} at {$date->format('H:i')}";
+        return $result;
     }
 }

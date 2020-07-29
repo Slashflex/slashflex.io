@@ -27,7 +27,7 @@
 				<li class="main-nav__item">
 					<a href="{{ path('logout') }}" class="main-nav__link">Logout</a>
 				</li>
-				{% elseif not app.user %}
+			{% elseif not app.user %}
 				<li class="main-nav__item">
 					<a href="{{ path('app_register') }}" class="main-nav__link">Register</a>
 				</li>
@@ -35,6 +35,12 @@
 					<a href="{{ path('user_signin') }}" class="main-nav__link">Login</a>
 				</li>
 			{% endif %}
+				<li class="main-nav__item">
+					<a href="{{ path('articles') }}" class="main-nav__link">Blog</a>
+				</li>
+				<li class="main-nav__item">
+					<a href="{{ path('projects') }}" class="main-nav__link">Work</a>
+				</li>
 			<li class="main-nav__item">
 				<a href="#" class="main-nav__link">Contact</a>
 			</li>

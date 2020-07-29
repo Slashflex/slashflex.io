@@ -23,10 +23,6 @@ class RegistrationController extends AbstractController
         $user = new User();
 
         $role = $roleRepository->findOneBy(['name' => 'ROLE_USER']);
-        // Define locale 
-        setlocale(LC_TIME, 'fr_FR.utf8', 'fra');
-        // Concat date and time
-        $currentDate = 'The '  . strftime("%A %d %B %Y") . ' at ' . strftime("%H:%M");
 
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
@@ -41,7 +37,6 @@ class RegistrationController extends AbstractController
             )
                 ->setAvatar('avatar.png')
                 ->addRoleUser($role)
-                ->setCreatedAt($currentDate)
                 ->initializeSlug();
 
             $entityManager = $this->getDoctrine()->getManager();
@@ -49,7 +44,7 @@ class RegistrationController extends AbstractController
             $entityManager->flush();
 
             $logo = $_SERVER['DOCUMENT_ROOT'] . '/build/images/email/logo.png';
-
+            // dd($logo);
             // Send an email
             $email = (new TemplatedEmail())
                 ->from($_ENV['DB_EMAIL'])

@@ -32,7 +32,7 @@
 						{% for user in users %}
 							<div class="col-sm-6 col-md-6 col-lg-3">
 								<div class="card card__bg m-3">
-									{# <img src="{{ user.imageFile }}" class="card-img-top" alt="{{ user.__toString }}"> #}
+									<img src="/uploads/avatars/{{ user.firstname|lower }}-{{ user.lastname|lower }}/{{ user.avatar }}" class="card-img-top" alt="{{ user.__toString }}">
 									<div class="card-body">
 										{% if user.roleUser[0].name == 'ROLE_ADMIN' %}
 											<h5 class="card-title card__title">{{ user.__toString }} [ADMIN]<i class="fas fa-crown"></i></h5>
@@ -41,7 +41,7 @@
 										{% endif %}
 										<p class="card-text card__description">{{ user.description|u.truncate(40, ' ...') }}</p>
 										<p class="font-weight-bold card__email">{{ user.email }}</p>
-										<p class="card-text card__description">Created on {{ user.createdAt }}</p>
+										<p class="card-text card__description">Created {{ user.getDate }}</p>
 
 										<div class="d-flex justify-content-between">
 											{# <a href="{{ path('single_project', {'slug': project.slug}) }}" class="btn btn-success">Show</a> #}
@@ -75,7 +75,7 @@
 										<div class="card-body">
 											<h5 class="card-title card__title">{{ project.title }}</h5>
 											<p class="card-text card__description">{{ project.introduction|u.truncate(30, ' ...') }}</p>
-											<p class="card-text card__description">Created by {{ author }} on {{ project.createdAt }}</p>
+											<p class="card-text card__description">Created by {{ author }} {{ project.getDate }}</p>
 											<div class="d-flex justify-content-between">
 												<a href="{{ path('single_project', {'slug': project.slug}) }}" class="button__login">Show</a>
 												<a href="{{ path('edit_project', {'slug': project.slug}) }}" class="button__login">Edit</a>
@@ -109,11 +109,11 @@
 										<div class="card-body">
 											<h5 class="card-title card__title">{{ article.title }}</h5>
 											<p class="card-text card__description">{{ article.introduction|u.truncate(50, ' ...') }}</p>
-											<p class="card-text">Created by {{ author }} on {{ article.createdAt }}</p>
+											<p class="card-text">Created by {{ author }} {{ article.getDate }}</p>
 											<div class="d-flex justify-content-between">
 												<a href="{{ path('single_article', {'slug': article.slug }) }}" class="button__login">Show</a>
 												<a href="{{ path('edit_article', {'slug': article.slug }) }}" class="button__login">Edit</a>
-												<a href="{{ path('delete_article', {'slug': article.slug }) }}" class="button__login--del">Delete</a>
+												<a href="{{ path('delete_article', {'slug': article.slug }) }}" class="button__login--del"><i class="fas fa-trash-alt"></i></a>
 											</div>
 										</div>
 									</div>

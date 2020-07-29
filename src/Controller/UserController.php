@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Form\AvatarType;
+use App\Form\AvatarUploadType;
+use Cocur\Slugify\Slugify;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Filesystem\Filesystem;
@@ -137,7 +139,7 @@ class UserController extends AbstractController
      */
     public function addUserAvatar(User $user, Request $request, SluggerInterface $slugger)
     {
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(AvatarUploadType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -160,10 +162,11 @@ class UserController extends AbstractController
                 $fileSystem = new Filesystem();
                 // Move the file to the directory where brochures are stored
                 try {
+                    $slug = new Slugify();
                     // Retrieve document root
                     $avatarDir = $_SERVER["DOCUMENT_ROOT"] . '/uploads/avatars/';
                     // Create folder based on user's firtname and lastname
-                    $userDir = $avatarDir . $this->getUser()->__toString();
+                    $userDir = $avatarDir . $slug->slugify($this->getUser()->__toString());
 
                     // Remove old avatar ffrom user folder
                     $fileSystem->remove([$userDir . '/', $user->getAvatar()]);

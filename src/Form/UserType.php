@@ -19,33 +19,7 @@ class UserType extends AbstractType
             ->add('firstname')
             ->add('lastname')
             ->add('description')
-            ->add('login')
-            ->add('avatar', FileType::class, [
-                'label' => false,
-
-                // unmapped means that this field is not associated to any entity property
-                'mapped' => false,
-
-                // make it optional so you don't have to re-upload the PDF file
-                // every time you edit the Product details
-                'required' => false,
-
-                // unmapped fields can't define their validation using annotations
-                // in the associated entity, so you can use the PHP constraint classes
-                'constraints' => [
-                    new File([
-                        'maxSize' => '1024k',
-                        'mimeTypes' => [
-                            'image/jpg',
-                            'image/jpeg',
-                            'image/gif',
-                            'image/webp',
-                            'image/png',
-                        ],
-                        'mimeTypesMessage' => 'Please upload a valid document (jpg|jpeg|gif|webp|png)',
-                    ])
-                ],
-            ]);
+            ->add('login');
     }
 
     public function configureOptions(OptionsResolver $resolver)

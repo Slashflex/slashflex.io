@@ -6,7 +6,9 @@ use Faker\Factory;
 use App\Entity\Role;
 use App\Entity\User;
 use App\Entity\Article;
+use App\Entity\Comment;
 use App\Entity\Project;
+use App\Entity\Reply;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\File\File;
@@ -25,20 +27,6 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         $faker = Factory::create('fr-Fr');
-
-        setlocale(LC_TIME, 'en_US.utf8');
-        $currentDate = strftime("%A %d %B %Y") . ' at ' . strftime("%H:%M");
-
-        // $src = __DIR__ . "/../../public/uploads/images/error-404.gif";
-
-        // $file = new UploadedFile(
-        //     $src,
-        //     'error-404.gif',
-        //     'image/gif',
-        //     false,
-        //     true //  Set test mode true !!! " Local files are used in test mode hence the code should not enforce HTTP uploads."
-        // );
-        // $file2 = new File(__DIR__ . "/../../public/uploads/images/error-404.gif");
 
         // Setup an admin
         $admin = new User();
@@ -62,7 +50,6 @@ class AppFixtures extends Fixture
             ->setDescription('Creator of https://slashflex.io')
             ->setLogin('Slashflex')
             ->addRoleUser($roleAdmin)
-            ->setCreatedAt($currentDate)
             ->initializeSlug();
 
         $manager->persist($admin);
@@ -73,30 +60,29 @@ class AppFixtures extends Fixture
 
             $title = $faker->word(3);
 
-            $src = __DIR__ . "/../../public/uploads/images/error-404.gif";
+            $src = __DIR__ . "/../../public/uploads/images/error_404.gif";
 
             $file = new UploadedFile(
                 $src,
-                'error-404.gif',
+                'error_404.gif',
                 'image/gif',
                 false,
                 true //  Set test mode true !!! " Local files are used in test mode hence the code should not enforce HTTP uploads."
             );
             $project->setImageName($file);
-            $file2 = new File(__DIR__ . "/../../public/uploads/images/error-404.gif");
+            $file2 = new File(__DIR__ . "/../../public/uploads/images/error_404.gif");
             $project->setImageFile($file2);
             $project
                 ->setTitle($title)
                 ->setIntroduction($faker->sentence(6))
                 ->setContent($faker->sentence(18))
                 ->setUsers($admin)
-                ->setCreatedAt($currentDate)
                 ->initializeSlug($title);
 
             $manager->persist($project);
         }
 
-        for ($m = 1; $m <= 6; $m++) {
+        for ($j = 1; $j <= 4; $j++) {
             $article = new Article();
 
             $title = $faker->word(3);
@@ -108,7 +94,6 @@ class AppFixtures extends Fixture
                 ->setIntroduction($faker->sentence(9))
                 ->setContent($faker->sentence(18))
                 ->setUsers($admin)
-                ->setCreatedAt($currentDate)
                 ->initializeSlug($title);
 
             $manager->persist($article);
@@ -121,7 +106,7 @@ class AppFixtures extends Fixture
         $manager->persist($roleAdmin);
         $manager->persist($roleUser);
 
-        for ($l = 1; $l < mt_rand(1, 12); $l++) {
+        for ($k = 1; $k < mt_rand(1, 12); $k++) {
             $user = new User();
 
             $user->setAvatar('avatar.png');
@@ -133,9 +118,31 @@ class AppFixtures extends Fixture
                 ->setEmail($faker->email())
                 ->setPassword($this->passwordEncoder->encodePassword($user, 'mdp'))
                 ->setLogin($faker->userName())
-                ->setCreatedAt($currentDate)
                 ->addRoleUser($roleUser)
                 ->initializeSlug();
+
+            for ($l = 1; $l < 8; $l++) {
+                $comment = new Comment();
+
+                $reply = new Reply();
+
+                $reply
+                    ->setMessage($faker->sentence(10))
+                    ->setUsers($user);
+                $manager->persist($reply);
+
+                $comment
+                    ->addReply($reply)
+                    ->setUsers($user)
+                    ->setContent($faker->sentence(8))
+                    ->setArticle($article);
+
+                $user
+                    ->addComment($comment)
+                    ->addReply($reply);
+
+                $manager->persist($comment);
+            }
 
             $manager->persist($user);
         }

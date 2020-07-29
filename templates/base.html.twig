@@ -23,11 +23,10 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.17.0/easing/EasePack.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.17.0/TweenLite.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TimelineLite.min.js"></script>
-                <!-- TweenMax core JS -->
+        <!-- TweenMax core JS -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.2/TweenMax.min.js"></script>
-        {# {% if app.request.attributes.get('_route') == 'home' %} #}
-            {{ encore_entry_script_tags('custom') }}
-        {# {% endif %} #}
+        <!-- Custom JS -->
+        {{ encore_entry_script_tags('custom') }}
         {% block javascripts %}{% endblock %}
     </body>
 </html>

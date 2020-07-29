@@ -45,12 +45,12 @@
 					<div class="card{{loop.index}}">
 						<div class="flips">
 							<div class="front{{loop.index}} vertical">
-								<div class="card-content--image" style="background-image: url(/uploads/images{{ article.imageName }})"></div>
+								<div class="card-content--image" style="background-image: url(/uploads/images/{{ article.imageName }})"></div>
 							</div>
 							<div class="back{{loop.index}} vertical">
 								<div class="card-content">
-									<h2>{{ article.title }}</h2>
-									<p>{{ article.introduction }}</p>
+									<h2>{{ article.title|capitalize }}</h2>
+									<p>{{ article.introduction|u.truncate(150, '...') }}</p>
 									<div class="form-group">
 										<a href="{{ path('single_article', { 'slug': article.slug }) }}" class="button__login--showcase">Showcase</a>
 									</div>

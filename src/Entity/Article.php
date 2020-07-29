@@ -6,13 +6,14 @@ use Cocur\Slugify\Slugify;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ArticleRepository;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\HttpFoundation\File\File;
+use Doctrine\Common\Collections\ArrayCollection;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=ArticleRepository::class)
  * @Vich\Uploadable
+ * @ORM\HasLifecycleCallbacks()
  */
 class Article
 {
@@ -39,14 +40,24 @@ class Article
     private $content;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="datetime", length=255)
      */
-    private $created_at;
+    private $createdAt;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $slug;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="articles")
+     */
+    private $users;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="article", orphanRemoval=true)
+     */
+    private $comments;
 
     /**
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
@@ -59,27 +70,50 @@ class Article
 
     /**
      * @ORM\Column(type="string")
-     *
      * @var string|null
      */
     private $imageName;
 
     /**
-     * @ORM\Column(type="datetime")
-     *
-     * @var \DateTimeInterface|null
+     * @ORM\PrePersist
+     * @return void
+     */
+    public function prePersist()
+    {
+        if (empty($this->createdAt)) {
+            $this->createdAt = new \DateTime();
+        }
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getDate()
+    {
+        $date = $this->getCreatedAt();
+
+        $result = "{$date->format('\o\n l jS F Y')} at {$date->format('H:i')}";
+        return $result;
+    }
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     * @var \DateTimeInterface
      */
     private $updatedAt;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="articles")
-     */
-    private $users;
-
     public function __construct()
     {
-        $this->image = new ArrayCollection();
-        // $this->content = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -123,20 +157,7 @@ class Article
         return $this;
     }
 
-    public function getCreatedAt(): ?string
-    {
-        return $this->created_at;
-    }
-
-    public function setCreatedAt(string $created_at): self
-    {
-        $this->created_at = $created_at;
-
-        return $this;
-    }
-
     /**
-     * @Orm\PrePersist
      * @ORM\PreUpdate
      */
     public function initializeSlug()
@@ -146,6 +167,7 @@ class Article
             $this->slug = $slug->slugify($this->title);
         }
     }
+
     public function updateSlug()
     {
         if (!empty($this->slug)) {
@@ -153,10 +175,12 @@ class Article
             $this->slug = $slug->slugify($this->title);
         }
     }
+
     public function getSlug(): ?string
     {
         return $this->slug;
     }
+
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
@@ -209,5 +233,36 @@ class Article
     public function getImageName(): ?string
     {
         return $this->imageName;
+    }
+
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setArticle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): self
+    {
+        if ($this->comments->contains($comment)) {
+            $this->comments->removeElement($comment);
+            // set the owning side to null (unless already changed)
+            if ($comment->getArticle() === $this) {
+                $comment->setArticle(null);
+            }
+        }
+
+        return $this;
     }
 }

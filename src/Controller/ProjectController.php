@@ -30,7 +30,7 @@ class ProjectController extends AbstractController
     public function show(Project $project)
     {
         return $this->render('project/show.html.twig', [
-            'title' => '/FLX | ' . $project->getTitle(),
+            'title' => '/FLX | ' . ucfirst($project->getTitle()),
             'project' => $project
         ]);
     }
@@ -60,11 +60,6 @@ class ProjectController extends AbstractController
     {
         $project = new Project();
 
-        // Define locale 
-        setlocale(LC_TIME, 'fr_FR.utf8', 'fra');
-        // Concat date and time
-        $currentDate = 'Le '  . strftime("%A %d %B %Y") . ' à ' . strftime("%H:%M");
-
         $form = $this->createForm(ProjectType::class, $project);
         $form->handleRequest($request);
 
@@ -73,7 +68,6 @@ class ProjectController extends AbstractController
 
             $project
                 ->setUsers($author)
-                ->setCreatedAt($currentDate)
                 ->initializeSlug();
 
             $this->manager->persist($project);
@@ -124,7 +118,7 @@ class ProjectController extends AbstractController
         }
 
         return $this->render('project/edit.html.twig', [
-            'title' => '/FLX | ' . $project->getTitle(),
+            'title' => '/FLX | ' . ucfirst($project->getTitle()),
             'form' => $form->createView(),
             'project' => $project
         ]);
