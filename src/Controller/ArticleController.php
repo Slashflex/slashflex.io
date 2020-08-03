@@ -39,7 +39,7 @@ class ArticleController extends AbstractController
     /**
      * Shows a single article
      * 
-     * @Route("/articles/{slug}", name="single_article")
+     * @Route("/blog/post/{slug}", name="single_article")
      */
     public function show(Article $article, Request $request)
     {
@@ -86,9 +86,9 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * Shows all articles
+     * Shows all blog's posts
      * 
-     * @Route("/articles", name="articles")
+     * @Route("/blog", name="blog")
      */
     public function index(ArticleRepository $articleRepository)
     {
@@ -103,7 +103,7 @@ class ArticleController extends AbstractController
     /**
      * Create a new article
      * 
-     * @Route("/admin/article/new", name="new_article")
+     * @Route("/admin/blog/new-post", name="new_article")
      * @IsGranted("ROLE_ADMIN")
      */
     public function newArticle(Request $request)
@@ -141,7 +141,7 @@ class ArticleController extends AbstractController
     /**
      * Edit an article
      * 
-     * @Route("/admin/article/{slug}/edit", name="edit_article")
+     * @Route("/admin/blog/post/{slug}/edit", name="edit_article")
      * @IsGranted("ROLE_ADMIN")
      */
     public function editArticle(Article $article, Request $request)
@@ -177,7 +177,7 @@ class ArticleController extends AbstractController
     /**
      * Delete an article
      * 
-     * @Route("/admin/article/{slug}/delete", name="delete_article")
+     * @Route("/admin/blog/post/{slug}/delete", name="delete_article")
      * @IsGranted("ROLE_ADMIN")
      */
     public function deleteArticle(Article $article)

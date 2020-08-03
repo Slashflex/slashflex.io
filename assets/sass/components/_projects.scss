@@ -21,19 +21,39 @@
 .model-human {
   display: block;
   margin: 0 auto;
-  width: 60%;
+  width: 70%;
   position: relative;
-  filter: drop-shadow(2px 4px 6px rgba($color-secondary, .7));
 
   @include respond (tab-port) {
-    width: 65%;
+    width: 50%;
   }
   @include respond (phone) {
-    width: 90%;
-    filter: none;
+    width: 42%;
   }
   @include respond(phone-small) {
-    width: 100%;
+    width: 80%;
+  }
+
+  &--base {
+    display: block;
+    margin: 0 auto;
+    width: 20%;
+    position: absolute;
+    top: 58%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    @include respond (tab-port) {
+      width: 30%;
+    }
+
+    @include respond (phone) {
+      width: 30%;
+    }
+
+    @include respond(phone-small) {
+      width: 85%;
+    }
   }
 }
 .keyF {
@@ -116,25 +136,20 @@ div[class^="key"] {
   @include respond (tab-land) {
     font-size: 10rem;
     margin-top: 0;
-    color: $color-tertiary;
   }
   @include respond (tab-port) {
     font-size: 8rem;
     margin-top: 0;
-    color: $color-secondary;
+    filter: drop-shadow(5px 11px 12px $color-black);
   }
-
   @include respond (phone) {
     font-size: 6rem;
-    color: $color-tertiary;
-    filter: drop-shadow(5px 11px 12px black);
+    filter: drop-shadow(5px 11px 12px $color-black);
   }
-
   @include respond (phone-small) {
-    font-size: 4.5rem;
-    color: $color-secondary;
+    font-size: 7.5rem;
     margin-top: -17rem;
-    filter: none;
+    filter: drop-shadow(5px 11px 12px $color-black);
   }
 }
 

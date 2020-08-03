@@ -8,6 +8,12 @@ $(document).ready(() => {
     download[1].style.display = "none";
   }
 
+  const files = document.querySelectorAll('input[type="file"]');
+  files.forEach(e => {
+    e.classList.add('inputfile');
+  });
+
+
   // Sets parallax effect only on root page
   if (window.location.pathname == "/") {
     // Parallax events
@@ -42,10 +48,10 @@ $(document).ready(() => {
   }
 
   $("#wrapper").mousemove(function (e) {
-    parallaxIt(e, ".keyF", -10);
-    parallaxIt(e, ".keyU", 10);
-    parallaxIt(e, ".keyK", -15);
-    parallaxIt(e, ".keyC", 15);
+    parallaxIt(e, ".keyF", -40);
+    parallaxIt(e, ".keyU", 20);
+    parallaxIt(e, ".keyK", -45);
+    parallaxIt(e, ".keyC", 25);
   });
 
   const parallaxIt = (e, target, movement) => {
@@ -156,20 +162,20 @@ $(document).ready(() => {
     );
   }
 
-  if (window.location.pathname == "/projects") {
+  if (window.location.pathname == "/works") {
     for (let i = 1; i < 15; i++) {
       let back = document.querySelector(`.back${[i]}`);
       $(back).css("background-color", "#27282c");
     }
-    $(".round").css("background-color", "#ffbe41");
+  //   $(".round").css("background-color", "#ffbe41");
   }
 });
 
 // Loader only on root page
 if (
   window.location.pathname == "/" ||
-  window.location.pathname == "/projects" ||
-  window.location.pathname == "/articles"
+  window.location.pathname == "/works" ||
+  window.location.pathname == "/blog"
 ) {
   var sentence = [
     '“Knowledge is power.” – <i style="color: #585858; font-size: 1.9rem">Francis Bacon</i>',

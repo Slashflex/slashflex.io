@@ -21,6 +21,7 @@
 	<header class="intro">
 		<div class="hero">
 			<h1 class="hero__text">Slashflex</h1>
+            <img src="/build/images/model.webp" class="model-human--base img-fluid" alt="model">
 
 			<!-- Chess pieces animation on mouse mouve -->
 			<div class="hero__chess1"></div>
@@ -55,7 +56,7 @@
 		  
 		  // Sets background-image property base on data attribute		
 		  img.css('background-image', function () {
-			var bg = ('url(/uploads/images/' + $(this).data('background') + ')');
+			var bg = ('url(/uploads/images' + $(this).data('background') + ')');
 			return bg;
 		  });
 

@@ -7,15 +7,12 @@
 
   &__right img {
     width: 100%;
-    margin-top: -14rem;
-    filter: drop-shadow(-9mm 0mm 6mm #d7d6d6);
+    margin-top: -6rem;
 
     @include respond(tab-land) {
-      // padding-top: -8rem;
       margin-top: 0;
     }
     @include respond(tab-port) {
-      // padding-top: -8rem;
       margin-top: 0;
     }
     @include respond(phone) {

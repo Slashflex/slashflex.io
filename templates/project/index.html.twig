@@ -17,7 +17,7 @@
             <img src="/build/images/sites_laptop.webp" class="model-laptop img-fluid" alt="">
 
             <div id="wrapper">
-                <h1 class="wrapper__sites">Projects</h1>
+                <h1 class="wrapper__sites">Works</h1>
                 <div class="keyF"></div>
                 <div class="keyU"></div>
                 <div class="keyK"></div>
@@ -29,12 +29,13 @@
 	<section class="project">
 		<div class="container">
 			<h1 class="project__title">Think. Design. Create!</h1>
-			<p class="project__introduction">Bright style, elegance, refinement, and attention to detail – this is what I value in works of top-level designers. Because of this I always look for new ways to improve my skills and create meticulously designed websites. Although I have not done that many projects within the last couple of years, I sincerely hope this list will grow intensively soon. And yeah, I’m not very good at coding, that is clearly not my thing. But I always find decent solutions and even help my coders with solving their issues:) There is an old Jewish saying: “If you are not allowed to enter through the door, then enter through the window!”</p>
+			<p class="project__introduction">Bright style, elegance, refinement, and attention to detail – this is what I value in my works. Because of this I always look for new ways to improve my skills and create meticulously designed and built websites. Although I have not done that many projects, I sincerely hope this list will grow intensively soon. I always find decent solutions and even help others with solving their issues 🙂.</p>
+			<p class="project__introduction">There is a proverb saying: “A stitch in time saves nine!”</p>
 		</div>
 
 		<div class="stack__text">
 			<div class="stack__text--projects">My recent</div>
-			<div class="stack__text--stack">PROJECTS</div>
+			<div class="stack__text--stack">WORKS</div>
 		</div>
 	</section>
 	
@@ -50,7 +51,7 @@
 							</div>
 							<div class="back{{loop.index}} vertical">
 								<div class="card-content">
-									<h2>{{project.title|capitalize}}</h2>
+									<h2>{{project.title|capitalize|u.truncate(30, '...')}}</h2>
 									<p>{{project.introduction|u.truncate(150, '...')}}</p>
 									<div class="form-group">
 										<a href="{{ path('single_project', { 'slug': project.slug }) }}" class="button__login--showcase">Showcase</a>

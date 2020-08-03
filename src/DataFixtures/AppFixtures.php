@@ -52,6 +52,11 @@ class AppFixtures extends Fixture
             ->addRoleUser($roleAdmin)
             ->initializeSlug();
 
+        $path = 'public/uploads/avatars/' . strtolower($admin->getFirstname()) . '-' . strtolower($admin->getLastname());
+        mkdir($path);
+        $admin->setAvatar('avatar.png');
+        copy('public/uploads/avatars/avatar.png', $path . '/avatar.png');
+
         $manager->persist($admin);
 
         // Populate the database with fake project, fake images and fake paragraphs
@@ -60,7 +65,7 @@ class AppFixtures extends Fixture
 
             $title = $faker->word(3);
 
-            $src = __DIR__ . "/../../public/uploads/images/error_404.gif";
+            $src = 'public/uploads/images/error_404.gif';
 
             $file = new UploadedFile(
                 $src,
@@ -70,7 +75,7 @@ class AppFixtures extends Fixture
                 true //  Set test mode true !!! " Local files are used in test mode hence the code should not enforce HTTP uploads."
             );
             $project->setImageName($file);
-            $file2 = new File(__DIR__ . "/../../public/uploads/images/error_404.gif");
+            $file2 = new File('public/uploads/images/error_404.gif');
             $project->setImageFile($file2);
             $project
                 ->setTitle($title)
@@ -109,8 +114,6 @@ class AppFixtures extends Fixture
         for ($k = 1; $k < mt_rand(1, 12); $k++) {
             $user = new User();
 
-            $user->setAvatar('avatar.png');
-
             $user
                 ->setFirstname($faker->firstName())
                 ->setLastname($faker->lastname())
@@ -120,6 +123,11 @@ class AppFixtures extends Fixture
                 ->setLogin($faker->userName())
                 ->addRoleUser($roleUser)
                 ->initializeSlug();
+
+            $path = 'public/uploads/avatars/' . strtolower($user->getFirstname()) . '-' . strtolower($user->getLastname());
+            mkdir($path);
+            $user->setAvatar('avatar.png');
+            copy('public/uploads/avatars/avatar.png', $path . '/avatar.png');
 
             for ($l = 1; $l < 8; $l++) {
                 $comment = new Comment();

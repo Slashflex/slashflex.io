@@ -19,10 +19,16 @@
 
   @include respond(tab-port) {
     width: 65rem;
+    margin-bottom: 0;
   }
 
   @include respond(phone) {
     width: 35rem;
+  }
+
+  @include respond(phone-small) {
+    width: 35rem;
+    margin-bottom: 50rem;
   }
 
   &__error {
@@ -142,6 +148,19 @@
     @include respond(tab-port) {
       display: none;
     }
+  }
+
+  &__projects {
+
+    // @include respond (tab-port) {
+    //   width: 42%;
+    // }
+    // @include respond (phone) {
+    //   width: 80%;
+    // }
+    // @include respond (phone-small) {
+    //   width: 80%;
+    // }
   }
 }
 

@@ -36,7 +36,7 @@
             <div class="swiper-container">
                 <div class="swiper-wrapper">
                     <!-- Loads images from back-end -->
-                    {% for image in project.getAttachments %}
+                    {% for image in project.Attachments %}
                         <div class="swiper-slide slide{{loop.index0|first}}" style="background-image: url(/uploads/images/{{ image.fileName }}); background-repeat: no-repeat; background-size: contain; background-position: center">
                             <a href="{{ path('single_project', {'slug': project.slug}) }}">
                                 <div class="slide__caption">
@@ -48,7 +48,6 @@
                     {% endfor %}
                 </div>
             </div>
-            
         </div>
     </header>
 

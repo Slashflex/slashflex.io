@@ -44,7 +44,7 @@ class RegistrationController extends AbstractController
             $entityManager->flush();
 
             $logo = $_SERVER['DOCUMENT_ROOT'] . '/build/images/email/logo.png';
-            // dd($logo);
+
             // Send an email
             $email = (new TemplatedEmail())
                 ->from($_ENV['DB_EMAIL'])

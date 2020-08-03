@@ -25,7 +25,7 @@ class ProjectController extends AbstractController
     /**
      * Shows a single project
      * 
-     * @Route("/projects/{slug}", name="single_project")
+     * @Route("/works/{slug}", name="single_project")
      */
     public function show(Project $project)
     {
@@ -36,16 +36,16 @@ class ProjectController extends AbstractController
     }
 
     /**
-     * Shows all projects
+     * Shows all work
      * 
-     * @Route("/projects", name="projects")
+     * @Route("/works", name="projects")
      */
     public function index(ProjectRepository $projectRepository)
     {
         $projects = $projectRepository->findAll();
 
         return $this->render('project/index.html.twig', [
-            'title' => '/FLX | Projects',
+            'title' => '/FLX | Works',
             'projects' => $projects
         ]);
     }
@@ -53,7 +53,7 @@ class ProjectController extends AbstractController
     /**
      * Create a new project
      * 
-     * @Route("/admin/project/new", name="new_project")
+     * @Route("/admin/works/new", name="new_project")
      * @IsGranted("ROLE_ADMIN")
      */
     public function newProject(Request $request)
@@ -65,6 +65,11 @@ class ProjectController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $author = $this->userRepository->findOneBy(['email' => $_ENV['DB_EMAIL']]);
+
+            foreach ($project->getAttachments() as $image) {
+                $image->setproject($project);
+                $this->manager->persist($image);
+            }
 
             $project
                 ->setUsers($author)
@@ -82,7 +87,7 @@ class ProjectController extends AbstractController
         }
 
         return $this->render('project/new.html.twig', [
-            'title' => '/FLX | New Project',
+            'title' => '/FLX | New work',
             'form' => $form->createView()
         ]);
     }
@@ -90,7 +95,7 @@ class ProjectController extends AbstractController
     /**
      * Edit a project
      * 
-     * @Route("/admin/project/{slug}/edit", name="edit_project")
+     * @Route("/admin/works/{slug}/edit", name="edit_project")
      * @IsGranted("ROLE_ADMIN")
      */
     public function editProject(Project $project, Request $request)
@@ -104,12 +109,17 @@ class ProjectController extends AbstractController
 
             $project->updateSlug($title);
 
+            foreach ($project->getAttachments() as $image) {
+                $image->setproject($project);
+                $this->manager->persist($image);
+            }
+
             $this->manager->persist($project);
             $this->manager->flush();
 
             $this->addFlash(
                 'success',
-                'The project ' . ucfirst($project->getTitle()) . ' has been updated'
+                'The work ' . ucfirst($project->getTitle()) . ' has been updated'
             );
 
             return $this->redirectToRoute('admin', [
@@ -127,7 +137,7 @@ class ProjectController extends AbstractController
     /**
      * Delete a project
      * 
-     * @Route("/admin/project/{slug}/delete", name="delete_project")
+     * @Route("/admin/works/{slug}/delete", name="delete_project")
      * @IsGranted("ROLE_ADMIN")
      */
     public function deleteProject(Project $project)
@@ -137,7 +147,7 @@ class ProjectController extends AbstractController
 
         $this->addFlash(
             'success',
-            'The project ' . ucfirst($project->getTitle()) . ' has been deleted'
+            'The work ' . ucfirst($project->getTitle()) . ' has been deleted'
         );
 
         return $this->redirectToRoute('admin');

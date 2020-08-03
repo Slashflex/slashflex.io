@@ -123,15 +123,17 @@ code {
     margin-left: -7.5rem;
     width: 15rem;
     height: 15rem;
-    background-color: $color-tertiary;
+    background-color: $color-secondary;
   }
   @include respond (phone-small) {
     display: block;
     position: absolute;
     left: 50%;
     top: 30%;
-    margin-left: -7.5rem;
-    background-color: $color-tertiary;
+    width: 25rem;
+    height: 25rem;
+    margin-left: -12.5rem;
+    background-color: $color-secondary;
   }
 }
 
