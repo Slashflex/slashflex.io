@@ -3,10 +3,9 @@
 namespace App\Controller;
 
 use DateTime;
-use App\Entity\Reply;
 use App\Entity\Article;
 use App\Entity\Comment;
-use App\Form\ReplyType;
+use App\Entity\ReplyToReply;
 use App\Form\ArticleType;
 use App\Form\CommentType;
 use App\Repository\UserRepository;
@@ -20,19 +19,18 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Serializer\SerializerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
 
 class ArticleController extends AbstractController
 {
     private $manager;
     private $userRepository;
-    private $replyRepository;
     private $commentRepository;
 
-    public function __construct(EntityManagerInterface $manager, UserRepository $userRepository, ReplyRepository $replyRepository, CommentRepository $commentRepository)
+    public function __construct(EntityManagerInterface $manager, UserRepository $userRepository, CommentRepository $commentRepository)
     {
         $this->manager = $manager;
         $this->userRepository = $userRepository;
-        $this->replyRepository = $replyRepository;
         $this->commentRepository = $commentRepository;
     }
 
@@ -44,23 +42,13 @@ class ArticleController extends AbstractController
     public function show(Article $article, Request $request)
     {
         $comment = new Comment();
-        $reply = new Reply();
 
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
 
-        // $formReply = $this->createForm(ReplyType::class, $comment);
-
-        $reply = $this->replyRepository->findAll();
+        $comments = $this->commentRepository->getCommentsForSingleArticle($article);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
-            foreach ($comment->getReplies() as $reply) {
-                $reply
-                    ->setCommentId($comment)
-                    ->setUsers($this->getUser());
-                $this->manager->persist($reply);
-            }
 
             $comment
                 ->setUsers($this->getUser())
@@ -81,7 +69,7 @@ class ArticleController extends AbstractController
             'title' => '/FLX | ' . ucfirst($article->getTitle()),
             'article' => $article,
             'form' => $form->createView(),
-            'reply' => $reply
+            'comments' => $comments
         ]);
     }
 
@@ -204,17 +192,34 @@ class ArticleController extends AbstractController
 
         $reply = $serializer->deserialize($json, Reply::class, 'json');
 
-        $comment->addReply($reply);
-
         $reply
             ->setUsers($this->getUser());
-        // ->setCommentId($comment);
+        // $comment->addReply($reply);
 
         $this->manager->persist($reply);
         $this->manager->flush();
 
-        return $this->json($reply, 201, []);
-        // $referer = filter_var($request->headers->get('referer'), FILTER_SANITIZE_URL);
-        // return $this->redirect($referer);
+        return $this->json($reply, 201, [], ['groups' => 'read:reply']);
+    }
+
+    /**
+     * @Route("/api/reply-to-reply/{id}", name="api_reply_to_reply_store")
+     */
+    public function postReplyToReply(Request $request, SerializerInterface $serializer, $id)
+    {
+        $replyToReply = $this->replyRepository->findOneBy(['id' => $id]);
+
+        $json = $request->getContent();
+
+        $reply = $serializer->deserialize($json, ReplyToReply::class, 'json');
+
+        $reply
+            ->setUsers($this->getUser());
+        $replyToReply->addReplyToReply($reply);
+
+        $this->manager->persist($reply);
+        $this->manager->flush();
+
+        return $this->json($reply, 201, [], ['groups' => 'read:replies']);
     }
 }
