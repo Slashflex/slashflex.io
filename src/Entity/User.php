@@ -13,7 +13,9 @@ use Cocur\Slugify\Slugify;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\Collection;
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
@@ -38,11 +40,6 @@ class User implements UserInterface
     private $email;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Role", mappedBy="user")
-     */
-    // private $roles;
-
-    /**
      * @var string The hashed password
      * @ORM\Column(type="string")
      */
@@ -54,7 +51,7 @@ class User implements UserInterface
     private $firstname;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255) 
      */
     private $lastname;
 
@@ -79,6 +76,32 @@ class User implements UserInterface
     private $createdAt;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $login;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     * @Groups({"read:comment", "read:reply", "read:replies"})
+     */
+    private $avatar;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="users")
+     */
+    private $comments;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Article::class, mappedBy="users")
+     */
+    private $articles;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Project::class, mappedBy="users")
+     */
+    private $projects;
+
+    /**
      * @ORM\PrePersist
      * @return void
      */
@@ -101,36 +124,6 @@ class User implements UserInterface
         return $this;
     }
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $login;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Article::class, mappedBy="users")
-     */
-    private $articles;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Project::class, mappedBy="users")
-     */
-    private $projects;
-
-    /**
-     * @ORM\Column(type="string", nullable=true)
-     */
-    private $avatar;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="users")
-     */
-    private $comments;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Reply::class, mappedBy="users")
-     */
-    private $replies;
-
     public function getAvatar()
     {
         return $this->avatar;
@@ -150,6 +143,7 @@ class User implements UserInterface
         $this->projects = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->replies = new ArrayCollection();
+        $this->replyToReplies = new ArrayCollection();
     }
 
     public function __toString()
@@ -430,37 +424,6 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($comment->getUsers() === $this) {
                 $comment->setUsers(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Reply[]
-     */
-    public function getReplies(): Collection
-    {
-        return $this->replies;
-    }
-
-    public function addReply(Reply $reply): self
-    {
-        if (!$this->replies->contains($reply)) {
-            $this->replies[] = $reply;
-            $reply->setUsers($this);
-        }
-
-        return $this;
-    }
-
-    public function removeReply(Reply $reply): self
-    {
-        if ($this->replies->contains($reply)) {
-            $this->replies->removeElement($reply);
-            // set the owning side to null (unless already changed)
-            if ($reply->getUsers() === $this) {
-                $reply->setUsers(null);
             }
         }
 

@@ -4,7 +4,6 @@ namespace App\Entity;
 
 use DateTime;
 use App\Entity\User;
-use App\Entity\Reply;
 use DateTimeInterface;
 use App\Entity\Article;
 use Doctrine\ORM\Mapping as ORM;
@@ -25,7 +24,7 @@ class Comment
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="text")
      */
     private $content;
 
@@ -41,19 +40,26 @@ class Comment
     private $users;
 
     /**
-     * @ORM\OneToMany(targetEntity=Reply::class, mappedBy="comment_id", orphanRemoval=true)
-     */
-    private $replies;
-
-    /**
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Comment::class, inversedBy="children")
+     * @ORM\JoinColumn(nullable=true, referencedColumnName="id")
+     */
+    private $parent;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="parent", orphanRemoval=true)
+     */
+    private $children;
+
     public function __construct()
     {
-        $this->replies = new ArrayCollection();
         $this->createdAt = new DateTime();
+        $this->replies = new ArrayCollection();
+        $this->children = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -62,6 +68,11 @@ class Comment
     }
 
     public function getContent(): ?string
+    {
+        return $this->content;
+    }
+
+    public function __toString()
     {
         return $this->content;
     }
@@ -98,37 +109,6 @@ class Comment
     }
 
     /**
-     * @return Collection|Reply[]
-     */
-    public function getReplies(): Collection
-    {
-        return $this->replies;
-    }
-
-    public function addReply(Reply $reply): self
-    {
-        if (!$this->replies->contains($reply)) {
-            $this->replies[] = $reply;
-            $reply->setCommentId($this);
-        }
-
-        return $this;
-    }
-
-    public function removeReply(Reply $reply): self
-    {
-        if ($this->replies->contains($reply)) {
-            $this->replies->removeElement($reply);
-            // set the owning side to null (unless already changed)
-            if ($reply->getCommentId() === $this) {
-                $reply->setCommentId(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
      * @ORM\PrePersist
      * @return void
      */
@@ -155,6 +135,49 @@ class Comment
     public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getParent(): ?self
+    {
+        return $this->parent;
+    }
+
+    public function setParent(?self $parent): self
+    {
+        $this->parent = $parent;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|self[]
+     */
+    public function getChildren(): Collection
+    {
+        return $this->children;
+    }
+
+    public function addParentChild(self $child): self
+    {
+        if (!$this->children->contains($child)) {
+            $this->children[] = $child;
+            $child->setParent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeChild(self $child): self
+    {
+        if ($this->children->contains($child)) {
+            $this->children->removeElement($child);
+            // set the owning side to null (unless already changed)
+            if ($child->getParent() === $this) {
+                $child->setParent(null);
+            }
+        }
 
         return $this;
     }

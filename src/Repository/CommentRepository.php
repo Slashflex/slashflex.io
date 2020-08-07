@@ -2,9 +2,10 @@
 
 namespace App\Repository;
 
+use App\Entity\Article;
 use App\Entity\Comment;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @method Comment|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,22 +20,30 @@ class CommentRepository extends ServiceEntityRepository
         parent::__construct($registry, Comment::class);
     }
 
-    // /**
-    //  * @return Comment[] Returns an array of Comment objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @return Comment[] Returns an array of Comment objects
+     */
+    public function orderById()
     {
         return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
             ->orderBy('c.id', 'ASC')
-            ->setMaxResults(10)
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
-    */
+    /**
+     * Get Comments for a single Article.
+     * @param Article $article
+     * @return mixed
+     */
+    public function getCommentsForSingleArticle(Article $article)
+    {
+        $qb = $this->createQueryBuilder('c')
+            ->where('c.article = :articleId')
+            ->orderBy('c.id', 'ASC')
+            ->setParameter('articleId', $article->getId());
+        $query = $qb->getQuery();
+        return $query->execute();
+    }
 
     /*
     public function findOneBySomeField($value): ?Comment

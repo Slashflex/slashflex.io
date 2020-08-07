@@ -8,7 +8,6 @@ use App\Entity\User;
 use App\Entity\Article;
 use App\Entity\Comment;
 use App\Entity\Project;
-use App\Entity\Reply;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\File\File;
@@ -129,25 +128,18 @@ class AppFixtures extends Fixture
             $user->setAvatar('avatar.png');
             copy('public/uploads/avatars/avatar.png', $path . '/avatar.png');
 
-            for ($l = 1; $l < 8; $l++) {
+            for ($l = 0; $l < 1; $l++) {
                 $comment = new Comment();
 
-                $reply = new Reply();
-
-                $reply
-                    ->setMessage($faker->sentence(10))
-                    ->setUsers($user);
-                $manager->persist($reply);
-
                 $comment
-                    ->addReply($reply)
+                    // ->addReply($reply)
                     ->setUsers($user)
                     ->setContent($faker->sentence(8))
                     ->setArticle($article);
 
                 $user
-                    ->addComment($comment)
-                    ->addReply($reply);
+                    ->addComment($comment);
+                // ->addReply($reply);
 
                 $manager->persist($comment);
             }
