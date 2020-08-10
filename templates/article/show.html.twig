@@ -120,9 +120,6 @@
                         <textarea type="text" name="reply[message]" id="commentID-{{ comment.id }}" style="color: white; width: 93%; float: right;" class="form__input d-block comment-block" ></textarea>
                         <label for="message" class="form__label">Message</label>
 
-                        <input type="hidden" class="userId" name="reply[users_id]" value="{{ comment.users.id }}">
-                        <input type="hidden" class="commID" name="reply[comment_id]" value="{{ comment.id }}">
-
                         <div class="form-group pt-2 pb-3">
                             <button type="button" id="postComment-{{ comment.id }}" class="button__login mx-auto d-block">Reply</button>
                         </div>
@@ -134,10 +131,70 @@
             if ("{{idParent}}" == "-1") {
                 console.log('IF')
 				$('.commentaire').append(commentaire);
+
+				
             } else {
                 console.log('ELSE')
                 $(".reply-{{idParent}}").append(commentaire);
             }
+
+			$('#loadComments-{{ comment.id }}').on('click', () => {
+					$('#reply-comment-{{ comment.id }}').toggle();
+					$('#commentID-{{ comment.id }}').focus();
+				});
+
+				$('#postComment-{{comment.id}}').on('click', () => {
+					axios.post('/api/comments', {
+						content: $('#commentID-{{comment.id}}').val(),
+						users: "/api/users/{{app.user.id}}",
+						article: "/api/articles/{{article.id}}",
+						parent: "/api/comments/{{comment.id}}"
+					})
+					.then(res => {
+						let userData = res.data.users;
+						let idComment = res.data.id;
+						let first = userData.firstname.charAt(0).toLowerCase() + userData.firstname.slice(1);
+						let last = userData.lastname.charAt(0).toLowerCase() + userData.lastname.slice(1);
+						let name = `${userData.firstname} ${userData.lastname}`;
+
+						let postComment = `
+							<li>
+								<div class="comment-wrap">
+									<div class="photo">
+										<div class="avatar" style="background-image: url(/uploads/avatars/${first}-${last}/${res.data.users.avatar})"></div>
+									</div>
+									<div class="comment-block">
+										<div class="comment-tile">${name} | Comment n°: ${res.data.id}</div>
+										<p class="comment-text">${res.data.content}</p>
+										<div class="bottom-comment">
+											<div class="comment-date">
+												about now
+											</div>
+											<span class="d-flex justify-content-end float-right">
+												<a href="{{ path('delete_comment', {'id': comment.id }) }}" class="button__login--del"><i class="fas fa-trash-alt"></i></a>
+											</span>
+										</div>
+									</div>
+								</div>
+
+								<!-- Reply to Comment with given ID -->
+								<form action="" style="display: none" id="reply-comment-${res.data.id}">
+									<textarea type="text" name="reply[message]" id="commentID-${res.data.id}" style="color: white; width: 93%; float: right;" class="form__input d-block comment-block" ></textarea>
+									<label for="message" class="form__label">Message</label>
+
+									<div class="form-group pt-2 pb-3">
+										<button type="button" id="postComment-${res.data.id}" class="button__login mx-auto d-block">Reply</button>
+									</div>
+								</form>
+								<ul class="reply-${res.data.id}" style="width: 98%; float: right"></ul>
+							</li>
+						`;
+						// Empty textarea
+						$("#comment_content").val('');
+						$('.reply-{{comment.id}}').append(postComment);
+						$('#reply-comment-{{comment.id}}').hide();
+					})
+				});
         {% endfor %}
 
 		{% if app.user %}
@@ -187,9 +244,6 @@
 								<form action="" style="display: none" id="reply-comment-${res.data.id}">
 									<textarea type="text" name="reply[message]" id="commentID-${res.data.id}" style="color: white; width: 93%; float: right;" class="form__input d-block comment-block" ></textarea>
 									<label for="message" class="form__label">Message</label>
-
-									<input type="hidden" class="userId" name="reply[users_id]" value="${res.data.users.id}">
-									<input type="hidden" class="commID" name="reply[comment_id]" value="${res.data.id}">
 
 									<div class="form-group pt-2 pb-3">
 										<button type="button" id="postComment-${res.data.id}" class="button__login mx-auto d-block">Reply</button>
