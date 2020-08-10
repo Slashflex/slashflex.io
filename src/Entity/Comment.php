@@ -8,10 +8,34 @@ use DateTimeInterface;
 use App\Entity\Article;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\CommentRepository;
+use ApiPlatform\Core\Annotation\ApiFilter;
 use Doctrine\Common\Collections\Collection;
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 
 /**
+ * @ApiResource(
+ *      attributes={
+ *          "order"={"createdAt":"DESC"},
+ *      },
+ *      paginationItemsPerPage=2,
+ *      normalizationContext={"groups"={"read:comment"}},
+ *      collectionOperations={
+ *          "get",
+ *          "post"={
+ *              "controller"=App\Controller\Api\CommentCreateController::class
+ *          }
+ *      },
+ *      itemOperations={
+ *          "get"={
+ *              "normalization_context"={"groups"={"read:comment", "read:full:comment"}}
+ *          },
+ *          "delete"
+ *      }
+ * )
+ * @ApiFilter(SearchFilter::class, properties={"article": "exact"})
  * @ORM\Entity(repositoryClass=CommentRepository::class)
  */
 class Comment
@@ -20,45 +44,51 @@ class Comment
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"read:comment"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups({"read:comment"})
      */
     private $content;
 
     /**
      * @ORM\ManyToOne(targetEntity=Article::class, inversedBy="comments")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"read:full:comment"})
      */
     private $article;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="comments")
+     * @Groups({"read:comment"})
      */
     private $users;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups({"read:comment"})
      */
     private $createdAt;
 
     /**
      * @ORM\ManyToOne(targetEntity=Comment::class, inversedBy="children")
      * @ORM\JoinColumn(nullable=true, referencedColumnName="id")
+     * @Groups({"read:comment"})
      */
     private $parent;
 
     /**
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="parent", orphanRemoval=true)
+     * @Groups({"read:comment"})
      */
     private $children;
 
     public function __construct()
     {
         $this->createdAt = new DateTime();
-        $this->replies = new ArrayCollection();
         $this->children = new ArrayCollection();
     }
 

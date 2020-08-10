@@ -5,8 +5,8 @@ namespace App\Entity;
 use App\Entity\Project;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\AttachmentRepository;
-use Doctrine\Common\Collections\Collection;
 use Symfony\Component\HttpFoundation\File\File;
+use Doctrine\Common\Collections\ArrayCollection;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
@@ -65,7 +65,7 @@ class Attachment
      */
     public function __construct()
     {
-        $this->groups = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->groups = new ArrayCollection();
     }
 
     /**

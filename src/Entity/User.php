@@ -20,6 +20,10 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
+ * @ApiResource(
+ *      collectionOperations={},
+ *      itemOperations={"get"}
+ * )
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\Table(name="`user`")
  * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
@@ -31,6 +35,7 @@ class User implements UserInterface
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"read:comment"})
      */
     private $id;
 
@@ -47,11 +52,13 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"read:comment"})
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=255) 
+     * @Groups({"read:comment"})
      */
     private $lastname;
 
@@ -82,7 +89,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Groups({"read:comment", "read:reply", "read:replies"})
+     * @Groups({"read:comment"})
      */
     private $avatar;
 

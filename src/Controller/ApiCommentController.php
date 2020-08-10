@@ -2,9 +2,9 @@
 
 namespace App\Controller;
 
-use App\Entity\Reply;
 use App\Entity\Comment;
 use App\Entity\User;
+use App\Repository\CommentRepository;
 use App\Repository\ReplyRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class ApiReplyController extends AbstractController
+class ApiCommentController extends AbstractController
 {
     private $manager;
 
@@ -20,28 +20,29 @@ class ApiReplyController extends AbstractController
     {
         $this->manager = $manager;
     }
+
     /**
-     * @Route("/api/reply", name="api_post_index", methods={"GET"})
+     * Retrieve all comments with nested replies 
+     * 
+     * @Route("/api/comments", name="api_comment_index", methods={"GET"})
      */
-    public function getPost(ReplyRepository $replyRepository)
+    public function getComments(CommentRepository $commentRepository)
     {
-        return $this->json($replyRepository->findAll(), 200, [], ['groups' => 'reply:read']);
+        return $this->json($commentRepository->findAll(), 200, [], ['groups' => 'comment:read']);
     }
 
     /**
-     * @Route("/api/reply", name="api_post_store", methods={"POST"})
+     * @Route("/api/comments", name="api_comment_store", methods={"POST"})
      */
     public function store(Request $request, SerializerInterface $serializer)
     {
         $jsonRecu = $request->getContent();
 
-        $reply = $serializer->deserialize($jsonRecu, Reply::class, 'json');
-        // dd($reply);
-        $reply->setCreatedAt(new \DateTime());
+        $comment = $serializer->deserialize($jsonRecu, Comment::class, 'json');
 
-        $this->manager->persist($reply);
+        $this->manager->persist($comment);
         $this->manager->flush();
 
-        return $this->json($reply, 201, [], ['groups' => 'reply:read']);
+        return $this->json($comment, 201, [], ['groups' => 'read:comment']);
     }
 }

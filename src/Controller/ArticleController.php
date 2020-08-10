@@ -180,46 +180,4 @@ class ArticleController extends AbstractController
 
         return $this->redirectToRoute('admin');
     }
-
-    /**
-     * @Route("/api/reply/{id}", name="api_reply_store")
-     */
-    public function postReply(Request $request, SerializerInterface $serializer, $id)
-    {
-        $comment = $this->commentRepository->findOneBy(['id' => $id]);
-
-        $json = $request->getContent();
-
-        $reply = $serializer->deserialize($json, Reply::class, 'json');
-
-        $reply
-            ->setUsers($this->getUser());
-        // $comment->addReply($reply);
-
-        $this->manager->persist($reply);
-        $this->manager->flush();
-
-        return $this->json($reply, 201, [], ['groups' => 'read:reply']);
-    }
-
-    /**
-     * @Route("/api/reply-to-reply/{id}", name="api_reply_to_reply_store")
-     */
-    public function postReplyToReply(Request $request, SerializerInterface $serializer, $id)
-    {
-        $replyToReply = $this->replyRepository->findOneBy(['id' => $id]);
-
-        $json = $request->getContent();
-
-        $reply = $serializer->deserialize($json, ReplyToReply::class, 'json');
-
-        $reply
-            ->setUsers($this->getUser());
-        $replyToReply->addReplyToReply($reply);
-
-        $this->manager->persist($reply);
-        $this->manager->flush();
-
-        return $this->json($reply, 201, [], ['groups' => 'read:replies']);
-    }
 }

@@ -36,7 +36,6 @@
 		<div class="row">
 			<h5 class="comments-counter">
 				{% set commentNumber = comments|length %}
-
 				{% if commentNumber == 1 %}
 					<p class="text-center"><i class="fas fa-comments"></i>
 					{{ commentNumber }} 
@@ -64,12 +63,12 @@
 		{% if app.user %}
 			{{ form_start(form) }}
 				<div class="form__group">
-					{{ form_widget(form.content, {'attr': { 'class': 'form__input comment-block d-block', 'placeholder': 'Add comment...', 'id': 'content', 'cols': '10', 'rows': '5' }}) }}
+					{{ form_widget(form.content, {'attr': { 'class': 'form__input comment-block d-block', 'placeholder': 'Add comment...', 'cols': '10', 'rows': '5' }}) }}
 					<label for="content" class="form__label">Comment</label>
 				</div>
 
 				<div class="form-group">
-					<button type="submit" id="postComment" class="button__login mx-auto d-block">Publish</button>
+					<button type="button" class="button__login mx-auto d-block postComment">Publish</button>
 				</div>
 			{{ form_end(form) }}
 		{% endif %}
@@ -117,37 +116,96 @@
                     </div>
 
                     <!-- Reply to Comment with given ID -->
-					
-					<form action="" style="display: none" {% if idParent == "-1" %}id="reply-comment-{{ comment.id }}"{% else %}id="reply-reply-{{ comment.id }}"{% endif %}>
-						<textarea type="text" name="comment[content]" id="commentID-{{ comment.id }}" style="color: white; width: 93%; float: right;" class="form__input d-block comment-block" ></textarea>
-						<label for="message" class="form__label">Message</label>
+                    <form action="" style="display: none" id="reply-comment-{{ comment.id }}">
+                        <textarea type="text" name="reply[message]" id="commentID-{{ comment.id }}" style="color: white; width: 93%; float: right;" class="form__input d-block comment-block" ></textarea>
+                        <label for="message" class="form__label">Message</label>
 
-						<input type="hidden" class="userId" name="comment[users_id]" value="{{ comment.users.id }}">
-						<input type="hidden" class="commID" name="comment[parent_id]" value="{{ comment.id }}">
+                        <input type="hidden" class="userId" name="reply[users_id]" value="{{ comment.users.id }}">
+                        <input type="hidden" class="commID" name="reply[comment_id]" value="{{ comment.id }}">
 
-						<div class="form-group pt-2 pb-3">
-							<button type="button" id="postComment-{{ comment.id }}" class="button__login mx-auto d-block">Reply</button>
-						</div>
-					</form>
-                    <ul class="reply-{{ comment.id }}" style="width: 98%; float: right"></ul>
+                        <div class="form-group pt-2 pb-3">
+                            <button type="button" id="postComment-{{ comment.id }}" class="button__login mx-auto d-block">Reply</button>
+                        </div>
+                    </form>
+                    <ul class="reply-{{comment.id}}" style="width: 98%; float: right"></ul>
                 </li>
             `;
 
             if ("{{idParent}}" == "-1") {
                 console.log('IF')
-                $('.commentaire').append(commentaire);
-				$('#loadComments-{{ comment.id }}').on('click', () => {
-					$('#reply-comment-{{ comment.id }}').toggle();
-				});
+				$('.commentaire').append(commentaire);
             } else {
                 console.log('ELSE')
                 $(".reply-{{idParent}}").append(commentaire);
-				$('#loadComments-{{ comment.id }}').on('click', () => {
-					$('#reply-reply-{{ comment.id }}').toggle();
-				});
             }
-
-			
         {% endfor %}
+
+		{% if app.user %}
+			$('.postComment').on('click', () => {
+				
+				// Prevents from submitting an empty field
+				if ($("#comment_content").val() != '') {
+					// Post Request to custom API
+					axios.post('/api/comments', {
+						content: $("#comment_content").val(),
+						users: "/api/users/{{app.user.id}}",
+						article: "/api/articles/{{article.id}}"
+					})
+					.then(res => {
+						// Retrieves data as a response from the api call
+						let userData = res.data.users;
+						let idComment = res.data.id;
+						let first = userData.firstname.charAt(0).toLowerCase() + userData.firstname.slice(1);
+						let last = userData.lastname.charAt(0).toLowerCase() + userData.lastname.slice(1);
+						let name = `${userData.firstname} ${userData.lastname}`;
+
+						// Converts JS variables to use them inside Twig conditions
+						{% set user = "userData" %}
+						{% set idCom = "idComment" %}
+
+						let postComment = `
+							<li>
+								<div class="comment-wrap">
+									<div class="photo">
+										<div class="avatar" style="background-image: url(/uploads/avatars/${first}-${last}/${res.data.users.avatar})"></div>
+									</div>
+									<div class="comment-block">
+										<div class="comment-tile">${name} | Comment n°: ${res.data.id}</div>
+										<p class="comment-text">${res.data.content}</p>
+										<div class="bottom-comment">
+											<div class="comment-date">
+												about now
+											</div>
+											<span class="d-flex justify-content-end float-right">
+												<a href="{{ path('delete_comment', {'id': idCom }) }}" class="button__login--del"><i class="fas fa-trash-alt"></i></a>
+											</span>
+										</div>
+									</div>
+								</div>
+
+								<!-- Reply to Comment with given ID -->
+								<form action="" style="display: none" id="reply-comment-${res.data.id}">
+									<textarea type="text" name="reply[message]" id="commentID-${res.data.id}" style="color: white; width: 93%; float: right;" class="form__input d-block comment-block" ></textarea>
+									<label for="message" class="form__label">Message</label>
+
+									<input type="hidden" class="userId" name="reply[users_id]" value="${res.data.users.id}">
+									<input type="hidden" class="commID" name="reply[comment_id]" value="${res.data.id}">
+
+									<div class="form-group pt-2 pb-3">
+										<button type="button" id="postComment-${res.data.id}" class="button__login mx-auto d-block">Reply</button>
+									</div>
+								</form>
+								<ul class="reply-${res.data.id}" style="width: 98%; float: right"></ul>
+							</li>
+						`;
+						// Empty textarea
+						$("#comment_content").val('');
+						$('.commentaire').append(postComment);
+					});
+				} else {
+					console.log('NOPE')
+				}
+			});
+		{% endif %}
    </script>
 {% endblock %}

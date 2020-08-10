@@ -15,16 +15,7 @@
         </div>
     {% endfor %}
 
- {# style="background-image: url(/uploads/images/{{ project.imageName }}); background-repeat: no-repeat; background-size: cover; padding: 20rem 0; background-position: center" #}
     <header>
-        {# <div class="container h-100">
-            <div class="row h-100 align-items-center">
-                <div class="col-12 text-center project-intro">
-                    <h1>{{ project.title }}</h1>
-                    <p>{{ project.introduction }}</p>
-                </div>
-            </div>
-        </div> #}
         <div class="mockup">
             <img src="{{ asset('build/images/mockup.webp')}}" alt=""/>
             
@@ -38,12 +29,9 @@
                     <!-- Loads images from back-end -->
                     {% for image in project.Attachments %}
                         <div class="swiper-slide slide{{loop.index0|first}}" style="background-image: url(/uploads/images/{{ image.fileName }}); background-repeat: no-repeat; background-size: contain; background-position: center">
-                            <a href="{{ path('single_project', {'slug': project.slug}) }}">
-                                <div class="slide__caption">
-                                    <p class="slide__text">{{ project.title }}</p>
-                                    <p class="slide__text--description">{{ project.introduction|u.truncate(30, '...') }}</p>
-                                </div>
-                            </a>
+                            {# <a href="{{ path('single_project', {'slug': project.slug}) }}"> #}
+                                
+                            {# </a> #}
                         </div>
                     {% endfor %}
                 </div>
