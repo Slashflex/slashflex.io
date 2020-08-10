@@ -65,12 +65,18 @@ $(document).ready(() => {
     });
   };
 
+  // Prevents text/image selection after a double click
+  document.addEventListener('mousedown', (event) => {
+    if (event.detail > 1) {
+      event.preventDefault();
+    }
+  }, false);
+
   // Swiper
   var swiper = new Swiper(".swiper-container", {
     loop: true,
     pagination: {
       el: ".swiper-pagination",
-      clickable: true,
       type: "progressbar",
     },
     navigation: {
@@ -175,7 +181,9 @@ $(document).ready(() => {
 if (
   window.location.pathname == "/" ||
   window.location.pathname == "/works" ||
-  window.location.pathname == "/blog"
+  window.location.pathname.includes("/works/") ||
+  window.location.pathname == "/blog" ||
+  window.location.pathname.includes("/blog/post")
 ) {
   var sentence = [
     '“Knowledge is power.” – <i style="color: #585858; font-size: 1.9rem">Francis Bacon</i>',

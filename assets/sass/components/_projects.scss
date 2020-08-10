@@ -21,7 +21,7 @@
 .model-human {
   display: block;
   margin: 0 auto;
-  width: 70%;
+  width: 100%;
   position: relative;
 
   @include respond (tab-port) {
