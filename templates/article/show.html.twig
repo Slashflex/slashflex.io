@@ -117,7 +117,7 @@
 
                     <!-- Reply to Comment with given ID -->
                     <form action="" style="display: none" id="reply-comment-{{ comment.id }}">
-                        <textarea type="text" name="reply[message]" id="commentID-{{ comment.id }}" style="color: white; width: 93%; float: right;" class="form__input d-block comment-block" ></textarea>
+                        <textarea type="text" name="comment[content]" id="commentID-{{ comment.id }}" style="color: white; width: 93%; float: right;" class="form__input d-block comment-block" ></textarea>
                         <label for="message" class="form__label">Message</label>
 
                         <div class="form-group pt-2 pb-3">
@@ -131,70 +131,73 @@
             if ("{{idParent}}" == "-1") {
                 console.log('IF')
 				$('.commentaire').append(commentaire);
-
-				
             } else {
                 console.log('ELSE')
                 $(".reply-{{idParent}}").append(commentaire);
             }
 
-			$('#loadComments-{{ comment.id }}').on('click', () => {
+			{% if app.user %}
+				$('#loadComments-{{ comment.id }}').on('click', () => {
 					$('#reply-comment-{{ comment.id }}').toggle();
 					$('#commentID-{{ comment.id }}').focus();
 				});
 
 				$('#postComment-{{comment.id}}').on('click', () => {
-					axios.post('/api/comments', {
-						content: $('#commentID-{{comment.id}}').val(),
-						users: "/api/users/{{app.user.id}}",
-						article: "/api/articles/{{article.id}}",
-						parent: "/api/comments/{{comment.id}}"
-					})
-					.then(res => {
-						let userData = res.data.users;
-						let idComment = res.data.id;
-						let first = userData.firstname.charAt(0).toLowerCase() + userData.firstname.slice(1);
-						let last = userData.lastname.charAt(0).toLowerCase() + userData.lastname.slice(1);
-						let name = `${userData.firstname} ${userData.lastname}`;
+					if ($("#commentID-{{comment.id}}").val() != '') {
+						axios.post('/api/comments', {
+							content: $('#commentID-{{comment.id}}').val(),
+							users: "/api/users/{{app.user.id}}",
+							article: "/api/articles/{{article.id}}",
+							parent: "/api/comments/{{comment.id}}"
+						})
+						.then(res => {
+							let userData = res.data.users;
+							let idComment = res.data.id;
+							let first = userData.firstname.charAt(0).toLowerCase() + userData.firstname.slice(1);
+							let last = userData.lastname.charAt(0).toLowerCase() + userData.lastname.slice(1);
+							let name = `${userData.firstname} ${userData.lastname}`;
+							let content = res.data.content.charAt(0).toUpperCase() + res.data.content.slice(1);
 
-						let postComment = `
-							<li>
-								<div class="comment-wrap">
-									<div class="photo">
-										<div class="avatar" style="background-image: url(/uploads/avatars/${first}-${last}/${res.data.users.avatar})"></div>
-									</div>
-									<div class="comment-block">
-										<div class="comment-tile">${name} | Comment n°: ${res.data.id}</div>
-										<p class="comment-text">${res.data.content}</p>
-										<div class="bottom-comment">
-											<div class="comment-date">
-												about now
+							let postComment = `
+								<li>
+									<div class="comment-wrap">
+										<div class="photo">
+											<div class="avatar" style="background-image: url(/uploads/avatars/${first}-${last}/${res.data.users.avatar})"></div>
+										</div>
+										<div class="comment-block">
+											<div class="comment-tile">${name} | Comment n°: ${idComment}</div>
+											<p class="comment-text">${content}</p>
+											<div class="bottom-comment">
+												<div class="comment-date">
+													about now
+												</div>
+												<span class="d-flex justify-content-end float-right">
+													<a href="/comment/${idComment}/delete" class="button__login--del"><i class="fas fa-trash-alt"></i></a>
+												</span>
 											</div>
-											<span class="d-flex justify-content-end float-right">
-												<a href="{{ path('delete_comment', {'id': comment.id }) }}" class="button__login--del"><i class="fas fa-trash-alt"></i></a>
-											</span>
 										</div>
 									</div>
-								</div>
 
-								<!-- Reply to Comment with given ID -->
-								<form action="" style="display: none" id="reply-comment-${res.data.id}">
-									<textarea type="text" name="reply[message]" id="commentID-${res.data.id}" style="color: white; width: 93%; float: right;" class="form__input d-block comment-block" ></textarea>
-									<label for="message" class="form__label">Message</label>
+									<!-- Reply to Comment with given ID -->
+									<form action="" style="display: none" id="reply-comment-${idComment}">
+										<textarea type="text" name="comment[content]" id="commentID-${idComment}" style="color: white; width: 93%; float: right;" class="form__input d-block comment-block" ></textarea>
+										<label for="message" class="form__label">Message</label>
 
-									<div class="form-group pt-2 pb-3">
-										<button type="button" id="postComment-${res.data.id}" class="button__login mx-auto d-block">Reply</button>
-									</div>
-								</form>
-								<ul class="reply-${res.data.id}" style="width: 98%; float: right"></ul>
-							</li>
-						`;
-						// Empty textarea
-						$("#comment_content").val('');
-						$('.reply-{{comment.id}}').append(postComment);
-						$('#reply-comment-{{comment.id}}').hide();
-					})
+										<div class="form-group pt-2 pb-3">
+											<button type="button" id="postComment-${idComment}" class="button__login mx-auto d-block">Reply</button>
+										</div>
+									</form>
+									<ul class="reply-${idComment}" style="width: 98%; float: right"></ul>
+								</li>
+							`;
+							// Empty textarea
+							$("#commentID-{{comment.id}}").val('');
+							$('.reply-{{comment.id}}').append(postComment);
+							$('#reply-comment-{{comment.id}}').hide();
+						})
+					}
 				});
+			{% endif %}
         {% endfor %}
 
 		{% if app.user %}
@@ -215,10 +218,9 @@
 						let first = userData.firstname.charAt(0).toLowerCase() + userData.firstname.slice(1);
 						let last = userData.lastname.charAt(0).toLowerCase() + userData.lastname.slice(1);
 						let name = `${userData.firstname} ${userData.lastname}`;
-
+						let content = res.data.content.charAt(0).toUpperCase() + res.data.content.slice(1);
 						// Converts JS variables to use them inside Twig conditions
 						{% set user = "userData" %}
-						{% set idCom = "idComment" %}
 
 						let postComment = `
 							<li>
@@ -227,29 +229,29 @@
 										<div class="avatar" style="background-image: url(/uploads/avatars/${first}-${last}/${res.data.users.avatar})"></div>
 									</div>
 									<div class="comment-block">
-										<div class="comment-tile">${name} | Comment n°: ${res.data.id}</div>
-										<p class="comment-text">${res.data.content}</p>
+										<div class="comment-tile">${name} | Comment n°: ${idComment}</div>
+										<p class="comment-text">${content}</p>
 										<div class="bottom-comment">
 											<div class="comment-date">
 												about now
 											</div>
 											<span class="d-flex justify-content-end float-right">
-												<a href="{{ path('delete_comment', {'id': idCom }) }}" class="button__login--del"><i class="fas fa-trash-alt"></i></a>
+												<a href="/comment/${idComment}/delete" class="button__login--del"><i class="fas fa-trash-alt"></i></a>
 											</span>
 										</div>
 									</div>
 								</div>
 
 								<!-- Reply to Comment with given ID -->
-								<form action="" style="display: none" id="reply-comment-${res.data.id}">
-									<textarea type="text" name="reply[message]" id="commentID-${res.data.id}" style="color: white; width: 93%; float: right;" class="form__input d-block comment-block" ></textarea>
+								<form action="" style="display: none" id="reply-comment-${idComment}">
+									<textarea type="text" name="comment[content]" id="commentID-${idComment}" style="color: white; width: 93%; float: right;" class="form__input d-block comment-block" ></textarea>
 									<label for="message" class="form__label">Message</label>
 
 									<div class="form-group pt-2 pb-3">
-										<button type="button" id="postComment-${res.data.id}" class="button__login mx-auto d-block">Reply</button>
+										<button type="button" id="postComment-${idComment}" class="button__login mx-auto d-block">Reply</button>
 									</div>
 								</form>
-								<ul class="reply-${res.data.id}" style="width: 98%; float: right"></ul>
+								<ul class="reply-${idComment}" style="width: 98%; float: right"></ul>
 							</li>
 						`;
 						// Empty textarea
