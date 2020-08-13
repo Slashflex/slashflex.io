@@ -9,10 +9,9 @@ $(document).ready(() => {
   }
 
   const files = document.querySelectorAll('input[type="file"]');
-  files.forEach(e => {
-    e.classList.add('inputfile');
+  files.forEach((e) => {
+    e.classList.add("inputfile");
   });
-
 
   // Sets parallax effect only on root page
   if (window.location.pathname == "/") {
@@ -64,13 +63,6 @@ $(document).ready(() => {
       y: ((relY - $this.height() / 2) / $this.height()) * movement,
     });
   };
-
-  // Prevents text/image selection after a double click
-  document.addEventListener('mousedown', (event) => {
-    if (event.detail > 1) {
-      event.preventDefault();
-    }
-  }, false);
 
   // Swiper
   var swiper = new Swiper(".swiper-container", {
@@ -173,11 +165,27 @@ $(document).ready(() => {
       let back = document.querySelector(`.back${[i]}`);
       $(back).css("background-color", "#27282c");
     }
-  //   $(".round").css("background-color", "#ffbe41");
+    //   $(".round").css("background-color", "#ffbe41");
   }
 });
 
-// Loader only on root page
+if (
+  window.location.pathname == "/" ||
+  window.location.pathname.includes("/works/")
+) {
+  // Prevents text/image selection after a double click
+  document.addEventListener(
+    "mousedown",
+    (event) => {
+      if (event.detail > 1) {
+        event.preventDefault();
+      }
+    },
+    false
+  );
+}
+
+// Loader with random quotes
 if (
   window.location.pathname == "/" ||
   window.location.pathname == "/works" ||
