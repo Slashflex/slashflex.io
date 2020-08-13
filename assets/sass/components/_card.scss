@@ -33,7 +33,7 @@
     }
 
     & p {
-      color: rgba(255, 255, 255, 0.85);
+      color: $color-tertiary;
       word-break: break-word;
       font-size: 1.3rem;
     }
@@ -59,10 +59,6 @@
     width: 100%;
     height: 17rem;
     cursor: pointer;
-
-    &:hover .ribbon-wrapper {
-      opacity: 1;
-    }
   }
 
   .front#{$i} {
@@ -104,7 +100,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    box-shadow: 0 2rem 4rem -1.4rem rgba(0, 0, 0, 0.4);
+    box-shadow: 0 2rem 4rem -1.4rem rgba($color-secondary, 0.4);
     border-radius: 0.5rem;
     z-index: 1;
     transition: all 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0s;
@@ -125,41 +121,10 @@
 }
 
 $max: 100;
-$step: 4;
 
-@for $i from 1 through ceil($max/$step) {
-  $value: ($i - 1) * $step + 1;
-
-  .back#{$value} {
-    background-color: $color-tertiary;
-    & h2 {color: #6960c6;}
-  }
-}
-
-@for $i from 1 through ceil($max/$step) {
-  $value: ($i - 1) * $step + 2;
-
-  .back#{$value} {
-    background-color: $alert-error;
-    
-    & h2 {color: #65de95;}
-  }
-}
-
-@for $i from 1 through ceil($max/$step) {
-  $value: ($i - 1) * $step + 3;
-
-  .back#{$value} {
-    background-color: #65de95;
-    & h2 {color: $alert-error;}
-  }
-}
-
-@for $i from 1 through ceil($max/$step) {
-  $value: ($i - 1) * $step + 4;
-
-  .back#{$value} {
-    background-color: #6960c6;
-    & h2 {color: $color-tertiary;}
+@for $i from 1 through $max {
+  .back#{$i} {
+    background-color: $color-secondary;
+    & h2 {color: $color-white;}
   }
 }

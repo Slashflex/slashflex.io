@@ -1,6 +1,6 @@
 // Shell
 .flag {
-  color: rgb(0, 204, 255);
+  color: $color-flag;
 
   &::selection {
     background-color: $color-white;
@@ -18,7 +18,7 @@
       }
 }
 .sudo {
-  color: chartreuse;
+  color: $color-tertiary;
 
   &::selection {
     background-color: $color-white;
@@ -44,28 +44,36 @@
     color: $color-tertiary;
   }
   &__function {
-    color: rgb(241, 155, 169);
+    color: $color-function;
   }
 }
 .language {
   &-html {
     font-size: 1.5rem;
     margin: 2rem 0;
-    text-align: justify;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
   }
   &-shell {
     font-size: 1.3rem;
-    background-color: #27282c;
+    background-color: $color-secondary;
     display: block;
     padding: 1rem;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    color: $color-white
   }
   &__title {
     font-size: 4rem;
     margin-bottom: 5rem;
+    font-family: "Montserrat", sans-serif;
+    font-weight: bold;
   }
   &__subtitle {
     font-weight: bold;
-    font-size: 2.2rem;
+    font-size: 2.6rem;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 800;
   }
   &__heading5 {
     font-weight: bold;
@@ -143,4 +151,20 @@ code {
 
 .in-bl {
   display: inline-block;
-}
+  color: $post-link;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  border-bottom: 1px solid transparent;
+  transition: all .5s;
+
+  &:hover {
+    color: $color-secondary;
+    text-decoration: none;
+    border-bottom: 1px solid $color-tertiary;
+  }
+} 
+
+.article__author {
+  font-weight: 100;
+  font-size: 1.7rem;
+}    

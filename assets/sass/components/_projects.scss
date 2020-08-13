@@ -21,7 +21,7 @@
 .model-human {
   display: block;
   margin: 0 auto;
-  width: 100%;
+  width: 30%;
   position: relative;
 
   @include respond (tab-port) {
@@ -37,7 +37,7 @@
   &--base {
     display: block;
     margin: 0 auto;
-    width: 20%;
+    width: 30%;
     position: absolute;
     top: 58%;
     left: 50%;

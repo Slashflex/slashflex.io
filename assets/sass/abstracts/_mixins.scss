@@ -14,11 +14,11 @@
 }
 
 @mixin shadow {
-  box-shadow: -6px -6px 9px #fff, 6px 6px 9px rgba(#000, 0.4);
+  box-shadow: -6px -6px 9px $color-white, 6px 6px 9px rgba($color-black, 0.4);
 }
 
 @mixin shadow-inset {
-  box-shadow: inset -6px -6px 9px #fff, inset 6px 6px 9px rgba(#000, 0.4);
+  box-shadow: inset -6px -6px 9px $color-white, inset 6px 6px 9px rgba($color-black, 0.4);
 }
 
 @mixin button {
