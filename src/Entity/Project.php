@@ -65,6 +65,9 @@ class Project
         if (empty($this->createdAt)) {
             $this->createdAt = new \DateTime();
         }
+        if (empty($this->updatedAt)) {
+            $this->updatedAt = new \DateTime();
+        }
     }
 
     public function getCreatedAt(): ?\DateTimeInterface
