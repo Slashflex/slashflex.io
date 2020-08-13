@@ -108,7 +108,7 @@
 										<img src="/uploads/images/{{ article.imageName }}" class="card-img-top" alt="...">
 										<div class="card-body">
 											<h5 class="card-title card__title">{{ article.title }}</h5>
-											<p class="card-text card__description">{{ article.introduction|u.truncate(50, ' ...') }}</p>
+											<p class="card-text card__description">{{ article.introduction|u.truncate(100, ' ...') }}</p>
 											<p class="card-text">Created by {{ author }} {{ article.getDate }}</p>
 											<div class="d-flex justify-content-between">
 												<a href="{{ path('single_article', {'slug': article.slug }) }}" class="button__login">Show</a>
