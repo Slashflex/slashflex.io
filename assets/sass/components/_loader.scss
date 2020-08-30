@@ -54,3 +54,16 @@
   background-color: $color-secondary;
   z-index: 100000000000;
 }
+
+.loading {
+
+  &__text {
+    color: $color-tertiary; 
+    margin-bottom: 33rem;
+  }
+
+  &__sentence {
+    color: #585858; 
+    font-size: 1.9rem;
+  }
+}

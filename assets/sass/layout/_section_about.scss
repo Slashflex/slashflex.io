@@ -36,7 +36,8 @@
     }
 
     &--text {
-      color: $color-gray;
+      // color: $color-gray;
+      color: var(--color-text);
       font-size: 1.7rem;
       text-align: justify;
       font-family: 'Montserrat', sans-serif;
@@ -44,7 +45,8 @@
     }
 
     &--title {
-      color: $color-secondary;
+      // color: $color-secondary
+      color: var(--color-headings);
       font-family: 'Montserrat', sans-serif;
       font-weight: 800;
       font-size: 3rem;
@@ -54,6 +56,19 @@
         font-size: 2.5rem;
         text-align: center;
       }
+    }
+  }
+}
+
+.scroll {
+  margin-top: -9rem;
+
+  &__wheel {
+    width: 10rem;
+    height: 10rem;
+
+    @include respond(tab-land) {
+      display: none;
     }
   }
 }

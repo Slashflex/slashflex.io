@@ -1,16 +1,37 @@
 .intro {
   display: flex;
   height: 100vh;
-
   justify-content: center;
   position: relative;
 }
+
+.header__blog {
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 20rem;
+  background-size: 50%;
+  background-position: center;
+
+  @include respond(tab-land) {
+    background-size: 100%;
+  }
+
+  @include respond(tab-port) {
+    background-size: 100%;
+  }
+
+  // @include respond(phone-small) {
+  //   background-size: 100%;
+  // }
+}
+
 .header__projects {
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
 .hero {
   width: 85rem;
   max-height: 18vh;
@@ -29,6 +50,10 @@
   @include respond(phone-small) {
     width: 35rem;
     margin-bottom: 50rem;
+  }
+
+  @include respond (phone-mid) {
+    margin-bottom: 64rem;
   }
 
   &__error {
@@ -67,11 +92,14 @@
     color: $color-gray;
     font-size: 2rem;
     transition: all 0.5s;
+    margin: 1rem auto 8rem auto;
+    display: inline-block;
 
     &:hover i,
     &:hover {
       text-decoration: none;
-      color: $color-secondary;
+      // color: $color-secondary;
+      color: var(--links);
       transform: scale(1.2) translateX(-0.5rem);
       transition: all 0.5s;
     }
@@ -83,8 +111,10 @@
     font-size: 13rem;
     font-weight: 900;
     text-transform: uppercase;
-    color: $color-white;
-    background-color: $color-secondary;
+    // color: $color-white;
+    color: var(--bg);
+    // background-color: $color-secondary;
+    background-color: var(--bg-inversed);
     animation: movingH1 10s infinite;
     text-align: center;
 
@@ -165,6 +195,7 @@
 }
 
 .code {
+
   &__401,
   &__403,
   &__404 {

@@ -30,6 +30,7 @@ class CommentRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
     /**
      * Get Comments for a single Article.
      * @param Article $article

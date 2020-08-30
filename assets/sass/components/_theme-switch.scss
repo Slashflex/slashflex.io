@@ -1,0 +1,105 @@
+html {
+    height: 100%;
+    font-family: 'Montserrat';
+
+    // display: grid;
+    align-items: center;
+    justify-items: center;
+
+    --bg: #fff;
+    --bg-inversed: #27282c;
+    --color-headings: #27282c;
+    --color-text: #6b6b6b;
+    --links: #27282c;
+    --links-hover: #ffbe41;
+    --text-alpha: #ececec;
+    --card-gradient: linear-gradient(228deg, rgba(50,50,52,1) 0%, rgba(39,40,44,1) 100%);
+    --card-border: transparent;
+    --card-p: #ffbe41;
+    --card-h2: #ffbe41;
+    --card-back-p: #fff;
+    --button: #ffbe41;
+    --form-input: #27282c;
+    --post-link: #695fc6;
+    --sudo: #ffbe41;
+    --flag: rgb(0, 204, 255);
+    --comment-block: #6b6b6b;
+    --span: #ffbe41;
+    --var: #20bf6b;
+    --param: #ffbe41;
+}
+
+html[data-theme='dark'] {
+    --bg: #27282c;
+    --bg-inversed: #fff;
+    --color-headings: #ffbe41;
+    --color-text: #aeaeae;
+    --links: #aeaeae;
+    --links-hover: #ffbe41;
+    --text-alpha: #fbbe4014;
+    --card-gradient: linear-gradient(228deg, rgba(255,190,65,1) 0%, rgba(124,81,0,1) 100%);
+    --card-border: #fff;
+    --card-p: #27282c;
+    --card-h2: #fff;
+    --card-back-p: #ffbe41;
+    --button: #27282c;
+    --form-input: #aeaeae;
+    --post-link: #ffbe41;
+    --sudo: #b05db5;
+    --flag: #006daf;
+    --comment-block: #27282c;
+    --span: #6b6b6b;
+    --var: #027137;
+    --param: #e07300;
+}
+
+
+input[type=checkbox]{
+	height: 0;
+	width: 0;
+	visibility: hidden;
+}
+
+#label {
+	cursor: pointer;
+	text-indent: -9999px;
+	width: 5.2rem;
+	height: 2.7rem;
+	background: $color-secondary;
+	float: right;
+	border-radius: 10rem;
+	position: relative;
+}
+
+#label:after {
+	content: '';
+	position: absolute;
+	top: 3px;
+	left: 3px;
+	width: 2rem;
+	height: 2rem;
+	background: #fff;
+	border-radius: 9rem;
+	transition: 0.3s;
+}
+
+input:checked + #label {
+	background: var(--color-headings);
+}
+
+input:checked + #label:after {
+	left: calc(100% - .5rem);
+	transform: translateX(-100%);
+}
+
+#label:active:after {
+	width: 4.5rem;
+}
+
+html.transition,
+html.transition *,
+html.transition *:before,
+html.transition *:after {
+  transition: all 750ms !important;
+  transition-delay: 0 !important;
+}

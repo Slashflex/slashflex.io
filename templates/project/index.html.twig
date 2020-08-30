@@ -28,14 +28,14 @@
     
 	<section class="project">
 		<div class="container">
-			<h1 class="project__title" data-aos="fade-right">Think. Design. Create!</h1>
-			<p class="project__introduction" data-aos="fade-right">Bright style, elegance, refinement, and attention to detail – this is what I value in my works. Because of this I always look for new ways to improve my skills and create meticulously designed and built websites. Although I have not done that many projects, I sincerely hope this list will grow intensively soon. I always find decent solutions and even help others with solving their issues 🙂.</p>
-			<p class="project__introduction" data-aos="fade-right">There is a proverb saying: “A stitch in time saves nine!”</p>
+			<h1 class="project__title" data-aos="fade-up">Think. Design. Create!</h1>
+			<p class="project__introduction" data-aos="fade-up">Bright style, elegance, refinement, and attention to detail – this is what I value in my works. Because of this I always look for new ways to improve my skills and create meticulously designed and built websites. Although I have not done that many projects, I sincerely hope this list will grow intensively soon. I always find decent solutions and even help others with solving their issues 🙂.</p>
+			<p class="project__introduction" data-aos="fade-up">There is a proverb saying: “A stitch in time saves nine!”</p>
 		</div>
 
 		<div class="stack__text">
-			<div class="stack__text--projects" data-aos="fade-right">My recent</div>
-			<div class="stack__text--stack" data-aos="fade-up-right">WORKS</div>
+			<div class="stack__text--projects" data-aos="fade-up">My recent</div>
+			<div class="stack__text--stack" data-aos="fade-up">WORKS</div>
 		</div>
 	</section>
 	
@@ -44,7 +44,7 @@
 			{% for project in projects %}
 			{% set auteur = project.users %}
 				<div class="col-12 col-lg-6"> 
-					<div class="card{{loop.index}}">
+					<div class="card{{loop.index}}" data-aos="fade-up">
 						<div class="flips">
 							<div class="front{{loop.index}} vertical">
 								<div class="card-content--image" style="background-image: url(/uploads/images/{{ project.imageName }})"></div>

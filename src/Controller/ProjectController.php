@@ -14,11 +14,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ProjectController extends AbstractController
 {
+    private $projectRepository;
     private $manager;
     private $userRepository;
 
-    public function __construct(EntityManagerInterface $manager, UserRepository $userRepository)
+    public function __construct(ProjectRepository $projectRepository, EntityManagerInterface $manager, UserRepository $userRepository)
     {
+        $this->projectRepository = $projectRepository;
         $this->manager = $manager;
         $this->userRepository = $userRepository;
     }
@@ -29,20 +31,23 @@ class ProjectController extends AbstractController
      */
     public function show(Project $project)
     {
+        $projects = $this->projectRepository->findAll();
+
         return $this->render('project/show.html.twig', [
             'title' => '/FLX | ' . ucfirst($project->getTitle()),
-            'project' => $project
+            'project' => $project,
+            'projects' => $projects
         ]);
     }
 
     /**
      * Shows all work
      * 
-     * @Route("/works", name="projects")
+     * @Route("/works", name="works")
      */
-    public function index(ProjectRepository $projectRepository)
+    public function index()
     {
-        $projects = $projectRepository->findAll();
+        $projects = $this->projectRepository->findAll();
 
         return $this->render('project/index.html.twig', [
             'title' => '/FLX | Works',

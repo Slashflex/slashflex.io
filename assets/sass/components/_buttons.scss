@@ -7,95 +7,97 @@
   z-index: 2;
 
   &__text {
-    color: $color-secondary;
+    // color: $color-secondary
+    color: var(--links);
     transition: all 0.5s;
     text-transform: uppercase;
-    font-size: 2.5rem;
+    font-size: 2.8rem;
     font-family: Montserrat, sans-serif;
     font-weight: 700;
 
     &:hover {
-      color: $color-tertiary;
+      // color: $color-tertiary;
+      color: var(--links-hover);
       text-decoration: none;
     }
   }
 }
 
-.btn {
-  cursor: pointer;
+// .btn {
+//   cursor: pointer;
 
-  &__footer--me {
-    text-align: center;
-    cursor: pointer;
-    width: 20%;
-    color: $color-secondary;
-    text-transform: uppercase;
-    font-weight: bold;
-    border: none;
-    padding: 0.4rem 1.2rem;
-    border-radius: 0.5rem;
-    background: $color-white;
-    box-shadow: 2rem 2rem 6rem $color-secondary;
-    transition: all 0.7s;
+//   &__footer--me {
+//     text-align: center;
+//     cursor: pointer;
+//     width: 20%;
+//     color: $color-secondary;
+//     text-transform: uppercase;
+//     font-weight: bold;
+//     border: none;
+//     padding: 0.4rem 1.2rem;
+//     border-radius: 0.5rem;
+//     background: $color-white;
+//     box-shadow: 2rem 2rem 6rem $color-secondary;
+//     transition: all 0.7s;
 
-    &:hover {
-      @include button-hover;
-      box-shadow: -0.4rem 1.6rem 4.4rem $color-secondary;
-      transform: scale(1.1);
-    }
-  }
-  &__new {
-    cursor: pointer;
-    color: $color-white;
-    text-transform: uppercase;
-    font-weight: bold;
-    border: none;
-    padding: 0.6rem 1.5rem;
-    border-radius: 5rem;
-    background: $color-secondary;
-    box-shadow: 2rem 2rem 6rem $color-gray-btn, -2rem -2rem 6rem $color-white;
-    transition: all 0.7s;
+//     &:hover {
+//       @include button-hover;
+//       box-shadow: -0.4rem 1.6rem 4.4rem $color-secondary;
+//       transform: scale(1.1);
+//     }
+//   }
+//   &__new {
+//     cursor: pointer;
+//     color: $color-white;
+//     text-transform: uppercase;
+//     font-weight: bold;
+//     border: none;
+//     padding: 0.6rem 1.5rem;
+//     border-radius: 5rem;
+//     background: $color-secondary;
+//     box-shadow: 2rem 2rem 6rem $color-gray-btn, -2rem -2rem 6rem $color-white;
+//     transition: all 0.7s;
 
-    &:hover {
-      background-color: $color-white;
-      color: $color-secondary;
-      box-shadow: -0.4rem 1.6rem 4.4rem $color-gray-btn,
-        -0.3rem -2rem 0.7rem $color-white;
-      transform: scale(1.1);
-    }
+//     &:hover {
+//       background-color: $color-white;
+//       color: $color-secondary;
+//       box-shadow: -0.4rem 1.6rem 4.4rem $color-gray-btn,
+//         -0.3rem -2rem 0.7rem $color-white;
+//       transform: scale(1.1);
+//     }
 
-    &--me {
-      text-align: center;
-      cursor: pointer;
-      width: 20%;
-      color: $color-white;
-      text-transform: uppercase;
-      font-weight: bold;
-      border: none;
-      padding: 0.6rem 1.5rem;
-      border-radius: 0.5rem;
-      background: $color-secondary;
-      box-shadow: 2rem 2rem 6rem $color-gray-btn;
-      transition: all 0.7s;
+//     &--me {
+//       text-align: center;
+//       cursor: pointer;
+//       width: 20%;
+//       color: $color-white;
+//       text-transform: uppercase;
+//       font-weight: bold;
+//       border: none;
+//       padding: 0.6rem 1.5rem;
+//       border-radius: 0.5rem;
+//       background: $color-secondary;
+//       box-shadow: 2rem 2rem 6rem $color-gray-btn;
+//       transition: all 0.7s;
 
-      &:hover {
-        background-color: $color-white;
-        color: $color-secondary;
-        text-decoration: none;
-        box-shadow: -0.4rem 1.6rem 4.4rem $color-gray-btn;
-        transform: scale(1.1);
-      }
-      &:not(:active) {
-        box-shadow: 0.5rem 0.5rem 1.5rem $color-gray;
-      }
-      &:active {
-        @include shadow-inset;
-      }
-    }
-  }
-}
+//       &:hover {
+//         background-color: $color-white;
+//         color: $color-secondary;
+//         text-decoration: none;
+//         box-shadow: -0.4rem 1.6rem 4.4rem $color-gray-btn;
+//         transform: scale(1.1);
+//       }
+//       &:not(:active) {
+//         box-shadow: 0.5rem 0.5rem 1.5rem $color-gray;
+//       }
+//       &:active {
+//         @include shadow-inset;
+//       }
+//     }
+//   }
+// }
 
-/* TEST */
+/* Gooey button */
 .button {
   -webkit-font-smoothing: antialiased;
   background-color: $color-secondary;
@@ -104,7 +106,7 @@
   display: inline-block;
   font-family: "Montserrat", sans-serif;
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: 600;
   text-decoration: none;
   user-select: none;
   letter-spacing: 1px;
@@ -126,11 +128,18 @@
 
 .button__login {
   @include button;
-  background-color: $color-secondary;
-  color: $color-white;
+  // background-color: $color-secondary;
+  background-color: var(--color-headings);
+  // color: $color-white;
+  color: var(--bg);
 
+  @include respond(phone-small) {
+    padding: .4rem .6rem;
+  }
+  
   &:hover {
-    background-color: $color-tertiary;
+    // background-color: $color-tertiary;
+    background-color: var(--card-h2);
     color: $color-secondary;
     text-decoration: none;
   }
@@ -143,6 +152,10 @@
     @include button;
     color: $color-secondary;
     background-color: $alert-error;
+
+    @include respond(phone-small) {
+      padding: .4rem .6rem;
+    }
 
     &:hover {
       @include button-hover;
@@ -161,6 +174,7 @@
 
     &:hover {
       @include button-hover;
+      background-color: $color-tertiary;
     }
 
     &:active {
@@ -170,8 +184,11 @@
 
   &--text {
     @include button;
-    background-color: $color-white;
-    color: $color-secondary;
+    // background-color: $color-white;
+    background-color: var(--button);
+    // color: var(--bg);
+    // color: $color-secondary;
+    color: var(--bg-inversed);
 
     &:hover {
       @include button-hover;
@@ -193,8 +210,9 @@
 .button--bubble {
   position: relative;
   z-index: 2;
-  color: $color-white;
-  background: none;
+  // color: $color-white;
+  color: var(--bg);
+  background: var(--color-headings);
 
   &:hover {
     background: none;
@@ -203,9 +221,11 @@
       .button--bubble__effect-container {
         .circle {
           background: $color-tertiary;
+          // background: var(--bubble-hover);
         }
         .button {
           background: $color-tertiary;
+          // background: var(--bubble-hover)
         }
       }
     }
@@ -277,5 +297,26 @@
 
   &-btn {
     margin-top: 4rem;
+    
+    @include respond(phone-small) {
+      text-align: center;
+    }
+  }
+}
+
+.toggle-container {
+  position: fixed;
+  top: 3rem;
+  left: 48%;
+  z-index: 9999999999;
+
+  @include respond(phone) {
+    top: 2.5rem;
+    left: 46.5%;
+  }
+
+  @include respond(phone-small) {
+    top: 2.5rem;
+    left: 44%;
   }
 }

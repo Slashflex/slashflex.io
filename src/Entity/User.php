@@ -64,6 +64,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"read:comment"})
      */
     private $slug;
 
@@ -94,7 +95,7 @@ class User implements UserInterface
     private $avatar;
 
     /**
-     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="users")
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="users", cascade={"remove"})
      */
     private $comments;
 

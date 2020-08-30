@@ -1,6 +1,8 @@
 {% extends "base.html.twig" %}
 
-{% block titre %}{{ project.title }}{% endblock %}
+{% block titre %}
+	{{ project.title }}
+{% endblock %}
 
 {% block body %}
 	<!-- Logo -->
@@ -9,43 +11,222 @@
 	<!-- Fullscreen Navigation -->
 	{% include "partials/_fullscreen_nav.html.twig" %}
 
-    {% for message in app.flashes('success') %}
-        <div class="flash-notice alert-success">
-            {{ message }}
-        </div>
-    {% endfor %}
+	{% for message in app.flashes('success') %}
+		<div class="flash-notice alert-success">
+			{{ message }}
+		</div>
+	{% endfor %}
 
-    <header>
-        <div class="mockup">
-            <img src="{{ asset('build/images/mockup.webp')}}" alt=""/>
-            
-            <!-- Swiper control arrows -->
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
-            
-            <!-- Swiper -->
-            <div class="swiper-container">
-                <div class="swiper-wrapper">
-                    <!-- Loads images from back-end -->
-                    {% for image in project.Attachments %}
-                        <div class="swiper-slide slide{{loop.index0|first}}" style="background-image: url(/uploads/images/{{ image.fileName }}); background-repeat: no-repeat; background-size: contain; background-position: center">
-                            {# <a href="{{ path('single_project', {'slug': project.slug}) }}"> #}
-                                
-                            {# </a> #}
-                        </div>
-                    {% endfor %}
+	<header>
+		<div class="mockup">
+			<img
+			src="{{ asset('build/images/mockup.webp')}}" alt="Laptop mockup"/>
+
+			<!-- Swiper control arrows -->
+			<div class="swiper-button-next"></div>
+			<div class="swiper-button-prev"></div>
+
+			<!-- Swiper -->
+			<div class="swiper-container moving">
+				<div class="swiper-wrapper">
+					<!-- Loads images from back-end -->
+					{% for image in project.Attachments %}
+						<div class="swiper-slide slide{{loop.index0}}" style="background-image: url(/uploads/images/{{ image.fileName }});
+							                                background-repeat: no-repeat;
+							                                background-size: cover;
+							                                background-position: center"></div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<div class="container works__wrapper">
+		<!-- LightBox -->
+		{% for img in project.Attachments %}
+			<div class="lightbox{{loop.index0}}">
+				<img src="/uploads/images/{{ img.fileName }}" alt="{{project.title}}" class="project__attachments">
+			</div>
+		{% endfor %}
+
+		<h1 class="text-center display-title">
+			{{ project.title|raw|capitalize }}
+		</h1>
+
+		<div class="my-5 display-content">
+            {{ project.introduction }}
+			{{ project.content|raw }}
+            {# <div class="container">
+                <div class="row">
+                    <div class="dev__icons mt-5 d-flex justify-content-center mx-auto">
+                        <a href="https://symfony.com/"><i class="devicon-symfony-original mr-5 dev__icons--i"></i></a>
+                        <a href="https://webpack.js.org/"><i class="devicon-webpack-plain mr-5 dev__icons--i"></i></a>
+                        <a href="https://sass-lang.com/"><i class="devicon-sass-original mr-5 dev__icons--i"></i></a>
+                        <a href="https://www.npmjs.com/"><i class="devicon-npm-original-wordmark dev__icons--i"></i></a>
+                    </div>
+                    <div class="dev__icons mt-5 d-flex justify-content-center mx-auto">
+                        <a href="https://www.apache.org/"><i class="devicon-apache-plain-wordmark mr-5 dev__icons--i"></i></a>
+                        <a href="https://getbootstrap.com/"><i class="devicon-bootstrap-plain mr-5 dev__icons--i"></i></a>
+                        <a href="https://www.postgresql.org/"><i class="devicon-postgresql-plain-wordmark mr-5 dev__icons--i"></i></a>
+                        <a href="https://www.doctrine-project.org/"><i class="devicon-doctrine-plain-wordmark dev__icons--i"></i></a>
+                    </div>
+                    <div class="dev__icons mt-5 d-flex justify-content-center mx-auto">
+                        <a href="https://git-scm.com/"><i class="devicon-git-plain mr-5 dev__icons--i"></i></a>
+                        <a href="https://www.php.net/"><i class="devicon-php-plain mr-5 dev__icons--i"></i></a>
+                        <a href="https://javascript.info/"><i class="devicon-javascript-plain mr-5 dev__icons--i"></i></a>
+                        <a href="https://ubuntu.com/"><i class="devicon-ubuntu-plain-wordmark dev__icons--i"></i></a>
+                    </div>
                 </div>
             </div>
-        </div>
-    </header>
+            
+            <div class="d-flex justify-content-center works__links">
+                <div class="goo-btn ml-4" style="margin-top: -1.4rem">
+                    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="goo">
+                        <defs>
+                            <filter id="goo">
+                            <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+                            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo" />
+                            <feComposite in="SourceGraphic" in2="goo"/>
+                            </filter>
+                        </defs>
+                    </svg>
 
-    <div class="container">
-        <h1 class="text-center display-1">{{ project.title|raw|capitalize }}</h1>
-        <div class="row mt-5 mb-5">
-            {{ project.content|raw }}
-        </div>
-    </div>
+                    <span class="button--bubble__container">
+                        <a href="https://github.com/Slashflex/slashflex.io" class="button button--bubble">
+                            Source code
+                        </a>
+                        <span class="button--bubble__effect-container">
+                            <span class="circle top-left"></span>
+                            <span class="circle top-left"></span>
+                            <span class="circle top-left"></span>
+
+                            <span class="button effect-button"></span>
+
+                            <span class="circle bottom-right"></span>
+                            <span class="circle bottom-right"></span>
+                            <span class="circle bottom-right"></span>
+                        </span>
+                    </span>
+                </div>
+
+                <div class="goo-btn ml-4" style="margin-top: -1.4rem">
+                    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="goo">
+                        <defs>
+                            <filter id="goo">
+                            <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+                            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo" />
+                            <feComposite in="SourceGraphic" in2="goo"/>
+                            </filter>
+                        </defs>
+                    </svg>
+
+                    <span class="button--bubble__container">
+                        <a href="https://github.com/Slashflex/slashflex.io" class="button button--bubble">
+                            Demo
+                        </a>
+                        <span class="button--bubble__effect-container">
+                            <span class="circle top-left"></span>
+                            <span class="circle top-left"></span>
+                            <span class="circle top-left"></span>
+
+                            <span class="button effect-button"></span>
+
+                            <span class="circle bottom-right"></span>
+                            <span class="circle bottom-right"></span>
+                            <span class="circle bottom-right"></span>
+                        </span>
+                    </span>
+                </div>
+            </div>
+
+            <div class="go-home text-center">
+                <a href="{{ path('works') }}" class="hero__home"><i class="fas fa-chevron-left"></i> Back</a>
+            </div> #}
+		</div>
+
+		<div class="stack__text--1 text-center">
+			<div class="stack__text--projects" data-aos="fade-up">My Other</div>
+			<div class="stack__text--stack" data-aos="fade-up">Works</div>
+		</div>
+
+		<!-- Swiper -->
+		<div class="swiper-container-2">
+			<div class="swiper-wrapper">
+				{% for img in projects %}
+					{% if app.request.get('slug') != img.slug %}
+						<div class="swiper-slide">
+							<div class="picture">
+								<a href="{{ path('single_project', {'slug': img.slug})}}" class="picture__link">
+									<img class="img-fluid slide-{{ loop.index|first }}" src="/uploads/images/{{img.imageName}}" alt="{{img.title}}">
+									<div class="detail">
+										<h3>{{ img.title|capitalize }}</h3>
+										<span>{{ img.introduction|u.truncate(20, '...')|capitalize }}</span>
+									</div>
+								</a>
+							</div>
+						</div>
+					{% endif %}
+				{% endfor %}
+			</div>
+			<div class="swiper-button-next"></div>
+			<div class="swiper-button-prev"></div>
+		</div>
+	</div>
 
 	<!-- Footer -->
 	{% include "partials/_footer.html.twig" %}
+{% endblock %}
+
+{% block javascripts %}
+	<script>
+		// LightBox
+        for (let i = 0; i < {{ project.Attachments|length }}; i++) {
+            let slides = document.querySelectorAll (`.slide${[i]}`);
+            let lightbox = document.querySelector (`.lightbox${[i]}`);
+
+            for (const slide of slides) { // Display lightbox
+                slide.addEventListener('click', (e) => {
+                    lightbox.style.display = 'block';
+                    lightbox.classList.add('ligthbox-open')
+                });
+            }
+
+            // Hide lightbox
+            lightbox.addEventListener('click', () => {
+                lightbox.style.display = 'none';
+                lightbox.classList.remove('ligthbox-open')
+            });
+        }
+
+        // Instanciate new Swiper Object
+        let swipes = new Swiper('.swiper-container-2', {
+            effect: "coverflow",
+            grabCursor: true,
+            centeredSlides: true,
+            slidesPerView: "auto",
+            coverflowEffect: {
+                rotate: 20,
+                stretch: 0,
+                depth: 350,
+                modifier: 1,
+                slideShadows: true
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev'
+            }
+        });
+        
+        {# (() => { // Loops through each project
+            for (let i = 1; i <= {{ projects|length }}; i++) { 
+                if (window.innerWidth <= '320') {
+                    console.log('phone-small');
+                    $(`.slide-${[i]}`).css({'height': '25rem', 'object-fit': 'cover'});
+                } else {
+                    console.log('desktop');
+                    $(`.slide-${[i]}`).css({'height': '35rem', 'object-fit': 'cover'});
+                }
+            }
+        })(); #}
+	</script>
 {% endblock %}

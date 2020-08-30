@@ -1,4 +1,4 @@
-<section class="stack" id="stack">
+<section class="stack">
 	<div class="stack__text">
 		<div class="stack__text--recent" data-aos="fade-right">Languages</div>
 		<div class="stack__text--stack" data-aos="fade-up-right">I SPEAK</div>
@@ -8,38 +8,66 @@
 	<div class="container">
 		<div class="row cards">
 			<div class="col-sm-1 col-lg-1"></div>
-			<div class="col-sm-5 col-lg-5" data-aos="fade-up-right"> 
+			<div class="col-sm-5 col-lg-5 moving" data-aos="fade-up-right"> 
 				<div class="card1">
 					<div class="flips">
 						<div class="front1 vertical">
 							<div class="card-content">
-								<h2>Front</h2>
-								<p>Lorem ipsum</p>
+								<h2 class="front-h2">Front</h2>
+								<p class="front-p">Lorem ipsum</p>
 							</div>
 						</div>
 						<div class="back1 vertical">
 							<div class="card-content">
-								<h2>Back</h2>
-								<p>Lorem ipsum</p>
+								<div class="form-group">
+									<div class="goo-btn">
+										<svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="goo">
+											<defs>
+												<filter id="goo">
+												<feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+												<feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo" />
+												<feComposite in="SourceGraphic" in2="goo"/>
+												</filter>
+											</defs>
+										</svg>
+
+										<span class="button--bubble__container" data-aos="fade-right">
+											<a href="{{ path('about') }}" class="button button--bubble">
+												About Me
+											</a>
+											<span class="button--bubble__effect-container">
+												<span class="circle top-left"></span>
+												<span class="circle top-left"></span>
+												<span class="circle top-left"></span>
+
+												<span class="button effect-button"></span>
+
+												<span class="circle bottom-right"></span>
+												<span class="circle bottom-right"></span>
+												<span class="circle bottom-right"></span>
+											</span>
+										</span>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 
-			<div class="col-sm-5 col-lg-5" data-aos="fade-up-right">
+			<div class="col-sm-5 col-lg-5 moving" data-aos="fade-up-right">
 				<div class="card2">
 					<div class="flips">
 						<div class="front2 vertical">
 							<div class="card-content">
-								<h2>Front</h2>
-								<p>Lorem ipsum</p>
+								<h2 class="front-h2">Front</h2>
+								<p class="front-p">Lorem ipsum</p>
 							</div>
 						</div>
 						<div class="back2 vertical">
 							<div class="card-content">
-								<h2>Back</h2>
-								<p>Lorem ipsum</p>
+								<h2 class="back-h2">Back</h2>
+								<p class="back-p">Lorem ipsum</p>
 							</div>
 						</div>
 					</div>
@@ -50,38 +78,38 @@
 
 		<div class="row">
 			<div class="col-sm-1 col-lg-1"></div>
-			<div class="col-sm-5 col-lg-5" data-aos="fade-up-right">
+			<div class="col-sm-5 col-lg-5 moving" data-aos="fade-up-right">
 				<div class="card3">
 					<div class="flips">
 						<div class="front3 vertical">
 							<div class="card-content">
-								<h2>Front</h2>
-								<p>Lorem ipsum</p>
+								<h2 class="front-h2">Front</h2>
+								<p class="front-p">Lorem ipsum</p>
 							</div>
 						</div>
 						<div class="back3 vertical">
 							<div class="card-content">
-								<h2>Back</h2>
-								<p>Lorem ipsum</p>
+								<h2 class="back-h2">Back</h2>
+								<p class="back-p">Lorem ipsum</p>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 
-			<div class="col-sm-5 col-lg-5" data-aos="fade-up-right">
+			<div class="col-sm-5 col-lg-5 moving" data-aos="fade-up-right">
 				<div class="card4">
 					<div class="flips">
 						<div class="front4 vertical">
 							<div class="card-content">
-								<h2>Front</h2>
-								<p>Lorem ipsum</p>
+								<h2 class="front-h2">Front</h2>
+								<p class="front-p">Lorem ipsum</p>
 							</div>
 						</div>
 						<div class="back4 vertical">
 							<div class="card-content">
-								<h2>Back</h2>
-								<p>Lorem ipsum</p>
+								<h2 class="back-h2">Back</h2>
+								<p class="back-p">Lorem ipsum</p>
 							</div>
 						</div>
 					</div>

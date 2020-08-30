@@ -28,10 +28,12 @@
   &__input {
     font-size: 1.3rem;
     font-family: inherit;
-    color: $color-white;
+    // color: $color-white;
+    color: var(--bg);
     padding: 0.5rem 0.7rem;
     border-radius: .2rem;
-    background-color: $color-secondary;
+    // background-color: $color-secondary;
+    background-color: var(--form-input);
     border: none;
     border-bottom: .3rem solid transparent;
     width: 100%;
@@ -39,8 +41,10 @@
     transition: all 0.3s;
 
     &::selection {
-      background-color: $color-white;
-      color: $color-secondary;
+      // background-color: $color-white;
+      background-color: var(--bg);
+      // color: $color-secondary;
+      color: var(--bg-inversed);
     }
 
     @include respond(tab-port) {
@@ -58,7 +62,8 @@
     }
 
     &::-webkit-input-placeholder {
-      color: $color-white;
+      // color: $color-white;
+      color: var(--bg);
     }
   }
 
@@ -69,6 +74,7 @@
     margin-top: 0.7rem;
     display: block;
     transition: all 0.3s;
+    color: var(--color-headings);
   }
 
   &__input:placeholder-shown + &__label {
@@ -100,12 +106,14 @@
     cursor: pointer;
     position: relative;
     padding-left: 4.5rem;
+    color: var(--color-headings);
   }
 
   &__radio-button {
     height: 2rem;
     width: 2rem;
-    border: .5rem solid $color-secondary;
+    // border: .5rem solid $color-secondary;
+    border: .5rem solid var(--color-headings);
     border-radius: 50%;
     display: inline-block;
     position: absolute;
@@ -121,7 +129,8 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      background-color: $color-tertiary;
+      // background-color: $color-tertiary;
+      background-color: var(--card-h2);
       opacity: 0;
       transition: opacity 0.2s;
     }

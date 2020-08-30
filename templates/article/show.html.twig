@@ -17,7 +17,7 @@
 		</div>
 	{% endfor %}
 
-	<header style="background-image: url('/uploads/images/{{ article.imageName }}'); background-repeat: no-repeat; background-size: cover; padding: 20rem; background-size: 50%; background-position: center;">
+	<header class="header__blog" style="background-image: url('/uploads/images/{{ article.imageName }}');">
 		{# <div class="container h-100">
 			<div class="row h-100 align-items-center">
 				<div class="col-12 text-center article-intro">
@@ -29,34 +29,25 @@
 	</header>
 
 	<div class="container">
-		<div class="row mt-5 mb-5">
+		<div class="row mt-5 mb-5 moving">
 			{{ article.content|raw }}
 		</div>
 		<hr class="separator">
 		<div class="row">
 			<h4 class="comments-counter">
-				{% set commentNumber = comments|length %}
-
-				{% if commentNumber == 1 %}
-					<p class="text-center"><i class="fas fa-comments"></i>
-					{{ commentNumber }} 
-					Comment</p>
-					{% if not app.user %}
-						<p>You need to be logged in to post a comment</p>
-					{% endif %}
-				{% elseif commentNumber >= 2 %}
-					<p class="text-center"><i class="fas fa-comments"></i>
-					{{ commentNumber }}	
-					Comments</p>
-					{% if not app.user %}
-						<p>You need to be logged in to post a comment</p>
-					{% endif %}
+				{% if not app.user %}
+					You need to be logged in to post or reply to a comment
 				{% else %}
-					Be the first one to post a comment
+					{% if article.comments|length >= 1 %}
+						<i class="fas fa-comments"></i> Comment section
+					{% else %}
+						<!-- No comment -->
+						No comment yet! Post the first one😀
+					{% endif %}
 				{% endif %}
 			</h4>
 
-			<div class="comments user-info-comments col-lg-12">
+			<div class="comments user-info-comments col-lg-12 moving">
                 <ul class="commentaire"></ul>
             </div>
         </div>
@@ -64,7 +55,7 @@
 		{% if app.user %}
 			{{ form_start(form) }}
 				<div class="form__group">
-					{{ form_widget(form.content, {'attr': { 'class': 'form__input comment-block d-block', 'placeholder': 'Add comment...', 'cols': '10', 'rows': '5' }}) }}
+					{{ form_widget(form.content, {'attr': { 'class': 'moving form__input comment-block d-block', 'placeholder': 'Add comment...', 'cols': '10', 'rows': '5' }}) }}
 					<label for="content" class="form__label">Comment</label>
 					<span class="textRequired form__label"></span>
 				</div>
@@ -84,7 +75,7 @@
    	<script language="javascript">
         let commentaire = '';
 		let author = "<br><span class='article__author'>Published by {{article.users}} {{article.createdAt|ago}}</span>";
-        
+
 		$('.language__title').append(author)
 
 		{% for comment in comments %}
@@ -98,10 +89,10 @@
                 <li>
                     <div class="comment-wrap">
                         <div class="photo">
-                            <div class="avatar" {% if comment.users.avatar != 'avatar.png' %} style="background-image: url(/uploads/avatars/{{ comment.users.firstName|lower }}-{{ comment.users.lastName|lower }}/{{ comment.users.avatar }})" {% else %} style="background-image: url(/uploads/avatars/{{ comment.users.avatar }})" {% endif %}></div>
-                        </div>
+                            <div class="avatar" {% if comment.users.avatar != 'avatar.png' %} style="background-image: url(/uploads/avatars/{{ comment.users.slug }}/{{ comment.users.avatar }})" {% else %} style="background-image: url(/uploads/avatars/{{ comment.users.avatar }})" {% endif %}></div>
+						</div>
                         <div class="comment-block">
-                            <div class="comment-tile">{{ comment.users.__toString }} | Comment n°: {{ comment.id }}</div>
+                            <div class="comment-tile">{{ comment.users.__toString }}</div>
                             <p class="comment-text">{{ comment.content|capitalize }}</p>
                             <div class="bottom-comment">
                                 <div class="comment-date">
@@ -109,7 +100,7 @@
                                 </div>
                                 <span class="d-flex justify-content-end float-right">
                                     {% if app.user != comment.users and app.user %}
-                                        <button id="loadComments-{{ comment.id }}" class="button__login d-block" style="background-color: #ffbe41; color: black;">Reply to comment {{ comment.id }}</button>  
+                                        <button id="loadComments-{{ comment.id }}" class="button__login d-block" style="background-color: #ffbe41; color: black;">Reply</button>  
                                     {% endif %}
                                 
                                     {% if comment.users is same as(app.user) %}
@@ -150,7 +141,7 @@
 				$('#postComment-{{comment.id}}').on('click', () => {
 					if ($("#commentID-{{comment.id}}").val() != '') {
 						axios.post('/api/comments', {
-							content: $('#commentID-{{comment.id}}').val(),
+							content: $('#commentID-{{comment.id}}').val().replace(/</g, "&lt;").replace(/>/g, "&gt;"),
 							users: "/api/users/{{app.user.id}}",
 							article: "/api/articles/{{article.id}}",
 							parent: "/api/comments/{{comment.id}}"
@@ -167,10 +158,10 @@
 								<li>
 									<div class="comment-wrap">
 										<div class="photo">
-											<div class="avatar" style="background-image: url(/uploads/avatars/${first}-${last}/${res.data.users.avatar})"></div>
+											<div class="avatar" {% if comment.users.avatar != 'avatar.png' %} style="background-image: url(/uploads/avatars/${userData.slug}/${res.data.users.avatar})" {% else %} style="background-image: url(/uploads/avatars/${res.data.users.avatar})" {% endif %}></div>
 										</div>
 										<div class="comment-block">
-											<div class="comment-tile">${name} | Comment n°: ${idComment}</div>
+											<div class="comment-tile">${name}</div>
 											<p class="comment-text">${content}</p>
 											<div class="bottom-comment">
 												<div class="comment-date">
@@ -206,13 +197,23 @@
         {% endfor %}
 
 		{% if app.user %}
+			// Update Comment counter
+			let text = "";
+	
+			// Update comment Counter by retrieving all comments
+			axios.get('/api/comments').then(result => {
+				$('.toggle__first-one').replaceWith(`
+					<p class="text-center singular">No comment yet! Publish the first one</p>
+				`);				
+			});
+
 			$('.postComment').on('click', () => {
-				
+        		let commentCount = document.querySelector('.comment__count');
 				// Prevents from submitting an empty field
 				if ($("#comment_content").val() != '') {
 					// Post Request to custom API
 					axios.post('/api/comments', {
-						content: $("#comment_content").val(),
+						content: $("#comment_content").val().replace(/</g, "&lt;").replace(/>/g, "&gt;"),
 						users: "/api/users/{{app.user.id}}",
 						article: "/api/articles/{{article.id}}"
 					})
@@ -224,6 +225,7 @@
 						let last = userData.lastname.charAt(0).toLowerCase() + userData.lastname.slice(1);
 						let name = `${userData.firstname} ${userData.lastname}`;
 						let content = res.data.content.charAt(0).toUpperCase() + res.data.content.slice(1);
+						
 						// Converts JS variables to use them inside Twig conditions
 						{% set user = "userData" %}
 
@@ -231,10 +233,10 @@
 							<li>
 								<div class="comment-wrap">
 									<div class="photo">
-										<div class="avatar" style="background-image: url(/uploads/avatars/${first}-${last}/${res.data.users.avatar})"></div>
+										<div class="avatar" style="background-image: url(/uploads/avatars/${userData.slug}/${res.data.users.avatar})"></div>
 									</div>
 									<div class="comment-block">
-										<div class="comment-tile">${name} | Comment n°: ${idComment}</div>
+										<div class="comment-tile">${name}</div>
 										<p class="comment-text">${content}</p>
 										<div class="bottom-comment">
 											<div class="comment-date">
@@ -259,6 +261,7 @@
 								<ul class="reply-${idComment}" style="width: 98%; float: right"></ul>
 							</li>
 						`;
+						
 						// Empty textarea
 						$("#comment_content").val('');
 						$('.commentaire').append(postComment);

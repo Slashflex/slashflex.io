@@ -26,12 +26,14 @@ class ArticleController extends AbstractController
     private $manager;
     private $userRepository;
     private $commentRepository;
+    private $articleRepository;
 
-    public function __construct(EntityManagerInterface $manager, UserRepository $userRepository, CommentRepository $commentRepository)
+    public function __construct(ArticleRepository $articleRepository, EntityManagerInterface $manager, UserRepository $userRepository, CommentRepository $commentRepository)
     {
         $this->manager = $manager;
         $this->userRepository = $userRepository;
         $this->commentRepository = $commentRepository;
+        $this->articleRepository = $articleRepository;
     }
 
     /**
@@ -78,9 +80,9 @@ class ArticleController extends AbstractController
      * 
      * @Route("/blog", name="blog")
      */
-    public function index(ArticleRepository $articleRepository)
+    public function index()
     {
-        $articles = $articleRepository->findAll();
+        $articles = $this->articleRepository->findAll();
 
         return $this->render('article/index.html.twig', [
             'title' => '/FLX | articles',

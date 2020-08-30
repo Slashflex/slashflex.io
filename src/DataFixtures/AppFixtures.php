@@ -35,6 +35,12 @@ class AppFixtures extends Fixture
         $roleAdmin->setName('ROLE_ADMIN');
         $manager->persist($roleAdmin);
 
+        // Create an user role
+        $roleUser = new Role();
+        $roleUser->setName('ROLE_USER');
+
+        $manager->persist($roleUser);
+
         $password = $_ENV['DB_PASSWORD'];
         $email = $_ENV['DB_EMAIL'];
         $firstname = $_ENV['DB_FIRSTNAME'];
@@ -50,9 +56,10 @@ class AppFixtures extends Fixture
             ->setDescription('Creator of https://slashflex.io')
             ->setLogin('Slashflex')
             ->addRoleUser($roleAdmin)
+            ->addRoleUser($roleUser)
             ->initializeSlug();
 
-        $path = 'public/uploads/avatars/' . strtolower($admin->getFirstname()) . '-' . strtolower($admin->getLastname());
+        $path = 'public/uploads/avatars/' . $admin->getSlug();
         mkdir($path);
         $admin->setAvatar('avatar.png');
         copy('public/uploads/avatars/avatar.png', $path . '/avatar.png');
@@ -573,7 +580,7 @@ class AppFixtures extends Fixture
                 nano /var/www/your_domain/html/index.html
                 </code>
                 <p class="language-html">Inside, add the following sample HTML:</p>
-                <img src="https://i.imgur.com/o2I3MoN.png">
+                <img class="img-fluid" src="https://i.imgur.com/o2I3MoN.png">
                 <p class="language-html">Save and close the file by typing <span class="highlight">CTRL</span> and <span class="highlight">X</span> then <span class="highlight">Y</span> and <span class="highlight">ENTER</span> when you are finished.</p>
                 <p class="language-html">In order for Nginx to serve this content, it’s necessary to create a server block with the correct directives. Instead of modifying the  default configuration file directly, let’s make a new one at <strong>/etc/nginx/sites-available/your_domain</strong>:</p>
                 <code class="language-shell">
@@ -630,7 +637,7 @@ class AppFixtures extends Fixture
                 <span class="sudo">sudo</span> systemctl restart nginx
                 </code>
                 <p class="language-html">Nginx should now be serving your domain name. You can test this by navigating to <strong>http://your_domain</strong>, where you should see something like this:</p>
-                <img src="https://assets.digitalocean.com/articles/nginx_server_block_1404/first_block.png">
+                <img class="img-fluid" src="https://assets.digitalocean.com/articles/nginx_server_block_1404/first_block.png">
                 <hr class="separator">
                 <h3 class="language__subtitle">Step 6 – Getting Familiar with Important Nginx Files and Directories</h3>
                 <p class="language-html">Now that you know how to manage the Nginx service itself, you should take a few minutes to familiarize yourself with a few important directories and files.</p>
@@ -896,7 +903,7 @@ class AppFixtures extends Fixture
                 <span class="sudo">nano</span> /var/www/example.com/public_html/index.html
                 </code>
                 <p class="language-html">Within this file, create an HTML document that indicates the site it is connected to, like the following:</p>
-                <img class="img-fluid" src="http://slashflex.io.test/index-html.webp" alt="html page">
+                <img class="img-fluid" src="http://slashflex.io.test/uploads/images/index-html.webp" alt="html page">
                 <p class="language-html">Save and close the file (in nano, press <span class="highlight">CTRL</span> + <span class="highlight">X</span> then <span class="highlight">Y</span> then <span class="highlight">ENTER</span>) when you are finished.</p>
                 <hr class="separator">
                 <h3 class="language__subtitle">Step Four — Create New Virtual Host Files</h3>
@@ -1138,6 +1145,7 @@ class AppFixtures extends Fixture
                 </ul> 
             </div>
         EOT;
+
         // Initial Server Setup with Ubuntu 20.04
         $content9 = <<<EOT
             <div class="article__content">
@@ -1327,7 +1335,7 @@ class AppFixtures extends Fixture
                 http://your_server_ip
                 </code>
                 <p class="language-html">You should see the default Ubuntu 20.04 Apache web page:</p>
-                <img class="w-50" src="http://slashflex.io.test/apache_default.png">
+                <img class="w-50 img-fluid" src="http://slashflex.io.test/uploads/images/apache_default.webp">
                 <p class="language-html">This page indicates that Apache is working correctly. It also includes some basic information about important Apache files and directory locations.</p>
                 <hr class="separator">
                 <h3 class="language__subtitle">Step 4 - Managing the Apache Process</h3>
@@ -1374,14 +1382,14 @@ class AppFixtures extends Fixture
                 <span class="sudo">sudo</span> nano /var/www/your_domain/index.html
                 </code>
                 <p class="language-html">Inside, add the following sample HTML:</p>
-                <img src="http://slashflex.io.test/index-html.png">
+                <img class="img-fluid" src="http://slashflex.io.test/uploads/images/index-html.webp">
                 <p class="language-html">Save and close the file when you are finished.</p>
                 <p class="language-html">In order for Apache to serve this content, it’s necessary to create a virtual host file with the correct directives. Instead of modifying the default configuration file located at <strong>/etc/apache2/sites-available/000-default.conf</strong> directly, let’s make a new one at <strong>/etc/apache2/sites-available/your_domain.conf</strong>:</p>
                 <code class="language-shell">
                 <span class="sudo">sudo</span> nano /etc/apache2/sites-available/your_domain.conf
                 </code>
                 <p class="language-html">Paste in the following configuration block, which is similar to the default, but updated for our new directory and domain name:</p>
-                <img src="http://slashflex.io.test/v-host.png">
+                <img class="img-fluid" src="http://slashflex.io.test/uploads/images/v-host.webp">
                 <p class="language-html">Notice that we’ve updated the <strong>DocumentRoot</strong> to our new directory and <strong>ServerAdmin</strong> to an email that the <strong>your_domain</strong> site administrator can access. We’ve also added two directives: <strong>ServerName</strong>, which establishes the base domain that should match for this virtual host definition, and <strong>ServerAlias</strong>, which defines further names that should match as if they were the base name.</p>
                 <p class="language-html">Save and close the file when you are finished.</p>
                 <p class="language-html">Let’s enable the file with the <strong>a2ensite</strong> tool:</p>
@@ -1405,7 +1413,7 @@ class AppFixtures extends Fixture
                 <span class="sudo">sudo</span> systemctl restart apache2
                 </code>
                 <p class="language-html">Apache should now be serving your domain name. You can test this by navigating to <strong>http://your_domain</strong>, where you should see something like this:</p>
-                <img src="http://slashflex.io.test/success-v-host.png">
+                <img class="img-fluid" src="http://slashflex.io.test/uploads/images/success-v-host.webp">
                 <hr class="separator">
                 <h3 class="language__subtitle">Step 6 - Getting Familiar with Important Apache Files and Directories</h3>
                 <p class="language-html">Now that you know how to manage the Apache service itself, you should take a few minutes to familiarize yourself with a few important directories and files.</p>
@@ -1416,8 +1424,8 @@ class AppFixtures extends Fixture
                 <p class="language-html"><span class="invisible">tab</span>- <strong>/etc/apache2/ports.conf</strong>: </br>This file specifies the ports that Apache will listen on. By default, Apache listens on port 80 and additionally listens on port 443 when a module providing SSL capabilities is enabled.</p>
                 <p class="language-html"><span class="invisible">tab</span>- <strong>/etc/apache2/sites-available/</strong>: </br>The directory where per-site virtual hosts can be stored. Apache will not use the configuration files found in this directory unless they are linked to the <strong>sites-enabled</strong> directory. Typically, all server block configuration is done in this directory, and then enabled by linking to the other directory with the <strong>a2ensite</strong> command.</p>
                 <p class="language-html"><span class="invisible">tab</span>- <strong>/etc/apache2/sites-enabled/</strong>: </br>The directory where enabled per-site virtual hosts are stored. Typically, these are created by linking to configuration files found in the <strong>sites-available</strong> directory with the <strong>a2ensite</strong>. Apache reads the configuration files and links found in this directory when it starts or reloads to compile a complete configuration.</p>
-                <p class="language-html"><span class="invisible">tab</span>- <strong>/etc/apache2/conf-available/</strong>, <strong>/etc/apache2/conf-enabled/</strong>: </br>These directories have the same relationship as the <strong>sites-available</strong> and <strong>sites-enabled</strong> directories, but are used to store configuration fragments that do not belong in a virtual host. Files in the <strong>conf-available</strong> directory can be enabled with the <strong>a2enconf</strong> command and disabled with the <strong>a2disconf</strong> command.</p>
-                <p class="language-html"><span class="invisible">tab</span>- <strong>/etc/apache2/mods-available/</strong>, <strong>/etc/apache2/mods-enabled/</strong>: </br>These directories contain the available and enabled modules, respectively. Files ending in <strong>.load</strong> contain fragments to load specific modules, while files ending in <strong>.conf</strong> contain the configuration for those modules. Modules can be enabled and disabled using the <strong>a2enmod</strong> and <strong>a2dismod</strong> command.</p>
+                <p class="language-html"><span class="invisible">tab</span>- <strong>/etc/apache2/conf-available/</strong>, </br> <span class="invisible"> tab </span> <strong>/etc/apache2/conf-enabled/</strong>: </br>These directories have the same relationship as the <strong>sites-available</strong> and <strong>sites-enabled</strong> directories, but are used to store configuration fragments that do not belong in a virtual host. Files in the <strong>conf-available</strong> directory can be enabled with the <strong>a2enconf</strong> command and disabled with the <strong>a2disconf</strong> command.</p>
+                <p class="language-html"><span class="invisible">tab</span>- <strong>/etc/apache2/mods-available/</strong>, </br> <span class="invisible"> tab </span> <strong>/etc/apache2/mods-enabled/</strong>: </br>These directories contain the available and enabled modules, respectively. Files ending in <strong>.load</strong> contain fragments to load specific modules, while files ending in <strong>.conf</strong> contain the configuration for those modules. Modules can be enabled and disabled using the <strong>a2enmod</strong> and <strong>a2dismod</strong> command.</p>
                 <h5 class="language__subtitle">Server Logs</h5>
                 <p class="language-html"><span class="invisible">tab</span>- <strong>/var/log/apache2/access.log</strong>: </br>By default, every request to your web server is recorded in this log file unless Apache is configured to do otherwise.</p>
                 <p class="language-html"><span class="invisible">tab</span>- <strong>/var/log/apache2/error/log</strong>: </br>By default, all errors are recorded in this file. The <strong>LogLevel</strong> directive in the Apache configuration specifies how much detail the error logs will contain.</p>
@@ -1529,33 +1537,34 @@ class AppFixtures extends Fixture
         $manager->persist($article8);
         $manager->persist($article9);
         $manager->persist($article10);
+
         // Populate the database with fake project, fake images and fake paragraphs
-        // for ($i = 1; $i <= 6; $i++) {
-        //     $project = new Project();
+        for ($i = 1; $i <= 6; $i++) {
+            $project = new Project();
 
-        //     $title = $faker->word(3);
+            $title = $faker->word(3);
 
-        //     $src = 'public/uploads/images/error_404.gif';
+            $src = 'public/uploads/images/error_404.gif';
 
-        //     $file = new UploadedFile(
-        //         $src,
-        //         'error_404.gif',
-        //         'image/gif',
-        //         false,
-        //         true //  Set test mode true !!! " Local files are used in test mode hence the code should not enforce HTTP uploads."
-        //     );
-        //     $project->setImageName($file);
-        //     $file2 = new File('public/uploads/images/error_404.gif');
-        //     $project->setImageFile($file2);
-        //     $project
-        //         ->setTitle($title)
-        //         ->setIntroduction($faker->sentence(6))
-        //         ->setContent($faker->sentence(20))
-        //         ->setUsers($admin)
-        //         ->initializeSlug($title);
+            $file = new UploadedFile(
+                $src,
+                'error_404.gif',
+                'image/gif',
+                false,
+                true //  Set test mode true !!! " Local files are used in test mode hence the code should not enforce HTTP uploads."
+            );
+            $project->setImageName($file);
+            $file2 = new File('public/uploads/images/error_404.gif');
+            $project->setImageFile($file2);
+            $project
+                ->setTitle($title)
+                ->setIntroduction($faker->sentence(6))
+                ->setContent($faker->sentence(20))
+                ->setUsers($admin)
+                ->initializeSlug($title);
 
-        //     $manager->persist($project);
-        // }
+            $manager->persist($project);
+        }
 
         // for ($j = 1; $j <= 4; $j++) {
         //     $article = new Article();
@@ -1573,12 +1582,6 @@ class AppFixtures extends Fixture
 
         //     $manager->persist($article);
         // }
-
-        // Create a user role
-        // $roleUser = new Role();
-        // $roleUser->setName('ROLE_USER');
-
-        // $manager->persist($roleUser);
 
         // for ($k = 1; $k < mt_rand(1, 12); $k++) {
         //     $user = new User();

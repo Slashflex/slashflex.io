@@ -1,6 +1,7 @@
 /* Full screen menu */
 #menu {
-  background: $color-tertiary;
+  // background: $color-tertiary;
+  background: var(--button);
   height: 100%;
   left: 0;
   opacity: 0;
@@ -61,7 +62,8 @@
     }
 
     &__link {
-      color: $color-secondary;
+      // color: $color-secondary;
+      color: var(--color-headings);
       display: block;
       font-size: 2.5rem;
       font-weight: bold;
@@ -89,7 +91,6 @@
   right: 2rem;
   background: $color-secondary;
   width: 30px;
-  height: 5px;
   transition: .2s ease;
   cursor: pointer;
   z-index: 1;
@@ -101,7 +102,8 @@
   position: absolute;
   top: 2.5rem;
   right: 2rem;
-  background: $color-secondary;
+  // background: $color-secondary;
+  background: var(--links);
   width: 3rem;
   height: 5px;
   transition: .2s ease;
@@ -112,7 +114,9 @@
     position: absolute;
     top: 2.5rem;
     right: 2rem;
-    background: $color-secondary;
+    // background-color: $color-secondary;
+  background: var(--links);
+
     width: 3rem;
     height: 5px;
     transition: .2s ease;
@@ -127,7 +131,9 @@
     position: absolute;
     top: 2.5rem;
     right: 2rem;
-    background: $color-secondary;
+    // background: $color-secondary;
+  background: var(--links);
+
     width: 3rem;
     height: 5px;
     transition: .2s ease;

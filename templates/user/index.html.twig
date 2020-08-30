@@ -19,17 +19,17 @@
     <div class="container">
         <h1 class="text-center mt-5">Hello {{ user }}</h1>
 
-        <p>Email : {{ user.email }}</p>
-        <p>Account created {{ user.getDate }}</p>
-        <a href="{{ path('edit_me', {'slug': user.slug}) }}" class="button__login">Edit</a>
-        <a href="{{ path('upload_avatar', {'slug': user.slug}) }}" class="button__login">Upload avatar</a>
+        <p class="moving">Email : {{ user.email }}</p>
+        <p class="moving">Account created {{ user.getDate }}</p>
+        <a href="{{ path('edit_me', {'slug': user.slug}) }}" class="button__login moving">Edit</a>
+        <a href="{{ path('upload_avatar', {'slug': user.slug}) }}" class="button__login moving">Upload avatar</a>
         {% if app.user.roleUser[0].name == 'ROLE_ADMIN' %}
-            <a href="{{ path('admin') }}" class="button__login">Dashboard</a>
+            <a href="{{ path('admin') }}" class="button__login moving">Dashboard</a>
         {% endif %}
 
         <div class="avatar">
             {% if user.avatar != 'avatar.png' %}
-                <img src="/uploads/avatars/{{ user.firstName|lower }}-{{ user.lastName|lower }}/{{ user.avatar }}" alt="{{ user.__toString }}" class="avatar__image">
+                <img src="/uploads/avatars/{{ user.slug }}/{{ user.avatar }}" alt="{{ user.__toString }}" class="avatar__image">
             {% else %}
                 <img src="/uploads/avatars/{{ user.avatar }}" alt="{{ user.__toString }}" class="avatar__image">
             {% endif %}

@@ -35,9 +35,16 @@ class RegistrationController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             )
-                ->setAvatar('avatar.png')
                 ->addRoleUser($role)
                 ->initializeSlug();
+
+            $firstname = str_replace(' ', '', $form->get('firstname')->getData());
+            $lastname = str_replace(' ', '', $form->get('lastname')->getData());
+            $path = 'uploads/avatars/' . $user->getSlug();
+            // Create dedicated folder for the registered user
+            mkdir($path);
+            $user->setAvatar('avatar.png');
+            copy('uploads/avatars/avatar.png', $path . '/avatar.png');
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);

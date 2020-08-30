@@ -1,6 +1,7 @@
 // Shell
 .flag {
-  color: $color-flag;
+  // color: $color-flag;
+  color: var(--flag);
 
   &::selection {
     background-color: $color-white;
@@ -18,7 +19,8 @@
       }
 }
 .sudo {
-  color: $color-tertiary;
+  // color: $color-tertiary;
+  color: var(--sudo);
 
   &::selection {
     background-color: $color-white;
@@ -27,7 +29,8 @@
 }
 
 .var {
-  color: $alert-success;
+  // color: $alert-success;
+  color: var(--var);
 
   &::selection {
     background-color: $color-white;
@@ -41,7 +44,8 @@
     color: $alert-error;
   }
   &__param {
-    color: $color-tertiary;
+    // color: $color-tertiary;
+    color: var(--param);
   }
   &__function {
     color: $color-function;
@@ -52,28 +56,42 @@
     font-size: 1.5rem;
     margin: 2rem 0;
     font-family: "Montserrat", sans-serif;
-    font-weight: 500;
+    font-weight: 400;
+    color: var(--links);
+
+    & strong {
+      color: var(--links);
+    }
   }
   &-shell {
     font-size: 1.3rem;
-    background-color: $color-secondary;
+    // background-color: $color-secondary;
+    background-color: var(--links);
     display: block;
     padding: 1rem;
     font-family: "Montserrat", sans-serif;
     font-weight: 500;
-    color: $color-white
+    // color: $color-white;
+    color: var(--bg);
+
+    &::selection {
+      background-color: $color-white;
+      color: $color-secondary;
+    }
   }
   &__title {
     font-size: 4rem;
     margin-bottom: 5rem;
     font-family: "Montserrat", sans-serif;
     font-weight: bold;
+    color: var(--links);
   }
   &__subtitle {
     font-weight: bold;
     font-size: 2.6rem;
     font-family: "Montserrat", sans-serif;
     font-weight: 800;
+    color: var(--links);
   }
   &__heading5 {
     font-weight: bold;
@@ -151,14 +169,16 @@ code {
 
 .in-bl {
   display: inline-block;
-  color: $post-link;
+  // color: $post-link;
+  color: var(--post-link);
   font-family: 'Montserrat', sans-serif;
   font-weight: 500;
   border-bottom: 1px solid transparent;
   transition: all .5s;
 
   &:hover {
-    color: $color-secondary;
+    // color: $color-secondary;
+    color: var(--links);
     text-decoration: none;
     border-bottom: 1px solid $color-tertiary;
   }
@@ -166,5 +186,6 @@ code {
 
 .article__author {
   font-weight: 100;
-  font-size: 1.7rem;
+  font-size: 1.5rem;
+  color: var(--links);
 }    

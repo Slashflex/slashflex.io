@@ -5,12 +5,23 @@
   left: 0;
   width: 100%;
   height: 40vh;
-  background: $color-secondary;
-  color: $color-white;
+  // background: $color-secondary;
+  background: var(--links);
+  // color: $color-white;
+  // color: var(--bg);
   z-index: -1;
-  box-shadow: inset 0px .3rem 1.6rem 0px rgba($color-black, 0.75);
   text-align: justify;
 
+  @include respond(tab-port) {
+    height: 65vh;
+  }
+
+  @include respond(phone) {
+    height: 85vh;
+  }
+  @include respond(phone-small) {
+    height: 84.6vh;
+  }
   &__title {
     font-size: 2rem;
   }
@@ -18,12 +29,14 @@
   &__slashflex {
     font-size: 3rem;
     font-weight: 800;
-    color: $color-tertiary;
+    // color: $color-tertiary;
+    color: var(--card-p);
     transition: all 0.9s;
     font-family: "Montserrat", Sans-serif;
 
     &:hover {
-      text-shadow: 0 0 1vw $color-tertiary;
+      // text-shadow: 0 0 1vw $color-tertiary;
+      text-shadow: 0 0 1vw var(--card-p);
     }
   }
 
@@ -39,23 +52,31 @@
     font-family: 'Montserrat', sans-serif;
     font-weight: 600;
     font-size: 1.1rem;
+    color: var(--bg);
     
     &--link {
       margin-left: 1rem;
-      color: $color-tertiary;
+      // color: $color-tertiary;
+      color: var(--card-p);
       font-family: 'Montserrat', sans-serif;
       font-weight: 600;
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       transition: all .5s;
+      padding: 0 .4rem;
       
       &:hover {
         background-color: $color-secondary;
         color: $color-tertiary;
+        padding: 0 .4rem;
         text-decoration: none;
         box-shadow: 0 0 10px $color-black;
         transform: rotate(4deg) scale(1.1);
       }
     }
+  }
+
+  & p {
+    color: var(--bg);
   }
 }
 
@@ -97,7 +118,8 @@
 
       &:hover {
         transform: scale(1.4) rotate(10deg);
-        color: $color-secondary;
+        // color: $color-secondary;
+        color: var(--color-headings);
       }
     }
 
@@ -109,7 +131,8 @@
     }
 
     &__social {
-      color: $color-white;
+      // color: $color-white;
+      color: var(--bg);
       text-decoration: none;
       text-transform: uppercase;
       font-size: 3rem;
@@ -128,7 +151,9 @@
 
       &:hover {
         transform: scale(1.4) rotate(10deg);
-        color: $color-tertiary;
+        // color: $color-tertiary;
+        color: var(--card-h2);
+        filter: drop-shadow(2px 4px 6px black);
       }
     }
   }

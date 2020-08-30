@@ -57,29 +57,17 @@
 <body>
     <div class="body">
         <div class="container">
-            <div class="header text-center">
-                <a href="{{ url('home') }}">
-                    <img src="{{ logo }}" alt="logo" class="logo">
-                </a>
-            </div>
-
             <div class="content">
-                <h1 class="text-center">Nice to meet you {{ name }}</h1>
-                <p class="block">Welcome to <strong>Slashflex.io</strong>, i can't wait to read your comments on my blog's posts</p>
+                <h1 class="text-center"><strong>{{user|capitalize}}</strong> sent you a message.</h1>
                 <p class="block">
-                    Check out existing posts and share you thoughts in the comment section
-                </p>
-                <p class="block text-center">
-                    <a href="{{ url('blog') }}" class="btn">Get reading!</a>
+                    <strong>Subject:</strong><br>
+                    {{subject|capitalize}}
                 </p>
                 <p class="block">
-                    I'm excited that you've decided to join me.</br>
-                    If you need help, we're always just a message away.
+                    Message sent {{date}}.
                 </p>
-            </div>
-            <div class="footer">
                 <p class="block">
-                    Cheers 🍺, <a href="{{ url('home') }}">David Saoud (Slashflex)</a>
+                    <strong>{{user|capitalize}}</strong> email address : {{mail}}.
                 </p>
             </div>
         </div>

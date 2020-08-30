@@ -24,7 +24,8 @@
   transition: all .5s;
   cursor: pointer;
   border-radius: 5px;
-  background-color: $color-secondary;
+  // background-color: $color-secondary;
+  background-color: var(--color-headings);
 
   &:hover, 
   &:focus, 
@@ -32,6 +33,10 @@
     // background: #ffffff;
     // box-shadow: 2rem 2rem 6rem #d9d9d9, -2rem -2rem 6rem #ffffff;
     @include shadow;
+  }
+
+  & h3, i {
+    color: var(--bg);
   }
 }
 
@@ -45,11 +50,12 @@
 }
 
 .card__bg {
-  background-color: $color-white;
+  // background-color: $color-white;
+  background-color: var(--bg);
 }
 
 #accordion {
-  margin-top: 4rem;
+  //margin-top: 4rem;
 }
 
 .fa-crown {
@@ -61,11 +67,19 @@
 .fa-trash-alt {
   font-size: 1.4rem;
   color: $color-white;
+
+  @include respond(phone-small) {
+    font-size: 1rem;
+  }
 }
 
 .card-img-top {
   margin: 0 auto;
-  border-radius: 50%;
+  // margin-top: .5rem;
+  // width: 50%;
+}
+
+.heading-admin {
+  align-items: center;
   margin-top: .5rem;
-  width: 50%;
 }

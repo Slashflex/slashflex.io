@@ -28,7 +28,7 @@ class ApiCommentController extends AbstractController
      */
     public function getComments(CommentRepository $commentRepository)
     {
-        return $this->json($commentRepository->findAll(), 200, [], ['groups' => 'comment:read']);
+        return $this->json($commentRepository->findAll(), 200, [], ['groups' => 'read:comment']);
     }
 
     /**

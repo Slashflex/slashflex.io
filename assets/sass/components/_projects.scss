@@ -25,13 +25,17 @@
   position: relative;
 
   @include respond (tab-port) {
-    width: 50%;
+    width: 35%;
   }
   @include respond (phone) {
     width: 42%;
   }
   @include respond(phone-small) {
     width: 80%;
+  }
+
+  @include respond (phone-mid) {
+    width: 100%;
   }
 
   &--base {
@@ -46,16 +50,25 @@
     @include respond (tab-port) {
       width: 30%;
     }
-
     @include respond (phone) {
       width: 30%;
     }
-
     @include respond(phone-small) {
       width: 85%;
     }
+    @include respond (phone-mid) {
+      width: 100%;
+    }
   }
 }
+
+.model-contact {
+  // display: block;
+  // margin: 0 auto;
+  // width: 30%;
+  position: relative;
+}
+
 .keyF {
   height: 11vh;
   background-image: url(/build/images/sites_f.webp);
@@ -154,11 +167,19 @@ div[class^="key"] {
 }
 
 .project {
+
+  &__attachments {
+    max-width: 90%; 
+    max-height: 80%; 
+    margin-top: 12%;
+  }
+
   &__title {
     font-family: "Montserrat", Sans-serif;
     font-size: 3.5rem;
     font-weight: 800;
     margin-bottom: 2rem;
+    color: var(--links);
   }
 
   &__introduction {

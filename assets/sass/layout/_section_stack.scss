@@ -12,6 +12,7 @@
       font-family: 'Montserrat', sans-serif;
       margin-bottom: -3.4rem;
       position: relative;
+      color: var(--color-text);
 
       @include respond(phone) {
         font-size: 2.5rem;
@@ -26,6 +27,7 @@
       font-family: 'Montserrat', sans-serif;
       margin-bottom: -1.4rem;
       position: relative;
+      color: var(--links);
 
       @include respond(phone) {
         font-size: 2.5rem;
@@ -39,6 +41,8 @@
       font-family: "Montserrat", Sans-serif;
       margin-bottom: -7.2rem;
       position: relative;
+      // color: var(--bg-inversed);
+      color: var(--links);
 
       @include respond(phone) {
         font-size: 3.5rem;
@@ -51,7 +55,8 @@
       text-transform: uppercase;
       font-weight: 200;
       line-height: 1;
-      color: $text-alpha;
+      // color: $text-alpha;
+      color: var(--text-alpha);
       letter-spacing: .2rem;
 
       @include respond(phone) {
