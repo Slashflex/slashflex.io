@@ -63,10 +63,18 @@
 }
 
 .model-contact {
-  // display: block;
-  // margin: 0 auto;
-  // width: 30%;
+  display: block;
+  margin: 0 auto;
+  width: 70%;
   position: relative;
+
+  @include respond(tab-port) {
+    width: 100%;
+  }
+
+  @include respond(phone-small) {
+    width: 100%;
+  }
 }
 
 .keyF {
