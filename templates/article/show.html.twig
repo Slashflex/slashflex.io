@@ -34,18 +34,23 @@
 		</div>
 		<hr class="separator">
 		<div class="row">
-			<h4 class="comments-counter">
+			<div class="comments-counter">
+				<p class="text-center">Join The Conversation</p>
+
 				{% if not app.user %}
-					You need to be logged in to post or reply to a comment
+					<h4 class="comments-section-title">
+						Please <a class="please-login in-bl" href="{{ path('user_signin') }}">Log In</a> to post.
+					</h4>
 				{% else %}
-					{% if article.comments|length >= 1 %}
-						<i class="fas fa-comments"></i> Comment section
+					{% if article.comments|length == 1 %}
+						<p class="text-center comments-number">There is <strong class="count-up">{{ article.comments|length }} comment</strong> about this article</p>
+					{% elseif article.comments|length >= 2 %}
+						<p class="text-center comments-number">There are <strong class="count-up">{{ article.comments|length }} comments</strong> about this article</p>
 					{% else %}
-						<!-- No comment -->
-						No comment yet! Post the first one😀
+						<p class="text-center none-yet">No comment yet! Post the first one.</p>
 					{% endif %}
 				{% endif %}
-			</h4>
+			</div>
 
 			<div class="comments user-info-comments col-lg-12 moving">
                 <ul class="commentaire"></ul>
@@ -74,7 +79,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
    	<script language="javascript">
         let commentaire = '';
-		let author = "<br><span class='article__author'>Published by {{article.users}} {{article.createdAt|ago}}</span>";
+		let author = "<br><span class='article__author'>Published by {{article.users.description}} {{article.createdAt|ago}}</span>";
 
 		$('.language__title').append(author)
 
@@ -96,7 +101,7 @@
                             <p class="comment-text">{{ comment.content|capitalize }}</p>
                             <div class="bottom-comment">
                                 <div class="comment-date">
-                                    about {{ comment.createdAt|ago }}
+                                    <span>&bull;</span> {{ comment.createdAt|ago }}
                                 </div>
                                 <span class="d-flex justify-content-end float-right">
                                     {% if app.user != comment.users and app.user %}
@@ -128,7 +133,7 @@
             if ("{{idParent}}" == "-1") {
 				$('.commentaire').append(commentaire);
             } else {
-				// Renders all comments and them childrens (replies to given comments)
+				// Renders all comments and their childrens (replies to given comments)
                 $(".reply-{{idParent}}").append(commentaire);
             }
 
@@ -186,11 +191,24 @@
 									<ul class="reply-${idComment}" style="width: 98%; float: right"></ul>
 								</li>
 							`;
+
+							axios.get('/api/comments').then(result => {
+								let commentsNumber = '{{article.comments|length}}';
+								let total = parseInt(commentsNumber) + count;
+								
+								$('.none-yet').hide()
+								if (result.data.length >= 2) {
+									document.querySelector('.comments-number').innerHTML = `There are <strong class="count-up">${result.data.length} comments</strong> about this article`;
+								} else {
+									$('.comments-counter').append(`<p class="text-center comments-number">There is <strong class="count-up">${result.data.length} comment</strong> about this article</p>`);
+								}
+							});
+
 							// Empty textarea
 							$("#commentID-{{comment.id}}").val('');
 							$('.reply-{{comment.id}}').append(postComment);
 							$('#reply-comment-{{comment.id}}').hide();
-						})
+						});
 					}
 				});
 			{% endif %}
@@ -199,7 +217,8 @@
 		{% if app.user %}
 			// Update Comment counter
 			let text = "";
-	
+			let count = 0;
+				
 			// Update comment Counter by retrieving all comments
 			axios.get('/api/comments').then(result => {
 				$('.toggle__first-one').replaceWith(`
@@ -208,6 +227,7 @@
 			});
 
 			$('.postComment').on('click', () => {
+				count++;
         		let commentCount = document.querySelector('.comment__count');
 				// Prevents from submitting an empty field
 				if ($("#comment_content").val() != '') {
@@ -265,6 +285,18 @@
 						// Empty textarea
 						$("#comment_content").val('');
 						$('.commentaire').append(postComment);
+
+						axios.get('/api/comments').then(result => {
+							let commentsNumber = '{{article.comments|length}}';
+							let total = parseInt(commentsNumber) + count;
+							
+							$('.none-yet').hide()
+							if (result.data.length >= 2) {
+								document.querySelector('.comments-number').innerHTML = `There are <strong class="count-up">${total} comments</strong> about this article`;
+							} else {
+								$('.comments-counter').append(`<p class="text-center comments-number">There is <strong class="count-up">${result.data.length} comment</strong> about this article</p>`);
+							}
+						});
 					});
 				} else {
 					$('.textRequired').text('This field is required')

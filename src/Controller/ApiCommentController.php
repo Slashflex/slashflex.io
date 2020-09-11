@@ -14,10 +14,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ApiCommentController extends AbstractController
 {
+    private $commentRepository;
     private $manager;
 
-    public function __construct(EntityManagerInterface $manager)
+    public function __construct(CommentRepository $commentRepository, EntityManagerInterface $manager)
     {
+        $this->commentRepository = $commentRepository;
         $this->manager = $manager;
     }
 
@@ -26,9 +28,9 @@ class ApiCommentController extends AbstractController
      * 
      * @Route("/api/comments", name="api_comment_index", methods={"GET"})
      */
-    public function getComments(CommentRepository $commentRepository)
+    public function getComments()
     {
-        return $this->json($commentRepository->findAll(), 200, [], ['groups' => 'read:comment']);
+        return $this->json($this->commentRepository->findAll(), 200, [], ['groups' => 'read:comment']);
     }
 
     /**

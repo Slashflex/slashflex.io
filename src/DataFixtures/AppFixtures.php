@@ -53,7 +53,7 @@ class AppFixtures extends Fixture
             ->setLastname($lastname)
             ->setEmail($email)
             ->setPassword($this->passwordEncoder->encodePassword($admin, $password))
-            ->setDescription('Creator of https://slashflex.io')
+            ->setDescription('Admin')
             ->setLogin('Slashflex')
             ->addRoleUser($roleAdmin)
             ->addRoleUser($roleUser)
