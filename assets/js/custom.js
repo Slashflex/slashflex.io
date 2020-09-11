@@ -205,6 +205,10 @@ const black = "#27282c";
 const grey = "#585858";
 const white = "#fff";
 
+if (window.location.pathname == '/contact') {
+  $(".round").css("display", "none");
+}
+
 if (
   window.location.pathname == "/" ||
   window.location.pathname.includes("/works/")
