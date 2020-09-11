@@ -15,7 +15,8 @@
         &-tile {
             font-size: 1.8rem;
             font-weight: bold;
-            color: $color-white
+            // color: $color-white;
+            color: var(--bg);
         }
 
         &-wrap {
@@ -27,7 +28,8 @@
 
         &-block {
             padding: 1rem;
-            background-color: $color-secondary;
+            // background-color: $color-secondary;
+            background-color: var(--bg-inversed);
             display: table-cell;
             vertical-align: top;
             border-radius: 0.1875rem;
@@ -48,13 +50,16 @@
 
         &-text {
             margin-bottom: 1.25rem;
-            color: $color-white;
+            // color: $color-white;
+            color: var(--bg);
             font-size: 1.2rem;
         }
 
         &-date {
             float: left;
             margin-top: 1.5rem;
+            font-size: 1.2rem;
+            color: var(--bg);
 
             @include respond(phone-small) {
                 margin-top: 1rem;
@@ -85,4 +90,13 @@
 .bottom-comment {
     color: #acb4c2;
     font-size: 0.875rem;
+}
+
+.comments-number, .none-yet {
+    font-size: 1.4rem;
+}
+
+.comments-section-title {
+    font-size: 1.8rem;
+    text-align: center;
 }

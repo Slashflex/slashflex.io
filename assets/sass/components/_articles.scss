@@ -1,40 +1,38 @@
 // Shell
 .flag {
-  // color: $color-flag;
   color: var(--flag);
 
   &::selection {
-    background-color: $color-white;
-    color: $color-secondary;
+    background-color: var(--card-p);
+    color: var(--bg-inversed);
   }
 }
 .highlight {
-    background-color: $color-secondary;
-    color: $color-white;
-    padding: 0 .4rem;
+  background-color: var(--color-headings);
+  color: var(--bg);
+  padding: 0.2rem 0.4rem;
+  font-weight: 600;
 
-    &::selection {
-        background-color: $color-tertiary;
-        color: $color-secondary;
-      }
+  &::selection {
+    background-color: var(--card-p);
+    color: var(--bg-inversed);
+  }
 }
 .sudo {
-  // color: $color-tertiary;
   color: var(--sudo);
 
   &::selection {
-    background-color: $color-white;
-    color: $color-secondary;
+    background-color: var(--card-p);
+    color: var(--bg-inversed);
   }
 }
 
 .var {
-  // color: $alert-success;
   color: var(--var);
 
   &::selection {
-    background-color: $color-white;
-    color: $color-secondary;
+    background-color: var(--card-p);
+    color: var(--bg-inversed);
   }
 
   &__name {
@@ -42,9 +40,13 @@
   }
   &__string {
     color: $alert-error;
+
+    &::selection {
+      background-color: var(--card-p);
+      color: var(--bg-inversed);
+    }
   }
   &__param {
-    // color: $color-tertiary;
     color: var(--param);
   }
   &__function {
@@ -65,18 +67,16 @@
   }
   &-shell {
     font-size: 1.3rem;
-    // background-color: $color-secondary;
     background-color: var(--links);
     display: block;
     padding: 1rem;
     font-family: "Montserrat", sans-serif;
     font-weight: 500;
-    // color: $color-white;
     color: var(--bg);
 
     &::selection {
-      background-color: $color-white;
-      color: $color-secondary;
+      background-color: var(--card-p);
+      color: var(--bg-inversed);
     }
   }
   &__title {
@@ -99,22 +99,18 @@
   }
 }
 .separator {
-    margin: 2rem 0;
-    background-color: $color-tertiary;
+  margin: 2rem 0;
+  background-color: $color-tertiary;
 }
 code {
   color: $color-white;
   margin-bottom: 2rem;
-
-  &::selection {
-    background-color: $color-white;
-    color: $color-secondary;
-  }
 }
 .article {
   &__content {
     width: 100%;
     margin: 0 auto;
+    text-align: justify;
 
     @include respond(phone) {
       width: 85%;
@@ -132,7 +128,7 @@ code {
   margin-left: -7.5rem;
   animation: movingH1 10s infinite;
 
-  @include respond (tab-port) {
+  @include respond(tab-port) {
     display: block;
     width: 28rem;
     height: 28rem;
@@ -142,7 +138,7 @@ code {
     margin-left: -14rem;
     margin-top: -1.5rem;
   }
-  @include respond (phone) {
+  @include respond(phone) {
     display: block;
     position: absolute;
     left: 50%;
@@ -151,7 +147,7 @@ code {
     height: 15rem;
     background-color: $color-secondary;
   }
-  @include respond (phone-small) {
+  @include respond(phone-small) {
     display: block;
     position: absolute;
     left: 50%;
@@ -169,23 +165,21 @@ code {
 
 .in-bl {
   display: inline-block;
-  // color: $post-link;
   color: var(--post-link);
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 500;
   border-bottom: 1px solid transparent;
-  transition: all .5s;
+  transition: all 0.5s;
 
   &:hover {
-    // color: $color-secondary;
     color: var(--links);
     text-decoration: none;
     border-bottom: 1px solid $color-tertiary;
   }
-} 
+}
 
 .article__author {
   font-weight: 100;
   font-size: 1.5rem;
   color: var(--links);
-}    
+}

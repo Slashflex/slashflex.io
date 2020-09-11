@@ -43,7 +43,7 @@
       font-family: "Montserrat", Sans-serif;
       margin-bottom: -7.2rem;
       position: relative;
-      color: var(--color-text);
+      color: var(--links);
 
       @include respond(phone) {
         font-size: 3.5rem;

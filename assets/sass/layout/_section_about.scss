@@ -59,16 +59,3 @@
     }
   }
 }
-
-.scroll {
-  margin-top: -9rem;
-
-  &__wheel {
-    width: 10rem;
-    height: 10rem;
-
-    @include respond(tab-land) {
-      display: none;
-    }
-  }
-}

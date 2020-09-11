@@ -74,6 +74,7 @@
     font-family: "Montserrat", Sans-serif;
     font-weight: 800;
     font-size: 10rem;
+    color: var(--links);
 
     @include respond(phone) {
       font-size: 5rem;
@@ -85,7 +86,9 @@
   }
 
   &__code {
-    background-color: $color-secondary;
+    // background-color: $color-secondary;
+    background-color: var(--links);
+    color: var(--bg);
   }
 
   &__home {
