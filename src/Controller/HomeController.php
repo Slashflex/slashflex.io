@@ -145,4 +145,16 @@ class HomeController extends AbstractController
             'projects' => $projects
         ]);
     }
+
+    /**
+     * Terms of use path
+     * 
+     * @Route("/terms-of-use", name="terms")
+     */
+    public function terms()
+    {
+        return $this->render('user/terms.html.twig', [
+            'title' => '/FLX | Terms of use'
+        ]);
+    }
 }
