@@ -205,6 +205,23 @@ const black = "#27282c";
 const grey = "#585858";
 const white = "#fff";
 
+window.cookieconsent.initialise({
+  "palette": {
+    "popup": {
+      "background": yellow
+    },
+    "button": {
+      "background": "transparent",
+      "text": black,
+      "border": black
+    }
+  },
+  "type": "opt-out",
+  "content": {
+    "href": "http://slashflex.io.test/terms-of-use"
+  }
+});
+
 if (window.location.pathname == '/contact') {
   $(".round").css("display", "none");
 }
