@@ -9,7 +9,6 @@
 }
 
 .nav__list {
-
   @include respond(tab-land) {
     display: flex;
     justify-content: center;
@@ -21,41 +20,35 @@
 .z-depth-0 {
   border: none;
   margin-bottom: 2rem;
-  transition: all .5s;
+  transition: all 0.5s;
   cursor: pointer;
   border-radius: 5px;
-  // background-color: $color-secondary;
   background-color: var(--color-headings);
 
-  &:hover, 
-  &:focus, 
+  &:hover,
+  &:focus,
   &:active {
-    // background: #ffffff;
-    // box-shadow: 2rem 2rem 6rem #d9d9d9, -2rem -2rem 6rem #ffffff;
     @include shadow;
   }
 
-  & h3, i {
+  & h3,
+  i {
     color: var(--bg);
   }
 }
 
-.users__list, .projects__list {
-  background-color: rgba(0,0,0,.03);
+.users__list,
+.projects__list {
+  background-color: rgba(0, 0, 0, 0.03);
 }
 
-#headingTwo2, 
+#headingTwo2,
 #headingOne2 {
   border-bottom: 0px solid transparent;
 }
 
 .card__bg {
-  // background-color: $color-white;
   background-color: var(--bg);
-}
-
-#accordion {
-  //margin-top: 4rem;
 }
 
 .fa-crown {
@@ -75,11 +68,9 @@
 
 .card-img-top {
   margin: 0 auto;
-  // margin-top: .5rem;
-  // width: 50%;
 }
 
 .heading-admin {
   align-items: center;
-  margin-top: .5rem;
+  margin-top: 0.5rem;
 }

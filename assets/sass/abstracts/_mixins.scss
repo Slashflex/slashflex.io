@@ -14,12 +14,12 @@
 }
 
 @mixin shadow {
-  // box-shadow: -6px -6px 9px $color-white, 6px 6px 9px rgba($color-black, 0.4);
   box-shadow: -6px -6px 9px var(--bg), 6px 6px 9px rgba($color-secondary, 0.4);
 }
 
 @mixin shadow-inset {
-  box-shadow: inset -6px -6px 9px $color-white, inset 6px 6px 9px rgba($color-black, 0.4);
+  box-shadow: inset -6px -6px 9px $color-white,
+    inset 6px 6px 9px rgba($color-black, 0.4);
 }
 
 @mixin button {
@@ -32,13 +32,12 @@
   text-decoration: none;
   user-select: none;
   letter-spacing: 1px;
-  padding: .8rem 1.6rem;
+  padding: 0.8rem 1.6rem;
   text-transform: uppercase;
   transition: all 0.3s ease-out;
 }
 
 @mixin button-hover {
-  // background-color: $color-tertiary;
   background-color: var(--card-back-p);
   color: $color-secondary;
   text-decoration: none;

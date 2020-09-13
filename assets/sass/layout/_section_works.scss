@@ -26,7 +26,7 @@
       font-size: 3.5rem;
       text-align: center;
       font-weight: 100;
-      font-family: 'Montserrat', sans-serif;
+      font-family: "Montserrat", sans-serif;
       margin-bottom: -3.4rem;
       position: relative;
       color: var(--color-text);
@@ -56,9 +56,8 @@
       font-weight: 200;
       text-transform: uppercase;
       line-height: 1;
-      // color: $text-alpha;
       color: var(--text-alpha);
-      letter-spacing: .2rem;
+      letter-spacing: 0.2rem;
 
       @include respond(phone) {
         font-size: 3rem;
@@ -68,22 +67,17 @@
 }
 
 .swiper-button-prev {
-  // color: #27282c;
   color: var(--color-headings);
   margin-left: 10vw;
 
-  // @include respond(phone) {
-  //   margin-left: 0px;
-  //   margin-top: -3rem;
-  // }
   @include respond(phone) {
     margin-left: 0px;
-    margin-top: 12rem; // -3rem
+    margin-top: 12rem;
     background-color: $color-white;
   }
   @include respond(phone-small) {
     margin-left: 0px;
-    margin-top: 21rem; // -3rem
+    margin-top: 21rem;
     background-color: $color-white;
   }
 
@@ -93,19 +87,18 @@
 }
 
 .swiper-button-next {
-  // color: #27282c;
   color: var(--color-headings);
 
   margin-right: 10vw;
 
   @include respond(phone) {
     margin-right: 0px;
-    margin-top: 12rem; // -3rem
+    margin-top: 12rem;
     background-color: $color-white;
   }
   @include respond(phone-small) {
     margin-right: 0px;
-    margin-top: 21rem; // -3rem
+    margin-top: 21rem;
     background-color: $color-white;
   }
 
@@ -130,14 +123,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
   }
-  // @include respond(phone-mid) {
-  //   margin-top: 25rem;
-  //   width: 100%;
-  //   height: 50vh;
-  //   top: 50%;
-  //   left: 50%;
-  //   transform: translate(-50%, -50%);
-  // }
+
   @include respond(phone-small) {
     margin-top: 23.8rem;
     width: 100%;
@@ -165,8 +151,9 @@
   align-items: center;
   transition: all 0.5s;
 }
-.swiper-slide:hover, .swiper-slide:focus {
-  box-shadow: inset -.9rem -20rem 15.9rem -6.5rem rgba($color-secondary, 0.75);
+.swiper-slide:hover,
+.swiper-slide:focus {
+  box-shadow: inset -0.9rem -20rem 15.9rem -6.5rem rgba($color-secondary, 0.75);
 }
 .slide__caption {
   width: 100%;

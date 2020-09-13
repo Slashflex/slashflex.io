@@ -56,14 +56,13 @@
 }
 
 .loading {
-
   &__text {
-    color: $color-tertiary; 
+    color: $color-tertiary;
     margin-bottom: 33rem;
   }
 
   &__sentence {
-    color: #585858; 
+    color: #585858;
     font-size: 1.9rem;
   }
 }

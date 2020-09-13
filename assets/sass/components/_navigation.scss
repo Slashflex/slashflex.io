@@ -1,6 +1,5 @@
 /* Full screen menu */
 #menu {
-  // background: $color-tertiary;
   background: var(--button);
   height: 100%;
   left: 0;
@@ -80,7 +79,7 @@
 
 .nav {
   position: fixed;
-  right: .2rem;
+  right: 0.2rem;
   top: 0;
   z-index: 100;
 }
@@ -91,7 +90,7 @@
   right: 2rem;
   background: $color-secondary;
   width: 30px;
-  transition: .2s ease;
+  transition: 0.2s ease;
   cursor: pointer;
   z-index: 1;
   height: 25px;
@@ -102,11 +101,10 @@
   position: absolute;
   top: 2.5rem;
   right: 2rem;
-  // background: $color-secondary;
   background: var(--links);
   width: 3rem;
   height: 5px;
-  transition: .2s ease;
+  transition: 0.2s ease;
   cursor: pointer;
   z-index: 1;
 
@@ -114,12 +112,10 @@
     position: absolute;
     top: 2.5rem;
     right: 2rem;
-    // background-color: $color-secondary;
-  background: var(--links);
-
+    background: var(--links);
     width: 3rem;
     height: 5px;
-    transition: .2s ease;
+    transition: 0.2s ease;
     cursor: pointer;
     z-index: 1;
     content: " ";
@@ -131,12 +127,10 @@
     position: absolute;
     top: 2.5rem;
     right: 2rem;
-    // background: $color-secondary;
-  background: var(--links);
-
+    background: var(--links);
     width: 3rem;
     height: 5px;
-    transition: .2s ease;
+    transition: 0.2s ease;
     cursor: pointer;
     z-index: 1;
     content: " ";
@@ -153,7 +147,7 @@
           #burger {
             top: 35px;
             transform: rotate(180deg);
-            transition: transform .2s ease;
+            transition: transform 0.2s ease;
             position: fixed;
             z-index: 100000;
 
@@ -162,7 +156,7 @@
               top: -9px;
               left: -1px;
               transform: rotate(-45deg) translateX(-5px);
-              transition: transform .2s ease;
+              transition: transform 0.2s ease;
             }
 
             &:after {
@@ -170,7 +164,7 @@
               top: 9px;
               right: 1px;
               transform: rotate(45deg) translateX(-5px);
-              transition: transform .2s ease;
+              transition: transform 0.2s ease;
             }
 
             + {
@@ -183,7 +177,7 @@
 
         ~ {
           #menu {
-            >li {
+            > li {
               display: block;
             }
           }

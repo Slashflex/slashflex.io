@@ -134,9 +134,9 @@
   color: var(--bg);
 
   @include respond(phone-small) {
-    padding: .4rem .6rem;
+    padding: 0.4rem 0.6rem;
   }
-  
+
   &:hover {
     // background-color: $color-tertiary;
     background-color: var(--card-h2);
@@ -154,7 +154,7 @@
     background-color: $alert-error;
 
     @include respond(phone-small) {
-      padding: .4rem .6rem;
+      padding: 0.4rem 0.6rem;
     }
 
     &:hover {
@@ -201,7 +201,7 @@
 }
 .add-image {
   cursor: pointer;
-  
+
   &:hover {
     color: $color-secondary !important;
   }
@@ -210,7 +210,6 @@
 .button--bubble {
   position: relative;
   z-index: 2;
-  // color: $color-white;
   color: var(--bg);
   background: var(--color-headings);
 
@@ -221,11 +220,9 @@
       .button--bubble__effect-container {
         .circle {
           background: $color-tertiary;
-          // background: var(--bubble-hover);
         }
         .button {
           background: $color-tertiary;
-          // background: var(--bubble-hover)
         }
       }
     }
@@ -297,7 +294,7 @@
 
   &-btn {
     margin-top: 4rem;
-    
+
     @include respond(phone-small) {
       text-align: center;
     }

@@ -3,13 +3,13 @@
   margin: 0 auto;
   width: 100%;
   position: relative;
-  filter: drop-shadow(2px 4px 6px rgba($color-secondary, .7));
+  filter: drop-shadow(2px 4px 6px rgba($color-secondary, 0.7));
 
-  @include respond (tab-port) {
+  @include respond(tab-port) {
     width: 65%;
     filter: none;
   }
-  @include respond (phone) {
+  @include respond(phone) {
     width: 60%;
     filter: none;
   }
@@ -24,17 +24,17 @@
   width: 30%;
   position: relative;
 
-  @include respond (tab-port) {
+  @include respond(tab-port) {
     width: 35%;
   }
-  @include respond (phone) {
+  @include respond(phone) {
     width: 42%;
   }
   @include respond(phone-small) {
     width: 80%;
   }
 
-  @include respond (phone-mid) {
+  @include respond(phone-mid) {
     width: 100%;
   }
 
@@ -47,16 +47,16 @@
     left: 50%;
     transform: translate(-50%, -50%);
 
-    @include respond (tab-port) {
+    @include respond(tab-port) {
       width: 30%;
     }
-    @include respond (phone) {
+    @include respond(phone) {
       width: 30%;
     }
     @include respond(phone-small) {
       width: 85%;
     }
-    @include respond (phone-mid) {
+    @include respond(phone-mid) {
       width: 100%;
     }
   }
@@ -128,7 +128,7 @@
 }
 
 div[class^="key"] {
-  @include respond (phone) {
+  @include respond(phone) {
     display: none;
   }
 }
@@ -154,20 +154,20 @@ div[class^="key"] {
   z-index: 2;
   margin-top: 2.5rem;
 
-  @include respond (tab-land) {
+  @include respond(tab-land) {
     font-size: 10rem;
     margin-top: 0;
   }
-  @include respond (tab-port) {
+  @include respond(tab-port) {
     font-size: 8rem;
     margin-top: 0;
     filter: drop-shadow(5px 11px 12px $color-black);
   }
-  @include respond (phone) {
+  @include respond(phone) {
     font-size: 6rem;
     filter: drop-shadow(5px 11px 12px $color-black);
   }
-  @include respond (phone-small) {
+  @include respond(phone-small) {
     font-size: 7.5rem;
     margin-top: -17rem;
     filter: drop-shadow(5px 11px 12px $color-black);
@@ -175,10 +175,9 @@ div[class^="key"] {
 }
 
 .project {
-
   &__attachments {
-    max-width: 90%; 
-    max-height: 80%; 
+    max-width: 90%;
+    max-height: 80%;
     margin-top: 12%;
   }
 
@@ -194,7 +193,7 @@ div[class^="key"] {
     color: $color-gray;
     font-family: "Montserrat", Sans-serif;
     font-size: 2.1rem;
-		font-weight: 400;
-		margin-bottom: 5rem;
+    font-weight: 400;
+    margin-bottom: 5rem;
   }
 }

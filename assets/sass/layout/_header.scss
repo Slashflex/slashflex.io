@@ -52,7 +52,7 @@
     margin-bottom: 50rem;
   }
 
-  @include respond (phone-mid) {
+  @include respond(phone-mid) {
     margin-bottom: 64rem;
   }
 
@@ -86,7 +86,6 @@
   }
 
   &__code {
-    // background-color: $color-secondary;
     background-color: var(--links);
     color: var(--bg);
   }
@@ -101,7 +100,6 @@
     &:hover i,
     &:hover {
       text-decoration: none;
-      // color: $color-secondary;
       color: var(--links);
       transform: scale(1.2) translateX(-0.5rem);
       transition: all 0.5s;
@@ -114,9 +112,7 @@
     font-size: 13rem;
     font-weight: 900;
     text-transform: uppercase;
-    // color: $color-white;
     color: var(--bg);
-    // background-color: $color-secondary;
     background-color: var(--bg-inversed);
     animation: movingH1 10s infinite;
     text-align: center;
@@ -182,23 +178,9 @@
       display: none;
     }
   }
-
-  &__projects {
-
-    // @include respond (tab-port) {
-    //   width: 42%;
-    // }
-    // @include respond (phone) {
-    //   width: 80%;
-    // }
-    // @include respond (phone-small) {
-    //   width: 80%;
-    // }
-  }
 }
 
 .code {
-
   &__401,
   &__403,
   &__404 {

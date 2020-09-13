@@ -8,11 +8,10 @@
   border: none;
 
   &-body {
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
   }
 
   &__description {
-    // color: $color-secondary;
     color: var(--links);
   }
 
@@ -38,26 +37,22 @@
     & .front-h2 {
       font-size: 2.5rem;
       margin-bottom: 0.5rem;
-      // color: $color-tertiary;
       color: var(--card-p);
     }
 
     & .back-h2 {
       font-size: 2.5rem;
       margin-bottom: 0.5rem;
-      //color: $color-tertiary;
       color: var(--card-h2);
     }
 
     & .front-p {
-      // color: $color-tertiary;
       color: var(--card-p);
       word-break: break-word;
       font-size: 1.3rem;
     }
 
     & .back-p {
-      // color: $color-tertiary;
       color: var(--card-back-p);
       word-break: break-word;
       font-size: 1.3rem;
@@ -95,12 +90,6 @@
     position: absolute;
     top: 0;
     left: 0;
-    // background-image: linear-gradient(
-    //   to top,
-    //   $color-black 0%,
-    //   $color-secondary 52%,
-    //   $color-secondary 100%
-    // );
     background-image: var(--card-gradient);
     box-shadow: 0 2rem 4rem -1.4rem rgba($color-black, 0.4);
     border-radius: 0.5rem;
@@ -126,9 +115,7 @@
     position: absolute;
     top: 0;
     left: 0;
-
     border: 1rem solid var(--card-border);
-    // box-shadow: 0 2rem 4rem -1.4rem rgba($color-secondary, 0.4);
     box-shadow: 0 2rem 4rem -1.4rem rgba($color-black, 0.4);
     border-radius: 0.5rem;
     z-index: 1;
@@ -154,6 +141,8 @@ $max: 100;
 @for $i from 1 through $max {
   .back#{$i} {
     background-color: $color-secondary;
-    & h2 {color: $color-white;}
+    & h2 {
+      color: $color-white;
+    }
   }
 }

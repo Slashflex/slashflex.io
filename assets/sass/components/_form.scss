@@ -25,17 +25,31 @@
     }
   }
 
+  &__contact {
+    margin: 0 auto;
+    width: 70%;
+    padding-top: 6rem;
+
+    &__group:not(:last-child) {
+      margin-bottom: 2rem;
+    }
+
+    @include respond(tab-land) {
+      width: 60%;
+    }
+  }
+
   &__input {
     font-size: 1.3rem;
     font-family: inherit;
     // color: $color-white;
     color: var(--bg);
     padding: 0.5rem 0.7rem;
-    border-radius: .2rem;
+    border-radius: 0.2rem;
     // background-color: $color-secondary;
     background-color: var(--form-input);
     border: none;
-    border-bottom: .3rem solid transparent;
+    border-bottom: 0.3rem solid transparent;
     width: 100%;
     display: block;
     transition: all 0.3s;
@@ -54,11 +68,11 @@
     &:focus {
       outline: none;
       box-shadow: 0 1rem 2rem rgba($color-black, 0.1);
-      border-bottom: .3rem solid $alert-success;
+      border-bottom: 0.3rem solid $alert-success;
     }
 
     &:focus:invalid {
-      border-bottom: .3rem solid $alert-error;
+      border-bottom: 0.3rem solid $alert-error;
     }
 
     &::-webkit-input-placeholder {
@@ -113,7 +127,7 @@
     height: 2rem;
     width: 2rem;
     // border: .5rem solid $color-secondary;
-    border: .5rem solid var(--color-headings);
+    border: 0.5rem solid var(--color-headings);
     border-radius: 50%;
     display: inline-block;
     position: absolute;
@@ -157,14 +171,14 @@
     float: left;
     width: 20%;
     margin-top: -2.3rem;
-    padding: .45rem;
+    padding: 0.45rem;
     border-radius: 0px;
 
     @include respond(tab-land) {
-      padding: .35rem;
+      padding: 0.35rem;
     }
     @include respond(tab-port) {
-      padding: .4rem;
+      padding: 0.4rem;
     }
   }
   .delete_project_content_#{$i},
