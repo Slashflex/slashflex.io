@@ -29,22 +29,18 @@
 						<label for="email" class="form__label">Email</label>
 					</div>
 
-					{# <div class="form__group">
-						{{ form_widget(registrationForm.plainPassword, {'attr': { 'type': 'password', 'class': 'form__input', 'placeholder': 'Password', 'id': 'password' }}) }}
-						<label for="password" class="form__label">Password</label>
-					</div> #}
-
-					{# <div class="form__group">
-						{{ form_widget(registrationForm.plainPassword, {'attr': { 'type': 'password', 'class': 'form__input', 'placeholder': 'Password', 'id': 'password' }}) }}
-						<label for="password" class="form__label">Password</label>
-					</div> #}
-
 					<div class="form__group">
+						<div class="form__errors">
+							{{ form_errors(registrationForm.email) }}
+						</div>
 						{{ form_widget(registrationForm.firstname, {'attr': { 'type': 'text', 'class': 'form__input', 'placeholder': 'Firstname', 'id': 'firstname' }}) }}
 						<label for="firstname" class="form__label">Firstname</label>
 					</div>
 
 					<div class="form__group">
+						<div class="form__errors">
+							{{ form_errors(registrationForm.email) }}
+						</div>
 						{{ form_widget(registrationForm.lastname, {'attr': { 'type': 'text', 'class': 'form__input', 'placeholder': 'Lastname', 'id': 'lastname' }}) }}
 						<label for="lastname" class="form__label">Lastname</label>
 					</div>
@@ -64,11 +60,6 @@
 						{{ form_widget(registrationForm.password.second, {'attr': { 'type': 'password', 'class': 'form__input', 'placeholder': 'Repeat password', 'id': 'repeat-password' }}) }}
 						<label for="repeat-password" class="form__label">Confirm password</label>
 					</div>
-
-					{# <div class="form__group">
-						{{ form_widget(registrationForm.description, {'attr': { 'type': 'text', 'class': 'form__input', 'placeholder': 'Description', 'id': 'description' }}) }}
-						<label for="description" class="form__label">Description</label>
-					</div> #}
 
 					<div class="form__group">
 						{{ form_widget(registrationForm.login, {'attr': { 'type': 'text', 'class': 'form__input', 'placeholder': 'Nickname', 'id': 'nickname' }}) }}
