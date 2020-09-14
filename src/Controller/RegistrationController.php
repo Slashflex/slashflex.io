@@ -28,23 +28,28 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // encode the plain password
+            // encode the password
             $user->setPassword(
                 $passwordEncoder->encodePassword(
                     $user,
-                    $form->get('plainPassword')->getData()
+                    $form->get('password')->getData()
                 )
             )
                 ->addRoleUser($role)
                 ->initializeSlug();
 
-            $firstname = str_replace(' ', '', $form->get('firstname')->getData());
-            $lastname = str_replace(' ', '', $form->get('lastname')->getData());
             $path = 'uploads/avatars/' . $user->getSlug();
             // Create dedicated folder for the registered user
-            mkdir($path);
             $user->setAvatar('avatar.png');
-            copy('uploads/avatars/avatar.png', $path . '/avatar.png');
+            $count = 0;
+
+            if (file_exists($path)) {
+                mkdir($path . '-' . $count++);
+                copy('uploads/avatars/avatar.png', $path . '/avatar.png');
+            } else {
+                mkdir($path);
+                copy('uploads/avatars/avatar.png', $path . '/avatar.png');
+            }
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);

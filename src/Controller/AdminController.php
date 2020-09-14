@@ -72,6 +72,14 @@ class AdminController extends AbstractController
         $this->manager->remove($user);
         $this->manager->flush();
 
+        $path = 'uploads/avatars/' . $user->getSlug();
+        $files = glob('uploads/avatars/' . $user->getSlug() . '/*'); // get all file names
+        foreach ($files as $file) { // iterate files
+            if (is_file($file))
+                unlink($file); // delete file
+        }
+        rmdir($path);
+
         $this->addFlash(
             'success',
             'The user ' . ucfirst($user->getFirstname()) . ' ' . ucfirst($user->getLastname()) . ' has been deleted'

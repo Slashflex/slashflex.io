@@ -18,6 +18,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ApiResource(
@@ -41,24 +42,45 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Assert\Email(
+     *     message = "The email '{{ value }}' is not a valid email."
+     * )
      */
     private $email;
 
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * @Assert\Length(
+     *      min=3,
+     *      max=20,
+     *      minMessage="You must enter at least {{ limit }} characters",
+     *      maxMessage="You must enter a maximum of {{ limit }} characters"
+     * )
      */
     private $password;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"read:comment"})
+     * @Assert\Length(
+     *      min=3,
+     *      max=20,
+     *      minMessage="You must enter at least {{ limit }} characters",
+     *      maxMessage="You must enter a maximum of {{ limit }} characters"
+     * )
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=255) 
      * @Groups({"read:comment"})
+     * @Assert\Length(
+     *      min=3,
+     *      max=20,
+     *      minMessage="You must enter at least {{ limit }} characters",
+     *      maxMessage="You must enter a maximum of {{ limit }} characters"
+     * )
      */
     private $lastname;
 
@@ -69,7 +91,7 @@ class User implements UserInterface
     private $slug;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $description;
 
@@ -85,6 +107,12 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\Length(
+     *      min=3,
+     *      max=20,
+     *      minMessage="You must enter at least {{ limit }} characters",
+     *      maxMessage="You must enter at least {{ limit }} characters"
+     * )
      */
     private $login;
 
