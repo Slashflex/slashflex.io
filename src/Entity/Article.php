@@ -189,6 +189,11 @@ class Article
         return $this->slug;
     }
 
+    public function __toString(): ?string
+    {
+        return $this->slug;
+    }
+
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
