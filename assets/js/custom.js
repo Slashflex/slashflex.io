@@ -125,10 +125,10 @@ $(document).ready(() => {
       $(".nav").css("position", "fixed");
     }
 
-    if (!$('#menu').hasClass('open')) {
+    if (!$("#menu").hasClass("open")) {
       $(".nav").css("position", "static");
-    } 
-      
+    }
+
     $("#menu").toggleClass("open");
   });
 
@@ -200,29 +200,64 @@ $(document).ready(() => {
   }
 });
 
+const warningIcon = '<i class="fas fa-exclamation-circle"></i>';
+
+// Add warning icons if errors on form inputs
+if ($(".form__errors").children().length > 0) {
+  let ul = $(".form__errors").children();
+  ul.children().prepend(`${warningIcon} `);
+  ul.children().append(` ${warningIcon}`);
+  $(ul).parent().css("border-bottom", "2px solid red");
+}
+
+// Add radio button error message on form submit if not checked
+$(".button__login").click(function () {
+  if ($(".form__radio-input").is(":checked")) {
+    $(".agree-message", ".agree").empty().remove();
+  } else {
+    let message = window.localStorage.getItem("agree");
+    $(".agree").append(`<li class="agree-message">${warningIcon} ${message} ${warningIcon}</li>`);
+  }
+});
+
+// Remove radio button error message if checked
+$(".form__radio-input").bind("click", function () {
+  var $t = $(this);
+  console.log($t.is(":checked"));
+
+  if ($t.is(":checked")) {
+    $(".agree-message", ".agree").empty().remove();
+  }
+});
+
+$('.generate-pdf').click(function() {
+  console.log('click');
+  $('#loading').hide();
+});
+
 const yellow = "#ffbe41";
 const black = "#27282c";
 const grey = "#585858";
 const white = "#fff";
 
 window.cookieconsent.initialise({
-  "palette": {
-    "popup": {
-      "background": yellow
+  palette: {
+    popup: {
+      background: yellow,
     },
-    "button": {
-      "background": "transparent",
-      "text": black,
-      "border": black
-    }
+    button: {
+      background: "transparent",
+      text: black,
+      border: black,
+    },
   },
-  "type": "opt-out",
-  "content": {
-    "href": "http://slashflex.io.test/terms-of-use"
-  }
+  type: "opt-out",
+  content: {
+    href: "http://slashflex.io.test/terms-of-use",
+  },
 });
 
-if (window.location.pathname == '/contact') {
+if (window.location.pathname == "/contact") {
   $(".round").css("display", "none");
 }
 
@@ -243,7 +278,7 @@ if (
 }
 
 if (window.location.pathname == "/works") {
-  $('.card-content--image').css('background-size', 'cover');
+  $(".card-content--image").css("background-size", "cover");
 }
 // Gooey button on https://slashflex.io/blog
 if (window.location.pathname.includes("/blog")) {
@@ -256,8 +291,7 @@ if (
   window.location.pathname == "/" ||
   window.location.pathname == "/works" ||
   window.location.pathname.includes("/works/") ||
-  window.location.pathname == "/blog" ||
-  window.location.pathname.includes("/blog/post")
+  window.location.pathname == "/blog" || window.location.pathname.includes("/blog/post")//  || window.location.pathname.includes("/blog/post")
 ) {
   const sentence = [
     `“Knowledge is power.” – <i class="loading__sentence" >Francis Bacon</i>`,
