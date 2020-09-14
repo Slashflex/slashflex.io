@@ -12,7 +12,7 @@
 	{% include "partials/_fullscreen_nav.html.twig" %}
 
 	{% for message in app.flashes('success') %}
-		<div class="flash-notice alert-success">
+		<div class="flash-notice">
 			{{ message }}
 		</div>
 	{% endfor %}
@@ -27,7 +27,7 @@
 			<div class="swiper-button-prev"></div>
 
 			<!-- Swiper -->
-			<div class="swiper-container moving">
+			<div class="swiper-container">
 				<div class="swiper-wrapper">
 					<!-- Loads images from back-end -->
 					{% for image in project.Attachments %}

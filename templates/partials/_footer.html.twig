@@ -12,7 +12,42 @@
 				</div>
 			</div>
 			<div class="col-md-4">
-				Lorem ipsum dolor sit amet.
+				<div class="portfolio">PORTFOLIO</div>
+				
+				<nav class="main-nav" style="margin-left: 8rem">
+					<ul class="main-nav__list">
+						<li class="main-nav__item d-block"><a href="{{ path('home') }}" class="main-nav__link">Home</a></li>
+						{% if app.user and app.user.roleUser[0].name == 'ROLE_ADMIN' %}
+							<li class="main-nav__item">
+								<a href="{{ path('admin') }}" class="main-nav__link">Dashboard</a>
+							</li>
+						{% endif %}
+						{% if app.user %}
+							<li class="main-nav__item">
+								<a href="{{ path('user') }}" class="main-nav__link">Profile</a>
+							</li>
+							<li class="main-nav__item">
+								<a href="{{ path('logout') }}" class="main-nav__link">Logout</a>
+							</li>
+						{% elseif not app.user %}
+							<li class="main-nav__item">
+								<a href="{{ path('app_register') }}" class="main-nav__link">Register</a>
+							</li>
+							<li class="main-nav__item">
+								<a href="{{ path('user_signin') }}" class="main-nav__link">Login</a>
+							</li>
+						{% endif %}
+							<li class="main-nav__item">
+								<a href="{{ path('blog') }}" class="main-nav__link">Blog</a>
+							</li>
+							<li class="main-nav__item">
+								<a href="{{ path('works') }}" class="main-nav__link">Works</a>
+							</li>
+						<li class="main-nav__item">
+							<a href="{{ path('contact') }}" class="main-nav__link">Contact</a>
+						</li>
+					</ul>
+				</nav>	
 			</div>
 			<div class="col-md-4">
 				Lorem ipsum dolor sit amet.
@@ -41,8 +76,7 @@
 			</nav>
 			<hr style="background-color: rgba(255, 255, 255, 0.1)">
 
-			<div class="footer-copyright text-center py-3">&copy; {{ "now"|date("Y") }} Copyright: 
-				<a class="footer-copyright--link" href="https://slashflex.io/"> Slashflex.io</a>
+			<div class="footer-copyright text-center py-3">&copy;<a class="footer-copyright--link" href="https://slashflex.io/"> Slashflex.io</a> {{ "now"|date("Y") }} 
 			</div>
 		</div>
 	</div>

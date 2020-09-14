@@ -11,7 +11,7 @@
 	{% include "partials/_fullscreen_nav.html.twig" %}
 
 	<header class="header__projects">
-        <div class="hero__projects moving">
+        <div class="hero__projects">
 			<div class="round"></div>
             <img src="/build/images/model.webp" class="model-human img-fluid" alt="model">
 
@@ -27,8 +27,8 @@
     
 	<section class="project">
 		<div class="container">
-			<h1 class="project__title moving" data-aos="fade-right">Think. Design. Create!</h1>
-			<p class="project__introduction moving" data-aos="fade-right">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tempora totam nemo id magni. Nesciunt quam optio ducimus, ipsam laboriosam nulla molestiae suscipit doloremque facere quisquam, minima ut distinctio hic quaerat necessitatibus nemo, id quasi blanditiis vitae assumenda. Ducimus asperiores eveniet praesentium eligendi quas facilis et omnis quo, fugit ratione placeat unde maxime adipisci magnam? Optio, rem minus. Ducimus, sunt tempore dolore rem nobis illo odio quis laborum saepe aut, provident quasi quisquam? Perferendis sapiente magnam veniam consectetur quos commodi!</p>
+			<h1 class="project__title" data-aos="fade-right">Think. Design. Create!</h1>
+			<p class="project__introduction" data-aos="fade-right">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tempora totam nemo id magni. Nesciunt quam optio ducimus, ipsam laboriosam nulla molestiae suscipit doloremque facere quisquam, minima ut distinctio hic quaerat necessitatibus nemo, id quasi blanditiis vitae assumenda. Ducimus asperiores eveniet praesentium eligendi quas facilis et omnis quo, fugit ratione placeat unde maxime adipisci magnam? Optio, rem minus. Ducimus, sunt tempore dolore rem nobis illo odio quis laborum saepe aut, provident quasi quisquam? Perferendis sapiente magnam veniam consectetur quos commodi!</p>
 		</div>
 
 		<div class="stack__text">
@@ -42,7 +42,7 @@
 			{% for article in articles %}
 			{% set auteur = article.users %}
 				<div class="col-12 col-lg-6"> 
-					<div class="card{{loop.index}} moving" data-aos="fade-up-right">
+					<div class="card{{loop.index}}" data-aos="fade-up-right">
 						<div class="flips">
 							<div class="front{{loop.index}} vertical">
 								<div class="card-content--image" style="background-image: url(/uploads/images/{{ article.imageName }})"></div>

@@ -64,3 +64,16 @@ html {
   background-color: var(--color-headings);
   color: var(--bg);
 }
+
+.flash-notice {
+  text-align: center;
+  padding: 1rem;
+  z-index: 1;
+  position: absolute;
+  margin: 0px auto;
+  width: 100%;
+  font-size: 1.5rem;
+  color: var(--color-headings);
+  background-color: var(--card-p);
+  border-color: var(--color-headings);
+}
