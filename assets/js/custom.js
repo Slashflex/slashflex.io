@@ -223,7 +223,6 @@ $(".button__login").click(function () {
 // Remove radio button error message if checked
 $(".form__radio-input").bind("click", function () {
   var $t = $(this);
-  console.log($t.is(":checked"));
 
   if ($t.is(":checked")) {
     $(".agree-message", ".agree").empty().remove();
@@ -231,7 +230,6 @@ $(".form__radio-input").bind("click", function () {
 });
 
 $('.generate-pdf').click(function() {
-  console.log('click');
   $('#loading').hide();
 });
 
