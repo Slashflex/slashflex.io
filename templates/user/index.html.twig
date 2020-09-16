@@ -16,25 +16,29 @@
 		</div>
 	{% endfor %}
     
-    <div class="container">
-        <h1 class="text-center mt-5">Hello {{ user }}</h1>
+    <div class="container pb-5">
+        <div class="stack__text">
+            <div class="stack__text--projects fs-1" data-aos="fade-up">Hello</div>
+            <div class="stack__text--stack mb-2 fs-2" data-aos="fade-up">{{ user }}</div>
+        </div>
 
-        <p>Email : {{ user.email }}</p>
-        <p>Account created {{ user.getDate }}</p>
+        <div id="DigitalCLOCK" class="clock" onload="showTime()"></div>
+
+        <div class="avatar">
+            {% if user.avatar != 'avatar.png' %}
+                <img src="/uploads/avatars/{{ user.slug}}/{{ user.avatar }}" alt="{{ user.__toString }}'s avatar" class="avatar__image">
+            {% else %}
+                <img src="/uploads/avatars/{{ user.avatar }}" alt="{{ user.__toString }}'s avatar" class="avatar__image">
+            {% endif %}
+            <p class="language-html">Email : {{ user.email }}</br>Your account was created {{ user.getDate }}</p>
+        </div>
+        
         <a href="{{ path('edit_me', {'slug': user.slug}) }}" class="button__login">Edit</a>
         <a href="{{ path('upload_avatar', {'slug': user.slug}) }}" class="button__login">Upload avatar</a>
         <a href="{{ path('logout') }}" class="button__login">Logout</a>
         {% if app.user.roleUser[0].name == 'ROLE_ADMIN' %}
             <a href="{{ path('admin') }}" class="button__login">Dashboard</a>
         {% endif %}
-
-        <div class="avatar">
-            {% if user.avatar != 'avatar.png' %}
-                <img src="/uploads/avatars/{{ user.slug }}/{{ user.avatar }}" alt="{{ user.__toString }}" class="avatar__image">
-            {% else %}
-                <img src="/uploads/avatars/{{ user.avatar }}" alt="{{ user.__toString }}" class="avatar__image">
-            {% endif %}
-        </div>
     </div>
 
 	<!-- Footer -->
