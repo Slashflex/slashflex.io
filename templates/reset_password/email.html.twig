@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password reset</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            /*background-color: #27282c;*/
+            color: #27282c;
+            padding: 30px 0 30px 0;
+            font-weight: normal;
+            font-size: 18px;
+        }
+        hr {
+            border: none;
+            border-top: 3px solid #27282c;
+            margin: 20px;
+        }
+        .container {
+            /*background-color: #fefefe;*/
+            width: 580px;
+            margin: 0 auto;
+        }
+        .bottom {
+            background-color: #efefee;
+        }
+        .block {
+            margin : 0;
+            padding: 10px 20px 20px 20px;
+            color: #000;
+        }
+        .logo {
+            width: 50%;
+            margin: 0 auto;
+            display: block;
+        }
+        .text-center {
+            text-align: center;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #27282c;
+            color: #fff !important;
+            border: 1px solid #fff;
+            border-radius: 3px;
+            font-size: 20px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        .main-link {
+            background-color: #27282c;
+            color:  #ffbe41 !important; 
+            text-decoration: none;
+            padding: .2rem .4rem;
+            transition: all .5s;
+        }
+        .main-link:hover {
+            background-color: #ffbe41;
+            color: #27282c !important; 
+        }
+    </style>
+</head>
+<body>
+    <div class="body">
+        <div class="container">
+            <div class="content">
+                <img class="logo" src="{{ absolute_url(asset('build/images/slashflex.png')) }}" alt="slashflex.io">
+                <h1 class="text-center">Hi {{ name }},</h1>
+                <p>
+                    You requested to reset your password from <a href="https://slashflex.io" class="main-link">slashflex.io</a>.
+                </p>
+                <p>
+                    To reset your password, please click
+                    <a href="{{ url('app_reset_password', {token: resetToken.token}) }}">here</a>
+                    This link will expire in {{ tokenLifetime|date('g') }} hour(s)..
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

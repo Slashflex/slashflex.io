@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block titre %}
+	{{ title }}
+{% endblock %}
+
+{% block body %}
+	<!-- Logo -->
+	{% include "partials/_top_buttons.html.twig" %}
+
+	<!-- Fullscreen Navigation -->
+	{% include "partials/_fullscreen_nav.html.twig" %}
+
+	{% for message in app.flashes('reset_password_error') %}
+        <div class="flash-notice-error">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    <div class="create container">
+		<div class="pt-5 mt-5">
+            <div class="stack__text">
+				<div class="stack__text--projects fs-1" data-aos="fade-up">Reset your</div>
+				<div class="stack__text--stack mb-2 fs-2" data-aos="fade-up">PASSWORD</div>
+			</div>
+
+            {{ form_start(requestForm, { 'attr': {'class': 'form pb-5' }}) }}
+                <div class="form__group">
+                    {{ form_row(requestForm.email, { 'attr': {'class': 'form__input', 'id': 'test' }}) }}
+                    {# <input type="email" name="reset_password_request_form[email]" class="form__input" placeholder="Email address" id="email" required> #}
+                    <label for="test" class="form__label">Email address</label>
+                </div>
+
+                <div>
+                    <p class="language-html">
+                        Enter your email address and you will receive an email with a link to reset your password.
+                    </p>
+                </div>
+
+                <div class="form__group">
+                    <button class="button__login d-block mx-auto">Reset email</button>
+                </div>
+            {{ form_end(requestForm) }}
+        </div>
+    </div>
+
+	<!-- Footer -->
+	{% include "partials/_footer.html.twig" %}
+{% endblock %}
