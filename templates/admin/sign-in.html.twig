@@ -19,6 +19,16 @@
 			</div>
 
 			<form method="POST" class="form pb-5" autocomplete="off">
+				<div class="form__errors">
+					{% if error %}
+						<ul>
+							<li>
+								{{ error.messageKey|trans(error.messageData, 'security') }}
+							</li>
+						</ul>
+					{% endif %}
+				</div>
+				
 				<div class="form__group">
 					<input type="email" name="_username" class="form__input" placeholder="Email address" id="email" required>
 					<label for="email" class="form__label">Email address</label>

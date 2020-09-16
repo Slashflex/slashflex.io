@@ -1,8 +1,23 @@
 .avatar {
-  width: 15%;
+  width: 100%;
 
   &__image {
     border-radius: 50%;
-    width: 100%;
+    width: 10%;
+
+    @include respond(tab-port) {
+      width: 25%;
+      margin: 3rem auto;
+      display: block;
+    }
+  }
+}
+
+.forgot_password_request {
+  color: var(--links);
+  transition: all .5s;
+
+  &:hover {
+    text-decoration: none;
   }
 }

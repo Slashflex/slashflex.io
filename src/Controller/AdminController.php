@@ -10,6 +10,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AdminController extends AbstractController
@@ -54,10 +55,14 @@ class AdminController extends AbstractController
      * 
      * @Route("/admin/sign-in", name="admin_signin")
      */
-    public function adminLogin()
+    public function adminLogin(AuthenticationUtils $authenticationUtils)
     {
+        // get the login error if there is one
+        $error = $authenticationUtils->getLastAuthenticationError();
+
         return $this->render('admin/sign-in.html.twig', [
             'title' => '/FLX | Admin Sign-in',
+            'error' => $error
         ]);
     }
 

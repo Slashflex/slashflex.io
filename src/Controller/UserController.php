@@ -5,8 +5,8 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Form\AvatarType;
-use App\Form\AvatarUploadType;
 use Cocur\Slugify\Slugify;
+use App\Form\AvatarUploadType;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Filesystem\Filesystem;
@@ -17,6 +17,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserController extends AbstractController
@@ -50,10 +51,14 @@ class UserController extends AbstractController
      * 
      * @Route("/login", name="user_signin")
      */
-    public function userLogin()
+    public function userLogin(AuthenticationUtils $authenticationUtils)
     {
+        // get the login error if there is one
+        $error = $authenticationUtils->getLastAuthenticationError();
+
         return $this->render('user/sign-in.html.twig', [
-            'title' => '/FLX | Login'
+            'title' => '/FLX | Login',
+            'error' => $error
         ]);
     }
 
@@ -101,18 +106,32 @@ class UserController extends AbstractController
      * 
      * @Route("/me/{slug}/edit", name="edit_me")
      */
-    public function editUser(User $user, Request $request)
+    public function editUser(User $user, Request $request, SluggerInterface $slugger)
     {
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        // Store current user path
+        $oldName = 'uploads/avatars/' . $user->getSlug() . '/';
 
-            // Retrieve updated slug on form submission
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Retrieve user first and last names on form submission
+            $firstname = $form->get('firstname')->getData();
+            $lastname = $form->get('lastname')->getData();
+            $fullname = $slugger->slug($firstname . '-' . $lastname);
+
+            // Hash new password and update slug on form submission
             $hash = $this->passwordEncoder->encodePassword($user, $request->request->get('user')['password']);
             $user
                 ->setPassword($hash)
                 ->updateSlug();
+            $user->setAvatar($user->getAvatar());
+
+            // New user path
+            $newName = 'uploads/avatars/' . $fullname . '/';
+
+            // Rename old user folder with new first and last names from submission
+            rename($oldName, $newName);
 
             $this->manager->persist($user);
             $this->manager->flush();
@@ -122,7 +141,7 @@ class UserController extends AbstractController
                 'Your profile has been updated'
             );
 
-            return $this->redirectToRoute('home');
+            return $this->redirectToRoute('user');
         }
 
         return $this->render('user/edit_me.html.twig', [
@@ -151,7 +170,6 @@ class UserController extends AbstractController
             if ($this->getUser()->getAvatar() != 'avatar.png') {
                 $user->setAvatar('avatar.png');
             }
-            // dd(pathinfo($avatarFile->getClientOriginalName(), PATHINFO_FILENAME));
 
             if ($avatarFile) {
                 $originalFilename = pathinfo($avatarFile->getClientOriginalName(), PATHINFO_FILENAME);
@@ -165,6 +183,7 @@ class UserController extends AbstractController
                     $slug = new Slugify();
                     // Retrieve document root
                     $avatarDir = $_SERVER["DOCUMENT_ROOT"] . '/uploads/avatars/';
+
                     // Create folder based on user's firtname and lastname
                     $userDir = $avatarDir . $slug->slugify($this->getUser()->__toString());
 
@@ -183,8 +202,7 @@ class UserController extends AbstractController
                     // ... handle exception if something happens during file upload
                 }
 
-                // updates the 'avatar' property to store the file name
-                // instead of its contents
+                // Updates the 'avatar' property to store the file name instead of its contents
                 $user->setAvatar($newFilename);
             }
 

@@ -31,7 +31,7 @@
 
 					<div class="form__group">
 						<div class="form__errors">
-							{{ form_errors(registrationForm.email) }}
+							{{ form_errors(registrationForm.firstname) }}
 						</div>
 						{{ form_widget(registrationForm.firstname, {'attr': { 'type': 'text', 'class': 'form__input', 'placeholder': 'Firstname', 'id': 'firstname' }}) }}
 						<label for="firstname" class="form__label">Firstname</label>
@@ -39,7 +39,7 @@
 
 					<div class="form__group">
 						<div class="form__errors">
-							{{ form_errors(registrationForm.email) }}
+							{{ form_errors(registrationForm.lastname) }}
 						</div>
 						{{ form_widget(registrationForm.lastname, {'attr': { 'type': 'text', 'class': 'form__input', 'placeholder': 'Lastname', 'id': 'lastname' }}) }}
 						<label for="lastname" class="form__label">Lastname</label>

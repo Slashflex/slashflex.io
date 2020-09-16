@@ -1,8 +1,7 @@
 $(document).ready(() => {
   // Removes Download link
   if (
-    window.location.pathname.endsWith("new") ||
-    window.location.pathname.endsWith("edit")
+    window.location.pathname.endsWith("new") 
   ) {
     const download = document.querySelectorAll("a[download]");
     download[1].style.display = "none";
@@ -137,6 +136,10 @@ $(document).ready(() => {
     $(".flash-notice").slideUp().fadeOut();
   }, 3000);
 
+  setInterval(() => {
+    $(".flash-notice-error").slideUp().fadeOut();
+  }, 8000);
+
   // Flips cards with perspective
   function flipCard(card, front, back, frontClass, backClass) {
     let count = 0;
@@ -200,6 +203,36 @@ $(document).ready(() => {
   }
 });
 
+if (window.location.pathname == '/me') {
+  // Display current time on user profile
+  const showTime = () => {
+    var date = new Date();
+    var h = date.getHours();
+    var m = date.getMinutes();
+    var s = date.getSeconds();
+
+    if (h == 0) {
+      h = 24;
+    }
+
+    if (h > 24) {
+      h = h - 24;
+    }
+
+    h = h < 10 ? "0" + h : h;
+    m = m < 10 ? "0" + m : m;
+    s = s < 10 ? "0" + s : s;
+
+    var time = h + ":" + m + ":" + s + " ";
+    document.getElementById("DigitalCLOCK").innerText = time;
+    document.getElementById("DigitalCLOCK").textContent = time;
+
+    setTimeout(showTime, 1000);
+  };
+
+  showTime();
+}
+
 const warningIcon = '<i class="fas fa-exclamation-circle"></i>';
 
 // Add warning icons if errors on form inputs
@@ -207,7 +240,15 @@ if ($(".form__errors").children().length > 0) {
   let ul = $(".form__errors").children();
   ul.children().prepend(`${warningIcon} `);
   ul.children().append(` ${warningIcon}`);
-  $(ul).parent().css("border-bottom", "2px solid red");
+  $(ul).parent().css("border-bottom", "2px solid #eb4d4b");
+  
+  // Remove errors when input value is >= 6
+  $('input').keypress(function() {
+    if ($(this).val().length >= 6) {
+      $(ul).parent().css("border-bottom", "2px solid transparent");
+      ul.detach();
+    }
+  });
 }
 
 // Add radio button error message on form submit if not checked
@@ -216,7 +257,9 @@ $(".button__login").click(function () {
     $(".agree-message", ".agree").empty().remove();
   } else {
     let message = window.localStorage.getItem("agree");
-    $(".agree").append(`<li class="agree-message">${warningIcon} ${message} ${warningIcon}</li>`);
+    $(".agree").append(
+      `<li class="agree-message">${warningIcon} ${message} ${warningIcon}</li>`
+    );
   }
 });
 
@@ -229,8 +272,8 @@ $(".form__radio-input").bind("click", function () {
   }
 });
 
-$('.generate-pdf').click(function() {
-  $('#loading').hide();
+$(".generate-pdf").click(function () {
+  $("#loading").hide();
 });
 
 const yellow = "#ffbe41";
@@ -238,6 +281,7 @@ const black = "#27282c";
 const grey = "#585858";
 const white = "#fff";
 
+// Cookie consent policy
 window.cookieconsent.initialise({
   palette: {
     popup: {
@@ -289,7 +333,8 @@ if (
   window.location.pathname == "/" ||
   window.location.pathname == "/works" ||
   window.location.pathname.includes("/works/") ||
-  window.location.pathname == "/blog" || window.location.pathname.includes("/blog/post")//  || window.location.pathname.includes("/blog/post")
+  window.location.pathname == "/blog" ||
+  window.location.pathname.includes("/blog/post") //  || window.location.pathname.includes("/blog/post")
 ) {
   const sentence = [
     `“Knowledge is power.” – <i class="loading__sentence" >Francis Bacon</i>`,

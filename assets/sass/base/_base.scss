@@ -65,15 +65,49 @@ html {
   color: var(--bg);
 }
 
-.flash-notice {
+.flash-notice, .flash-notice-error {
   text-align: center;
   padding: 1rem;
   z-index: 1;
   position: absolute;
+  top: 0;
   margin: 0px auto;
   width: 100%;
   font-size: 1.5rem;
-  color: var(--color-headings);
-  background-color: var(--card-p);
+  color: $color-secondary;
+  background-color: $color-tertiary;
   border-color: var(--color-headings);
 }
+
+
+.clock {
+  color: var(--color-headings);
+  font-size: 1.7rem;
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: 7px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.cc-compliance {
+  justify-content: center;
+}
+
+.cc-message {
+  font-size: 1.6rem;
+  font-family: 'Montserrat', sans-serif;
+  color: $color-secondary !important;
+}
+
+.cc-deny, .cc-allow {
+  font-size: 1.5rem;
+  color: $color-secondary !important;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.cc-revoke {
+  font-size: 1.4rem;
+  font-family: 'Montserrat', sans-serif;
+  color: $color-secondary !important;
+}
+
