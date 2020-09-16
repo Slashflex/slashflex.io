@@ -48,25 +48,26 @@
     justify-content: center;
     font-family: "Montserrat", sans-serif;
     font-weight: 600;
-    font-size: 1.1rem;
+    font-size: 1.3rem;
     color: var(--bg);
 
     &--link {
       color: var(--card-p);
       font-family: "Montserrat", sans-serif;
       font-weight: 600;
-      font-size: 1.2rem;
       transition: all 0.5s;
       padding: 0 0.4rem;
 
       &:hover {
-        background-color: $color-secondary;
-        color: $color-tertiary;
-        padding: 0 0.4rem;
         text-decoration: none;
-        box-shadow: 0 0 10px $color-black;
-        transform: rotate(4deg) scale(1.1);
+        color: var(--card-p);
       }
+    }
+
+    &.copy {
+      font-family: "Montserrat", sans-serif;
+      font-weight: 600;
+      font-size: 1.4rem;
     }
   }
 
@@ -95,6 +96,10 @@
     &__item {
       display: inline;
       margin: 0 1rem;
+
+      @include respond(tab-port) {
+        margin: 0 2.2rem;
+      }
     }
 
     &__link {
@@ -135,7 +140,7 @@
       }
 
       @include respond(tab-port) {
-        font-size: 2.2rem;
+        font-size: 3.5rem;
       }
     }
 

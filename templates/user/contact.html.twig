@@ -5,89 +5,91 @@
 {% endblock %}
 
 {% block body %}
-    <!-- Logo -->
-	{% include "partials/_top_buttons.html.twig" %}
+	<div id="main">
+		<!-- Logo -->
+		{% include "partials/_top_buttons.html.twig" %}
 
-	<!-- Fullscreen Navigation -->
-	{% include "partials/_fullscreen_nav.html.twig" %}
+		<!-- Fullscreen Navigation -->
+		{% include "partials/_fullscreen_nav.html.twig" %}
 
-    <header class="header__projects">
-        <div class="hero__projects">
-			<div class="round"></div>
-            <img src="/build/images/contact.webp" class="model-contact img-fluid" alt="contact model">
+		<header class="header__projects">
+			<div class="hero__projects">
+				<div class="round"></div>
+				<img src="/build/images/contact.webp" class="model-contact img-fluid" alt="contact model">
 
-            <div id="wrapper">
-                <h1 class="wrapper__sites">Contact</h1>
-                <div class="keyF"></div>
-                <div class="keyU"></div>
-                <div class="keyK"></div>
-                <div class="keyC"></div>
-            </div>
-        </div>
-    </header>
-    
-	<section class="project">
-		<div class="container">
-			<div class="stack__text">
-				<div class="stack__text--projects" data-aos="fade-up">Contact me</div>
-				<div class="stack__text--stack mb-2" data-aos="fade-up">RIGHT NOW</div>
-			</div>
-			
-			{{ form_start(form, {'attr': {'class': 'form__contact pb-5'}}) }}
-			<div class="row">
-				<div class="col-12 col-lg-6 mx-auto">
-					<div class="form__group">
-						{{ form_widget(form.firstname, {'attr': { 'type': 'text', 'class': 'form__input', 'placeholder': 'Firstname', 'id': 'firstname' }}) }}
-						<label for="firstname" class="form__label">Firstname</label>
-					</div>
-
-                    <div class="form__group">
-						{{ form_widget(form.lastname, {'attr': { 'type': 'text', 'class': 'form__input', 'placeholder': 'Lastname', 'id': 'lastname' }}) }}
-						<label for="lastname" class="form__label">Lastname</label>
-					</div>
-
-                    <div class="form__group">
-						{{ form_widget(form.email, {'attr': { 'type': 'email', 'class': 'form__input', 'placeholder': 'Email', 'id': 'email' }}) }}
-						<label for="email" class="form__label">Email</label>
-					</div>
-
-                    <div class="form__group">
-						{{ form_widget(form.subject, {'attr': { 'class': 'form__input fake-input', 'placeholder': 'Your message...', 'id': 'subject' }}) }}
-						<label for="subject" class="form__label">Message</label>
-					</div>
+				<div id="wrapper">
+					<h1 class="wrapper__sites">Contact</h1>
+					<div class="keyF"></div>
+					<div class="keyU"></div>
+					<div class="keyK"></div>
+					<div class="keyC"></div>
 				</div>
 			</div>
-
-			<div class="form-group">
-				<button type="submit" class="button__login mx-auto d-block">Send</button>
-			</div>
-            {{ form_end(form) }}
-        </div>
-
-		{# <div class="stack__text">
-			<div class="stack__text--projects">My recent</div>
-			<div class="stack__text--stack">PROJECTS</div>
-		</div> #}
-	</section>
-
-	{# <section style="position: relative; height: 80vh">
-		<!-- Swiper -->
-		<div class="swiper-container">
-			<div class="swiper-wrapper">
-			<!-- Loads images from back-end via a JS script from index.html.twig -->
-			{% for project in projects %}
-				<div class="swiper-slide slide{{ loop.index|first }}" style="background-image: url(/uploads/images/{{ project.imageName }})">
-					<a href="{{ path('single_project', {'slug': project.slug}) }}">
-						<div class="slide__caption">
-							<p class="slide__text">{{ project.title }}</p>
-							<p class="slide__text--description">{{ project.introduction|u.truncate(30, '...') }}</p>
+		</header>
+		
+		<section class="project">
+			<div class="container">
+				<div class="stack__text">
+					<div class="stack__text--projects" data-aos="fade-up">Contact me</div>
+					<div class="stack__text--stack mb-2" data-aos="fade-up">RIGHT NOW</div>
+				</div>
+				
+				{{ form_start(form, {'attr': {'class': 'form__contact pb-5'}}) }}
+				<div class="row">
+					<div class="col-12 col-lg-6 mx-auto">
+						<div class="form__group">
+							{{ form_widget(form.firstname, {'attr': { 'type': 'text', 'class': 'form__input', 'placeholder': 'Firstname', 'id': 'firstname' }}) }}
+							<label for="firstname" class="form__label">Firstname</label>
 						</div>
-					</a>
+
+						<div class="form__group">
+							{{ form_widget(form.lastname, {'attr': { 'type': 'text', 'class': 'form__input', 'placeholder': 'Lastname', 'id': 'lastname' }}) }}
+							<label for="lastname" class="form__label">Lastname</label>
+						</div>
+
+						<div class="form__group">
+							{{ form_widget(form.email, {'attr': { 'type': 'email', 'class': 'form__input', 'placeholder': 'Email', 'id': 'email' }}) }}
+							<label for="email" class="form__label">Email</label>
+						</div>
+
+						<div class="form__group">
+							{{ form_widget(form.subject, {'attr': { 'class': 'form__input fake-input', 'placeholder': 'Your message...', 'id': 'subject' }}) }}
+							<label for="subject" class="form__label">Message</label>
+						</div>
+					</div>
 				</div>
-			{% endfor %}
+
+				<div class="form-group">
+					<button type="submit" class="button__login mx-auto d-block">Send</button>
+				</div>
+				{{ form_end(form) }}
 			</div>
-		</div>
-	</section> #}
+
+			{# <div class="stack__text">
+				<div class="stack__text--projects">My recent</div>
+				<div class="stack__text--stack">PROJECTS</div>
+			</div> #}
+		</section>
+
+		{# <section style="position: relative; height: 80vh">
+			<!-- Swiper -->
+			<div class="swiper-container">
+				<div class="swiper-wrapper">
+				<!-- Loads images from back-end via a JS script from index.html.twig -->
+				{% for project in projects %}
+					<div class="swiper-slide slide{{ loop.index|first }}" style="background-image: url(/uploads/images/{{ project.imageName }})">
+						<a href="{{ path('single_project', {'slug': project.slug}) }}">
+							<div class="slide__caption">
+								<p class="slide__text">{{ project.title }}</p>
+								<p class="slide__text--description">{{ project.introduction|u.truncate(30, '...') }}</p>
+							</div>
+						</a>
+					</div>
+				{% endfor %}
+				</div>
+			</div>
+		</section> #}
+	</div>
 	
 	<!-- Footer -->
 	{% include "partials/_footer.html.twig" %}

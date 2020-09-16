@@ -5,15 +5,17 @@
 {% endblock %}
 
 {% block body %}
-    <!-- Logo -->
-	{% include "partials/_top_buttons.html.twig" %}
+	<div id="main">
+		<!-- Logo -->
+		{% include "partials/_top_buttons.html.twig" %}
 
-	<!-- Fullscreen Navigation -->
-	{% include "partials/_fullscreen_nav.html.twig" %}
+		<!-- Fullscreen Navigation -->
+		{% include "partials/_fullscreen_nav.html.twig" %}
 
-	<!-- Edit user Form -->
-	{% include "partials/_form_edit_user.html.twig" %}
-
+		<!-- Edit user Form -->
+		{% include "partials/_form_edit_user.html.twig" %}
+	</div>
+	
 	<!-- Footer -->
 	{% include "partials/_footer.html.twig" %}
 {% endblock %}

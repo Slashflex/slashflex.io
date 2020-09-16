@@ -15,7 +15,6 @@ button:focus {
 html,
 body {
   width: 100%;
-  background: var(--bg);
   margin-bottom: 65vh; // Hidden Footer
 
   @include respond(tab-port) {
@@ -109,5 +108,17 @@ html {
   font-size: 1.4rem;
   font-family: 'Montserrat', sans-serif;
   color: $color-secondary !important;
+
+  @include respond(tab-port) {
+    display: none;
+  }
 }
 
+#main {
+  position: relative;
+  z-index: 1;
+  // background-color: #fff;
+  background: var(--bg);
+  // padding: 120px 0 600px;
+  box-shadow: 0 3px 3px rgba($color-secondary, 0.2);
+}

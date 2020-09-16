@@ -5,44 +5,46 @@
 {% endblock %}
 
 {% block body %}
-	<!-- Logo -->
-	{% include "partials/_top_buttons.html.twig" %}
+	<div id="main">
+		<!-- Logo -->
+		{% include "partials/_top_buttons.html.twig" %}
 
-	<!-- Fullscreen Navigation -->
-	{% include "partials/_fullscreen_nav.html.twig" %}
+		<!-- Fullscreen Navigation -->
+		{% include "partials/_fullscreen_nav.html.twig" %}
 
-	<div class="create container">
-		<div class="pt-5 mt-5">
-			<div class="stack__text">
-				<div class="stack__text--projects fs-1" data-aos="fade-up">Log in to your</div>
-				<div class="stack__text--stack mb-2 fs-2" data-aos="fade-up">ACCOUNT</div>
+		<div class="create container">
+			<div class="pt-5 mt-5">
+				<div class="stack__text">
+					<div class="stack__text--projects fs-1" data-aos="fade-up">Log in to your</div>
+					<div class="stack__text--stack mb-2 fs-2" data-aos="fade-up">ACCOUNT</div>
+				</div>
+
+				<form method="POST" class="form pb-5" autocomplete="off">
+					<div class="form__errors">
+						{% if error %}
+							<ul>
+								<li>
+									{{ error.messageKey|trans(error.messageData, 'security') }}
+								</li>
+							</ul>
+						{% endif %}
+					</div>
+					
+					<div class="form__group">
+						<input type="email" name="_username" class="form__input" placeholder="Email address" id="email" required>
+						<label for="email" class="form__label">Email address</label>
+					</div>
+
+					<div class="form__group">
+						<input type="password" name="_password" class="form__input" placeholder="Password" id="password" required>
+						<label for="password" class="form__label">Password</label>
+					</div>
+
+					<div class="form-group">
+						<button type="submit" class="button__login mx-auto d-block">Login</button>
+					</div>
+				</form>
 			</div>
-
-			<form method="POST" class="form pb-5" autocomplete="off">
-				<div class="form__errors">
-					{% if error %}
-						<ul>
-							<li>
-								{{ error.messageKey|trans(error.messageData, 'security') }}
-							</li>
-						</ul>
-					{% endif %}
-				</div>
-				
-				<div class="form__group">
-					<input type="email" name="_username" class="form__input" placeholder="Email address" id="email" required>
-					<label for="email" class="form__label">Email address</label>
-				</div>
-
-				<div class="form__group">
-					<input type="password" name="_password" class="form__input" placeholder="Password" id="password" required>
-					<label for="password" class="form__label">Password</label>
-				</div>
-
-				<div class="form-group">
-					<button type="submit" class="button__login mx-auto d-block">Login</button>
-				</div>
-			</form>
 		</div>
 	</div>
 

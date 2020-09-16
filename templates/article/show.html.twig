@@ -5,75 +5,78 @@
 {% endblock %}
 
 {% block body %}
-	<!-- Logo -->
-	{% include "partials/_top_buttons.html.twig" %}
+	<div id="main">
+		<!-- Logo -->
+		{% include "partials/_top_buttons.html.twig" %}
 
-	<!-- Fullscreen Navigation -->
-	{% include "partials/_fullscreen_nav.html.twig" %}
+		<!-- Fullscreen Navigation -->
+		{% include "partials/_fullscreen_nav.html.twig" %}
 
-	{% for message in app.flashes('success') %}
-		<div class="flash-notice">
-			{{ message }}
-		</div>
-	{% endfor %}
+		{% for message in app.flashes('success') %}
+			<div class="flash-notice">
+				{{ message }}
+			</div>
+		{% endfor %}
 
-	<header class="header__blog" style="background-image: url('/uploads/images/{{ article.imageName }}');">
-		{# <div class="container h-100">
-			<div class="row h-100 align-items-center">
-				<div class="col-12 text-center article-intro">
-					<h1>{{ article.title|capitalize }}</h1>
-					<p>{{ article.introduction|capitalize }}</p>
+		<header class="header__blog" style="background-image: url('/uploads/images/{{ article.imageName }}');">
+			{# <div class="container h-100">
+				<div class="row h-100 align-items-center">
+					<div class="col-12 text-center article-intro">
+						<h1>{{ article.title|capitalize }}</h1>
+						<p>{{ article.introduction|capitalize }}</p>
+					</div>
+				</div>
+			</div> #}
+		</header>
+
+		<div class="container">
+			<div class="row mt-5 mb-5">
+				{{ article.content|raw }}
+				<div class="mx-auto generate-pdf">
+					<a href="{{ path('article_to_pdf', {'slug': article.slug}) }}" class="button__login">Download as PDF</a>
 				</div>
 			</div>
-		</div> #}
-	</header>
+			<hr class="separator">
+			<div class="row">
+				<div class="comments-counter">
+					<p class="text-center">Join The Conversation</p>
 
-	<div class="container">
-		<div class="row mt-5 mb-5">
-			{{ article.content|raw }}
-			<div class="mx-auto generate-pdf">
-				<a href="{{ path('article_to_pdf', {'slug': article.slug}) }}" class="button__login">Download as PDF</a>
-			</div>
-		</div>
-		<hr class="separator">
-		<div class="row">
-			<div class="comments-counter">
-				<p class="text-center">Join The Conversation</p>
-
-				{% if not app.user %}
-					<h4 class="comments-section-title">
-						Please <a class="please-login in-bl" href="{{ path('user_signin') }}">Log In</a> to post.
-					</h4>
-				{% else %}
-					{% if article.comments|length == 1 %}
-						<p class="text-center comments-number">There is <strong class="count-up">{{ article.comments|length }} comment</strong> about this post</p>
-					{% elseif article.comments|length >= 2 %}
-						<p class="text-center comments-number">There are <strong class="count-up">{{ article.comments|length }} comments</strong> about this post</p>
+					{% if not app.user %}
+						<h4 class="comments-section-title">
+							Please <a class="please-login in-bl" href="{{ path('user_signin') }}">Log In</a> to post.
+						</h4>
 					{% else %}
-						<p class="text-center none-yet">No comment yet! Post the first one.</p>
+						{% if article.comments|length == 1 %}
+							<p class="text-center comments-number">There is <strong class="count-up">{{ article.comments|length }} comment</strong> about this post</p>
+						{% elseif article.comments|length >= 2 %}
+							<p class="text-center comments-number">There are <strong class="count-up">{{ article.comments|length }} comments</strong> about this post</p>
+						{% else %}
+							<p class="text-center none-yet">No comment yet! Post the first one.</p>
+						{% endif %}
 					{% endif %}
-				{% endif %}
+				</div>
+
+				<div class="comments user-info-comments col-lg-12">
+					<ul class="commentaire"></ul>
+				</div>
 			</div>
 
-			<div class="comments user-info-comments col-lg-12">
-                <ul class="commentaire"></ul>
-            </div>
-        </div>
+			{% if app.user %}
+				{{ form_start(form) }}
+					<div class="form__group">
+						{{ form_widget(form.content, {'attr': { 'class': 'form__input comment-block d-block', 'placeholder': 'Add comment...', 'cols': '10', 'rows': '5' }}) }}
+						<label for="content" class="form__label">Comment</label>
+						<span class="textRequired form__label"></span>
+					</div>
 
-		{% if app.user %}
-			{{ form_start(form) }}
-				<div class="form__group">
-					{{ form_widget(form.content, {'attr': { 'class': 'form__input comment-block d-block', 'placeholder': 'Add comment...', 'cols': '10', 'rows': '5' }}) }}
-					<label for="content" class="form__label">Comment</label>
-					<span class="textRequired form__label"></span>
-				</div>
+					<div class="form-group">
+						<button type="button" class="button__login mx-auto d-block postComment">Publish</button>
+					</div>
+				{{ form_end(form) }}
+			{% endif %}
+		</div>
+	</div>
 
-				<div class="form-group">
-					<button type="button" class="button__login mx-auto d-block postComment">Publish</button>
-				</div>
-			{{ form_end(form) }}
-		{% endif %}
-    </div>
 	<!-- Footer -->
 	{% include "partials/_footer.html.twig" %}
 {% endblock %}

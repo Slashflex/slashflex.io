@@ -1,9 +1,10 @@
-#main {
+#main-1 {
   transition: margin-left 0.5s;
   padding: 1.6rem;
   padding-top: 6rem;
   padding-bottom: 8rem;
 }
+
 .card-header {
   color: $color-white;
 }
@@ -21,7 +22,6 @@
   border: none;
   margin-bottom: 2rem;
   transition: all 0.5s;
-  // cursor: pointer;
   border-radius: 5px;
   background-color: var(--color-headings);
 

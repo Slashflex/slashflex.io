@@ -5,44 +5,46 @@
 {% endblock %}
 
 {% block body %}
-	<!-- Logo -->
-	{% include "partials/_top_buttons.html.twig" %}
+	<div id="main">
+        <!-- Logo -->
+        {% include "partials/_top_buttons.html.twig" %}
 
-	<!-- Fullscreen Navigation -->
-	{% include "partials/_fullscreen_nav.html.twig" %}
+        <!-- Fullscreen Navigation -->
+        {% include "partials/_fullscreen_nav.html.twig" %}
 
-	{% for message in app.flashes('reset_password_error') %}
-        <div class="flash-notice-error">
-            {{ message }}
-        </div>
-    {% endfor %}
+        {% for message in app.flashes('reset_password_error') %}
+            <div class="flash-notice-error">
+                {{ message }}
+            </div>
+        {% endfor %}
 
-    <div class="create container">
-		<div class="pt-5 mt-5">
-            <div class="stack__text">
-				<div class="stack__text--projects fs-1" data-aos="fade-up">Reset your</div>
-				<div class="stack__text--stack mb-2 fs-2" data-aos="fade-up">PASSWORD</div>
-			</div>
+        <div class="create container">
+            <div class="pt-5 mt-5">
+                <div class="stack__text">
+                    <div class="stack__text--projects fs-1" data-aos="fade-up">Reset your</div>
+                    <div class="stack__text--stack mb-2 fs-2" data-aos="fade-up">PASSWORD</div>
+                </div>
 
-            {{ form_start(resetForm, { 'attr': {'class': 'form pb-5' }}) }}
-                {# {{ form_row(resetForm.plainPassword.first) }} #}
-                <div class="form__group">
-                    <div class="form__errors">
-                        {{ form_errors(resetForm, {'attr': {'class': 'form__errors'}})}}
+                {{ form_start(resetForm, { 'attr': {'class': 'form pb-5' }}) }}
+                    {# {{ form_row(resetForm.plainPassword.first) }} #}
+                    <div class="form__group">
+                        <div class="form__errors">
+                            {{ form_errors(resetForm, {'attr': {'class': 'form__errors'}})}}
+                        </div>
+                        {{ form_widget(resetForm.plainPassword.first, {'attr': { 'type': 'password', 'class': 'form__input', 'placeholder': 'New password', 'id': 'password' }}) }}
+                        <label for="password" class="form__label">Password</label>
                     </div>
-                    {{ form_widget(resetForm.plainPassword.first, {'attr': { 'type': 'password', 'class': 'form__input', 'placeholder': 'New password', 'id': 'password' }}) }}
-                    <label for="password" class="form__label">Password</label>
-                </div>
 
-                <div class="form__group">
-                    {{ form_widget(resetForm.plainPassword.second, {'attr': { 'type': 'password', 'class': 'form__input', 'placeholder': 'Repeat new password', 'id': 'repeat-password' }}) }}
-                    <label for="repeat-password" class="form__label">Confirm password</label>
-                </div>
+                    <div class="form__group">
+                        {{ form_widget(resetForm.plainPassword.second, {'attr': { 'type': 'password', 'class': 'form__input', 'placeholder': 'Repeat new password', 'id': 'repeat-password' }}) }}
+                        <label for="repeat-password" class="form__label">Confirm password</label>
+                    </div>
 
-                <div class="form__group">
-                    <button class="button__login d-block mx-auto">Reset password</button>
-                </div>
-            {{ form_end(resetForm) }}
+                    <div class="form__group">
+                        <button class="button__login d-block mx-auto">Reset password</button>
+                    </div>
+                {{ form_end(resetForm) }}
+            </div>
         </div>
     </div>
 

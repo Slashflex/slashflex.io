@@ -14,10 +14,11 @@
 }
 
 .forgot_password_request {
-  color: var(--links);
+  color: var(--links) !important;
   transition: all .5s;
 
   &:hover {
     text-decoration: none;
+    color: var(--links) !important;
   }
 }

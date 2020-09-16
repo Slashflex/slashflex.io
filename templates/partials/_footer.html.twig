@@ -5,7 +5,7 @@
 				<a class="footer__link" href="{{ path('home') }}">
 					<span class="footer__slashflex">/ FLX</span>
 				</a>
-				<p style="text-align: justify;">I am always open to new interesting ideas and startups. If you need some help with your project – please do not hesitate to contact me right now!</p>
+				<p class="language-html" style="text-align: justify;">I am always open to new interesting ideas and startups. If you need some help with your project – please do not hesitate to contact me right now!</p>
 
 				<div class="btn__footer">
 					<a href="mailto: pro.davidsaoud@gmail.com" class="button__login--text">Text Me</a>
@@ -14,43 +14,43 @@
 			<div class="col-md-4">
 				<div class="portfolio">PORTFOLIO</div>
 				
-				<nav class="main-nav" style="margin-left: 8rem">
-					<ul class="main-nav__list">
-						<li class="main-nav__item d-block"><a href="{{ path('home') }}" class="main-nav__link">Home</a></li>
+				<nav class="footer-nav-1" style="margin-left: 8rem">
+					<ul class="footer-nav-1__list">
+						<li class="footer-nav-1__item d-block"><a href="{{ path('home') }}" class="footer-nav-1__link">Home</a></li>
 						{% if app.user and app.user.roleUser[0].name == 'ROLE_ADMIN' %}
-							<li class="main-nav__item">
-								<a href="{{ path('admin') }}" class="main-nav__link">Dashboard</a>
+							<li class="footer-nav-1__item">
+								<a href="{{ path('admin') }}" class="footer-nav-1__link">Dashboard</a>
 							</li>
 						{% endif %}
 						{% if app.user %}
-							<li class="main-nav__item">
-								<a href="{{ path('user') }}" class="main-nav__link">Profile</a>
+							<li class="footer-nav-1__item">
+								<a href="{{ path('user') }}" class="footer-nav-1__link">Profile</a>
 							</li>
-							<li class="main-nav__item">
-								<a href="{{ path('logout') }}" class="main-nav__link">Logout</a>
+							<li class="footer-nav-1__item">
+								<a href="{{ path('logout') }}" class="footer-nav-1__link">Logout</a>
 							</li>
 						{% elseif not app.user %}
-							<li class="main-nav__item">
-								<a href="{{ path('app_register') }}" class="main-nav__link">Register</a>
+							<li class="footer-nav-1__item">
+								<a href="{{ path('app_register') }}" class="footer-nav-1__link">Register</a>
 							</li>
-							<li class="main-nav__item">
-								<a href="{{ path('user_signin') }}" class="main-nav__link">Login</a>
+							<li class="footer-nav-1__item">
+								<a href="{{ path('user_signin') }}" class="footer-nav-1__link">Login</a>
 							</li>
 						{% endif %}
-							<li class="main-nav__item">
-								<a href="{{ path('blog') }}" class="main-nav__link">Blog</a>
+							<li class="footer-nav-1__item">
+								<a href="{{ path('blog') }}" class="footer-nav-1__link">Blog</a>
 							</li>
-							<li class="main-nav__item">
-								<a href="{{ path('works') }}" class="main-nav__link">Works</a>
+							<li class="footer-nav-1__item">
+								<a href="{{ path('works') }}" class="footer-nav-1__link">Works</a>
 							</li>
-						<li class="main-nav__item">
-							<a href="{{ path('contact') }}" class="main-nav__link">Contact</a>
+						<li class="footer-nav-1__item">
+							<a href="{{ path('contact') }}" class="footer-nav-1__link">Contact</a>
 						</li>
 					</ul>
 				</nav>	
 			</div>
 			<div class="col-md-4">
-				Lorem ipsum dolor sit amet.
+				<p class="language-html">Lorem ipsum dolor sit amet.</p>
 			</div>
 		</div>
 
@@ -76,7 +76,7 @@
 			</nav>
 			<hr style="background-color: rgba(255, 255, 255, 0.1)">
 
-			<div class="footer-copyright text-center py-3">&copy;<a class="footer-copyright--link" href="https://slashflex.io/"> Slashflex.io</a> {{ "now"|date("Y") }} 
+			<div class="footer-copyright text-center py-3"><span class="copy">&copy;</span><a class="footer-copyright--link" href="https://slashflex.io/"> Slashflex.io</a> {{ "now"|date("Y") }} 
 			</div>
 		</div>
 	</div>

@@ -5,6 +5,8 @@
 {% endblock %}
 
 {% block body %}
+<div id="main">
+
     <!-- Logo -->
 	{% include "partials/_top_buttons.html.twig" %}
 
@@ -30,11 +32,6 @@
 		</div>
 	</header>
 
-	<!-- Mouse scoller -->
-	<div class="scroll">
-		<lottie-player class="mx-auto scroll__wheel" src="https://assets3.lottiefiles.com/packages/lf20_d3tYeZ.json" background="transparent" speed="1" loop autoplay></lottie-player>
-	</div>
-
 	<!-- Section About -->
 	{% include "partials/_section_about.html.twig" %}
 
@@ -43,14 +40,14 @@
 
 	<!-- Section Works -->
 	{% include "partials/_section_works.html.twig" %}
-
+</div>
 	<!-- Footer -->
 	{% include "partials/_footer.html.twig" %}
 {% endblock %}
 
 {% block javascripts %}
 	<script type="text/javascript">
-	  // Symfony webpack encore bundle fix for SCSS not rendering background-image url(s)
+	  {# // Symfony webpack encore bundle fix for SCSS not rendering background-image url(s)
 	
 	  // IIFE that takes Array from back-end and adds a background-image based on data attribute
 	  (function() {
@@ -88,6 +85,7 @@
 		  /*img[0].style.width = '348px !important';
 		  console.log(img[0].style.width = '348px');*/
 	    }
-      })();
+      })(); #}
+	  (function(){for(let i=1;i<={{projects|length}};i++){var img=$(`.slide${[i]}`);img.css('background-image',function(){var bg=('url(/uploads/images'+$(this).data('background')+')');return bg});img.css('background-size',function(){var cover='cover';return cover});img.css('background-position',function(){var position='center';return position});img.css('background-repeat',function(){var position='no-repeat';return position});img.css('width',function(){var position='348px';return position})}})()
 	</script>
 {% endblock %}

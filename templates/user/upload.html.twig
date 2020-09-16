@@ -5,31 +5,33 @@
 {% endblock %}
 
 {% block body %}
-	<!-- Logo and Nav -->
-	{% include "partials/_top_buttons.html.twig" %}
+	<div id="main">
+		<!-- Logo and Nav -->
+		{% include "partials/_top_buttons.html.twig" %}
 
-	<!-- Fullscreen Navigation -->
-	{% include "partials/_fullscreen_nav.html.twig" %}
+		<!-- Fullscreen Navigation -->
+		{% include "partials/_fullscreen_nav.html.twig" %}
 
-	<div class="create container">
-		<div class="create__form mx-auto pt-5 mt-5">
-			<h1 class="heading__secondary">
-				Upload an avatar (jpg, jpeg, png or gif only)
-			</h1>
-			{{ form_start(form, {'attr': {'class': 'm-auto'}}) }}
-			<div class="row">
-				<div class="col-12 col-lg-12">
-					<div class="form__group">
-						{{ form_widget(form.avatar, {'attr': { 'class': 'form__input' }}) }}
-						<label for="avatar_upload_avatar" class="form__label">Avatar</label>
+		<div class="create container">
+			<div class="create__form mx-auto pt-5 mt-5">
+				<h1 class="heading__secondary">
+					Upload an avatar (jpg, jpeg, png or gif only)
+				</h1>
+				{{ form_start(form, {'attr': {'class': 'm-auto'}}) }}
+				<div class="row">
+					<div class="col-12 col-lg-12">
+						<div class="form__group">
+							{{ form_widget(form.avatar, {'attr': { 'class': 'form__input' }}) }}
+							<label for="avatar_upload_avatar" class="form__label">Avatar</label>
+						</div>
 					</div>
 				</div>
-			</div>
 
-			<div class="form-group mt-5 pb-5">
-				<button type="submit" class="button__login mx-auto d-block px-5">Edit</button>
+				<div class="form-group mt-5 pb-5">
+					<button type="submit" class="button__login mx-auto d-block px-5">Edit</button>
+				</div>
+				{{ form_end(form) }}
 			</div>
-			{{ form_end(form) }}
 		</div>
 	</div>
 

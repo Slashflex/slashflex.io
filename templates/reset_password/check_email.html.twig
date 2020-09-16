@@ -5,19 +5,21 @@
 {% endblock %}
 
 {% block body %}
-	<!-- Logo -->
-	{% include "partials/_top_buttons.html.twig" %}
+	<div id="main">
+		<!-- Logo -->
+		{% include "partials/_top_buttons.html.twig" %}
 
-	<!-- Fullscreen Navigation -->
-	{% include "partials/_fullscreen_nav.html.twig" %}
+		<!-- Fullscreen Navigation -->
+		{% include "partials/_fullscreen_nav.html.twig" %}
 
-	<div class="container mt-5">
-		<div class="stack__text">
-            <div class="stack__text--projects fs-1" data-aos="fade-up">Check your</div>
-            <div class="stack__text--stack mb-2 fs-2" data-aos="fade-up">INBOX</div>
-        </div>
-		<p class="language-html">An email has been sent to you containing a link you can click to reset your password. This link will expire in {{ tokenLifetime|date('g') }} hour(s).</p>
-    	<p class="language-html">If you don't receive an email please check your spam folder or <a href="{{ path('app_forgot_password_request') }}" class="in-bl">try again</a>.</p>
+		<div class="container mt-5">
+			<div class="stack__text">
+				<div class="stack__text--projects fs-1" data-aos="fade-up">Check your</div>
+				<div class="stack__text--stack mb-2 fs-2" data-aos="fade-up">INBOX</div>
+			</div>
+			<p class="language-html">An email has been sent to you containing a link you can click to reset your password. This link will expire in {{ tokenLifetime|date('g') }} hour(s).</p>
+			<p class="language-html">If you don't receive an email please check your spam folder or <a href="{{ path('app_forgot_password_request') }}" class="in-bl">try again</a>.</p>
+		</div>
 	</div>
 
 	<!-- Footer -->

@@ -5,58 +5,60 @@
 {% endblock %}
 
 {% block body %}
-	<!-- Logo and Nav -->
-	{% include "partials/_top_buttons.html.twig" %}
+	<div id="main">
+		<!-- Logo and Nav -->
+		{% include "partials/_top_buttons.html.twig" %}
 
-	<!-- Fullscreen Navigation -->
-	{% include "partials/_fullscreen_nav.html.twig" %}
+		<!-- Fullscreen Navigation -->
+		{% include "partials/_fullscreen_nav.html.twig" %}
 
-	<div class="create container mt-5">
-		<div class="create__form mx-auto pt-5 pb-5">
-			<h1 class="heading__secondary">
-				Create a new project
-			</h1>
-			{% form_theme form 'partials/_images-collection.html.twig' %}
-			{{ form_start(form, {'attr': {'class': 'm-auto'}}) }}
-			<div class="row mt-5">
-				<div class="col-12 col-lg-12">
-					<div class="form__group">
-						{{ form_widget(form.title, {'attr': { 'type': 'text', 'class': 'form__input', 'placeholder': 'Title', 'id': 'title' }}) }}
-						<label for="title" class="form__label">Title</label>
+		<div class="create container mt-5">
+			<div class="create__form mx-auto pt-5 pb-5">
+				<h1 class="heading__secondary">
+					Create a new project
+				</h1>
+				{% form_theme form 'partials/_images-collection.html.twig' %}
+				{{ form_start(form, {'attr': {'class': 'm-auto'}}) }}
+				<div class="row mt-5">
+					<div class="col-12 col-lg-12">
+						<div class="form__group">
+							{{ form_widget(form.title, {'attr': { 'type': 'text', 'class': 'form__input', 'placeholder': 'Title', 'id': 'title' }}) }}
+							<label for="title" class="form__label">Title</label>
+						</div>
+
+						<div class="form__group">
+							{{ form_widget(form.introduction, {'attr': { 'type': 'text', 'class': 'form__input', 'placeholder': 'Introduction', 'id': 'introduction' }}) }}
+							<label for="introduction" class="form__label">Introduction</label>
+						</div>
+
+						<div class="form__group">
+							{{ form_widget(form.content, {'attr': { 'type': 'text', 'class': 'form__input', 'placeholder': 'Content', 'id': 'content' }}) }}
+							<label for="content" class="form__label">Content</label>
+						</div>
+
+						<div class="form__group">
+							{{ form_widget(form.imageFile, {'attr': { 'class': 'form__input', 'id': 'image_file' }}) }}
+							<label for="image_file" class="form__label">Image file</label>
+						</div>
+
+						{# <div class="form__group">
+							{{ form_widget(form.attachments, {'attr': { 'class': 'form__input', 'id': 'image_file' }}) }}
+							<a href="#" id="add_attachment" data-prototype-add="div#project_attachments" class="btn btn-default btn-collection-add">
+								<i class="fa fa-plus" aria-hidden="true"></i> Add an image
+							</a>
+							<button type="button" data-action="delete">Delete</button>
+						</div> #}
+						{% block project_attachments_widget %}
+							{{ form_widget(form) }}
+						{% endblock %}
 					</div>
-
-					<div class="form__group">
-						{{ form_widget(form.introduction, {'attr': { 'type': 'text', 'class': 'form__input', 'placeholder': 'Introduction', 'id': 'introduction' }}) }}
-						<label for="introduction" class="form__label">Introduction</label>
-					</div>
-
-					<div class="form__group">
-						{{ form_widget(form.content, {'attr': { 'type': 'text', 'class': 'form__input', 'placeholder': 'Content', 'id': 'content' }}) }}
-						<label for="content" class="form__label">Content</label>
-					</div>
-
-					<div class="form__group">
-						{{ form_widget(form.imageFile, {'attr': { 'class': 'form__input', 'id': 'image_file' }}) }}
-						<label for="image_file" class="form__label">Image file</label>
-					</div>
-
-					{# <div class="form__group">
-						{{ form_widget(form.attachments, {'attr': { 'class': 'form__input', 'id': 'image_file' }}) }}
-						<a href="#" id="add_attachment" data-prototype-add="div#project_attachments" class="btn btn-default btn-collection-add">
-							<i class="fa fa-plus" aria-hidden="true"></i> Add an image
-						</a>
-						<button type="button" data-action="delete">Delete</button>
-					</div> #}
-					{% block project_attachments_widget %}
-						{{ form_widget(form) }}
-					{% endblock %}
 				</div>
-			</div>
 
-			<div class="form-group p-5">
-				<button type="submit" class="button__login mx-auto d-block">Create</button>
+				<div class="form-group p-5">
+					<button type="submit" class="button__login mx-auto d-block">Create</button>
+				</div>
+				{{ form_end(form) }}
 			</div>
-			{{ form_end(form) }}
 		</div>
 	</div>
 

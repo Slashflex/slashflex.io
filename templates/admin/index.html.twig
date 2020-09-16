@@ -5,88 +5,56 @@
 {% endblock %}
 
 {% block body %}
-    <!-- Logo -->
-	{% include "partials/_top_buttons.html.twig" %}
-
-	<!-- Fullscreen Navigation -->
-	{% include "partials/_fullscreen_nav.html.twig" %}
-	
-	{% for message in app.flashes('success') %}
-		<div class="flash-notice">
-			{{ message }}
-		</div>
-	{% endfor %}
-
 	<div id="main">
-		<div class="accordion" id="accordion">
-			<!-- Users -->
-			<div class="card z-depth-0 bordered">
-				<div class="card-header" id="headingOne2">
-					<div class="d-flex justify-content-between" data-toggle="collapse" class="heading-admin" data-target="#users-list" aria-expanded="true" aria-controls="users-list">
-						<h3>
-							<i class="fas fa-users"></i> Users list
-						</h3>
-					</div>
-				</div>
-				<div id="users-list" class="collapse users__list" aria-labelledby="headingOne2" data-parent="#accordion">
-					<div class="row">
-						<!-- Card -->
-						{% for user in users %}
-							<div class="col-sm-6 col-md-6 col-lg-3">
-								<div class="card card__bg m-3">
-									<img src="/uploads/avatars/{{ user.slug }}/{{ user.avatar }}" class="card-img-top" alt="{{ user.__toString }}">
-									<div class="card-body">
-										{% if user.roleUser[0].name == 'ROLE_ADMIN' %}
-											<h5 class="card-title card__title">{{ user.__toString }} [ADMIN]<i class="fas fa-crown"></i></h5>
-										{% else %}
-											<h5 class="card-title card__title">{{ user.__toString }} [USER]</h5>
-										{% endif %}
-										<p class="card-text card__description">{{ user.description|u.truncate(40, ' ...') }}</p>
-										<p class="font-weight-bold card__email">{{ user.email }}</p>
-										<p class="card-text card__description">Created {{ user.getDate }}</p>
+		<!-- Logo -->
+		{% include "partials/_top_buttons.html.twig" %}
 
-										<div class="d-flex justify-content-between">
-											{# <a href="{{ path('single_project', {'slug': project.slug}) }}" class="btn btn-success">Show</a> #}
-											<a href="{{ path('edit_user', {'slug': user.slug}) }}" class="button__login">Edit</a>
-											<a href="{{ path('delete_user', {'slug': user.slug}) }}" class="button__login--del"><i class="fas fa-trash-alt"></i></a>
-										</div>
-									</div>
-								</div>
-							</div>
-						{% endfor %}
-					</div>
-				</div>
+		<!-- Fullscreen Navigation -->
+		{% include "partials/_fullscreen_nav.html.twig" %}
+		
+		{% for message in app.flashes('success') %}
+			<div class="flash-notice">
+				{{ message }}
+			</div>
+		{% endfor %}
+
+		<div id="main-1">
+			<div class="stack__text pb-5">
+				<div class="stack__text--projects fs-1" data-aos="fade-up">Admin</div>
+				<div class="stack__text--stack mb-2 fs-2" data-aos="fade-up">DASHBOARD</div>
 			</div>
 
-			<!-- Projects -->
-			<div class="card z-depth-0 bordered">
-				<div class="card-header" id="headingTwo2">
-					<div class="d-flex justify-content-between align-items-center" data-toggle="collapse" class="heading-admin" data-target="#projects-list" aria-expanded="false" aria-controls="projects-list">
-						<h3>
-							<i class="fas fa-project-diagram"></i> Works list
-						</h3>
-						{% if app.user and app.user.roleUser[0].name == 'ROLE_ADMIN' %}
-							<a href="{{ path('new_project') }}" class="button__login--showcase">New work</a>
-						{% endif %}
+			<div class="accordion" id="accordion">
+				<!-- Users -->
+				<div class="card z-depth-0 bordered">
+					<div class="card-header" id="headingOne2">
+						<div class="d-flex justify-content-between" data-toggle="collapse" class="heading-admin" data-target="#users-list" aria-expanded="true" aria-controls="users-list">
+							<h3>
+								<i class="fas fa-users"></i> Users list
+							</h3>
+						</div>
 					</div>
-				</div>
-				<div id="projects-list" class="collapse projects__list" aria-labelledby="headingTwo2" data-parent="#accordion">
-					<div class="card-body">
+					<div id="users-list" class="collapse users__list" aria-labelledby="headingOne2" data-parent="#accordion">
 						<div class="row">
 							<!-- Card -->
-							{% for project in projects %}
-								{% set author = project.users %}
+							{% for user in users %}
 								<div class="col-sm-6 col-md-6 col-lg-3">
 									<div class="card card__bg m-3">
-										<img src="/uploads/images/{{ project.imageName }}" class="card-img-top" alt="{{ project.title }}">
+										<img src="/uploads/avatars/{{ user.slug }}/{{ user.avatar }}" class="card-img-top" alt="{{ user.__toString }}">
 										<div class="card-body">
-											<h5 class="card-title card__title">{{ project.title|capitalize }}</h5>
-											<p class="card-text card__description">{{ project.introduction|u.truncate(30, ' ...') }}</p>
-											<p class="card-text card__description">Created by {{ author }} {{ project.getDate }}</p>
+											{% if user.roleUser[0].name == 'ROLE_ADMIN' %}
+												<h5 class="card-title card__title">{{ user.__toString }} [ADMIN]<i class="fas fa-crown"></i></h5>
+											{% else %}
+												<h5 class="card-title card__title">{{ user.__toString }} [USER]</h5>
+											{% endif %}
+											<p class="card-text card__description">{{ user.description|u.truncate(40, ' ...') }}</p>
+											<p class="font-weight-bold card__email">{{ user.email }}</p>
+											<p class="card-text card__description">Created {{ user.getDate }}</p>
+
 											<div class="d-flex justify-content-between">
-												<a href="{{ path('single_project', {'slug': project.slug}) }}" class="button__login">Show</a>
-												<a href="{{ path('edit_project', {'slug': project.slug}) }}" class="button__login">Edit</a>
-												<a href="{{ path('delete_project', {'slug': project.slug}) }}" class="button__login--del"><i class="fas fa-trash-alt"></i></a>
+												{# <a href="{{ path('single_project', {'slug': project.slug}) }}" class="btn btn-success">Show</a> #}
+												<a href="{{ path('edit_user', {'slug': user.slug}) }}" class="button__login">Edit</a>
+												<a href="{{ path('delete_user', {'slug': user.slug}) }}" class="button__login--del"><i class="fas fa-trash-alt"></i></a>
 											</div>
 										</div>
 									</div>
@@ -95,43 +63,82 @@
 						</div>
 					</div>
 				</div>
-			</div>
 
-			<!-- Articles -->
-			<div class="card z-depth-0 bordered">
-				<div class="card-header" id="headingThree2">
-					<div class="d-flex justify-content-between align-items-center" data-toggle="collapse" class="heading-admin" data-target="#articles-list" aria-expanded="false" aria-controls="articles-list">
-						<h3>
-							<i class="fas fa-newspaper"></i> Articles list
-						</h3>
-
-						{% if app.user and app.user.roleUser[0].name == 'ROLE_ADMIN' %}
-							<a href="{{ path('new_article') }}" class="button__login--showcase">New post</a>
-						{% endif %}
+				<!-- Projects -->
+				<div class="card z-depth-0 bordered">
+					<div class="card-header" id="headingTwo2">
+						<div class="d-flex justify-content-between align-items-center" data-toggle="collapse" class="heading-admin" data-target="#projects-list" aria-expanded="false" aria-controls="projects-list">
+							<h3>
+								<i class="fas fa-project-diagram"></i> Works list
+							</h3>
+							{% if app.user and app.user.roleUser[0].name == 'ROLE_ADMIN' %}
+								<a href="{{ path('new_project') }}" class="button__login--showcase">New work</a>
+							{% endif %}
+						</div>
 					</div>
-				</div>
-				<div id="articles-list" class="collapse articles__list" aria-labelledby="headingThree2" data-parent="#accordion">
-					<div class="card-body">
-						<div class="row">
-							<!-- Card -->
-							{% for article in articles %}
-								{% set author = article.users %}
-								<div class="col-sm-6 col-md-6 col-lg-3">
-									<div class="card card__bg m-3">
-										<img src="/uploads/images/{{ article.imageName }}" class="card-img-top" alt="{{ article.title }}">
-										<div class="card-body">
-											<h5 class="card-title card__title">{{ article.title }}</h5>
-											<p class="card-text card__description">{{ article.introduction|u.truncate(100, ' ...') }}</p>
-											<p class="card-text">Created by {{ author }} {{ article.getDate }}</p>
-											<div class="d-flex justify-content-between">
-												<a href="{{ path('single_article', {'slug': article.slug }) }}" class="button__login">Show</a>
-												<a href="{{ path('edit_article', {'slug': article.slug }) }}" class="button__login">Edit</a>
-												<a href="{{ path('delete_article', {'slug': article.slug }) }}" class="button__login--del"><i class="fas fa-trash-alt"></i></a>
+					<div id="projects-list" class="collapse projects__list" aria-labelledby="headingTwo2" data-parent="#accordion">
+						<div class="card-body">
+							<div class="row">
+								<!-- Card -->
+								{% for project in projects %}
+									{% set author = project.users %}
+									<div class="col-sm-6 col-md-6 col-lg-3">
+										<div class="card card__bg m-3">
+											<img src="/uploads/images/{{ project.imageName }}" class="card-img-top" alt="{{ project.title }}">
+											<div class="card-body">
+												<h5 class="card-title card__title">{{ project.title|capitalize }}</h5>
+												<p class="card-text card__description">{{ project.introduction|u.truncate(30, ' ...') }}</p>
+												<p class="card-text card__description">Created by {{ author }} {{ project.getDate }}</p>
+												<div class="d-flex justify-content-between">
+													<a href="{{ path('single_project', {'slug': project.slug}) }}" class="button__login">Show</a>
+													<a href="{{ path('edit_project', {'slug': project.slug}) }}" class="button__login">Edit</a>
+													<a href="{{ path('delete_project', {'slug': project.slug}) }}" class="button__login--del"><i class="fas fa-trash-alt"></i></a>
+												</div>
 											</div>
 										</div>
 									</div>
-								</div>
-							{% endfor %}
+								{% endfor %}
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Articles -->
+				<div class="card z-depth-0 bordered">
+					<div class="card-header" id="headingThree2">
+						<div class="d-flex justify-content-between align-items-center" data-toggle="collapse" class="heading-admin" data-target="#articles-list" aria-expanded="false" aria-controls="articles-list">
+							<h3>
+								<i class="fas fa-newspaper"></i> Articles list
+							</h3>
+
+							{% if app.user and app.user.roleUser[0].name == 'ROLE_ADMIN' %}
+								<a href="{{ path('new_article') }}" class="button__login--showcase">New post</a>
+							{% endif %}
+						</div>
+					</div>
+					<div id="articles-list" class="collapse articles__list" aria-labelledby="headingThree2" data-parent="#accordion">
+						<div class="card-body">
+							<div class="row">
+								<!-- Card -->
+								{% for article in articles %}
+									{% set author = article.users %}
+									<div class="col-sm-6 col-md-6 col-lg-3">
+										<div class="card card__bg m-3">
+											<img src="/uploads/images/{{ article.imageName }}" class="card-img-top" alt="{{ article.title }}">
+											<div class="card-body">
+												<h5 class="card-title card__title">{{ article.title }}</h5>
+												<p class="card-text card__description">{{ article.introduction|u.truncate(100, ' ...') }}</p>
+												<p class="card-text">Created by {{ author }} {{ article.getDate }}</p>
+												<div class="d-flex justify-content-between">
+													<a href="{{ path('single_article', {'slug': article.slug }) }}" class="button__login">Show</a>
+													<a href="{{ path('edit_article', {'slug': article.slug }) }}" class="button__login">Edit</a>
+													<a href="{{ path('delete_article', {'slug': article.slug }) }}" class="button__login--del"><i class="fas fa-trash-alt"></i></a>
+												</div>
+											</div>
+										</div>
+									</div>
+								{% endfor %}
+							</div>
 						</div>
 					</div>
 				</div>

@@ -208,3 +208,10 @@
 .mockup__img {
   background-image: url(/build/images/mockup.webp);
 }
+
+.swipe-caption {
+
+  &:hover {
+    text-decoration: none;
+  }
+}

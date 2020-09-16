@@ -1,8 +1,41 @@
+// Loader with random quotes
+const removeLoader = () => {
+  $("#loading").fadeOut(500, () => {
+    // FadeOut complete. Remove the loading div
+    $(this).remove(); // Makes page more lightweight
+  });
+};
+
+if (!window.location.pathname.includes("/admin")) {
+  const sentence = [
+    `“Knowledge is power.” – <i class="loading__sentence" >Francis Bacon</i>`,
+    `“Simplicity is the soul of efficiency.” – <i class="loading__sentence" >Austin Freeman</i>`,
+    `“Make it work, make it right, make it fast.” – <i class="loading__sentence" >Kent Beck</i>`,
+    `“Talk is cheap. Show me the code.“ – <i class="loading__sentence" >Linus Torvalds</i>`,
+    `“Software is like sex: It’s better when it’s free.“ – <i class="loading__sentence" >Linus Torvalds</i>`,
+    `“The Internet? Is that thing still around?” - <i class="loading__sentence" >Homer Simpson</i>`,
+    `“I find your lack of faith disturbing.” - <i class="loading__sentence" >Darth Vader</i>`,
+    `“Do. Or do not. There is no try.” - <i class="loading__sentence" >Yoda</i>`,
+    `“We meet again at last.” - <i class="loading__sentence" >Darth Vader</i>`,
+  ]; // Get a random index from the array sentence
+  const randomNumber = Math.floor(Math.random() * sentence.length); // Get a random sentence from randomNumber
+
+  const quote = sentence[randomNumber];
+  $("body").append(
+    `<div style="width: 100%; background: ${black}; color: ${white}; margin-bottom: 40vh; height: 100%; position: fixed;" id="loading"><div class="loader"></div></div>`
+  ); // Displays a random quote inside the loading div
+
+  $("#loading").append(
+    `<p class="text-center h1 loading__text">`.concat(quote, "</p>")
+  );
+  $(window).on("load", () => {
+    setTimeout(removeLoader, 600); // Wait for page load
+  });
+}
+
 $(document).ready(() => {
   // Removes Download link
-  if (
-    window.location.pathname.endsWith("new") 
-  ) {
+  if (window.location.pathname.endsWith("new")) {
     const download = document.querySelectorAll("a[download]");
     download[1].style.display = "none";
   }
@@ -203,8 +236,8 @@ $(document).ready(() => {
   }
 });
 
-if (window.location.pathname == '/me') {
-  // Display current time on user profile
+// Display current time on user profile
+if (window.location.pathname == "/me") {
   const showTime = () => {
     var date = new Date();
     var h = date.getHours();
@@ -241,9 +274,9 @@ if ($(".form__errors").children().length > 0) {
   ul.children().prepend(`${warningIcon} `);
   ul.children().append(` ${warningIcon}`);
   $(ul).parent().css("border-bottom", "2px solid #eb4d4b");
-  
+
   // Remove errors when input value is >= 6
-  $('input').keypress(function() {
+  $("input").keypress(function () {
     if ($(this).val().length >= 6) {
       $(ul).parent().css("border-bottom", "2px solid transparent");
       ul.detach();
@@ -295,7 +328,7 @@ window.cookieconsent.initialise({
   },
   type: "opt-out",
   content: {
-    href: "http://slashflex.io.test/terms-of-use",
+    href: "https://slashflex.io/terms-of-use",
   },
 });
 
@@ -328,225 +361,121 @@ if (window.location.pathname.includes("/blog")) {
   $(".button").css("background-color", yellow);
 }
 
-// Loader with random quotes
-if (
-  window.location.pathname == "/" ||
-  window.location.pathname == "/works" ||
-  window.location.pathname.includes("/works/") ||
-  window.location.pathname == "/blog" ||
-  window.location.pathname.includes("/blog/post") //  || window.location.pathname.includes("/blog/post")
-) {
-  const sentence = [
-    `“Knowledge is power.” – <i class="loading__sentence" >Francis Bacon</i>`,
-    `“Simplicity is the soul of efficiency.” – <i class="loading__sentence" >Austin Freeman</i>`,
-    `“Make it work, make it right, make it fast.” – <i class="loading__sentence" >Kent Beck</i>`,
-    `“Talk is cheap. Show me the code.“ – <i class="loading__sentence" >Linus Torvalds</i>`,
-    `“Software is like sex: It’s better when it’s free.“ – <i class="loading__sentence" >Linus Torvalds</i>`,
-    `“The Internet? Is that thing still around?” - <i class="loading__sentence" >Homer Simpson</i>`,
-    `“I find your lack of faith disturbing.” - <i class="loading__sentence" >Darth Vader</i>`,
-    `“Do. Or do not. There is no try.” - <i class="loading__sentence" >Yoda</i>`,
-    `“We meet again at last.” - <i class="loading__sentence" >Darth Vader</i>`,
-  ]; // Get a random index from the array sentence
-  const randomNumber = Math.floor(Math.random() * sentence.length); // Get a random sentence from randomNumber
+// Gooey button
+$(".button--bubble").each(function () {
+  var $circlesTopLeft = $(this).parent().find(".circle.top-left");
+  var $circlesBottomRight = $(this).parent().find(".circle.bottom-right");
 
-  const quote = sentence[randomNumber];
-  $("body").append(
-    `<div style="width: 100%; background: ${black}; color: ${white}; margin-bottom: 40vh; height: 100%; position: fixed;" id="loading"><div class="loader"></div></div>`
-  ); // Displays a random quote inside the loading div
+  var tl = new TimelineLite();
+  var tl2 = new TimelineLite();
+  var btTl = new TimelineLite({ paused: true });
 
-  $("#loading").append(
-    `<p class="text-center h1 loading__text">`.concat(quote, "</p>")
+  tl.to($circlesTopLeft, 1.2, {
+    x: -25,
+    y: -25,
+    scaleY: 2,
+    ease: SlowMo.ease.config(0.1, 0.7, false),
+  });
+  tl.to($circlesTopLeft.eq(0), 0.1, { scale: 0.2, x: "+=6", y: "-=2" });
+  tl.to(
+    $circlesTopLeft.eq(1),
+    0.1,
+    { scaleX: 1, scaleY: 0.8, x: "-=10", y: "-=7" },
+    "-=0.1"
   );
-  $(window).on("load", () => {
-    setTimeout(removeLoader, 600); // Wait for page load
+  tl.to(
+    $circlesTopLeft.eq(2),
+    0.1,
+    { scale: 0.2, x: "-=15", y: "+=6" },
+    "-=0.1"
+  );
+  tl.to($circlesTopLeft.eq(0), 1, {
+    scale: 0,
+    x: "-=5",
+    y: "-=15",
+    opacity: 0,
   });
+  tl.to(
+    $circlesTopLeft.eq(1),
+    1,
+    { scaleX: 0.4, scaleY: 0.4, x: "-=10", y: "-=10", opacity: 0 },
+    "-=1"
+  );
+  tl.to(
+    $circlesTopLeft.eq(2),
+    1,
+    { scale: 0, x: "-=15", y: "+=5", opacity: 0 },
+    "-=1"
+  );
 
-  const removeLoader = () => {
-    $("#loading").fadeOut(500, () => {
-      // FadeOut complete. Remove the loading div
-      $(this).remove(); // Makes page more lightweight
-    });
-  };
+  var tlBt1 = new TimelineLite();
+  var tlBt2 = new TimelineLite();
 
-  // Gooey button
-  $(".button--bubble").each(function () {
-    var $circlesTopLeft = $(this).parent().find(".circle.top-left");
-    var $circlesBottomRight = $(this).parent().find(".circle.bottom-right");
+  tlBt1.set($circlesTopLeft, { x: 0, y: 0, rotation: -45 });
+  tlBt1.add(tl);
 
-    var tl = new TimelineLite();
-    var tl2 = new TimelineLite();
-    var btTl = new TimelineLite({ paused: true });
-
-    tl.to($circlesTopLeft, 1.2, {
-      x: -25,
-      y: -25,
-      scaleY: 2,
-      ease: SlowMo.ease.config(0.1, 0.7, false),
-    });
-    tl.to($circlesTopLeft.eq(0), 0.1, { scale: 0.2, x: "+=6", y: "-=2" });
-    tl.to(
-      $circlesTopLeft.eq(1),
-      0.1,
-      { scaleX: 1, scaleY: 0.8, x: "-=10", y: "-=7" },
-      "-=0.1"
-    );
-    tl.to(
-      $circlesTopLeft.eq(2),
-      0.1,
-      { scale: 0.2, x: "-=15", y: "+=6" },
-      "-=0.1"
-    );
-    tl.to($circlesTopLeft.eq(0), 1, {
-      scale: 0,
-      x: "-=5",
-      y: "-=15",
-      opacity: 0,
-    });
-    tl.to(
-      $circlesTopLeft.eq(1),
-      1,
-      { scaleX: 0.4, scaleY: 0.4, x: "-=10", y: "-=10", opacity: 0 },
-      "-=1"
-    );
-    tl.to(
-      $circlesTopLeft.eq(2),
-      1,
-      { scale: 0, x: "-=15", y: "+=5", opacity: 0 },
-      "-=1"
-    );
-
-    var tlBt1 = new TimelineLite();
-    var tlBt2 = new TimelineLite();
-
-    tlBt1.set($circlesTopLeft, { x: 0, y: 0, rotation: -45 });
-    tlBt1.add(tl);
-
-    tl2.set($circlesBottomRight, { x: 0, y: 0 });
-    tl2.to($circlesBottomRight, 1.1, {
-      x: 30,
-      y: 30,
-      ease: SlowMo.ease.config(0.1, 0.7, false),
-    });
-    tl2.to($circlesBottomRight.eq(0), 0.1, { scale: 0.2, x: "-=6", y: "+=3" });
-    tl2.to(
-      $circlesBottomRight.eq(1),
-      0.1,
-      { scale: 0.8, x: "+=7", y: "+=3" },
-      "-=0.1"
-    );
-    tl2.to(
-      $circlesBottomRight.eq(2),
-      0.1,
-      { scale: 0.2, x: "+=15", y: "-=6" },
-      "-=0.2"
-    );
-    tl2.to($circlesBottomRight.eq(0), 1, {
-      scale: 0,
-      x: "+=5",
-      y: "+=15",
-      opacity: 0,
-    });
-    tl2.to(
-      $circlesBottomRight.eq(1),
-      1,
-      { scale: 0.4, x: "+=7", y: "+=7", opacity: 0 },
-      "-=1"
-    );
-    tl2.to(
-      $circlesBottomRight.eq(2),
-      1,
-      { scale: 0, x: "+=15", y: "-=5", opacity: 0 },
-      "-=1"
-    );
-
-    tlBt2.set($circlesBottomRight, { x: 0, y: 0, rotation: 45 });
-    tlBt2.add(tl2);
-
-    btTl.add(tlBt1);
-    btTl.to(
-      $(this).parent().find(".button.effect-button"),
-      0.8,
-      { scaleY: 1.1 },
-      0.1
-    );
-    btTl.add(tlBt2, 0.2);
-    btTl.to(
-      $(this).parent().find(".button.effect-button"),
-      1.8,
-      { scale: 1, ease: Elastic.easeOut.config(1.2, 0.4) },
-      1.2
-    );
-
-    btTl.timeScale(2.6);
-
-    $(this).on("mouseover", function () {
-      btTl.restart();
-    });
+  tl2.set($circlesBottomRight, { x: 0, y: 0 });
+  tl2.to($circlesBottomRight, 1.1, {
+    x: 30,
+    y: 30,
+    ease: SlowMo.ease.config(0.1, 0.7, false),
   });
-}
+  tl2.to($circlesBottomRight.eq(0), 0.1, { scale: 0.2, x: "-=6", y: "+=3" });
+  tl2.to(
+    $circlesBottomRight.eq(1),
+    0.1,
+    { scale: 0.8, x: "+=7", y: "+=3" },
+    "-=0.1"
+  );
+  tl2.to(
+    $circlesBottomRight.eq(2),
+    0.1,
+    { scale: 0.2, x: "+=15", y: "-=6" },
+    "-=0.2"
+  );
+  tl2.to($circlesBottomRight.eq(0), 1, {
+    scale: 0,
+    x: "+=5",
+    y: "+=15",
+    opacity: 0,
+  });
+  tl2.to(
+    $circlesBottomRight.eq(1),
+    1,
+    { scale: 0.4, x: "+=7", y: "+=7", opacity: 0 },
+    "-=1"
+  );
+  tl2.to(
+    $circlesBottomRight.eq(2),
+    1,
+    { scale: 0, x: "+=15", y: "-=5", opacity: 0 },
+    "-=1"
+  );
 
-// const collision = ($fix, $moving) => {
-//   var x1 = $fix.offset().left,
-//     y1 = $fix.offset().top,
-//     h1 = $fix.outerHeight(true),
-//     w1 = $fix.outerWidth(true),
-//     b1 = y1 + h1,
-//     r1 = x1 + w1,
-//     x2 = $moving.offset().left,
-//     y2 = $moving.offset().top,
-//     h2 = $moving.outerHeight(true),
-//     w2 = $moving.outerWidth(true),
-//     b2 = y2 + h2,
-//     r2 = x2 + w2;
+  tlBt2.set($circlesBottomRight, { x: 0, y: 0, rotation: 45 });
+  tlBt2.add(tl2);
 
-//   if (b1 < y2 || y1 > b2 || r1 < x2 || x1 > r2) return false;
-//   return true;
-// };
+  btTl.add(tlBt1);
+  btTl.to(
+    $(this).parent().find(".button.effect-button"),
+    0.8,
+    { scaleY: 1.1 },
+    0.1
+  );
+  btTl.add(tlBt2, 0.2);
+  btTl.to(
+    $(this).parent().find(".button.effect-button"),
+    1.8,
+    { scale: 1, ease: Elastic.easeOut.config(1.2, 0.4) },
+    1.2
+  );
 
-// // Change color when overlaping same color (Logo & Burger menu)
-// // const stylesheet = document.styleSheets[8];
+  btTl.timeScale(2.6);
 
-// $(window).scroll(() => {
-//   const all = $(".moving");
-//   const appendToBurger = $("#trigger").css({
-//     width: "5rem",
-//     height: "5rem",
-//     "background-color": yellow,
-//     position: "absolute",
-//     right: "1rem",
-//     top: "1.7rem",
-//   });
-
-//   for (let i = 0; i < all.length; i++) {
-//     if (collision($(".fix"), all.eq(i)) && collision($("#burger"), all.eq(i))) {
-//       $(".fix").css("color", yellow);
-//       console.log("not overlaping");
-//       appendToBurger.css("opacity", 0.7);
-
-//       // appendToBurger.css('opacity', .7);
-//       // $("#burger").css("background", yellow);
-//       // stylesheet.addRule("#burger::before", `background-color: ${yellow}`);
-//       // stylesheet.insertRule(
-//       //   `#burger::before { background-color: ${yellow} }`);
-//       // stylesheet.addRule("#burger::after", `background-color: ${yellow}`);
-//       // stylesheet.insertRule(
-//       //   `#burger::after { background-color: ${yellow} }`);
-//       break;
-//     } else {
-//       $(".fix").css("color", black);
-//       console.log("overlaping");
-//       appendToBurger.css("opacity", "0");
-
-//       // appendToBurger;
-//       // $("#burger").css("background", black);
-//       // stylesheet.addRule("#burger::before", `background-color: ${black}`);
-//       // stylesheet.insertRule(
-//       //   `#burger::before { background-color: ${black} }`);
-//       // stylesheet.addRule("#burger::after", `background-color: ${black}`);
-//       // stylesheet.insertRule(`#burger::after { background-color: ${black} }`);
-//     }
-//   }
-// });
+  $(this).on("mouseover", function () {
+    btTl.restart();
+  });
+});
 
 // Dark/Light Theme switch
 const checkbox = document.querySelector("input[name=theme]");
