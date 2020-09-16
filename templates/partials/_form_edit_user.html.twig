@@ -1,8 +1,9 @@
 <div class="create container pb-5">
     <div class="pt-5 mt-5">
-        <h1 class="heading__secondary">
-            Edit your profile
-        </h1>
+        <div class="stack__text">
+            <div class="stack__text--projects fs-1" data-aos="fade-up">Edit your</div>
+            <div class="stack__text--stack mb-2 fs-2" data-aos="fade-up">PROFILE</div>
+        </div>
 
         {{ form_start(form._token, {'attr': { 'class': 'form', 'autocomplete': 'off' }}) }}
             <div class="form__group">
@@ -32,7 +33,7 @@
 
             <div class="form__group">
                 {{ form_widget(form.login, {'attr': { 'type': 'text', 'class': 'form__input', 'id': 'login' }}) }}
-                <label for="login" class="form__label">Login</label>
+                <label for="login" class="form__label">Nickname</label>
             </div>
 
             {# <div class="form__group">

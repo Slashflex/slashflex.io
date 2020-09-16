@@ -166,7 +166,7 @@
 								<li>
 									<div class="comment-wrap">
 										<div class="photo">
-											<div class="avatar" {% if comment.users.avatar != 'avatar.png' %} style="background-image: url(/uploads/avatars/${userData.slug}/${res.data.users.avatar})" {% else %} style="background-image: url(/uploads/avatars/${res.data.users.avatar})" {% endif %}></div>
+											<div class="avatar" {% if comment.users.avatar != 'avatar.png' %} style="background-image: url(/uploads/avatars/${userData.slug}/${userData.avatar})" {% else %} style="background-image: url(/uploads/avatars/${userData.avatar})" {% endif %}></div>
 										</div>
 										<div class="comment-block">
 											<div class="comment-tile">${name}</div>
@@ -251,12 +251,11 @@
 						
 						// Converts JS variables to use them inside Twig conditions
 						{% set user = "userData" %}
-
 						let postComment = `
 							<li>
 								<div class="comment-wrap">
 									<div class="photo">
-										<div class="avatar" style="background-image: url(/uploads/avatars/${userData.slug}/${res.data.users.avatar})"></div>
+										<div class="avatar" style="background-image: url(/uploads/avatars/${userData.slug}/${userData.avatar})"></div>
 									</div>
 									<div class="comment-block">
 										<div class="comment-tile">${name}</div>
