@@ -40,7 +40,6 @@
 @mixin button-hover {
   background-color: var(--card-back-p);
   color: $color-secondary;
-  text-decoration: none;
 }
 
 @mixin button-hover-delete {

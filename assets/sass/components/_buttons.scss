@@ -84,8 +84,9 @@
     }
 
     &:hover {
-      @include button-hover;
-      color: $color-secondary;
+      text-decoration: none;
+      color: $color-tertiary;
+      background-color: var(--color-headings);
     }
 
     &:active {
@@ -99,8 +100,9 @@
     color: $color-secondary;
 
     &:hover {
-      @include button-hover;
-      background-color: $color-tertiary;
+      color: $color-tertiary;
+      text-decoration: none;
+      background-color: var(--card-p);
     }
 
     &:active {
