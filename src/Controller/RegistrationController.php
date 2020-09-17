@@ -41,15 +41,17 @@ class RegistrationController extends AbstractController
             $path = 'uploads/avatars/' . $user->getSlug();
             // Create dedicated folder for the registered user
             $user->setAvatar('avatar.png');
-            $count = 0;
 
-            if (file_exists($path)) {
-                mkdir($path . '-' . $count++);
-                copy('uploads/avatars/avatar.png', $path . '/avatar.png');
-            } else {
-                mkdir($path);
-                copy('uploads/avatars/avatar.png', $path . '/avatar.png');
-            }
+            // Create a user folder with increment when 2 users register having same first and last names
+            // $count = 0;
+
+            // if (file_exists($path)) {
+            //     mkdir($path . '-' . $count++);
+            //     copy('uploads/avatars/avatar.png', $path . '/avatar.png');
+            // } else {
+            //     mkdir($path);
+            //     copy('uploads/avatars/avatar.png', $path . '/avatar.png');
+            // }
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
