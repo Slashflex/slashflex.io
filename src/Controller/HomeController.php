@@ -83,7 +83,7 @@ class HomeController extends AbstractController
         $user = $this->userRepository->findOneBy(['email' => $_ENV['DB_EMAIL']]);
 
         return $this->render('user/about.html.twig', [
-            'title' => '/FLX | About',
+            'title' => '/FLX | About me',
             'user' => $user
         ]);
     }
@@ -139,7 +139,7 @@ class HomeController extends AbstractController
         $user = $this->userRepository->findOneBy(['email' => $_ENV['DB_EMAIL']]);
 
         return $this->render('user/contact.html.twig', [
-            'title' => '/FLX | About',
+            'title' => '/FLX | Contact me',
             'user' => $user,
             'form' => $form->createView(),
             'projects' => $projects
