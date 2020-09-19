@@ -36,7 +36,7 @@ class AvatarUploadType extends AbstractType
                             'image/webp',
                             'image/png',
                         ],
-                        'mimeTypesMessage' => 'Please upload a valid document (jpg|jpeg|gif|webp|png)',
+                        'mimeTypesMessage' => 'Please upload a valid document (jpg, jpeg, gif, webp or png)',
                     ])
                 ],
             ]);
