@@ -84,6 +84,11 @@
 {% block javascripts %}
 	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
    	<script language="javascript">
+		// Hides loader when printing as PDF
+		$(".generate-pdf").click(function () {
+			$("#loading").hide();
+		});
+
         let commentaire = '';
 		let author = "<br><span class='article__author'>Published by {{article.users.description}} {{article.createdAt|ago}}</span>";
 
