@@ -48,53 +48,7 @@ $(document).ready(() => {
   // Sets parallax effect only on root page
   if (window.location.pathname == "/") {
     // Parallax events
-    (() => {
-      // Add event listener
-      document.addEventListener("mousemove", parallax);
-      const chess1 = document.querySelector(".hero__chess1");
-      const chess2 = document.querySelector(".hero__chess2");
-      const chess3 = document.querySelector(".hero__chess3");
-
-      // Magic happens here
-      function parallax(e) {
-        let width = window.innerWidth / 2;
-        let height = window.innerHeight / 2;
-        let mouseX = e.clientX;
-        let mouseY = e.clientY;
-        let depth1 = `${50 - (mouseX - width) * 0.01}% ${
-          50 - (mouseY - height) * 0.01
-        }%`;
-        let depth2 = `${50 + (mouseX - width) * 0.01}% ${
-          50 + (mouseY - height) * 0.01
-        }%`;
-        let depth3 = `${50 + (mouseX - width) * 0.01}% ${
-          50 - (mouseY - height) * 0.01
-        }%`;
-
-        chess1.style.backgroundPosition = depth1;
-        chess2.style.backgroundPosition = depth2;
-        chess3.style.backgroundPosition = depth3;
-      }
-    })();
   }
-
-  $("#wrapper").mousemove((e) => {
-    parallaxIt(e, ".keyF", -40);
-    parallaxIt(e, ".keyU", 20);
-    parallaxIt(e, ".keyK", -45);
-    parallaxIt(e, ".keyC", 25);
-  });
-
-  const parallaxIt = (e, target, movement) => {
-    var wrapper = $("#wrapper");
-    var relX = e.pageX - wrapper.offset().left;
-    var relY = e.pageY - wrapper.offset().top;
-
-    TweenMax.to(target, 1, {
-      x: ((relX - wrapper.width() / 2) / wrapper.width()) * movement,
-      y: ((relY - wrapper.height() / 2) / wrapper.height()) * movement,
-    });
-  };
 
   // Swiper
   var swiper = new Swiper(".swiper-container", {
@@ -172,99 +126,7 @@ $(document).ready(() => {
   setInterval(() => {
     $(".flash-notice-error").slideUp().fadeOut();
   }, 8000);
-
-  // Flips cards with perspective
-  function flipCard(card, front, back, frontClass, backClass) {
-    let count = 0;
-    $(card).on("click", function () {
-      count++;
-      if (count === 1) {
-        $(front).addClass(frontClass);
-        $(back).addClass(backClass);
-        count++;
-      } else {
-        $(front).removeClass(frontClass);
-        $(back).removeClass(backClass);
-        count = 0;
-      }
-    });
-  }
-  for (let i = 0; i < 15; i++) {
-    const card = document.querySelector(`.card${[i]}`);
-    const front = document.querySelector(`.front${[i]}`);
-    const back = document.querySelector(`.back${[i]}`);
-    flipCard(
-      $(card),
-      $(front),
-      $(back),
-      `front-visible-${[i]}`,
-      `back-visible-${[i]}`
-    );
-  }
-
-  if (window.location.pathname.includes("/works")) {
-    // $(".swiper-slide").css('width', '0px');
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > 600) {
-        $(".swiper-button-next, .swiper-button-prev").css({
-          top: "95%",
-          right: "0",
-        });
-        $(".swiper-slide").css({
-          "box-shadow": "0px 0px 0px white",
-          "border-radius": "25px",
-        });
-      } else {
-        $(".swiper-button-next, .swiper-button-prev").css({
-          top: "50%",
-          right: "0",
-        });
-        $(".swiper-slide").css({
-          "box-shadow": "0px 0px 0px white",
-          "border-radius": "0px",
-        });
-      }
-    });
-  }
-
-  if (window.location.pathname == "/works") {
-    for (let i = 1; i < 15; i++) {
-      let back = document.querySelector(`.back${[i]}`);
-      $(back).css("background-color", black);
-    }
-    //   $(".round").css("background-color", "#ffbe41");
-  }
 });
-
-// Display current time on user profile
-if (window.location.pathname == "/me") {
-  const showTime = () => {
-    var date = new Date();
-    var h = date.getHours();
-    var m = date.getMinutes();
-    var s = date.getSeconds();
-
-    if (h == 0) {
-      h = 24;
-    }
-
-    if (h > 24) {
-      h = h - 24;
-    }
-
-    h = h < 10 ? "0" + h : h;
-    m = m < 10 ? "0" + m : m;
-    s = s < 10 ? "0" + s : s;
-
-    var time = h + ":" + m + ":" + s + " ";
-    document.getElementById("DigitalCLOCK").innerText = time;
-    document.getElementById("DigitalCLOCK").textContent = time;
-
-    setTimeout(showTime, 1000);
-  };
-
-  showTime();
-}
 
 const warningIcon = '<i class="fas fa-exclamation-circle"></i>';
 
@@ -294,19 +156,6 @@ $(".button__login").click(function () {
       `<li class="agree-message">${warningIcon} ${message} ${warningIcon}</li>`
     );
   }
-});
-
-// Remove radio button error message if checked
-$(".form__radio-input").bind("click", function () {
-  var $t = $(this);
-
-  if ($t.is(":checked")) {
-    $(".agree-message", ".agree").empty().remove();
-  }
-});
-
-$(".generate-pdf").click(function () {
-  $("#loading").hide();
 });
 
 const yellow = "#ffbe41";
@@ -350,15 +199,6 @@ if (
     },
     false
   );
-}
-
-if (window.location.pathname == "/works") {
-  $(".card-content--image").css("background-size", "cover");
-}
-// Gooey button on https://slashflex.io/blog
-if (window.location.pathname.includes("/blog")) {
-  $(".button--bubble").css("color", black);
-  $(".button").css("background-color", yellow);
 }
 
 // Gooey button

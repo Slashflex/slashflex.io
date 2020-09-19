@@ -100,9 +100,10 @@
     color: $color-secondary;
 
     &:hover {
-      color: $color-tertiary;
+      color: $color-secondary;
+      // color: var();
       text-decoration: none;
-      background-color: var(--card-p);
+      background-color: $color-tertiary;
     }
 
     &:active {

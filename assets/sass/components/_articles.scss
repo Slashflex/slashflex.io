@@ -60,6 +60,7 @@
     font-family: "Montserrat", sans-serif;
     font-weight: 400;
     color: var(--links);
+    text-align: justify;
 
     & strong {
       color: var(--links);
@@ -96,6 +97,7 @@
   &__heading5 {
     font-weight: bold;
     font-size: 1.8rem;
+    color: var(--links);
   }
 }
 .separator {
@@ -110,7 +112,6 @@ code {
   &__content {
     width: 100%;
     margin: 0 auto;
-    text-align: justify;
 
     @include respond(phone) {
       width: 85%;

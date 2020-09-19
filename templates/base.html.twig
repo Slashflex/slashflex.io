@@ -34,6 +34,29 @@
         <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js" data-cfasync="false"></script>
         <!-- Custom JS -->
         {{ encore_entry_script_tags('custom') }}
+
+        {% if app.request.pathInfo == '/' %}
+            {{ encore_entry_script_tags('home') }}
+        {% endif %}
+        {% if app.request.pathInfo == '/blog' %}
+            {{ encore_entry_script_tags('blog') }}
+        {% endif %}
+        {% if app.request.pathInfo == '/register' %}
+            {{ encore_entry_script_tags('register') }}
+        {% endif %}
+        {% if app.request.pathInfo == '/works' %}
+            {{ encore_entry_script_tags('works') }}
+        {% endif %}
+        {% if app.request.pathInfo == '/me' %}
+            {{ encore_entry_script_tags('profile') }}
+        {% endif %}
+        {% if 
+            app.request.pathInfo == '/' or 
+            app.request.pathInfo == '/blog' or 
+            app.request.pathInfo == '/works' 
+        %}
+            {{ encore_entry_script_tags('cards') }}
+        {% endif %}
         {% block javascripts %}{% endblock %}
     </body>
 </html>

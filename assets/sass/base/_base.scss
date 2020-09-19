@@ -16,6 +16,7 @@ html,
 body {
   width: 100%;
   margin-bottom: 65vh; // Hidden Footer
+  background-color: var(--bg);
 
   @include respond(tab-port) {
     margin-bottom: 65vh;
@@ -117,8 +118,6 @@ html {
 #main {
   position: relative;
   z-index: 1;
-  // background-color: #fff;
   background: var(--bg);
-  // padding: 120px 0 600px;
-  box-shadow: 0 3px 3px rgba($color-secondary, 0.2);
+  // box-shadow: 0 3px 3px rgba($color-secondary, 0.2);
 }
