@@ -43,15 +43,15 @@ class RegistrationController extends AbstractController
             $user->setAvatar('avatar.png');
 
             // Create a user folder with increment when 2 users register having same first and last names
-            // $count = 0;
+            $count = 0;
 
-            // if (file_exists($path)) {
-            //     mkdir($path . '-' . $count++);
-            //     copy('uploads/avatars/avatar.png', $path . '/avatar.png');
-            // } else {
-            //     mkdir($path);
-            //     copy('uploads/avatars/avatar.png', $path . '/avatar.png');
-            // }
+            if (file_exists($path)) {
+                mkdir($path . '-' . $count++);
+                copy('uploads/avatars/avatar.png', $path . '/avatar.png');
+            } else {
+                mkdir($path);
+                copy('uploads/avatars/avatar.png', $path . '/avatar.png');
+            }
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
