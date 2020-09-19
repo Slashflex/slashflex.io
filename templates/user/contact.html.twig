@@ -33,36 +33,41 @@
 					<div class="stack__text--projects" data-aos="fade-up">Contact me</div>
 					<div class="stack__text--stack mb-2" data-aos="fade-up">RIGHT NOW</div>
 				</div>
-				
-				{{ form_start(form, {'attr': {'class': 'form__contact pb-5'}}) }}
 				<div class="row">
-					<div class="col-12 col-lg-6 mx-auto">
-						<div class="form__group">
-							{{ form_widget(form.firstname, {'attr': { 'type': 'text', 'class': 'form__input', 'placeholder': 'Firstname', 'id': 'firstname' }}) }}
-							<label for="firstname" class="form__label">Firstname</label>
-						</div>
+					<div class="col-lg-6">
+						{{ form_start(form, {'attr': {'class': 'form__contact pb-5'}}) }}
+							<div class="mx-auto">
+								<div class="form__group">
+									{{ form_widget(form.firstname, {'attr': { 'type': 'text', 'class': 'form__input', 'placeholder': 'Firstname', 'id': 'firstname' }}) }}
+									<label for="firstname" class="form__label">Firstname</label>
+								</div>
 
-						<div class="form__group">
-							{{ form_widget(form.lastname, {'attr': { 'type': 'text', 'class': 'form__input', 'placeholder': 'Lastname', 'id': 'lastname' }}) }}
-							<label for="lastname" class="form__label">Lastname</label>
-						</div>
+								<div class="form__group">
+									{{ form_widget(form.lastname, {'attr': { 'type': 'text', 'class': 'form__input', 'placeholder': 'Lastname', 'id': 'lastname' }}) }}
+									<label for="lastname" class="form__label">Lastname</label>
+								</div>
 
-						<div class="form__group">
-							{{ form_widget(form.email, {'attr': { 'type': 'email', 'class': 'form__input', 'placeholder': 'Email', 'id': 'email' }}) }}
-							<label for="email" class="form__label">Email</label>
-						</div>
+								<div class="form__group">
+									{{ form_widget(form.email, {'attr': { 'type': 'email', 'class': 'form__input', 'placeholder': 'Email', 'id': 'email' }}) }}
+									<label for="email" class="form__label">Email</label>
+								</div>
 
-						<div class="form__group">
-							{{ form_widget(form.subject, {'attr': { 'class': 'form__input fake-input', 'placeholder': 'Your message...', 'id': 'subject' }}) }}
-							<label for="subject" class="form__label">Message</label>
+								<div class="form__group">
+									{{ form_widget(form.subject, {'attr': { 'class': 'form__input fake-input', 'placeholder': 'Your message...', 'id': 'subject' }}) }}
+									<label for="subject" class="form__label">Message</label>
+								</div>
+							</div>
+
+						<div class="form-group">
+							<button type="submit" class="button__login mx-auto d-block">Send</button>
 						</div>
+						{{ form_end(form) }}
+					</div>
+
+					<div class="col-lg-6">
+						Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus eveniet reiciendis explicabo, obcaecati sapiente at natus commodi aspernatur nisi odit minus error quia magni et neque doloremque, illum aut tempore voluptatum quas ducimus laudantium alias officia! Aliquid, assumenda. Cupiditate quo ea ducimus amet, a, quasi maxime reiciendis rem, excepturi delectus dignissimos maiores. Eligendi quos voluptatum quaerat consequuntur id, animi ipsum odit delectus molestias molestiae tempore soluta alias possimus rerum provident aliquam suscipit quis, ipsa exercitationem pariatur, facere consequatur esse veniam. Fuga, repellat. Dolor obcaecati itaque, aspernatur quod iusto modi, recusandae animi quis iste dignissimos similique saepe ex beatae fugiat possimus.
 					</div>
 				</div>
-
-				<div class="form-group">
-					<button type="submit" class="button__login mx-auto d-block">Send</button>
-				</div>
-				{{ form_end(form) }}
 			</div>
 
 			{# <div class="stack__text">
