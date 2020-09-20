@@ -98,27 +98,26 @@ class HomeController extends AbstractController
         $form = $this->createForm(ContactType::class, null);
         $form->handleRequest($request);
 
-
         if ($form->isSubmitted() && $form->isValid()) {
             $firstname = $request->request->get('contact')['firstname'];
             $lastname = $request->request->get('contact')['lastname'];
             $mail = $request->request->get('contact')['email'];
             $subject = $request->request->get('contact')['subject'];
+            $fullname = ucfirst($firstname) . ' ' . ucfirst($lastname);
 
             $admin = $_ENV['DB_FIRSTNAME'] . ' ' . $_ENV['DB_LASTNAME'];
             $date = new DateTime('NOW');
-
 
             // Send an email
             $eMail = (new TemplatedEmail())
                 ->from($_ENV['DB_EMAIL'])
                 ->to($_ENV['DB_EMAIL'])
-                ->subject($subject)
+                ->subject('Message from : ' . $fullname)
                 ->htmlTemplate('emails/contact.html.twig')
                 ->context([
                     'name' => $admin,
                     'date' => "{$date->format('\o\n l jS F Y')} at {$date->format('H:i')}",
-                    'user' => $firstname . ' ' . $lastname,
+                    'user' => $fullname,
                     'subject' => $subject,
                     'mail' => $mail
                 ]);
@@ -133,16 +132,13 @@ class HomeController extends AbstractController
             return $this->redirectToRoute('home');
         }
 
-        $projects = $this->projectRepository->findAll();
-
         // Retrieve my informations from database
         $user = $this->userRepository->findOneBy(['email' => $_ENV['DB_EMAIL']]);
 
         return $this->render('user/contact.html.twig', [
             'title' => '/FLX | Contact me',
             'user' => $user,
-            'form' => $form->createView(),
-            'projects' => $projects
+            'form' => $form->createView()
         ]);
     }
 

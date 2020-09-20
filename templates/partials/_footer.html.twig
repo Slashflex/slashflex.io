@@ -17,12 +17,15 @@
 				<nav class="footer-nav-1" style="margin-left: 8rem">
 					<ul class="footer-nav-1__list">
 						<li class="footer-nav-1__item d-block"><a href="{{ path('home') }}" class="footer-nav-1__link">Home</a></li>
-						{% if app.user and app.user.roleUser[0].name == 'ROLE_ADMIN' %}
-							<li class="footer-nav-1__item">
-								<a href="{{ path('admin') }}" class="footer-nav-1__link">Dashboard</a>
-							</li>
-						{% endif %}
+						
 						{% if app.user %}
+							{% for role in app.user.roles %}
+								{% if role == 'ROLE_ADMIN' %}
+									<li class="footer-nav-1__item">
+										<a href="{{ path('admin') }}" class="footer-nav-1__link">Dashboard</a>
+									</li>
+								{% endif %}
+							{% endfor %}
 							<li class="footer-nav-1__item">
 								<a href="{{ path('user') }}" class="footer-nav-1__link">Profile</a>
 							</li>

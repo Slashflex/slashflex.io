@@ -12,14 +12,14 @@
   }
 
   &__errors {
-    font-size: 1.6rem;
+    font-size: 1.15rem;
     text-align: center;
     border: 2px solid transparent;
   }
 
   &__registration {
     margin: 0 auto;
-    width: 70%;
+    width: 80%;
     padding-top: 6rem;
 
     &__group:not(:last-child) {
@@ -221,4 +221,9 @@
 .agree-message {
   font-size: 1.6rem;
   text-align: center;
+}
+
+.inputfile {
+  width: 40%;
+  margin: 0 auto;
 }

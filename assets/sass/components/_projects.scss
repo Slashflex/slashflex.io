@@ -199,3 +199,12 @@ div[class^="key"] {
     text-align: justify;
   }
 }
+
+.next-btn, .prev-btn {
+  @include respond(phone) {
+    display: none;
+  }
+}
+.radius {
+  border-radius: 2rem;
+}

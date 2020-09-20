@@ -69,31 +69,7 @@
 					</div>
 				</div>
 			</div>
-
-			{# <div class="stack__text">
-				<div class="stack__text--projects">My recent</div>
-				<div class="stack__text--stack">PROJECTS</div>
-			</div> #}
 		</section>
-
-		{# <section style="position: relative; height: 80vh">
-			<!-- Swiper -->
-			<div class="swiper-container">
-				<div class="swiper-wrapper">
-				<!-- Loads images from back-end via a JS script from index.html.twig -->
-				{% for project in projects %}
-					<div class="swiper-slide slide{{ loop.index|first }}" style="background-image: url(/uploads/images/{{ project.imageName }})">
-						<a href="{{ path('single_project', {'slug': project.slug}) }}">
-							<div class="slide__caption">
-								<p class="slide__text">{{ project.title }}</p>
-								<p class="slide__text--description">{{ project.introduction|u.truncate(30, '...') }}</p>
-							</div>
-						</a>
-					</div>
-				{% endfor %}
-				</div>
-			</div>
-		</section> #}
 	</div>
 	
 	<!-- Footer -->
@@ -101,4 +77,3 @@
 {% endblock %}
 
 {% block javascripts %}{% endblock %}
-

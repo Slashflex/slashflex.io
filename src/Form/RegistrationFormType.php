@@ -42,8 +42,36 @@ class RegistrationFormType extends AbstractType
                 'invalid_message' => 'The password fields must match.',
                 'options' => ['attr' => ['class' => 'password-field']],
                 'required' => true,
-                'first_options'  => ['label' => 'Password'],
-                'second_options' => ['label' => 'Repeat Password'],
+                'first_options'  => [
+                    'label' => 'Password',
+                    'constraints' => [
+                        new NotBlank([
+                            'message' => 'Please enter a password',
+                        ]),
+                        new Length([
+                            'min' => 8,
+                            'minMessage' => 'Your password should be at least {{ limit }} characters long',
+                            'maxMessage' => 'Your password should be at most {{ limit }} characters long',
+                            // max length allowed by Symfony for security reasons
+                            'max' => 4096,
+                        ]),
+                    ],
+                ],
+                'second_options' => [
+                    'label' => 'Repeat Password',
+                    'constraints' => [
+                        new NotBlank([
+                            'message' => 'Please enter a password',
+                        ]),
+                        new Length([
+                            'min' => 8,
+                            'minMessage' => 'This field should be at least {{ limit }} characters long',
+                            'maxMessage' => 'This field should be at most {{ limit }} characters long',
+                            // max length allowed by Symfony for security reasons
+                            'max' => 4096,
+                        ]),
+                    ],
+                ],
             ])
             // ->add('description')
             ->add('login')

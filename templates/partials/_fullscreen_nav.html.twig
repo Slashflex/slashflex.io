@@ -9,12 +9,16 @@
 	<nav class="main-nav">
 		<ul class="main-nav__list">
 			<li class="main-nav__item"><a href="{{ path('home') }}" class="main-nav__link">Home</a></li>
-			{% if app.user and app.user.roleUser[0].name == 'ROLE_ADMIN' %}
-				<li class="main-nav__item">
-					<a href="{{ path('admin') }}" class="main-nav__link">Dashboard</a>
-				</li>
-			{% endif %}
+			
 			{% if app.user %}
+				{% for role in app.user.roles %}
+					{% if role == 'ROLE_ADMIN' %}
+						<li class="main-nav__item">
+							<a href="{{ path('admin') }}" class="main-nav__link">Dashboard</a>
+						</li>
+					{% endif %}
+				{% endfor %}
+				
 				<li class="main-nav__item">
 					<a href="{{ path('user') }}" class="main-nav__link">Profile</a>
 				</li>

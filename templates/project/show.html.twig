@@ -6,7 +6,6 @@
 
 {% block body %}
 	<div id="main">
-        <!-- Logo -->
         {% include "partials/_top_buttons.html.twig" %}
 
         <!-- Fullscreen Navigation -->
@@ -55,7 +54,7 @@
             </h1>
 
             <div class="my-5 display-content">
-                {{ project.introduction }}
+                <div class="project__introduction">{{ project.introduction }}</div>
                 {{ project.content|raw }}
                 {# <div class="container">
                     <div class="row">
@@ -155,7 +154,7 @@
                 <div class="swiper-wrapper">
                     {% for img in projects %}
                         {% if app.request.get('slug') != img.slug %}
-                            <div class="swiper-slide">
+                            <div class="swiper-slide radius">
                                 <div class="picture">
                                     <a href="{{ path('single_project', {'slug': img.slug})}}" class="picture__link">
                                         <img class="img-fluid slide-{{ loop.index|first }}" src="/uploads/images/{{img.imageName}}" alt="{{img.title}}">
@@ -169,8 +168,8 @@
                         {% endif %}
                     {% endfor %}
                 </div>
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next next-btn"></div>
+                <div class="swiper-button-prev prev-btn"></div>
             </div>
         </div>
 	</div>
@@ -182,41 +181,8 @@
 {% block javascripts %}
 	<script>
 		// LightBox
-        for (let i = 0; i < {{ project.Attachments|length }}; i++) {
-            let slides = document.querySelectorAll (`.slide${[i]}`);
-            let lightbox = document.querySelector (`.lightbox${[i]}`);
-
-            for (const slide of slides) { // Display lightbox
-                slide.addEventListener('click', (e) => {
-                    lightbox.style.display = 'block';
-                    lightbox.classList.add('ligthbox-open')
-                });
-            }
-
-            // Hide lightbox
-            lightbox.addEventListener('click', () => {
-                lightbox.style.display = 'none';
-                lightbox.classList.remove('ligthbox-open')
-            });
-        }
-
-        // Instanciate new Swiper Object
-        let swipes = new Swiper('.swiper-container-2', {
-            effect: "coverflow",
-            grabCursor: true,
-            centeredSlides: true,
-            slidesPerView: "auto",
-            coverflowEffect: {
-                rotate: 20,
-                stretch: 0,
-                depth: 350,
-                modifier: 1,
-                slideShadows: true
-            },
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev'
-            }
-        });
+        for(let i=0;i<{{project.Attachments|length}};i++){let slides=document.querySelectorAll(`.slide${[i]}`);let lightbox=document.querySelector(`.lightbox${[i]}`);for(const slide of slides){slide.addEventListener('click',(e)=>{lightbox.style.display='block';lightbox.classList.add('ligthbox-open')})}
+        lightbox.addEventListener('click',()=>{lightbox.style.display='none';lightbox.classList.remove('ligthbox-open')})}
+        let swipes=new Swiper('.swiper-container-2',{effect:"coverflow",grabCursor:!0,centeredSlides:!0,slidesPerView:"auto",coverflowEffect:{rotate:20,stretch:0,depth:350,modifier:1,slideShadows:!0},navigation:{nextEl:'.swiper-button-next',prevEl:'.swiper-button-prev'}})
 	</script>
 {% endblock %}

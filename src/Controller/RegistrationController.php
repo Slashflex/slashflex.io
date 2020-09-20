@@ -35,7 +35,6 @@ class RegistrationController extends AbstractController
                     $form->get('password')->getData()
                 )
             )
-                ->addRoleUser($role)
                 ->initializeSlug();
 
             $path = 'uploads/avatars/' . $user->getSlug();

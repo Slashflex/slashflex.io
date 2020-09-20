@@ -37,9 +37,11 @@
             <a href="{{ path('edit_me', {'slug': user.slug}) }}" class="button__login">Edit</a>
             <a href="{{ path('upload_avatar', {'slug': user.slug}) }}" class="button__login">Upload avatar</a>
             <a href="{{ path('logout') }}" class="button__login">Logout</a>
-            {% if app.user.roleUser[0].name == 'ROLE_ADMIN' %}
-                <a href="{{ path('admin') }}" class="button__login">Dashboard</a>
-            {% endif %}
+            {% for role in app.user.roles %}
+                {% if role == 'ROLE_ADMIN' %}
+                    <a href="{{ path('admin') }}" class="button__login">Dashboard</a>
+                {% endif %}
+            {% endfor %}
         </div>
     </div>
 	<!-- Footer -->
