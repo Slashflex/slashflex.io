@@ -118,7 +118,7 @@ class UserController extends AbstractController
             // Retrieve user first and last names on form submission
             $firstname = $form->get('firstname')->getData();
             $lastname = $form->get('lastname')->getData();
-            $fullname = $slugger->slug($firstname . '-' . $lastname);
+            $fullname = $slugger->slug(strtolower($firstname . '-' . $lastname));
 
             // Hash new password and update slug on form submission
             $hash = $this->passwordEncoder->encodePassword($user, $request->request->get('user')['password']);
@@ -215,6 +215,8 @@ class UserController extends AbstractController
             );
 
             return $this->redirectToRoute('user');
+        } else {
+            $form->getErrors();
         }
 
         return $this->render('user/upload.html.twig', [
