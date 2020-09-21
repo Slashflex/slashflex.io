@@ -39,7 +39,7 @@
             {{ encore_entry_script_tags('home') }}
         {% endif %}
         {% if app.user %}
-            {% if app.request.pathInfo == '/me/'~ app.user.slug ~ '/upload' %}
+            {% if app.request.pathInfo == '/me/' ~ app.user.slug ~ '/upload' %}
                 {{ encore_entry_script_tags('upload') }}
             {% endif %}
         {% endif %}
@@ -58,8 +58,10 @@
         {% if 
             app.request.pathInfo == '/' or 
             app.request.pathInfo == '/blog' or 
-            app.request.pathInfo == '/works' 
+            app.request.pathInfo == '/works' or
+            app.request.pathInfo == '/contact'
         %}
+            {{ encore_entry_script_tags('fukc') }}
             {{ encore_entry_script_tags('cards') }}
         {% endif %}
         {% block javascripts %}{% endblock %}

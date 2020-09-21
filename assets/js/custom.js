@@ -181,10 +181,6 @@ window.cookieconsent.initialise({
   },
 });
 
-if (window.location.pathname == "/contact") {
-  $(".round").css("display", "none");
-}
-
 if (
   window.location.pathname == "/" ||
   window.location.pathname.includes("/works/")

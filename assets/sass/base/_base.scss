@@ -79,7 +79,7 @@ html {
   border-color: var(--color-headings);
 }
 
-
+// Clock on profile page
 .clock {
   color: var(--color-headings);
   font-size: 1.7rem;
@@ -89,35 +89,8 @@ html {
   margin: 0 auto;
 }
 
-.cc-compliance {
-  justify-content: center;
-}
-
-.cc-message {
-  font-size: 1.6rem;
-  font-family: 'Montserrat', sans-serif;
-  color: $color-secondary !important;
-}
-
-.cc-deny, .cc-allow {
-  font-size: 1.5rem;
-  color: $color-secondary !important;
-  font-family: 'Montserrat', sans-serif;
-}
-
-.cc-revoke {
-  font-size: 1.4rem;
-  font-family: 'Montserrat', sans-serif;
-  color: $color-secondary !important;
-
-  @include respond(tab-port) {
-    display: none;
-  }
-}
-
 #main {
   position: relative;
   z-index: 1;
   background: var(--bg);
-  // box-shadow: 0 3px 3px rgba($color-secondary, 0.2);
 }
