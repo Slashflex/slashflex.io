@@ -178,7 +178,7 @@ class UserController extends AbstractController
                 $newFilename = $safeFilename . '-' . $user->getId() . '.' . $avatarFile->guessExtension();
 
                 $fileSystem = new Filesystem();
-                // Move the file to the directory where brochures are stored
+                // Move the file to the directory where avatars are stored
                 try {
                     $slug = new Slugify();
                     // Retrieve document root
@@ -187,11 +187,13 @@ class UserController extends AbstractController
                     // Create folder based on user's firtname and lastname
                     $userDir = $avatarDir . $slug->slugify($this->getUser()->__toString());
 
-                    // Remove old avatar ffrom user folder
+                    // Remove old avatar from user folder
                     $fileSystem->remove([$userDir . '/', $user->getAvatar()]);
+                    // $fileSystem->remove($userDir . '/', $user->getAvatar());
 
                     if (!file_exists($userDir) || file_exists($userDir)) {
                         $userFolder = $userDir;
+
                         // Move the uploaded file to the current user avatar folder
                         $avatarFile->move(
                             $userFolder,
