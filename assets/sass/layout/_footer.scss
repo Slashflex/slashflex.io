@@ -165,4 +165,11 @@
     translateX(0px) translateY(0px) translateZ(0px);
   margin-top: 5rem;
   margin-left: -26rem;
+
+  @include respond (phone-small) {
+    transform: rotateZ(-360deg) rotateX(0deg) rotateY(0deg) scale(1)
+      translateX(0px) translateY(0px) translateZ(0px);
+      margin-left: 0rem;
+      text-align: center;
+  }
 }

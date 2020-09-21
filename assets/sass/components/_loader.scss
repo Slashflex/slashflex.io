@@ -62,7 +62,8 @@
   }
 
   &__sentence {
-    color: #585858;
+    color: var(--color-text);
     font-size: 1.9rem;
+    display: block;
   }
 }

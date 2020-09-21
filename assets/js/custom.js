@@ -1,3 +1,8 @@
+const yellow = "#ffbe41";
+const black = "#27282c";
+const grey = "#585858";
+const white = "#fff";
+
 // Loader with random quotes
 const removeLoader = () => {
   $("#loading").fadeOut(500, () => {
@@ -8,15 +13,15 @@ const removeLoader = () => {
 
 if (!window.location.pathname.includes("/admin")) {
   const sentence = [
-    `“Knowledge is power.” – <i class="loading__sentence" >Francis Bacon</i>`,
-    `“Simplicity is the soul of efficiency.” – <i class="loading__sentence" >Austin Freeman</i>`,
-    `“Make it work, make it right, make it fast.” – <i class="loading__sentence" >Kent Beck</i>`,
-    `“Talk is cheap. Show me the code.“ – <i class="loading__sentence" >Linus Torvalds</i>`,
-    `“Software is like sex: It’s better when it’s free.“ – <i class="loading__sentence" >Linus Torvalds</i>`,
-    `“The Internet? Is that thing still around?” - <i class="loading__sentence" >Homer Simpson</i>`,
-    `“I find your lack of faith disturbing.” - <i class="loading__sentence" >Darth Vader</i>`,
-    `“Do. Or do not. There is no try.” - <i class="loading__sentence" >Yoda</i>`,
-    `“We meet again at last.” - <i class="loading__sentence" >Darth Vader</i>`,
+    `“Knowledge is power.”<i class="loading__sentence"><span style="color: ${yellow}"> – </span>Francis Bacon</i>`,
+    `“Simplicity is the soul of efficiency.”<i class="loading__sentence"><span style="color: ${yellow}"> – </span>Austin Freeman</i>`,
+    `“Make it work, make it right, make it fast.”<i class="loading__sentence"><span style="color: ${yellow}"> – </span>Kent Beck</i>`,
+    `“Talk is cheap. Show me the code.“<i class="loading__sentence"><span style="color: ${yellow}"> – </span>Linus Torvalds</i>`,
+    `“Software is like sex: It’s better when it’s free.“<i class="loading__sentence"><span style="color: ${yellow}"> – </span>Linus Torvalds</i>`,
+    `“The Internet? Is that thing still around?”<i class="loading__sentence"><span style="color: ${yellow}"> – </span>Homer Simpson</i>`,
+    `“I find your lack of faith disturbing.”<i class="loading__sentence"><span style="color: ${yellow}"> – </span>Darth Vader</i>`,
+    `“Do. Or do not. There is no try.”<i class="loading__sentence"><span style="color: ${yellow}"> – </span>Yoda</i>`,
+    `“We meet again at last.”<i class="loading__sentence"><span style="color: ${yellow}"> – </span>Darth Vader</i>`,
   ]; // Get a random index from the array sentence
   const randomNumber = Math.floor(Math.random() * sentence.length); // Get a random sentence from randomNumber
 
@@ -134,7 +139,7 @@ const warningIcon = '<i class="fas fa-exclamation-circle"></i>';
 if ($(".form__errors").children().length > 0) {
   let ul = $(".form__errors").children();
   ul.children().prepend(`${warningIcon} `);
-  ul.children().append(` ${warningIcon}`);
+  // ul.children().append(` ${warningIcon}`);
   $(ul).parent().css("border-bottom", "2px solid #eb4d4b");
 
   // Remove errors when input value is >= 6
@@ -157,11 +162,6 @@ $(".button__login").click(function () {
     );
   }
 });
-
-const yellow = "#ffbe41";
-const black = "#27282c";
-const grey = "#585858";
-const white = "#fff";
 
 // Cookie consent policy
 window.cookieconsent.initialise({
