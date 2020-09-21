@@ -1,29 +1,5 @@
 const black = "#27282c";
 
-if (window.location.pathname.includes("/works")) {
-  window.addEventListener("scroll", () => {
-    if (window.scrollY > 600) {
-      $(".swiper-button-next, .swiper-button-prev").css({
-        top: "95%",
-        right: "0",
-      });
-      $(".swiper-slide").css({
-        boxShadow: "0px 0px 0px white",
-        borderRadius: "25px",
-      });
-    } else {
-      $(".swiper-button-next, .swiper-button-prev").css({
-        top: "50%",
-        right: "0",
-      });
-      $(".swiper-slide").css({
-        boxShadow: "0px 0px 0px white",
-        borderRadius: "0px",
-      });
-    }
-  });
-}
-
 for (let i = 1; i < 15; i++) {
   let back = document.querySelector(`.back${[i]}`);
   $(back).css("background-color", black);
