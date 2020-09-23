@@ -94,3 +94,9 @@ html {
   z-index: 1;
   background: var(--bg);
 }
+
+// Recaptcha
+.grecaptcha-badge {
+  margin: 2rem auto !important;
+  position: initial !important;
+}
