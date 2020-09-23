@@ -134,6 +134,15 @@
     "fzaninotto/faker": {
         "version": "v1.9.1"
     },
+    "google/recaptcha": {
+        "version": "1.1",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "1.1",
+            "ref": "d087df3e087f50da3955f2def05079380da5894b"
+        }
+    },
     "h4cc/wkhtmltopdf-amd64": {
         "version": "0.12.4"
     },
@@ -152,6 +161,18 @@
     },
     "jms/metadata": {
         "version": "2.3.0"
+    },
+    "karser/karser-recaptcha3-bundle": {
+        "version": "0.1",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "0.1",
+            "ref": "107a3a758fe331292f1c23c13d73c66cb3a268c7"
+        },
+        "files": [
+            "config/packages/karser_recaptcha3.yaml"
+        ]
     },
     "knplabs/knp-snappy": {
         "version": "v1.2.1"
