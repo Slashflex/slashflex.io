@@ -28,9 +28,10 @@ Encore
      * Each entry will result in one JavaScript file (e.g. app.js)
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
+    .addEntry('loader', './assets/js/loader.js')
+    .addEntry('custom', './assets/js/custom.js')
     .addEntry('app', './assets/js/app.js')
     .addEntry('home', './assets/js/home.js')
-    .addEntry('custom', './assets/js/custom.js')
     .addEntry('works', './assets/js/works.js')
     .addEntry('blog', './assets/js/blog.js')
     .addEntry('register', './assets/js/register.js')
@@ -38,6 +39,7 @@ Encore
     .addEntry('cards', './assets/js/cards.js')
     .addEntry('upload', './assets/js/upload.js')
     .addEntry('fukc', './assets/js/fukc.js')
+    .addEntry('dark-theme', './assets/js/dark-theme.js')
     .addEntry('images-collection', './assets/js/images-collection.js')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
