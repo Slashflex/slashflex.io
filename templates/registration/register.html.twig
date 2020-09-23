@@ -100,17 +100,6 @@
 {% block javascripts %}
 	<script type="text/javascript">
 	let message = "{{registrationForm.agreeTerms.vars.errors.form.config.options.constraints[0].message}}";
-		//console.log(message)
-		window.localStorage.setItem('agree', message);
-		/*$('.form__radio-input').change(() => {
-			if ($(this).prop("checked")) {
-				// checked
-				console.log('checked');
-				$('.agree').text(`<li>${message}</li>`);
-				//return;
-			}
-			// not checked
-			console.log('not checked');
-		});*/
+	window.localStorage.setItem('agree', message);
 	</script>
 {% endblock %}
