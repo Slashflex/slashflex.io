@@ -54,7 +54,6 @@ class AdminController extends AbstractController
      * Admin connexion form
      * 
      * @Route("/admin/sign-in", name="admin_signin")
-     * @IsGranted("ROLE_ADMIN")
      */
     public function adminLogin(AuthenticationUtils $authenticationUtils)
     {
