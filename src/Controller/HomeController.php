@@ -2,12 +2,10 @@
 
 namespace App\Controller;
 
-use App\Entity\Project;
+use DateTime;
 use App\Form\ContactType;
-use App\Repository\RoleRepository;
 use App\Repository\UserRepository;
 use App\Repository\ProjectRepository;
-use DateTime;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
@@ -27,6 +25,8 @@ class HomeController extends AbstractController
 
     /**
      * @Route("/", name="home")
+     *
+     * @return void
      */
     public function index()
     {
@@ -43,6 +43,8 @@ class HomeController extends AbstractController
      * Page not found or access denied (non admin)
      * 
      * @Route("/404", name="not_found")
+     *
+     * @return void
      */
     public function notFound()
     {
@@ -55,6 +57,8 @@ class HomeController extends AbstractController
      * Page not found or access denied (non admin)
      * 
      * @Route("/500", name="internal_server_error")
+     *
+     * @return void
      */
     public function internalServerError()
     {
@@ -67,6 +71,8 @@ class HomeController extends AbstractController
      * Logout path
      * 
      * @Route("/logout", name="logout")
+     *
+     * @return void
      */
     public function logout()
     {
@@ -76,6 +82,8 @@ class HomeController extends AbstractController
      * About path
      * 
      * @Route("/about-me", name="about")
+     *
+     * @return void
      */
     public function about()
     {
@@ -92,6 +100,10 @@ class HomeController extends AbstractController
      * Contact page
      * 
      * @Route("/contact", name="contact")
+     *
+     * @param Request $request
+     * @param MailerInterface $mailer
+     * @return void
      */
     public function contact(Request $request, MailerInterface $mailer)
     {
@@ -146,6 +158,8 @@ class HomeController extends AbstractController
      * Terms of use path
      * 
      * @Route("/terms-of-use", name="terms")
+     *
+     * @return void
      */
     public function terms()
     {

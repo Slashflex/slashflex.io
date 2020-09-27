@@ -6,7 +6,6 @@ use App\Entity\Project;
 use App\Form\ProjectType;
 use App\Repository\UserRepository;
 use App\Repository\ProjectRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -15,19 +14,20 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ProjectController extends AbstractController
 {
     private $projectRepository;
-    private $manager;
     private $userRepository;
 
-    public function __construct(ProjectRepository $projectRepository, EntityManagerInterface $manager, UserRepository $userRepository)
+    public function __construct(ProjectRepository $projectRepository, UserRepository $userRepository)
     {
         $this->projectRepository = $projectRepository;
-        $this->manager = $manager;
         $this->userRepository = $userRepository;
     }
     /**
      * Shows a single project
      * 
      * @Route("/works/{slug}", name="single_project")
+     *
+     * @param Project $project
+     * @return void
      */
     public function show(Project $project)
     {
@@ -44,6 +44,8 @@ class ProjectController extends AbstractController
      * Shows all work
      * 
      * @Route("/works", name="works")
+     *
+     * @return void
      */
     public function index()
     {
@@ -60,9 +62,14 @@ class ProjectController extends AbstractController
      * 
      * @Route("/admin/works/new", name="new_project")
      * @IsGranted("ROLE_ADMIN")
+     *
+     * @param Request $request
+     * @return void
      */
     public function newProject(Request $request)
     {
+        $manager = $this->getDoctrine()->getManager();
+        
         $project = new Project();
 
         $form = $this->createForm(ProjectType::class, $project);
@@ -80,8 +87,8 @@ class ProjectController extends AbstractController
                 ->setUsers($author)
                 ->initializeSlug();
 
-            $this->manager->persist($project);
-            $this->manager->flush();
+            $manager->persist($project);
+            $manager->flush();
 
             $this->addFlash(
                 'success',
@@ -102,9 +109,15 @@ class ProjectController extends AbstractController
      * 
      * @Route("/admin/works/{slug}/edit", name="edit_project")
      * @IsGranted("ROLE_ADMIN")
+     *
+     * @param Project $project
+     * @param Request $request
+     * @return void
      */
     public function editProject(Project $project, Request $request)
     {
+        $manager = $this->getDoctrine()->getManager();
+        
         $form = $this->createForm(ProjectType::class, $project);
         $form->handleRequest($request);
 
@@ -119,8 +132,8 @@ class ProjectController extends AbstractController
                 $this->manager->persist($image);
             }
 
-            $this->manager->persist($project);
-            $this->manager->flush();
+            $manager->persist($project);
+            $manager->flush();
 
             $this->addFlash(
                 'success',
@@ -144,11 +157,16 @@ class ProjectController extends AbstractController
      * 
      * @Route("/admin/works/{slug}/delete", name="delete_project")
      * @IsGranted("ROLE_ADMIN")
+     *
+     * @param Project $project
+     * @return void
      */
     public function deleteProject(Project $project)
     {
-        $this->manager->remove($project);
-        $this->manager->flush();
+        $manager = $this->getDoctrine()->getManager();
+        
+        $manager->remove($project);
+        $manager->flush();
 
         $this->addFlash(
             'success',

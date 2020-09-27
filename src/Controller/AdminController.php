@@ -6,26 +6,22 @@ use App\Entity\User;
 use App\Repository\UserRepository;
 use App\Repository\ArticleRepository;
 use App\Repository\ProjectRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class AdminController extends AbstractController
 {
     private $projectRepository;
     private $userRepository;
-    private $manager;
+    private $articleRepository;
 
-    public function __construct(EntityManagerInterface $manager, UserPasswordEncoderInterface $passwordEncoder, ProjectRepository $projectRepository, UserRepository $userRepository, ArticleRepository $articleRepository)
+    public function __construct(ProjectRepository $projectRepository, UserRepository $userRepository, ArticleRepository $articleRepository)
     {
         $this->projectRepository = $projectRepository;
         $this->userRepository = $userRepository;
         $this->articleRepository = $articleRepository;
-        $this->passwordEncoder = $passwordEncoder;
-        $this->manager = $manager;
     }
 
     /**
@@ -54,6 +50,9 @@ class AdminController extends AbstractController
      * Admin connexion form
      * 
      * @Route("/admin/sign-in", name="admin_signin")
+     *
+     * @param AuthenticationUtils $authenticationUtils
+     * @return void
      */
     public function adminLogin(AuthenticationUtils $authenticationUtils)
     {
@@ -71,11 +70,15 @@ class AdminController extends AbstractController
      * 
      * @Route("/admin/user/{slug}/delete", name="delete_user")
      * @IsGranted("ROLE_ADMIN")
+     *
+     * @param User $user
+     * @return void
      */
     public function deleteUser(User $user)
     {
-        $this->manager->remove($user);
-        $this->manager->flush();
+        $manager = $this->getDoctrine()->getManager();
+        $manager->remove($user);
+        $manager->flush();
 
         $path = 'uploads/avatars/' . $user->getSlug();
         $files = glob('uploads/avatars/' . $user->getSlug() . '/*'); // get all file names

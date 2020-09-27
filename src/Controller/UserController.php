@@ -4,13 +4,12 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
-use App\Form\AvatarType;
 use Cocur\Slugify\Slugify;
 use App\Form\AvatarUploadType;
 use App\Repository\UserRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -24,19 +23,19 @@ class UserController extends AbstractController
 {
     private $userRepository;
     private $passwordEncoder;
-    private $manager;
 
-    public function __construct(UserRepository $userRepository, EntityManagerInterface $manager, UserPasswordEncoderInterface $passwordEncoder)
+    public function __construct(UserRepository $userRepository, UserPasswordEncoderInterface $passwordEncoder)
     {
         $this->userRepository = $userRepository;
         $this->passwordEncoder = $passwordEncoder;
-        $this->manager = $manager;
     }
 
     /**
      * @Route("/me", name="user")
+     *
+     * @return Response
      */
-    public function index()
+    public function index(): Response
     {
         $user = $this->getUser();
 
@@ -50,15 +49,21 @@ class UserController extends AbstractController
      * User connexion form
      * 
      * @Route("/login", name="user_signin")
+     *
+     * @param AuthenticationUtils $authenticationUtils
+     * @return Response
      */
-    public function userLogin(AuthenticationUtils $authenticationUtils)
+    public function userLogin(AuthenticationUtils $authenticationUtils): Response
     {
+        $user = $this->userRepository->findOneBy(['tokenEnabled' => false]);
+
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
 
         return $this->render('user/sign-in.html.twig', [
             'title' => '/FLX | Login',
-            'error' => $error
+            'error' => $error,
+            'user' => $user
         ]);
     }
 
@@ -67,9 +72,15 @@ class UserController extends AbstractController
      * 
      * @Route("/admin/user/{slug}/edit", name="edit_user")
      * @IsGranted("ROLE_ADMIN")
+     *
+     * @param User $user
+     * @param Request $request
+     * @return Response
      */
-    public function editUsers(User $user, Request $request)
+    public function editUsers(User $user, Request $request): Response
     {
+        $manager = $this->getDoctrine()->getManager();
+
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
@@ -81,8 +92,8 @@ class UserController extends AbstractController
                 ->setPassword($hash)
                 ->updateSlug();
 
-            $this->manager->persist($user);
-            $this->manager->flush();
+            $manager->persist($user);
+            $manager->flush();
 
             $this->addFlash(
                 'success',
@@ -105,9 +116,16 @@ class UserController extends AbstractController
      * User edit form
      * 
      * @Route("/me/{slug}/edit", name="edit_me")
+     *
+     * @param User $user
+     * @param Request $request
+     * @param SluggerInterface $slugger
+     * @return Response
      */
-    public function editUser(User $user, Request $request, SluggerInterface $slugger)
+    public function editUser(User $user, Request $request, SluggerInterface $slugger): Response
     {
+        $manager = $this->getDoctrine()->getManager();
+
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
@@ -133,8 +151,8 @@ class UserController extends AbstractController
             // Rename old user folder with new first and last names from submission
             rename($oldName, $newName);
 
-            $this->manager->persist($user);
-            $this->manager->flush();
+            $manager->persist($user);
+            $manager->flush();
 
             $this->addFlash(
                 'success',
@@ -155,9 +173,16 @@ class UserController extends AbstractController
      * Add an avatar to user's profile
      * 
      * @Route("/me/{slug}/upload", name="upload_avatar")
+     *
+     * @param User $user
+     * @param Request $request
+     * @param SluggerInterface $slugger
+     * @return Response
      */
-    public function addUserAvatar(User $user, Request $request, SluggerInterface $slugger)
+    public function addUserAvatar(User $user, Request $request, SluggerInterface $slugger): Response
     {
+        $manager = $this->getDoctrine()->getManager();
+        
         $form = $this->createForm(AvatarUploadType::class, $user);
         $form->handleRequest($request);
 
@@ -208,8 +233,8 @@ class UserController extends AbstractController
                 $user->setAvatar($newFilename);
             }
 
-            $this->manager->persist($user);
-            $this->manager->flush();
+            $manager->persist($user);
+            $manager->flush();
 
             $this->addFlash(
                 'success',
