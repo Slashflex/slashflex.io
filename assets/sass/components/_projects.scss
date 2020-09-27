@@ -200,7 +200,8 @@ div[class^="key"] {
   }
 }
 
-.next-btn, .prev-btn {
+.next-btn,
+.prev-btn {
   @include respond(phone) {
     display: none;
   }

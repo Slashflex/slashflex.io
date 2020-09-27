@@ -13,7 +13,9 @@ if (window.innerHeight > window.innerWidth) {
   // iphone 6/7/8 -> portrait
   if (window.innerWidth >= 321 && window.innerWidth <= 375) {
     $(".round").css("top", "5.8%");
-    $(".wrapper__sites").css({ fontSize: "9.5rem" });
+    $(".wrapper__sites").css({
+      fontSize: "9.5rem"
+    });
   }
   // iphone 6/7/8 Plus -> portrait
   if (window.innerWidth >= 376 && window.innerWidth <= 414) {
@@ -23,7 +25,10 @@ if (window.innerHeight > window.innerWidth) {
       width: "28rem",
       height: "28rem",
     });
-    $(".wrapper__sites").css({ fontSize: "10rem", marginBottom: "7rem" });
+    $(".wrapper__sites").css({
+      fontSize: "10rem",
+      marginBottom: "7rem"
+    });
   }
   // iphone X -> portrait
   if (window.innerWidth == 375 && window.innerHeight == 812) {
@@ -33,7 +38,9 @@ if (window.innerHeight > window.innerWidth) {
       width: "28rem",
       height: "28rem",
     });
-    $(".wrapper__sites").css({ fontSize: "10.5rem" });
+    $(".wrapper__sites").css({
+      fontSize: "10.5rem"
+    });
   }
 } else {
   // iphone 5/SE -> landscape
@@ -44,7 +51,9 @@ if (window.innerHeight > window.innerWidth) {
       width: "20rem",
       height: "20rem",
     });
-    $(".wrapper__sites").css({ fontSize: "9rem" });
+    $(".wrapper__sites").css({
+      fontSize: "9rem"
+    });
   }
   // iphone 6/7/8 -> landscape
   if (window.innerWidth >= 569 && window.innerWidth <= 667) {
@@ -54,7 +63,9 @@ if (window.innerHeight > window.innerWidth) {
       width: "23rem",
       height: "23rem",
     });
-    $(".wrapper__sites").css({ fontSize: "9rem" });
+    $(".wrapper__sites").css({
+      fontSize: "9rem"
+    });
   }
   // iphone 6/7/8 Plus -> landscape
   if (window.innerWidth >= 668 && window.innerWidth <= 736) {
@@ -64,7 +75,9 @@ if (window.innerHeight > window.innerWidth) {
       width: "25rem",
       height: "25rem",
     });
-    $(".wrapper__sites").css({ fontSize: "9rem" });
+    $(".wrapper__sites").css({
+      fontSize: "9rem"
+    });
   }
   // iphone X -> landscape
   if (window.innerWidth >= 737 && window.innerWidth <= 812) {
@@ -74,6 +87,8 @@ if (window.innerHeight > window.innerWidth) {
       width: "25rem",
       height: "25rem",
     });
-    $(".wrapper__sites").css({ fontSize: "9rem" });
+    $(".wrapper__sites").css({
+      fontSize: "9rem"
+    });
   }
 }

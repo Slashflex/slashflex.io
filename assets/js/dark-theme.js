@@ -34,8 +34,9 @@ if (themeSwitch) {
     themeSwitch.checked = darkThemeSelected;
     // update body data-theme attribute
     darkThemeSelected
-      ? document.querySelector("html").setAttribute("data-theme", "dark")
-      : document.querySelector("html").removeAttribute("data-theme");
+      ?
+      document.querySelector("html").setAttribute("data-theme", "dark") :
+      document.querySelector("html").removeAttribute("data-theme");
   }
 
   function resetTheme() {

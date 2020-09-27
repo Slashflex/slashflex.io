@@ -65,12 +65,13 @@ html {
   color: var(--bg);
 }
 
-.flash-notice, .flash-notice-error {
+.flash-notice,
+.flash-notice-error {
   text-align: center;
   padding: 1rem;
   z-index: 1;
-  position: absolute;
-  top: 0;
+  // position: absolute;
+  // top: 0;
   margin: 0px auto;
   width: 100%;
   font-size: 1.5rem;
@@ -83,7 +84,7 @@ html {
 .clock {
   color: var(--color-headings);
   font-size: 1.7rem;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   letter-spacing: 7px;
   text-align: center;
   margin: 0 auto;
