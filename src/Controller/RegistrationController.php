@@ -113,13 +113,11 @@ class RegistrationController extends AbstractController
             $manager->persist($user);
             $manager->flush();
 
-            // if ($user->getTokenEnabled() == true) {
             $this->addFlash(
                 'success',
                 'You have successfully confirmed your account. You can now log in'
             );
             return $this->redirectToRoute('home');
-            // }
         } else {
             return $this->render('registration/token-expire.html.twig');
         }
