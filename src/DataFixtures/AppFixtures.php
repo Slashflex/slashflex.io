@@ -45,6 +45,8 @@ class AppFixtures extends Fixture
         $admin
             ->setFirstname($firstname)
             ->setLastname($lastname)
+            ->setConfirmationToken(null)
+            ->setTokenEnabled(true)
             ->setEmail($email)
             ->setPassword($this->passwordEncoder->encodePassword($admin, $password))
             ->setDescription('Creator of https://slashflex.io')
@@ -805,9 +807,6 @@ class AppFixtures extends Fixture
                     <p class="language-html">Now, access http://localhost:5050/ from any browser. If all the steps are completed properly then the browser will display.</p>
                 </div>
             EOT;
-
-
-
 
         // How to install PostgreSQL on ubuntu 20.04 LTS
         $content6 = <<<EOT

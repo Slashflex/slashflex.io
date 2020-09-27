@@ -117,6 +117,16 @@ class User implements UserInterface
     private $avatar;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $confirmationToken;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $tokenEnabled = false;
+
+    /**
      * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="users", cascade={"remove"})
      */
     private $comments;
@@ -224,6 +234,33 @@ class User implements UserInterface
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
+
+        return $this;
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function getTokenEnabled(): ?bool
+    {
+        return (bool) $this->tokenEnabled;
+    }
+
+    public function setTokenEnabled(bool $tokenEnabled): self
+    {
+        $this->tokenEnabled = $tokenEnabled;
+
+        return $this;
+    }
+
+    public function getConfirmationToken(): ?string
+    {
+        return $this->confirmationToken;
+    }
+
+    public function setConfirmationToken(?string $confirmationToken): self
+    {
+        $this->confirmationToken = $confirmationToken;
 
         return $this;
     }

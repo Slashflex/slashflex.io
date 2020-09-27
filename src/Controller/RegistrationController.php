@@ -3,39 +3,62 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Service\MailerService;
+use App\Form\ResendTokenFormType;
 use App\Form\RegistrationFormType;
-use App\Repository\RoleRepository;
-use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class RegistrationController extends AbstractController
 {
-    /**
-     * @Route("/register", name="app_register")
-     */
-    public function register(RoleRepository $roleRepository, Request $request, UserPasswordEncoderInterface $passwordEncoder, MailerInterface $mailer): Response
-    {
-        $user = new User();
+    private $userRepository;
+    private $mailerService;
 
-        $role = $roleRepository->findOneBy(['name' => 'ROLE_USER']);
+    public function __construct(UserRepository $userRepository, MailerService $mailerService)
+    {
+        $this->userRepository = $userRepository;
+        $this->mailerService = $mailerService;
+    }
+
+    /**
+     * Register a new user and sends an email including a token inside a link
+     * 
+     * @Route("/register", name="app_register")
+     *
+     * @param AuthenticationUtils $authenticationUtils
+     * @param Request $request
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @param MailerService $mailerService
+     * @return Response
+     */
+    public function register(AuthenticationUtils $authenticationUtils, Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
+    {
+        $manager = $this->getDoctrine()->getManager();
+        // get the login error if there is one
+        $error = $authenticationUtils->getLastAuthenticationError();
+        // last username entered by the user
+        $lastUsername = $authenticationUtils->getLastUsername();
+        $user = new User();
 
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // encode the password
+            // encode the plain password
             $user->setPassword(
                 $passwordEncoder->encodePassword(
                     $user,
                     $form->get('password')->getData()
                 )
-            )
-                ->initializeSlug();
+            )->initializeSlug();
+
+            $user->setConfirmationToken($this->generateToken());
 
             $path = 'uploads/avatars/' . $user->getSlug();
             // Create dedicated folder for the registered user
@@ -52,36 +75,148 @@ class RegistrationController extends AbstractController
                 copy('uploads/avatars/avatar.png', $path . '/avatar.png');
             }
 
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($user);
-            $entityManager->flush();
+            $manager->persist($user);
+            $manager->flush();
 
-            $logo = $_SERVER['DOCUMENT_ROOT'] . '/build/images/email/logo.png';
+            $token = $user->getConfirmationToken();
+            $email = $request->request->get('registration_form')['email'];
+            $login = $request->request->get('registration_form')['login'];
 
-            // Send an email
-            $email = (new TemplatedEmail())
-                ->from($_ENV['DB_EMAIL'])
-                ->to($user->getEmail())
-                ->subject('Thanks for signing up!')
-                ->htmlTemplate('emails/welcome.html.twig')
-                ->context([
-                    'name' => $user->__toString(),
-                    'logo' => $logo
-                ]);
-
-            $mailer->send($email);
-
-            $this->addFlash(
-                'success',
-                'Your account has been successfully created'
-            );
-
+            $this->mailerService->sendToken($token, $email, $login, 'confirm.html.twig');
+            $this->addFlash('success', 'Your account has been successfully created, please check your inbox to confirm your registration');
             return $this->redirectToRoute('home');
         }
-
         return $this->render('registration/register.html.twig', [
+            'title' => '/ FLX | Sign up',
             'registrationForm' => $form->createView(),
-            'title' => '/FLX | Register'
+            'last_username' => $lastUsername,
+            'error' => $error,
         ]);
+    }
+
+    /**
+     * Confirm account once user has clicked on link received by email
+     * 
+     * @Route("/account/confirm/{token}", name="confirm_account")
+     * @param $token
+     * @param $login
+     * @return Response
+     */
+    public function confirmAccount($token): Response
+    {
+        $manager = $this->getDoctrine()->getManager();
+
+        $user = $this->userRepository->findOneBy(['confirmationToken' => $token]);
+        if ($user) {
+            $user->setConfirmationToken(null);
+            $user->setTokenEnabled(true);
+            $manager->persist($user);
+            $manager->flush();
+
+            // if ($user->getTokenEnabled() == true) {
+            $this->addFlash(
+                'success',
+                'You have successfully confirmed your account. You can now log in'
+            );
+            return $this->redirectToRoute('home');
+            // }
+        } else {
+            return $this->render('registration/token-expire.html.twig');
+        }
+    }
+
+    /**
+     * Sends a new token to user's input email
+     * 
+     * @Route("/send-confirmation-token", name="send_confirmation_token")
+     *
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function sendConfirmationToken(Request $request): RedirectResponse
+    {
+        $manager = $this->getDoctrine()->getManager();
+
+        $email = $request->request->get('email');
+        $user = $this->userRepository->findOneBy(['email' => $email]);
+
+        if ($user === null) {
+            $this->addFlash('error', 'utilisateur non trouvé');
+            return $this->redirectToRoute('resend_confirmation_token');
+        }
+
+        $user->setConfirmationToken($this->generateToken());
+        $manager->persist($user);
+        $manager->flush();
+
+        $token = $user->getConfirmationToken();
+        $email = $user->getEmail();
+        $username = $user->getUsername();
+
+        $sendMail = $this->mailerService->sendToken($token, $email, $username, 'confirm.html.twig');
+        return $this->redirectToRoute('user_signin', ['sendmail' => $sendMail]);
+    }
+
+    /**
+     * @Route("/resend-confirmation-token", name="resend_confirmation_token")
+     *
+     * @param AuthenticationUtils $authenticationUtils
+     * @param Request $request
+     * @return void
+     */
+    public function resendConfirmationToken(AuthenticationUtils $authenticationUtils, Request $request)
+    {
+        $manager = $this->getDoctrine()->getManager();
+
+        $error = $authenticationUtils->getLastAuthenticationError();
+        $emailList = $this->userRepository->findAll();
+
+        $form = $this->createForm(ResendTokenFormType::class);
+        $form->handleRequest($request);
+
+        $userEmail = [];
+        for ($i = 0; $i < count($emailList); $i++) {
+            array_push($userEmail, $emailList[$i]->getEmail());
+        }
+
+        if ($form->isSubmitted()) {
+            $email = $request->request->get('resend_token_form')['email'];
+
+            if (in_array($email, $userEmail)) {
+                $user = $this->userRepository->findOneBy(['email' => $email]);
+                $user->setConfirmationToken($this->generateToken());
+                $user->setTokenEnabled(false);
+                $manager->persist($user);
+                $manager->flush();
+                $token = $user->getConfirmationToken();
+                $username = $user->getUsername();
+
+                $sendMail = $this->mailerService->sendToken($token, $email, $username, 'confirm.html.twig');
+                $this->addFlash('success', 'An email with a confirmation link has been sent to your inbox');
+
+                return $this->redirectToRoute('home', ['sendmail' => $sendMail]);
+            } else {
+                $this->addFlash('error', 'There is nobody registered with this email address');
+                return $this->render('user/resend_token.html.twig', [
+                    'title' => '/ FLX | Sign up confirmation',
+                    'form' => $form->createView(),
+                    'error' => $error
+                ]);
+            }
+        }
+
+        return $this->render('user/resend_token.html.twig', [
+            'title' => '/ FLX | Sign up confirmation',
+            'form' => $form->createView(),
+            'error' => $error
+        ]);
+    }
+
+    /**
+     * @return string
+     */
+    private function generateToken()
+    {
+        return mb_strtoupper(strval(bin2hex(openssl_random_pseudo_bytes(16))));
     }
 }
