@@ -292,6 +292,9 @@
             "config/bootstrap.php"
         ]
     },
+    "symfony/css-selector": {
+        "version": "v5.0.11"
+    },
     "symfony/dependency-injection": {
         "version": "v5.0.8"
     },
@@ -632,6 +635,12 @@
         "files": [
             "config/packages/reset_password.yaml"
         ]
+    },
+    "tijsverkoyen/css-to-inline-styles": {
+        "version": "2.2.3"
+    },
+    "twig/cssinliner-extra": {
+        "version": "v3.0.5"
     },
     "twig/extra-bundle": {
         "version": "v3.0.3"
