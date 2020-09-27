@@ -202,7 +202,6 @@ a {
 }
 
 .footer-nav-1 {
-
   &__list {
     &:hover {
       a {
@@ -216,7 +215,7 @@ a {
       // Stops it being a twitchy mess in chrome :pray:
       // https://www.binarymoon.co.uk/2014/02/fixing-css-transitions-in-google-chrome/
       -webkit-transform: translateZ(0);
-      transition: all .3s ease-in-out;
+      transition: all 0.3s ease-in-out;
 
       &:hover {
         opacity: 1;
@@ -226,14 +225,13 @@ a {
   }
 
   &__item {
-
   }
 
   &__link {
     color: var(--bg);
     font-size: 2.2rem;
-    font-family: 'Montserrat', sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-weight: 700;
-    transition: all .5s;
+    transition: all 0.5s;
   }
 }

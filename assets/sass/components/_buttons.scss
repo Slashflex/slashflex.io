@@ -7,7 +7,6 @@
   z-index: 2;
 
   &__text {
-    // color: $color-secondary
     color: var(--links);
     transition: all 0.5s;
     text-transform: uppercase;
@@ -16,7 +15,6 @@
     font-weight: 700;
 
     &:hover {
-      // color: $color-tertiary;
       color: var(--links-hover);
       text-decoration: none;
     }
@@ -54,9 +52,7 @@
 
 .button__login {
   @include button;
-  // background-color: $color-secondary;
   background-color: var(--color-headings);
-  // color: $color-white;
   color: var(--bg);
 
   @include respond(phone-small) {
@@ -64,7 +60,6 @@
   }
 
   &:hover {
-    // background-color: $color-tertiary;
     background-color: var(--card-h2);
     color: $color-secondary;
     text-decoration: none;
@@ -101,7 +96,6 @@
 
     &:hover {
       color: $color-secondary;
-      // color: var();
       text-decoration: none;
       background-color: $color-tertiary;
     }
@@ -113,10 +107,7 @@
 
   &--text {
     @include button;
-    // background-color: $color-white;
     background-color: var(--button);
-    // color: var(--bg);
-    // color: $color-secondary;
     color: var(--bg-inversed);
 
     &:hover {

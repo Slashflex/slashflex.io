@@ -41,6 +41,10 @@ security:
                 check_path: user_signin
                 default_target_path: /me
 
+            guard:
+                authenticators:
+                    - App\Security\LoginFormAuthenticator
+
             logout: 
                 path: logout
                 target: home

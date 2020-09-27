@@ -2,35 +2,33 @@
 
 namespace App\Controller;
 
-use DateTime;
 use App\Entity\Article;
 use App\Entity\Comment;
-use App\Entity\ReplyToReply;
 use App\Form\ArticleType;
 use App\Form\CommentType;
 use App\Repository\UserRepository;
-use App\Repository\ReplyRepository;
 use App\Repository\ArticleRepository;
 use App\Repository\CommentRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\Serializer\SerializerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
 
 class ArticleController extends AbstractController
 {
-    private $manager;
     private $userRepository;
     private $commentRepository;
     private $articleRepository;
 
-    public function __construct(ArticleRepository $articleRepository, EntityManagerInterface $manager, UserRepository $userRepository, CommentRepository $commentRepository)
+    /**
+     * Constructor
+     *
+     * @param ArticleRepository $articleRepository
+     * @param UserRepository $userRepository
+     * @param CommentRepository $commentRepository
+     */
+    public function __construct(ArticleRepository $articleRepository, UserRepository $userRepository, CommentRepository $commentRepository)
     {
-        $this->manager = $manager;
         $this->userRepository = $userRepository;
         $this->commentRepository = $commentRepository;
         $this->articleRepository = $articleRepository;
@@ -40,9 +38,15 @@ class ArticleController extends AbstractController
      * Shows a single article
      * 
      * @Route("/blog/post/{slug}", name="single_article")
+     *
+     * @param Article $article
+     * @param Request $request
+     * @return void
      */
     public function show(Article $article, Request $request)
     {
+        $manager = $this->getDoctrine()->getMAnager();
+        
         $comment = new Comment();
 
         $form = $this->createForm(CommentType::class, $comment);
@@ -56,8 +60,8 @@ class ArticleController extends AbstractController
                 ->setUsers($this->getUser())
                 ->setArticle($article);
 
-            $this->manager->persist($comment);
-            $this->manager->flush();
+            $manager->persist($comment);
+            $manager->flush();
 
             $this->addFlash(
                 'success',
@@ -79,13 +83,15 @@ class ArticleController extends AbstractController
      * Shows all blog's posts
      * 
      * @Route("/blog", name="blog")
+     *
+     * @return void
      */
     public function index()
     {
         $articles = $this->articleRepository->findAll();
 
         return $this->render('article/index.html.twig', [
-            'title' => '/FLX | Blog posts',
+            'title' => '/FLX | Blog',
             'articles' => $articles
         ]);
     }
@@ -95,9 +101,14 @@ class ArticleController extends AbstractController
      * 
      * @Route("/admin/blog/new-post", name="new_article")
      * @IsGranted("ROLE_ADMIN")
+     *
+     * @param Request $request
+     * @return void
      */
     public function newArticle(Request $request)
     {
+        $manager = $this->getDoctrine()->getMAnager();
+
         $article = new Article();
 
         $form = $this->createForm(ArticleType::class, $article);
@@ -111,8 +122,8 @@ class ArticleController extends AbstractController
                 ->setUsers($author)
                 ->initializeSlug();
 
-            $this->manager->persist($article);
-            $this->manager->flush();
+            $manager->persist($article);
+            $manager->flush();
 
             $this->addFlash(
                 'success',
@@ -133,9 +144,15 @@ class ArticleController extends AbstractController
      * 
      * @Route("/admin/blog/post/{slug}/edit", name="edit_article")
      * @IsGranted("ROLE_ADMIN")
+     *
+     * @param Article $article
+     * @param Request $request
+     * @return void
      */
     public function editArticle(Article $article, Request $request)
     {
+        $manager = $this->getDoctrine()->getMAnager();
+
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
 
@@ -144,8 +161,8 @@ class ArticleController extends AbstractController
             $title = $request->request->get('article')['title'];
             $article->updateSlug($title);
 
-            $this->manager->persist($article);
-            $this->manager->flush();
+            $manager->persist($article);
+            $manager->flush();
 
             $this->addFlash(
                 'success',
@@ -169,11 +186,16 @@ class ArticleController extends AbstractController
      * 
      * @Route("/admin/blog/post/{slug}/delete", name="delete_article")
      * @IsGranted("ROLE_ADMIN")
+     *
+     * @param Article $article
+     * @return void
      */
     public function deleteArticle(Article $article)
     {
-        $this->manager->remove($article);
-        $this->manager->flush();
+        $manager = $this->getDoctrine()->getMAnager();
+
+        $manager->remove($article);
+        $manager->flush();
 
         $this->addFlash(
             'success',
