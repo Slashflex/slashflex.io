@@ -81,8 +81,11 @@ class RegistrationController extends AbstractController
             $token = $user->getConfirmationToken();
             $email = $request->request->get('registration_form')['email'];
             $login = $request->request->get('registration_form')['login'];
+            $firstname = $request->request->get('registration_form')['firstname'];
+            $lastname = $request->request->get('registration_form')['lastname'];
+            $fullname = ucfirst($firstname) . ' ' . ucfirst($lastname);
 
-            $this->mailerService->sendToken($token, $email, $login, 'confirm.html.twig');
+            $this->mailerService->sendToken($token, $email, $fullname, 'confirm.html.twig');
             $this->addFlash('success', 'Your account has been successfully created, please check your inbox to confirm your registration');
             return $this->redirectToRoute('home');
         }
@@ -118,9 +121,7 @@ class RegistrationController extends AbstractController
                 'You have successfully confirmed your account. You can now log in'
             );
             return $this->redirectToRoute('home');
-        } else {
-            return $this->render('registration/token-expire.html.twig');
-        }
+        } 
     }
 
     /**

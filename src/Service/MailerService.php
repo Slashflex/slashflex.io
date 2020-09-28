@@ -5,6 +5,7 @@ namespace App\Service;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 
 class MailerService extends AbstractController
 {
@@ -12,7 +13,7 @@ class MailerService extends AbstractController
      * @var MailerInterface
      */
     private $mailer;
-    
+
     public function __construct(MailerInterface $mailer)
     {
         $this->mailer = $mailer;
@@ -28,7 +29,7 @@ class MailerService extends AbstractController
         $message = (new TemplatedEmail())
             ->from($_ENV['DB_EMAIL'])
             ->to($to)
-            ->subject('Mail de confirmation')
+            ->subject('Slashflex.io | Sign up confirmation email')
             ->htmlTemplate('emails/' . $template)
             ->context([
                 'token' => $token,
