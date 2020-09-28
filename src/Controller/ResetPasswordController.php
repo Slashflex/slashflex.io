@@ -190,7 +190,7 @@ class ResetPasswordController extends AbstractController
             ->from(new Address($_ENV['DB_EMAIL'], 'Slashflex.io'))
             ->to($user->getEmail())
             ->subject('Your password reset request')
-            ->htmlTemplate('reset_password/email.html.twig')
+            ->htmlTemplate('emails/forgot_password.html.twig')
             ->context([
                 'resetToken' => $resetToken,
                 'tokenLifetime' => $this->resetPasswordHelper->getTokenLifetime(),
