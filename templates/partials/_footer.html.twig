@@ -1,7 +1,7 @@
 <footer class="footer" id="footer">
 	<div class="container">
 		<div class="row mt-5">
-			<div class="col-md-4">
+			<div class="col-12" id="large-mobile">
 				<a class="footer__link" href="{{ path('home') }}">
 					<span class="footer__slashflex">/ FLX</span>
 				</a>
@@ -11,76 +11,8 @@
 					<a href="mailto: pro.davidsaoud@gmail.com" class="button__login--text">Text Me</a>
 				</div>
 			</div>
-			<div class="col-md-4">
-				<div class="portfolio">PORTFOLIO</div>
-				
-				<nav class="footer-nav-1" style="margin-left: 8rem">
-					<ul class="footer-nav-1__list">
-						<li class="footer-nav-1__item d-block"><a href="{{ path('home') }}" class="footer-nav-1__link">Home</a></li>
-						
-						{% if app.user %}
-							{% for role in app.user.roles %}
-								{% if role == 'ROLE_ADMIN' %}
-									<li class="footer-nav-1__item">
-										<a href="{{ path('admin') }}" class="footer-nav-1__link">Dashboard</a>
-									</li>
-								{% endif %}
-							{% endfor %}
-							<li class="footer-nav-1__item">
-								<a href="{{ path('user') }}" class="footer-nav-1__link">Profile</a>
-							</li>
-							<li class="footer-nav-1__item">
-								<a href="{{ path('logout') }}" class="footer-nav-1__link">Logout</a>
-							</li>
-						{% elseif not app.user %}
-							<li class="footer-nav-1__item">
-								<a href="{{ path('app_register') }}" class="footer-nav-1__link">Register</a>
-							</li>
-							<li class="footer-nav-1__item">
-								<a href="{{ path('user_signin') }}" class="footer-nav-1__link">Login</a>
-							</li>
-						{% endif %}
-							<li class="footer-nav-1__item">
-								<a href="{{ path('blog') }}" class="footer-nav-1__link">Blog</a>
-							</li>
-							<li class="footer-nav-1__item">
-								<a href="{{ path('works') }}" class="footer-nav-1__link">Works</a>
-							</li>
-						<li class="footer-nav-1__item">
-							<a href="{{ path('contact') }}" class="footer-nav-1__link">Contact</a>
-						</li>
-					</ul>
-				</nav>	
-			</div>
-			<div class="col-md-4">
-				<p class="language-html">Lorem ipsum dolor sit amet.</p>
-			</div>
 		</div>
 
-		<div class="menu-footer">
-			<nav class="footer-nav">
-				<ul class="footer-nav__icons">
-					<li class="footer-nav__item">
-						<a href="https://github.com/Slashflex" class="footer-nav__social" aria-label="Find me on GitHub">
-							<i class="fab fa-github footer-nav__menu"></i>
-						</a>
-					</li>
-					<li class="footer-nav__item">
-						<a href="https://www.linkedin.com/in/david-saoud-775624174/" class="footer-nav__social" aria-label="Find me on LinkedIn">
-							<i class="fab fa-linkedin-in footer-nav__menu"></i>
-						</a>
-					</li>
-					<li class="footer-nav__item">
-						<a href="mailto: pro.davidsaoud@gmail.com" class="footer-nav__social" aria-label="Send me a direct email">
-							<i class="fas fa-paper-plane footer-nav__menu"></i>
-						</a>
-					</li>
-				</ul>
-			</nav>
-			<hr style="background-color: rgba(255, 255, 255, 0.1)">
-
-			<div class="footer-copyright text-center py-3"><span class="copy">&copy;</span><a class="footer-copyright--link" href="https://slashflex.io/"> Slashflex.io</a> {{ "now"|date("Y") }} 
-			</div>
-		</div>
+		{% include "partials/_footer-full-nav.html.twig" %}
 	</div>
 </footer>

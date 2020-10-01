@@ -35,6 +35,10 @@
         font-size: 2.5rem;
         margin-bottom: -2.4rem;
       }
+      @include respond(phone-small) {
+        font-size: 4.5rem;
+        margin-bottom: -3.7rem;
+      }
     }
 
     &--works {
@@ -49,6 +53,10 @@
         font-size: 3.5rem;
         margin-bottom: -5.2rem;
       }
+      @include respond(phone-small) {
+        font-size: 4.5rem;
+        margin-bottom: -6.7rem;
+      }
     }
 
     &--sub {
@@ -60,6 +68,9 @@
       letter-spacing: 0.2rem;
 
       @include respond(phone) {
+        font-size: 3rem;
+      }
+      @include respond(phone-small) {
         font-size: 3rem;
       }
     }
