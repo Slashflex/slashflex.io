@@ -1,4 +1,137 @@
 $(document).ready(() => {
+  /* DEVICES specific media queries
+  Iphone XR - Portrait */
+  if (
+    window.screen.orientation.type == "portrait-primary" &&
+    window.innerWidth <= 414 &&
+    window.innerWidth >= 376 &&
+    window.innerHeight <= 896 &&
+    window.innerHeight >= 813
+  ) {
+    $(".swiper-container").css("height", "25vh");
+    $(".works").css("height", "38.6vh");
+    $("body").css("margin-bottom", "32.5vh");
+    $(".footer").css("height", "32.5vh");
+  }
+  // Iphone XR - Landscape
+  if (
+    window.screen.orientation.type == "landscape-primary" &&
+    window.innerWidth <= 896 &&
+    window.innerWidth >= 814 &&
+    window.innerHeight <= 414 &&
+    window.innerHeight >= 377
+  ) {
+    $("body").css("margin-bottom", "66.5vh");
+    $(".footer").css("height", "66.5vh");
+  }
+  // Iphone X/XS - Portrait
+  if (
+    window.screen.orientation.type == "portrait-primary" &&
+    window.innerWidth <= 375 &&
+    window.innerWidth >= 320 &&
+    window.innerHeight <= 812 &&
+    window.innerHeight >= 737
+  ) {
+    $(".swiper-container").css("height", "25vh");
+    $(".works").css("height", "44.2vh");
+    $("body").css("margin-bottom", "36.5vh");
+    $(".footer").css("height", "36.5vh");
+  }
+  // Android 7
+  if (
+    window.screen.orientation.type == "portrait-primary" &&
+    window.innerWidth <= 360 &&
+    window.innerWidth >= 320 &&
+    window.innerHeight <= 740 &&
+    window.innerHeight >= 737
+  ) {
+    $(".swiper-container").css("height", "26vh");
+    $(".works").css("height", "49.2vh");
+    $("body").css("margin-bottom", "39.5vh");
+    $(".footer").css("height", "39.5vh");
+  }
+  // Android 5 - Landscape
+  if (
+    window.screen.orientation.type == "landscape-primary" &&
+    window.innerWidth <= 732 &&
+    window.innerWidth >= 697 &&
+    window.innerHeight <= 412 &&
+    window.innerHeight >= 397
+  ) {
+    console.log("android 5");
+    $("body").css("margin-bottom", "66.5vh");
+    $(".footer").css("height", "66.5vh");
+  }
+  // Iphone X/XS - Landscape
+  if (
+    window.screen.orientation.type == "landscape-primary" &&
+    window.innerWidth <= 812 &&
+    window.innerWidth >= 737 &&
+    window.innerHeight <= 375 &&
+    window.innerHeight >= 320
+  ) {
+    $("#large-mobile").css({
+      maxWidth: "100%",
+      flex: "0 0 100%",
+    });
+    $("body").css("margin-bottom", "74.5vh");
+    $(".footer").css("height", "74.5vh");
+  }
+  // Iphone 6/7/8 PLUS - Portrait
+  if (
+    window.screen.orientation.type == "portrait-primary" &&
+    window.innerWidth <= 414 &&
+    window.innerWidth >= 401 &&
+    window.innerHeight <= 736
+  ) {
+    $(".swiper-container").css("height", "43vh");
+    $(".works").css("height", "53.3vh");
+    $("body").css("margin-bottom", "40vh");
+    $(".footer").css("height", "40vh");
+  }
+  // Iphone 6/7/8 - Portrait
+  if (
+    window.screen.orientation.type == "portrait-primary" &&
+    window.innerWidth <= 375 &&
+    window.innerWidth >= 321 &&
+    window.innerHeight <= 667 &&
+    window.innerHeight >= 569
+  ) {
+    $("body").css("margin-bottom", "43.5vh");
+    $(".swiper-container").css("height", "30vh");
+    $(".footer").css("height", "43.5vh");
+    $(".works").css("height", "55.7vh");
+  }
+  // Iphone 6/7/8 - Landscape
+  if (
+    window.screen.orientation.type == "landscape-primary" &&
+    window.innerWidth <= 667 &&
+    window.innerWidth >= 569 &&
+    window.innerHeight <= 375 &&
+    window.innerHeight >= 321
+  ) {
+    $("body").css("margin-bottom", "73vh");
+    $(".footer").css("height", "73vh");
+  }
+  // Iphone 5/SE - Portrait
+  if (
+    window.screen.orientation.type == "portrait-primary" &&
+    window.innerWidth <= 320 &&
+    window.innerHeight <= 568
+  ) {
+    $("body").css("margin-bottom", "63vh");
+    $(".footer").css("height", "54vh");
+  }
+  // Iphone 5/SE - Landscape
+  if (
+    window.screen.orientation.type == "landscape-primary" &&
+    window.innerWidth <= 568 &&
+    window.innerHeight <= 320
+  ) {
+    $("body").css("margin-bottom", "84vh");
+    $(".footer").css("height", "84vh");
+  }
+
   // Removes Download link
   if (window.location.pathname.endsWith("new")) {
     const download = document.querySelectorAll("a[download]");
@@ -160,7 +293,7 @@ $(".button--bubble").each(function () {
   var tl = new TimelineLite();
   var tl2 = new TimelineLite();
   var btTl = new TimelineLite({
-    paused: true
+    paused: true,
   });
 
   tl.to($circlesTopLeft, 1.2, {
@@ -172,7 +305,7 @@ $(".button--bubble").each(function () {
   tl.to($circlesTopLeft.eq(0), 0.1, {
     scale: 0.2,
     x: "+=6",
-    y: "-=2"
+    y: "-=2",
   });
   tl.to(
     $circlesTopLeft.eq(1),
@@ -180,7 +313,7 @@ $(".button--bubble").each(function () {
       scaleX: 1,
       scaleY: 0.8,
       x: "-=10",
-      y: "-=7"
+      y: "-=7",
     },
     "-=0.1"
   );
@@ -189,7 +322,7 @@ $(".button--bubble").each(function () {
     0.1, {
       scale: 0.2,
       x: "-=15",
-      y: "+=6"
+      y: "+=6",
     },
     "-=0.1"
   );
@@ -206,7 +339,7 @@ $(".button--bubble").each(function () {
       scaleY: 0.4,
       x: "-=10",
       y: "-=10",
-      opacity: 0
+      opacity: 0,
     },
     "-=1"
   );
@@ -216,7 +349,7 @@ $(".button--bubble").each(function () {
       scale: 0,
       x: "-=15",
       y: "+=5",
-      opacity: 0
+      opacity: 0,
     },
     "-=1"
   );
@@ -227,13 +360,13 @@ $(".button--bubble").each(function () {
   tlBt1.set($circlesTopLeft, {
     x: 0,
     y: 0,
-    rotation: -45
+    rotation: -45,
   });
   tlBt1.add(tl);
 
   tl2.set($circlesBottomRight, {
     x: 0,
-    y: 0
+    y: 0,
   });
   tl2.to($circlesBottomRight, 1.1, {
     x: 30,
@@ -243,14 +376,14 @@ $(".button--bubble").each(function () {
   tl2.to($circlesBottomRight.eq(0), 0.1, {
     scale: 0.2,
     x: "-=6",
-    y: "+=3"
+    y: "+=3",
   });
   tl2.to(
     $circlesBottomRight.eq(1),
     0.1, {
       scale: 0.8,
       x: "+=7",
-      y: "+=3"
+      y: "+=3",
     },
     "-=0.1"
   );
@@ -259,7 +392,7 @@ $(".button--bubble").each(function () {
     0.1, {
       scale: 0.2,
       x: "+=15",
-      y: "-=6"
+      y: "-=6",
     },
     "-=0.2"
   );
@@ -275,7 +408,7 @@ $(".button--bubble").each(function () {
       scale: 0.4,
       x: "+=7",
       y: "+=7",
-      opacity: 0
+      opacity: 0,
     },
     "-=1"
   );
@@ -285,7 +418,7 @@ $(".button--bubble").each(function () {
       scale: 0,
       x: "+=15",
       y: "-=5",
-      opacity: 0
+      opacity: 0,
     },
     "-=1"
   );
@@ -293,7 +426,7 @@ $(".button--bubble").each(function () {
   tlBt2.set($circlesBottomRight, {
     x: 0,
     y: 0,
-    rotation: 45
+    rotation: 45,
   });
   tlBt2.add(tl2);
 
@@ -301,7 +434,7 @@ $(".button--bubble").each(function () {
   btTl.to(
     $(this).parent().find(".button.effect-button"),
     0.8, {
-      scaleY: 1.1
+      scaleY: 1.1,
     },
     0.1
   );
@@ -310,7 +443,7 @@ $(".button--bubble").each(function () {
     $(this).parent().find(".button.effect-button"),
     1.8, {
       scale: 1,
-      ease: Elastic.easeOut.config(1.2, 0.4)
+      ease: Elastic.easeOut.config(1.2, 0.4),
     },
     1.2
   );

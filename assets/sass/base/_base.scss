@@ -15,15 +15,21 @@ button:focus {
 html,
 body {
   width: 100%;
-  margin-bottom: 65vh; // Hidden Footer
+  margin-bottom: 34vh; // Hidden Footer
   background-color: var(--bg);
 
+  @include respond(tab-land) {
+    margin-bottom: 40vh;
+  }
   @include respond(tab-port) {
-    margin-bottom: 65vh;
+    margin-bottom: 27vh;
   }
-  @include respond(phone) {
-    margin-bottom: 85vh;
-  }
+  // @include respond(phone) {
+  //   margin-bottom: 85vh;
+  // }
+  // @include respond(phone-small) {
+  //   margin-bottom: 100vh;
+  // }
 }
 
 html {
