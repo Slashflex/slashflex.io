@@ -46,6 +46,7 @@
         {{ encore_entry_script_tags('custom') }}
         {{ encore_entry_script_tags('dark-theme') }}
 
+        <!-- Fire up JS script(s) file(s) on specific route(s) -->
         {% if app.request.pathInfo == '/' %}
             {{ encore_entry_script_tags('home') }}
         {% endif %}

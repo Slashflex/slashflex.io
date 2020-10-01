@@ -53,45 +53,6 @@
 
 {% block javascripts %}
 	<script type="text/javascript">
-	  {# // Symfony webpack encore bundle fix for SCSS not rendering background-image url(s)
-	
-	  // IIFE that takes Array from back-end and adds a background-image based on data attribute
-	  (function() {
-	    // Loops through each project
-	    for (let i = 1; i <= {{ projects|length }}; i++) {
-	      // Increments class
-	      var img = $(`.slide${[i]}`);
-		  
-		  // Sets background-image property base on data attribute		
-		  img.css('background-image', function () {
-			var bg = ('url(/uploads/images' + $(this).data('background') + ')');
-			return bg;
-		  });
-
-		  // Sets cover property to background-image
-	      img.css('background-size', function () {
-		    var cover = 'cover';
-		    return cover;
-	      });
-
-		  img.css('background-position', function () {
-			  var position = 'center';
-			  return position;
-		  });
-
-		  img.css('background-repeat', function () {
-			  var position = 'no-repeat';
-			  return position;
-		  });
-
-		  img.css('width', function () {
-			  var position = '348px';
-			  return position;
-		  });
-		  /*img[0].style.width = '348px !important';
-		  console.log(img[0].style.width = '348px');*/
-	    }
-      })(); #}
 	  (function(){for(let i=1;i<={{projects|length}};i++){var img=$(`.slide${[i]}`);img.css('background-image',function(){var bg=('url(/uploads/images'+$(this).data('background')+')');return bg});img.css('background-size',function(){var cover='cover';return cover});img.css('background-position',function(){var position='center';return position});img.css('background-repeat',function(){var position='no-repeat';return position});img.css('width',function(){var position='348px';return position})}})()
 	</script>
 {% endblock %}
