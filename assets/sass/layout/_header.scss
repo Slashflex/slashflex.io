@@ -7,18 +7,9 @@
 
 .header__blog {
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: contain;
   padding: 20rem;
-  background-size: 50%;
   background-position: center;
-
-  @include respond(tab-land) {
-    background-size: 100%;
-  }
-
-  @include respond(tab-port) {
-    background-size: 100%;
-  }
 }
 
 .header__projects {
