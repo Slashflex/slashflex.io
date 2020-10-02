@@ -13,7 +13,16 @@
     height: 40vh;
   }
   @include respond(tab-port) {
-    height: 27vh;
+    height: 77vh;
+  }
+  @include respond(phone) {
+    height: 85vh;
+  }
+  @include respond(phone-mid) {
+    height: 40vh;
+  }
+  @include respond(phone-small) {
+    height: 55vh;
   }
 
   &__title {
@@ -154,6 +163,10 @@
 .menu-footer-1 {
   padding-bottom: 1rem;
   margin-top: 3rem;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
 
   .footer-nav {
     &__list {
@@ -224,23 +237,5 @@
         filter: drop-shadow(2px 4px 6px $color-secondary);
       }
     }
-  }
-}
-
-.portfolio {
-  color: var(--comment-block);
-  font-size: 5rem;
-  font-weight: 100;
-  font-family: "Montserrat", sans-serif;
-  transform: rotateZ(0270deg) rotateX(0deg) rotateY(0deg) scale(1)
-    translateX(0px) translateY(0px) translateZ(0px);
-  margin-top: 5rem;
-  margin-left: -26rem;
-
-  @include respond(phone-small) {
-    transform: rotateZ(-360deg) rotateX(0deg) rotateY(0deg) scale(1)
-      translateX(0px) translateY(0px) translateZ(0px);
-    margin-left: 0rem;
-    text-align: center;
   }
 }

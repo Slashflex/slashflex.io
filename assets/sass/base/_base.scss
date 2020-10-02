@@ -22,14 +22,17 @@ body {
     margin-bottom: 40vh;
   }
   @include respond(tab-port) {
-    margin-bottom: 27vh;
+    margin-bottom: 77vh;
   }
-  // @include respond(phone) {
-  //   margin-bottom: 85vh;
-  // }
-  // @include respond(phone-small) {
-  //   margin-bottom: 100vh;
-  // }
+  @include respond(phone) {
+    margin-bottom: 85vh;
+  }
+  @include respond(phone-mid) {
+    margin-bottom: 40vh;
+  }
+  @include respond(phone-small) {
+    margin-bottom: 55vh;
+  }
 }
 
 html {

@@ -8,8 +8,11 @@
   @include respond(phone) {
     height: 120vh;
   }
+  @include respond(phone-mid) {
+    height: 46vh;
+  }
   @include respond(phone-small) {
-    height: 70vh;
+    height: 62vh;
   }
 
   &__text {
@@ -134,11 +137,19 @@
     left: 50%;
     transform: translate(-50%, -50%);
   }
+  @include respond(phone-mid) {
+    margin-top: 14.8rem;
+    width: 100%;
+    height: 30vh;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 
   @include respond(phone-small) {
     margin-top: 23.8rem;
     width: 100%;
-    height: 50vh;
+    height: 30vh;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
