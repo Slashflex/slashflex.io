@@ -52,7 +52,7 @@
 {% endblock %}
 
 {% block javascripts %}
-	<script type="text/javascript">
+	<script>
 	  (function(){for(let i=1;i<={{projects|length}};i++){var img=$(`.slide${[i]}`);img.css('background-image',function(){var bg=('url(/uploads/images'+$(this).data('background')+')');return bg});img.css('background-size',function(){var cover='cover';return cover});img.css('background-position',function(){var position='center';return position});img.css('background-repeat',function(){var position='no-repeat';return position});img.css('width',function(){var position='348px';return position})}})()
 	</script>
 {% endblock %}
