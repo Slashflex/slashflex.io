@@ -55,8 +55,9 @@
 
 					<input type="hidden" name="_csrf_token"value="{{ csrf_token('authenticate') }}">
 					
-					<div class="form-group">
+					<div class="form-group d-flex">
 						<button type="submit" class="button__login mx-auto d-block">Login</button>
+						<a href="{{ path('connect_google') }}" class="button__login mx-auto d-block"><i class="fab fa-google"></i>Google</a>
 					</div>
 
 					<div class="form__group mt-5 text-center">
