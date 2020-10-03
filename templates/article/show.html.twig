@@ -19,14 +19,6 @@
 		{% endfor %}
 
 		<header class="header__blog" style="background-image: url('/uploads/images/{{ article.imageName }}');">
-			{# <div class="container h-100">
-				<div class="row h-100 align-items-center">
-					<div class="col-12 text-center article-intro">
-						<h1>{{ article.title|capitalize }}</h1>
-						<p>{{ article.introduction|capitalize }}</p>
-					</div>
-				</div>
-			</div> #}
 		</header>
 
 		<div class="container">
@@ -62,7 +54,7 @@
 			</div>
 
 			{% if app.user %}
-				{{ form_start(form) }}
+				{{ form_start(form, {'attr': {'class': 'py-5'}}) }}
 					<div class="form__group">
 						{{ form_widget(form.content, {'attr': { 'class': 'form__input comment-block d-block', 'placeholder': 'Add comment...', 'cols': '10', 'rows': '5' }}) }}
 						<label for="content" class="form__label">Comment</label>
