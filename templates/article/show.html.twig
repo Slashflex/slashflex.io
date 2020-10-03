@@ -79,7 +79,8 @@
 		// Hides loader when printing as PDF
 		$(".generate-pdf").click(async function () {
 			$("#loading").hide();
-			await $('.pdf-btn').text('processing...')
+
+			await $('.pdf-btn').text('processing...') && $('.pdf-btn').append(' <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>')
 		});
 
         let commentaire = '';
