@@ -47,6 +47,15 @@
             </div>
 
             <div class="form__group">
+                <div class="form__errors">
+                    {{ form_errors(form.description) }}
+                </div>
+                {{ form_widget(form.description, {'attr': { 'class': 'form__input', 'type': 'description' }}) }}
+                <label for="user_description" class="form__label">Description</label>
+            </div>
+
+            <div class="form__group">
+                {{ form_widget(form.login, {'attr': { 'class': 'form__input', 'type': 'login' }}) }}
                 <label for="login" class="form__label">Nickname</label>
             </div>
 
