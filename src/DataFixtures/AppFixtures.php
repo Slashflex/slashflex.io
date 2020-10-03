@@ -41,7 +41,7 @@ class AppFixtures extends Fixture
         $email = $_ENV['DB_EMAIL'];
         $firstname = $_ENV['DB_FIRSTNAME'];
         $lastname = $_ENV['DB_LASTNAME'];
-        $admin->setAvatar('avatar.png');
+        // $admin->setAvatar('avatar.png');
         $admin
             ->setFirstname($firstname)
             ->setLastname($lastname)
@@ -68,7 +68,7 @@ class AppFixtures extends Fixture
         $article5 = new Article();
         $article6 = new Article();
         $article7 = new Article();
-        $article8 = new Article();
+        // $article8 = new Article();
         $article9 = new Article();
         $article10 = new Article();
         $user = "$" . "USER";
@@ -1013,10 +1013,10 @@ class AppFixtures extends Fixture
                 </div>
             EOT;
 
-        $introduction8 = "ZSH, also called the Z shell, is an extended version of the Bourne Shell (sh), with plenty of new features, and support for plugins and themes. Since it’s based on the same shell as Bash, ZSH has many of the same features, and switching over is a breeze.";
+        // $introduction8 = "ZSH, also called the Z shell, is an extended version of the Bourne Shell (sh), with plenty of new features, and support for plugins and themes. Since it’s based on the same shell as Bash, ZSH has many of the same features, and switching over is a breeze.";
 
         // How to setup ZSH and Oh-my-zsh on Linux
-        $content8 = <<<EOT
+        /*$content8 = <<<EOT
                 <div class="article__content">
                     <h2 class="language__title">How to setup ZSH and Oh-my-zsh on Linux</h2>
                     <h3 class="language__subtitle">Introduction</h3>
@@ -1170,7 +1170,7 @@ class AppFixtures extends Fixture
                     </li>
                     </ul> 
                 </div>
-            EOT;
+            EOT;*/
         // Initial Server Setup with Ubuntu 20.04
         $content9 = <<<EOT
             <div class="article__content">
@@ -1480,64 +1480,64 @@ class AppFixtures extends Fixture
         $title5 = "How to install PgAdmin4 on Ubuntu 20.04 Foca Fossa";
         $title6 = "How to install PostgreSQL on ubuntu 20.04 LTS";
         $title7 = "How To Set Up Apache Virtual Hosts on Ubuntu 20.04";
-        $title8 = "How to setup ZSH and Oh-my-zsh on Linux";
+        // $title8 = "How to setup ZSH and Oh-my-zsh on Linux";
         $title9 = "Initial Server Setup with Ubuntu 20.04";
         $title10 = "How To Install the Apache Web Server on Ubuntu 20.04";
-        $article1->setImageName('avatar.png');
+        $article1->setImageName('certbot-apache.webp');
         $article1
             ->setTitle($title1)
             ->setIntroduction($introduction1)
             ->setContent($content1)
             ->initializeSlug($title1);
-        $article2->setImageName('avatar.png');
+        $article2->setImageName('certbot-nginx.webp');
         $article2
             ->setTitle($title2)
             ->setIntroduction($introduction2)
             ->setContent($content2)
             ->initializeSlug($title2);
-        $article3->setImageName('avatar.png');
+        $article3->setImageName('nginx-ubuntu.webp');
         $article3
             ->setTitle($title3)
             ->setIntroduction($introduction3)
             ->setContent($content3)
             ->initializeSlug($title3);
-        $article4->setImageName('avatar.png');
+        $article4->setImageName('node-ubuntu.webp');
         $article4
             ->setTitle($title4)
             ->setIntroduction($introduction4)
             ->setContent($content4)
             ->initializeSlug($title4);
-        $article5->setImageName('avatar.png');
+        $article5->setImageName('pgadmin-4.webp');
         $article5
             ->setTitle($title5)
             ->setIntroduction($introduction5)
             ->setContent($content5)
             ->initializeSlug($title5);
-        $article6->setImageName('avatar.png');
+        $article6->setImageName('postgresql.webp');
         $article6
             ->setTitle($title6)
             ->setIntroduction($introduction6)
             ->setContent($content6)
             ->initializeSlug($title6);
-        $article7->setImageName('avatar.png');
+        $article7->setImageName('apachevirtual-hosts.webp');
         $article7
             ->setTitle($title7)
             ->setIntroduction($introduction7)
             ->setContent($content7)
             ->initializeSlug($title7);
-        $article8->setImageName('avatar.png');
-        $article8
-            ->setTitle($title8)
-            ->setIntroduction($introduction8)
-            ->setContent($content8)
-            ->initializeSlug($title8);
-        $article9->setImageName('avatar.png');
+        // $article8->setImageName('avatar.png');
+        // $article8
+        //     ->setTitle($title8)
+        //     ->setIntroduction($introduction8)
+        //     ->setContent($content8)
+        //     ->initializeSlug($title8);
+        $article9->setImageName('initial-setup-ubuntu.webp');
         $article9
             ->setTitle($title9)
             ->setIntroduction($introduction9)
             ->setContent($content9)
             ->initializeSlug($title9);
-        $article10->setImageName('avatar.png');
+        $article10->setImageName('apache-ubuntu.webp');
         $article10
             ->setTitle($title10)
             ->setIntroduction($introduction10)
@@ -1550,7 +1550,7 @@ class AppFixtures extends Fixture
         $admin->addArticle($article5);
         $admin->addArticle($article6);
         $admin->addArticle($article7);
-        $admin->addArticle($article8);
+        // $admin->addArticle($article8);
         $admin->addArticle($article9);
         $admin->addArticle($article10);
         $manager->persist($admin);
@@ -1561,7 +1561,7 @@ class AppFixtures extends Fixture
         $manager->persist($article5);
         $manager->persist($article6);
         $manager->persist($article7);
-        $manager->persist($article8);
+        // $manager->persist($article8);
         $manager->persist($article9);
         $manager->persist($article10);
 
