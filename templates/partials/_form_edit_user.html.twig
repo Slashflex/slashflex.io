@@ -7,39 +7,48 @@
 
         {{ form_start(form._token, {'attr': { 'class': 'form', 'autocomplete': 'off' }}) }}
             <div class="form__group">
+                <div class="form__errors">
+                    {{ form_errors(form.firstname) }}
+                </div>
                 {{ form_widget(form.firstname, {'attr': { 'type': 'text', 'class': 'form__input', 'id': 'firstname' }}) }}
                 <label for="firstname" class="form__label">Firstname</label>
             </div>
 
             <div class="form__group">
+                <div class="form__errors">
+                    {{ form_errors(form.lastname) }}
+                </div>
                 {{ form_widget(form.lastname, {'attr': { 'type': 'text', 'class': 'form__input', 'id': 'lastname' }}) }}
                 <label for="lastname" class="form__label">Lastname</label>
             </div>
 
             <div class="form__group">
+                <div class="form__errors">
+                    {{ form_errors(form.email) }}
+                </div>
                 {{ form_widget(form.email, {'attr': { 'type': 'text', 'class': 'form__input', 'id': 'email' }}) }}
                 <label for="email" class="form__label">Email address</label>
             </div>
 
             <div class="form__group">
-                {{ form_widget(form.password, {'attr': { 'class': 'form__input', 'type': 'password', 'value': '•••••••••••' }}) }}
-                <label for="password" class="form__label">Password</label>
+                <div class="form__errors">
+                    {{ form_errors(form.password.first) }}
+                </div>
+                {{ form_widget(form.password.first, {'attr': { 'class': 'form__input', 'type': 'password' }}) }}
+                <label for="user_password_first" class="form__label">Password</label>
             </div>
 
             <div class="form__group">
-                {{ form_widget(form.description, {'attr': { 'type': 'text', 'class': 'form__input', 'id': 'description' }}) }}
-                <label for="description" class="form__label">Description</label>
+                <div class="form__errors">
+                    {{ form_errors(form.password.second) }}
+                </div>
+                {{ form_widget(form.password.second, {'attr': { 'class': 'form__input', 'type': 'password' }}) }}
+                <label for="user_password_second" class="form__label">Confirm password</label>
             </div>
 
             <div class="form__group">
-                {{ form_widget(form.login, {'attr': { 'type': 'text', 'class': 'form__input', 'id': 'login' }}) }}
                 <label for="login" class="form__label">Nickname</label>
             </div>
-
-            {# <div class="form__group">
-                {{ form_widget(form.fileName) }}
-                <label for="avatar" class="form__label">Avatar</label>
-            </div> #}
 
             <div class="form-group">
                 <button type="submit" class="button__login mx-auto d-block">Edit</button>

@@ -122,10 +122,12 @@ class UserController extends AbstractController
      * @param SluggerInterface $slugger
      * @return Response
      */
-    public function editUser(User $user, Request $request, SluggerInterface $slugger): Response
+    public function editUser(AuthenticationUtils $authenticationUtils, User $user, Request $request, SluggerInterface $slugger): Response
     {
         $manager = $this->getDoctrine()->getManager();
-
+        
+        $error = $authenticationUtils->getLastAuthenticationError();
+        
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
@@ -139,7 +141,7 @@ class UserController extends AbstractController
             $fullname = $slugger->slug(strtolower($firstname . '-' . $lastname));
 
             // Hash new password and update slug on form submission
-            $hash = $this->passwordEncoder->encodePassword($user, $request->request->get('user')['password']);
+            $hash = $this->passwordEncoder->encodePassword($user, $form->get('password')->getData());
             $user
                 ->setPassword($hash)
                 ->updateSlug();
@@ -165,7 +167,8 @@ class UserController extends AbstractController
         return $this->render('user/edit_me.html.twig', [
             'title' => '/FLX | ' . $user->getSlug(),
             'form' => $form->createView(),
-            'user' => $user
+            'user' => $user,
+            'error' => $error,
         ]);
     }
 
