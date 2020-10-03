@@ -719,8 +719,7 @@ class AppFixtures extends Fixture
                 <span class="sudo">nano</span> /var/www/example.com/public_html/index.html
                 </code>
                 <p class="language-html">Within this file, create an HTML document that indicates the site it is connected to, like the following:</p>
-                <img class="img-fluid" src="http://slashflex.io.test/index-html.webp" alt="html page">
-                <img class="img-fluid" src="http://slashflex.io.test/uploads/images/index-html.webp" alt="html page">
+                <img class="img-fluid" src="https://slashflex.io/uploads/images/index-html.webp" alt="html page">
                 <p class="language-html">Save and close the file (in nano, press <span class="highlight">CTRL</span> + <span class="highlight">X</span> then <span class="highlight">Y</span> then <span class="highlight">ENTER</span>) when you are finished.</p>
                 <hr class="separator">
                 <h3 class="language__subtitle">Step Four — Create New Virtual Host Files</h3>
@@ -1360,8 +1359,7 @@ class AppFixtures extends Fixture
                 http://your_server_ip
                 </code>
                 <p class="language-html">You should see the default Ubuntu 20.04 Apache web page:</p>
-                <img class="w-50" src="http://slashflex.io.test/apache_default.png">
-                <img class="w-50 img-fluid" src="http://slashflex.io.test/uploads/images/apache_default.webp">
+                <img class="w-50 img-fluid" src="https://slashflex.io/uploads/images/apache_default.webp" alt="apache default age">
                 <p class="language-html">This page indicates that Apache is working correctly. It also includes some basic information about important Apache files and directory locations.</p>
                 <hr class="separator">
                 <h3 class="language__subtitle">Step 4 - Managing the Apache Process</h3>
@@ -1408,16 +1406,14 @@ class AppFixtures extends Fixture
                 <span class="sudo">sudo</span> nano /var/www/your_domain/index.html
                 </code>
                 <p class="language-html">Inside, add the following sample HTML:</p>
-                <img src="http://slashflex.io.test/index-html.png">
-                <img class="img-fluid" src="http://slashflex.io.test/uploads/images/index-html.webp">
+                <img class="img-fluid" src="https://slashflex.io/uploads/images/index-html.webp" alt="basic html page">
                 <p class="language-html">Save and close the file when you are finished.</p>
                 <p class="language-html">In order for Apache to serve this content, it’s necessary to create a virtual host file with the correct directives. Instead of modifying the default configuration file located at <strong>/etc/apache2/sites-available/000-default.conf</strong> directly, let’s make a new one at <strong>/etc/apache2/sites-available/your_domain.conf</strong>:</p>
                 <code class="language-shell">
                 <span class="sudo">sudo</span> nano /etc/apache2/sites-available/your_domain.conf
                 </code>
                 <p class="language-html">Paste in the following configuration block, which is similar to the default, but updated for our new directory and domain name:</p>
-                <img src="http://slashflex.io.test/v-host.png">
-                <img class="img-fluid" src="http://slashflex.io.test/uploads/images/v-host.webp">
+                <img class="img-fluid" src="https://slashflex.io/uploads/images/v-host.webp" alt="basic virtual host">
                 <p class="language-html">Notice that we’ve updated the <strong>DocumentRoot</strong> to our new directory and <strong>ServerAdmin</strong> to an email that the <strong>your_domain</strong> site administrator can access. We’ve also added two directives: <strong>ServerName</strong>, which establishes the base domain that should match for this virtual host definition, and <strong>ServerAlias</strong>, which defines further names that should match as if they were the base name.</p>
                 <p class="language-html">Save and close the file when you are finished.</p>
                 <p class="language-html">Let’s enable the file with the <strong>a2ensite</strong> tool:</p>
@@ -1441,8 +1437,7 @@ class AppFixtures extends Fixture
                 <span class="sudo">sudo</span> systemctl restart apache2
                 </code>
                 <p class="language-html">Apache should now be serving your domain name. You can test this by navigating to <strong>http://your_domain</strong>, where you should see something like this:</p>
-                <img src="http://slashflex.io.test/success-v-host.png">
-                <img class="img-fluid" src="http://slashflex.io.test/uploads/images/success-v-host.webp">
+                <img class="img-fluid" src="https://slashflex.io/uploads/images/success-v-host.webp" alt="virtual host successfully setup">
                 <hr class="separator">
                 <h3 class="language__subtitle">Step 6 - Getting Familiar with Important Apache Files and Directories</h3>
                 <p class="language-html">Now that you know how to manage the Apache service itself, you should take a few minutes to familiarize yourself with a few important directories and files.</p>

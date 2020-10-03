@@ -42,6 +42,33 @@
                     <a href="{{ path('admin') }}" class="button__login">Dashboard</a>
                 {% endif %}
             {% endfor %}
+
+            {# {% if user.comments != null %}
+                <h2>Your stats : </h2>
+                {% if user.comments|length >= 2 %}
+                    <p>Comments count : {{user.comments|length}}</p>
+                {% else %}
+                    <p>Comment count : {{user.comments|length}}</p>
+                {% endif %}
+                <table class="table table-hover table-dark">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="text-center">Comment posted on</th>
+                            <th scope="col" class="text-center">Message of the comment</th>
+                            <th scope="col" class="text-center">Comment posted on article</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for comment in user.comments %}
+                            <tr>
+                                <td scope="row">{{comment.createdAt|date("m/d/Y")}} at {{comment.createdAt|date("H:i:s")}}</td>
+                                <td scope="row" class="w-50">{{comment.content|capitalize}}</td>
+                                <td scope="row"><a href="{{path('single_article', {'slug': comment.article.slug}) }}">{{comment.article.title}}</a></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %} #}
         </div>
     </div>
 	<!-- Footer -->
