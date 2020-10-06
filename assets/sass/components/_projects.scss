@@ -10,11 +10,11 @@
     filter: none;
   }
   @include respond(phone) {
-    width: 60%;
+    width: 85%;
     filter: none;
   }
   @include respond(phone-small) {
-    width: 57%;
+    width: 85%;
     filter: none;
   }
 }
@@ -168,7 +168,7 @@ div[class^="key"] {
     filter: drop-shadow(5px 11px 12px $color-black);
   }
   @include respond(phone-small) {
-    font-size: 7.5rem;
+    font-size: 6.5rem;
     margin-top: -17rem;
     filter: drop-shadow(5px 11px 12px $color-black);
   }

@@ -67,6 +67,9 @@
         {% if app.request.pathInfo == '/me' %}
             {{ encore_entry_script_tags('profile') }}
         {% endif %}
+        {% if app.request.pathInfo == '/about-me' %}
+            {{ encore_entry_script_tags('about') }}
+        {% endif %}
         {% if 
             app.request.pathInfo == '/' or 
             app.request.pathInfo == '/blog' or 

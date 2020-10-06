@@ -29,49 +29,163 @@
 		
 		<section class="project">
 			<div class="container">
-				<h1 class="project__title">Just a couple of words</h1>
-				<p class="project__introduction mb-3">My name is David Saoud (aka Slashflex).</p>
-				<p class="project__introduction mb-3">I am a 36 y.o. web developper. It is a considerably large enterprise with a complex structure and well-developed network.</p>
-				<p class="project__introduction mb-3">Even though my job has many advantages and benefits, I also love to do things I am really passionate about. We live only once, which is why at the moment I am seeking opportunities to realize my full potential within the IT sector. This is a field I truly find fascinating and a field I believe will allow me to create awesome things!</p>
-				<p class="project__introduction">So I appreciate attractive job offers from web agencies, mobile developers, and startups!</p>
+				<h1 class="project__title" data-aos="fade-right">Just a couple of words</h1>
+				<p class="project__introduction mb-3" data-aos="fade-up-right">My name is David Saoud (also know as Slashflex).</p>
+				<p class="project__introduction mb-3" data-aos="fade-up-right">I am a 36 y.o. french web developper based in Lorient (56). I am quietly confident, naturally curious and am constantly working on improving my skills.</p>
+				<p class="project__introduction mb-3" data-aos="fade-up-right">Even though my job has many advantages and benefits, I also love to do things I am really passionate about. We live only once, which is why at the moment I am seeking opportunities to realize my full potential within the IT sector. This is a field I truly find fascinating and a field I believe will allow me to create awesome things!</p>
+				<p class="project__introduction" data-aos="fade-up-right">So I appreciate attractive job offers from web agencies, mobile developers, and startups!</p>
 			</div>
 
 			<div class="stack__text">
-				<div class="stack__text--projects">My recent</div>
-				<div class="stack__text--stack">PROJECTS</div>
+				<div class="stack__text--projects" data-aos="fade-right">My strongest</div>
+				<div class="stack__text--stack" data-aos="fade-up-right">SKILLS</div>
 			</div>
 		</section>
-		
-		{# <div class="container">
-			<div class="row cards">
-				{% for project in projects %}
-				{% set auteur = project.users %}
-					<div class="col-12 col-lg-6"> 
-						<div class="card{{loop.index}}">
-							<div class="flips">
-								<div class="front{{loop.index}} vertical">
-									<div class="card-content--image" style="background-image: url({{ project.mainImage }})"></div>
+
+		<section class="info-circle-section desktop-mode" id="info-circle-section">
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+						<div class="info-circle">
+							<div class="info-sub-circle one active" data-circle-index="0">
+								<i class="fas fa-user-tie"></i>
+							</div>
+							<div class="info-sub-circle two" data-circle-index="1">
+								<i class="fas fa-users"></i>
+							</div>
+							<div class="info-sub-circle three" data-circle-index="2">
+								<i class="fas fa-satellite-dish"></i>
+							</div>
+							<div class="info-sub-circle four" data-circle-index="3">
+								<i class="fas fa-brain"></i>
+							</div>
+							<div class="info-sub-circle five" data-circle-index="4">
+								<i class="fas fa-sitemap"></i>
+							</div>
+							<div class="info-sub-circle six" data-circle-index="5">
+								<i class="fas fa-exclamation-triangle"></i>
+							</div>
+							
+							<div class="info-circle-content-wrapper">
+								<div class="info-circle-content-item active">
+									<span class="title">
+									<p class="underlined-link">PERSONAL IMPROVEMENT</p>
+									</span>
+									<p class="description">
+										I'm extremely active and eager to try new approaches. I am constantly on technological watch in order to keep my curiosity awake.
+									</p>
 								</div>
-								<div class="back{{loop.index}} vertical">
-									<div class="card-content">
-										<h2>Back</h2>
-										<p>Lorem ipsum</p>
-										<div class="form-group">
-											<a href="{{ path('single_project', { 'slug': project.slug }) }}" class="button__login--showcase">Showcase</a>
-										</div>
-									</div>
+								<div class="info-circle-content-item">
+									<span class="title">
+									<p class="underlined-link">TEAMWORK</p></span>
+									<p class="description">
+										Teamwork and a positive approach to mistakes are key skills that I naturally own.
+									</p>
+								</div>
+								<div class="info-circle-content-item">
+									<span class="title">
+									<p class="underlined-link">COMMUNICATION</p></span>
+									<p class="description">
+										Listening, speaking, observing, empathizing and accepting / giving feedback are what I value.
+									</p>
+								</div>
+								<div class="info-circle-content-item">
+									<span class="title">
+									<p class="underlined-link">LATERAL THINKING</p></span>
+									<p class="description">
+										I am always trying to look for the most effective ways forward.
+									</p>
+								</div>
+								<div class="info-circle-content-item">
+									<span class="title">
+									<p class="underlined-link">ORGANIZATION</p></span>
+									<p class="description">
+										Strong sense of organization, good capacity for self-management and communication.
+									</p>
+								</div>
+								<div class="info-circle-content-item">
+									<span class="title">
+									<p class="underlined-link">PROBLEM SOLVING</p></span>
+									<p class="description">
+										I'm always trying to do my best at understanding a given problem in order to find suitable solution.
+									</p>
 								</div>
 							</div>
 						</div>
 					</div>
-				{% endfor %}
+				</div>
 			</div>
-		</div> #}
+		</section>
+
+		<section class="mobile-skills">
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+						<div class="mt-5 mb-4 d-flex">
+							<div class="sinfo-sub-circle one" data-circle-index="0">
+								<i class="fas fa-user-tie"></i>
+							</div>
+							<p class="mobile-skills__title">PERSONAL IMPROVEMENT</p>
+						</div>
+						<p class="project__introduction">
+							I'm extremely active and eager to try new approaches. I am constantly on technological watch in order to keep my curiosity awake.
+						</p>
+
+						<div class="mt-5 mb-4 d-flex">
+							<div class="sinfo-sub-circle one" data-circle-index="0">
+								<i class="fas fa-users"></i>
+							</div>
+							<p class="mobile-skills__title">TEAMWORK</p>
+						</div>
+						<p class="project__introduction">
+							Teamwork and a positive approach to mistakes are key skills that I naturally own.
+						</p>
+
+						<div class="mt-5 mb-4 d-flex">
+							<div class="sinfo-sub-circle one" data-circle-index="0">
+								<i class="fas fa-satellite-dish"></i>
+							</div>
+							<p class="mobile-skills__title">COMMUNICATION</p>
+						</div>
+						<p class="project__introduction">
+							Listening, speaking, observing, empathizing and accepting / giving feedback are what I value.
+						</p>
+
+						<div class="mt-5 mb-4 d-flex">
+							<div class="sinfo-sub-circle one" data-circle-index="0">
+								<i class="fas fa-brain"></i>
+							</div>
+							<p class="mobile-skills__title">LATHERAL THINKING</p>
+						</div>
+						<p class="project__introduction">
+							I am always trying to look for the most effective ways forward.
+						</p>
+
+						<div class="mt-5 mb-4 d-flex">
+							<div class="sinfo-sub-circle one" data-circle-index="0">
+								<i class="fas fa-sitemap"></i>
+							</div>
+							<p class="mobile-skills__title">ORGANIZATION</p>
+						</div>
+						<p class="project__introduction">
+							Strong sense of organization, good capacity for self-management and communication.
+						</p>
+
+						<div class="mt-5 mb-4 d-flex">
+							<div class="sinfo-sub-circle one" data-circle-index="0">
+								<i class="fas fa-exclamation-triangle"></i>
+							</div>
+							<p class="mobile-skills__title">PROBLEM SOLVING</p>
+						</div>
+						<p class="project__introduction">
+							I'm always trying to do my best at understanding a given problem in order to find suitable solution.
+						</p>
+					</div>
+				</div>
+			</div>
+		</section>
 	</div>
 
 	<!-- Footer -->
 	{% include "partials/_footer.html.twig" %}
 {% endblock %}
-
-{% block javascripts %}{% endblock %}
-

@@ -1,6 +1,4 @@
 $(document).ready(() => {
-  
-
   // Removes Download link
   if (window.location.pathname.endsWith("new")) {
     const download = document.querySelectorAll("a[download]");

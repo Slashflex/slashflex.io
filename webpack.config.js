@@ -33,6 +33,7 @@ Encore
     .addEntry('app', './assets/js/app.js')
     .addEntry('home', './assets/js/home.js')
     .addEntry('works', './assets/js/works.js')
+    .addEntry('about', './assets/js/about.js')
     .addEntry('blog', './assets/js/blog.js')
     .addEntry('register', './assets/js/register.js')
     .addEntry('profile', './assets/js/profile.js')
