@@ -80,7 +80,7 @@ class ProjectController extends AbstractController
 
             foreach ($project->getAttachments() as $image) {
                 $image->setproject($project);
-                $this->manager->persist($image);
+                $manager->persist($image);
             }
 
             $project
