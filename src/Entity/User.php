@@ -4,7 +4,6 @@ namespace App\Entity;
 
 use DateTime;
 use App\Entity\Role;
-use App\Entity\Reply;
 use DateTimeInterface;
 use App\Entity\Article;
 use App\Entity\Comment;
@@ -16,9 +15,10 @@ use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ApiResource(
@@ -44,6 +44,9 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=180, unique=true)
      * @Assert\Email(
      *     message = "The email '{{ value }}' is not a valid email."
+     * )
+     * @Assert\NotBlank(
+     *     message = "You have enter an email address." 
      * )
      */
     private $email;

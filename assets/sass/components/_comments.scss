@@ -26,6 +26,7 @@
     }
 
     &-block {
+      color: var(--bg);
       padding: 1rem;
       background-color: var(--bg-inversed);
       display: table-cell;

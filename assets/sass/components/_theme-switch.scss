@@ -32,6 +32,7 @@ html {
   --about-circle:  #27282c;
   --dashed: #e1e1e1;
   --plain: #fbbe40a1;
+  --loader-border: rgb(107, 107, 107);
 }
 
 html[data-theme="dark"] {
@@ -63,6 +64,7 @@ html[data-theme="dark"] {
   --about-circle: #695fc6;
   --dashed: rgba(251, 190, 64, 0.29);
   --plain: #6b6b6b;
+  --loader-border:  #444444;
 }
 
 input[type="checkbox"] {

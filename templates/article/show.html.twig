@@ -123,7 +123,7 @@
 
                     <!-- Reply to Comment with given ID -->
                     <form action="" style="display: none" id="reply-comment-{{ comment.id }}">
-                        <textarea type="text" name="comment[content]" id="commentID-{{ comment.id }}" style="color: white; width: 93%; float: right;" class="form__input d-block comment-block" ></textarea>
+                        <textarea type="text" name="comment[content]" id="commentID-{{ comment.id }}" style="width: 93%; float: right;" class="form__input d-block comment-block" ></textarea>
                         <label for="message" class="form__label">Message</label>
 
                         <div class="form-group pt-2 pb-3">
@@ -168,7 +168,7 @@
 								<li>
 									<div class="comment-wrap">
 										<div class="photo">
-											<div class="avatar" {% if comment.users.avatar != 'avatar.png' %} style="background-image: url(/uploads/avatars/${userData.slug}/${userData.avatar})" {% else %} style="background-image: url(/uploads/avatars/${userData.avatar})" {% endif %}></div>
+											<div class="avatar" {% if comment.users.avatar != 'avatar.png' %} style="background-image: url(/uploads/avatars/${userData.slug}/${userData.avatar})" {% else %} style="background-image: url(/uploads/avatars/${userData.slug}/${userData.avatar})" {% endif %}></div>
 										</div>
 										<div class="comment-block">
 											<div class="comment-tile">${name}</div>
@@ -186,7 +186,7 @@
 
 									<!-- Reply to Comment with given ID -->
 									<form action="" style="display: none" id="reply-comment-${idComment}">
-										<textarea type="text" name="comment[content]" id="commentID-${idComment}" style="color: white; width: 93%; float: right;" class="form__input d-block comment-block" ></textarea>
+										<textarea type="text" name="comment[content]" id="commentID-${idComment}" style="width: 93%; float: right;" class="form__input d-block comment-block" ></textarea>
 										<label for="message" class="form__label">Message</label>
 
 										<div class="form-group pt-2 pb-3">
@@ -275,7 +275,7 @@
 
 								<!-- Reply to Comment with given ID -->
 								<form action="" style="display: none" id="reply-comment-${idComment}">
-									<textarea type="text" name="comment[content]" id="commentID-${idComment}" style="color: white; width: 93%; float: right;" class="form__input d-block comment-block" ></textarea>
+									<textarea type="text" name="comment[content]" id="commentID-${idComment}" style="width: 93%; float: right;" class="form__input d-block comment-block" ></textarea>
 									<label for="message" class="form__label">Message</label>
 
 									<div class="form-group pt-2 pb-3">
