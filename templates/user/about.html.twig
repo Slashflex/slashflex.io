@@ -35,7 +35,7 @@
 				<p class="project__introduction mb-3" data-aos="fade-up-right">Even though my job has many advantages and benefits, I also love to do things I am really passionate about. We live only once, which is why at the moment I am seeking opportunities to realize my full potential within the IT sector. This is a field I truly find fascinating and a field I believe will allow me to create awesome things!</p>
 				<p class="project__introduction" data-aos="fade-up-right">So I appreciate attractive job offers from web agencies, mobile developers, and startups!</p>
 				<div class="form-group">
-					<div class="goo-btn">
+					<div class="goo-btn generate-pdf">
 						<svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="goo">
 							<defs>
 								<filter id="goo">
@@ -47,7 +47,7 @@
 						</svg>
 
 						<span class="button--bubble__container" data-aos="fade-right">
-							<a href="{{ path('resume_to_pdf') }}" class="button button--bubble">
+							<a href="{{ path('resume_to_pdf') }}" class="button button--bubble pdf-btn">
 								Download my resume
 							</a>
 							<span class="button--bubble__effect-container">
@@ -218,4 +218,14 @@
 
 	<!-- Footer -->
 	{% include "partials/_footer.html.twig" %}
+{% endblock %}
+
+{% block javascripts %}
+	<script>
+		$(".generate-pdf").click(async function () {
+			$("#loading").hide();
+
+			await $('.pdf-btn').text('processing...') && $('.pdf-btn').append(' <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>')
+		});
+	</script>
 {% endblock %}

@@ -31,7 +31,7 @@ class PDFController extends AbstractController
     public function indexAction(Pdf $snappy, Article $article)
     {
         $slug = $this->articleRepository->findOneBy(["slug" => $article->getSlug()]);
-        $url = 'http://slashflex.io.test/blog/post/' . $slug->__toString();
+        $url = 'http://slashflex.io/blog/post/' . $slug->__toString();
 
         // WkHtmlToPdf options => wkhtmltopdf -H
         $options = [
@@ -58,7 +58,7 @@ class PDFController extends AbstractController
      */
     public function resumeToPdf(Pdf $snappy)
     {
-        $resume = 'http://slashflex.io.test/about-me/resume';
+        $resume = 'https://slashflex.io/about-me/resume';
 
         $options = [
             'disable-javascript' => true,
