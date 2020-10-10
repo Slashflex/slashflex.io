@@ -29,11 +29,41 @@
 		
 		<section class="project">
 			<div class="container">
-				<h1 class="project__title" data-aos="fade-right">Just a couple of words</h1>
+				<h2 class="project__title" data-aos="fade-right">Just a couple of words</h2>
 				<p class="project__introduction mb-3" data-aos="fade-up-right">My name is David Saoud (also know as Slashflex).</p>
 				<p class="project__introduction mb-3" data-aos="fade-up-right">I am a 36 y.o. french web developper based in Lorient (56). I am quietly confident, naturally curious and am constantly working on improving my skills.</p>
 				<p class="project__introduction mb-3" data-aos="fade-up-right">Even though my job has many advantages and benefits, I also love to do things I am really passionate about. We live only once, which is why at the moment I am seeking opportunities to realize my full potential within the IT sector. This is a field I truly find fascinating and a field I believe will allow me to create awesome things!</p>
 				<p class="project__introduction" data-aos="fade-up-right">So I appreciate attractive job offers from web agencies, mobile developers, and startups!</p>
+				<div class="form-group">
+					<div class="goo-btn">
+						<svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="goo">
+							<defs>
+								<filter id="goo">
+								<feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+								<feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo" />
+								<feComposite in="SourceGraphic" in2="goo"/>
+								</filter>
+							</defs>
+						</svg>
+
+						<span class="button--bubble__container" data-aos="fade-right">
+							<a href="{{ path('resume_to_pdf') }}" class="button button--bubble">
+								Download my resume
+							</a>
+							<span class="button--bubble__effect-container">
+								<span class="circle top-left"></span>
+								<span class="circle top-left"></span>
+								<span class="circle top-left"></span>
+
+								<span class="button effect-button"></span>
+
+								<span class="circle bottom-right"></span>
+								<span class="circle bottom-right"></span>
+								<span class="circle bottom-right"></span>
+							</span>
+						</span>
+					</div>
+				</div>
 			</div>
 
 			<div class="stack__text">

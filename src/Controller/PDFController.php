@@ -31,7 +31,7 @@ class PDFController extends AbstractController
     public function indexAction(Pdf $snappy, Article $article)
     {
         $slug = $this->articleRepository->findOneBy(["slug" => $article->getSlug()]);
-        $url = 'https://slashflex.io/blog/post/' . $slug->__toString();
+        $url = 'http://slashflex.io.test/blog/post/' . $slug->__toString();
 
         // WkHtmlToPdf options => wkhtmltopdf -H
         $options = [
@@ -46,5 +46,45 @@ class PDFController extends AbstractController
             'Content-Type'          => 'application/pdf',
             'Content-Disposition'   => 'inline; filename="' . $slug . '.pdf"'
         ));
+    }
+
+    /**
+     * Generates a pdf document out of an post
+     * 
+     * @Route("/about-me/resume/pdf", name="resume_to_pdf")
+     *
+     * @param Pdf $snappy
+     * @return void
+     */
+    public function resumeToPdf(Pdf $snappy)
+    {
+        $resume = 'http://slashflex.io.test/about-me/resume';
+
+        $options = [
+            'disable-javascript' => true,
+            'margin-top'    => 10,
+            'margin-right'  => 15,
+            'margin-bottom' => 15,
+            'margin-left'   => 15,
+        ];
+
+        return new Response($snappy->getOutput($resume, $options), 200, array(
+            'Content-Type'          => 'application/pdf',
+            'Content-Disposition'   => 'inline; filename="CV-david-saoud.pdf"'
+        ));
+    }
+
+    /**
+     * Generates a pdf document out of an post
+     * 
+     * @Route("/about-me/resume", name="show_resume")
+     *
+     * @return void
+     */
+    public function showResume()
+    {
+        return $this->render('user/resume.html.twig', [
+            'title' => '/ FLX | My resume'
+        ]);
     }
 }
