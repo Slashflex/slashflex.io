@@ -78,7 +78,7 @@ class RoutesTest extends WebTestCase
         yield ['/works/test'];
     }
 
-    public function testLoginUser(): void
+    public function testAnonymousUserSubmitLoginForm(): void
     {
         $userEmail = 'pro.davidsaoud@gmail.com';
 
@@ -93,5 +93,45 @@ class RoutesTest extends WebTestCase
         $user = self::$container->get(UserRepository::class)->findOneByEmail($userEmail);
 
         $this->assertSame($userEmail, $user->getEmail());
+    }
+
+    public function testAdminUserSubmitLoginForm(): void
+    {
+        $adminEmail = 'pro.davidsaoud@gmail.com';
+
+        $client = static::createClient();
+        $crawler = $client->request('GET', 'http://slashflex.io.test/admin/sign-in');
+
+        $form = $crawler->selectButton('Login')->form();
+        $form['_username'] = $adminEmail;
+        $form['_password'] = 'pass1234';
+
+        $crawler = $client->submit($form);
+
+        $user = self::$container->get(UserRepository::class)->findOneByEmail($adminEmail);
+
+        if ($user->getRoles()[0] == 'ROLE_ADMIN') {
+            $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        }
+    }
+
+    public function testDenyAdminAccessForNonAdminRole(): void
+    {
+        $userEmail = 'supraderp@gmail.com';
+
+        $client = static::createClient();
+        $crawler = $client->request('GET', 'http://slashflex.io.test/admin/sign-in');
+
+        $form = $crawler->selectButton('Login')->form();
+        $form['_username'] = $userEmail;
+        $form['_password'] = 'pass1234';
+
+        $crawler = $client->submit($form);
+
+        $user = self::$container->get(UserRepository::class)->findOneByEmail($userEmail);
+
+        if ($user->getRoles()[0] != 'ROLE_ADMIN') {
+            $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        }
     }
 }
