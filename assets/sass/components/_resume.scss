@@ -1,14 +1,3 @@
-@page {
-  size: A4;
-}
-body {
-  color-adjust: exact;
-  background-color: #fff;
-  font-family: "Montserrat", sans-serif;
-  font-weight: 300;
-  display: flex;
-  justify-content: center;
-}
 .btn-print {
   z-index: 1;
   position: absolute;
@@ -184,13 +173,5 @@ body {
   }
   .lang-label {
     width: 8em;
-  }
-}
-@media print {
-  body {
-    min-width: initial !important;
-  }
-  .btn-print {
-    display: none;
   }
 }

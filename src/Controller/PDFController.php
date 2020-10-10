@@ -56,19 +56,19 @@ class PDFController extends AbstractController
      * @param Pdf $snappy
      * @return void
      */
-    public function resumeToPdf(Pdf $snappyy)
+    public function resumeToPdf(Pdf $snappy)
     {
         $resume = 'http://slashflex.io.test/about-me/resume';
 
-        $optionss = [
-            // 'disable-javascript' => true,
+        $options = [
+            'disable-javascript' => true,
             'margin-top'    => 10,
             'margin-right'  => 15,
             'margin-bottom' => 15,
             'margin-left'   => 15,
         ];
 
-        return new Response($snappyy->getOutput($resume, $optionss), 200, array(
+        return new Response($snappy->getOutput($resume, $options), 200, array(
             'Content-Type'          => 'application/pdf',
             'Content-Disposition'   => 'inline; filename="CV-david-saoud.pdf"'
         ));
