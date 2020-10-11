@@ -44,7 +44,9 @@
         
         <!-- Custom JS -->
         {{ encore_entry_script_tags('custom') }}
-        {{ encore_entry_script_tags('dark-theme') }}
+        {% if not app.request.pathInfo == '/about-me/resume' %}
+            {{ encore_entry_script_tags('dark-theme') }}
+        {% endif %}
 
         <!-- Fire up JS script(s) file(s) on specific route(s) -->
         {% if app.request.pathInfo == '/' %}
