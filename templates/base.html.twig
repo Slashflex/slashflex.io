@@ -44,7 +44,7 @@
         
         <!-- Custom JS -->
         {{ encore_entry_script_tags('custom') }}
-        {% if not app.request.pathInfo == '/about-me/resume' %}
+        {% if app.request.pathInfo != '/about-me/resume' %}
             {{ encore_entry_script_tags('dark-theme') }}
         {% endif %}
 
