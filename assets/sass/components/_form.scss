@@ -164,7 +164,12 @@
     opacity: 1;
   }
 }
-
+@for $i from 0 through 30 {
+  #project_attachments_#{$i}_file,
+  #project_imageFile_file {
+    color: var(--bg-inversed);
+  }
+}
 @for $i from 0 through 30 {
   #project_image_#{$i}_url,
   #project_content_#{$i}_content,
