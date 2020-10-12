@@ -573,7 +573,6 @@ class AppFixtures extends Fixture
                 nano /var/www/your_domain/html/index.html
                 </code>
                 <p class="language-html">Inside, add the following sample HTML:</p>
-                <img src="https://i.imgur.com/o2I3MoN.png">
                 <img class="img-fluid" src="https://i.imgur.com/o2I3MoN.png">
                 <p class="language-html">Save and close the file by typing <span class="highlight">CTRL</span> and <span class="highlight">X</span> then <span class="highlight">Y</span> and <span class="highlight">ENTER</span> when you are finished.</p>
                 <p class="language-html">In order for Nginx to serve this content, it’s necessary to create a server block with the correct directives. Instead of modifying the  default configuration file directly, let’s make a new one at <strong>/etc/nginx/sites-available/your_domain</strong>:</p>
@@ -631,7 +630,6 @@ class AppFixtures extends Fixture
                 <span class="sudo">sudo</span> systemctl restart nginx
                 </code>
                 <p class="language-html">Nginx should now be serving your domain name. You can test this by navigating to <strong>http://your_domain</strong>, where you should see something like this:</p>
-                <img src="https://assets.digitalocean.com/articles/nginx_server_block_1404/first_block.png">
                 <img class="img-fluid" src="https://assets.digitalocean.com/articles/nginx_server_block_1404/first_block.png">
                 <hr class="separator">
                 <h3 class="language__subtitle">Step 6 – Getting Familiar with Important Nginx Files and Directories</h3>
@@ -655,11 +653,11 @@ class AppFixtures extends Fixture
             <div class="article__content">
                 <h2 class="language__title">How to Install Latest Node.js and NPM on Ubuntu with PPA</h2>
                 <h3 class="language__subtitle">Step 1 – Add Node.js PPA</h3>
-                <p class="language-html">Node.js package is available in the LTS release and the current release. It’s your choice to select which version you want to install on the system as per your requirements. Let’s add the PPA to your system to install Nodejs on  Ubuntu.<br><br>
-                <strong>Use Current Release:</strong> At te last update of this tutorial, Node.js 13 is the current Node.js release available.</p>
+                <p class="language-html">Node.js package is available in the LTS release and the current release. It’s your choice to select which version you want to install on the system as per your requirements. Let’s add the PPA to your system to install Nodejs on Ubuntu.<br><br>
+                <strong>Use Current Release:</strong> At the last update of this tutorial, Node.js 14 is the current Node.js release available.</p>
                 <code class="language-shell">
                 <span class="sudo">sudo</span> apt-get install <span class="sudo">curl</span><br>
-                <span class="sudo">curl</span> <span class="flag">-sL</span> https://deb.nodesource.com/setup_13.x | <span class="sudo">sudo</span> <span class="flag">-E</span> <span class="sudo">bash</span> <span class="flag">-</span>
+                <span class="sudo">curl</span> <span class="flag">-sL</span> https://deb.nodesource.com/setup_14.x | <span class="sudo">sudo</span> <span class="flag">-E</span> <span class="sudo">bash</span> <span class="flag">-</span>
                 </code>
                 <p class="language-html"><strong>Use LTS Release :</strong> At the last update of this tutorial, Node.js 12.x is the LTS release available.</p>
                 <code class="language-shell">
@@ -669,81 +667,52 @@ class AppFixtures extends Fixture
                 <p class="language-html">For this tutorial, <strong>I am using the latest current release</strong> and added their PPA to my system.</p>
                 <hr class="separator">
                 <h3 class="language__subtitle">Step 2 – Install Node.js on Ubuntu</h3>
-                <p class="language-html">You can successfully add Node.js PPA to the Ubuntu system. Now execute the below command install Node on and Ubuntu using apt-get. This will also  install NPM with node.js. This command also installs many other  dependent packages on your system.</p>
+                <p class="language-html">You can successfully add Node.js PPA to the Ubuntu system. Now execute the below command will install Node on Ubuntu using apt-get. This will also install NPM with node.js. This command also installs many other dependent packages on your system.</p>
                 <code class="language-shell">
                 <span class="sudo">sudo</span> apt-get install nodejs<br>
-                <span class="sudo">curl</span> <span class="flag">-sL</span> https://deb.nodesource.com/setup_13.x | <span class="sudo">sudo</span> <span class="flag">-E</span> <span class="sudo">bash</span> <span class="flag">-</span>
+                <span class="sudo">curl</span> <span class="flag">-sL</span> https://deb.nodesource.com/setup_14.x | <span class="sudo">sudo</span> <span class="flag">-E</span> <span class="sudo">bash</span> <span class="flag">-</span>
                 </code>
                 <hr class="separator">
                 <h3 class="language__subtitle">Step 3 – Check Node.js and NPM Version</h3>
-                <p class="language-html">The Apache web server is a popular method for serving websites on the internet. As of 2019, it is estimated to serve 29% of all active  websites and it offers robustness and flexibility for developers. Using  Apache, an administrator can set up one server to host multiple domains  or sites off of a single interface or IP by using a matching system.</p>
-                <p class="language-html">Each domain or individual site — known as a <strong>virtual host</strong> — that is configured using Apache will direct the visitor to a specific directory  holding that site’s information. This is done without indicating that  the same server is also responsible for other sites. This scheme is  expandable without any software limit as long as your server can handle  the load. The basic unit that describes an individual site or domain is  called a virtual hostIn this guide, we will walk you through how to set up Apache virtual  hosts on an Ubuntu 20.04 server. During this process, you’ll learn how  to serve different content to different visitors depending on which  domains they are requesting.</p>
-                <h3 class="language__subtitle">Prerequisites</h3>
-                <p class="language-html">Before you begin this tutorial, you should <a class="in-bl" href="https://slashflex.io/blog/post/initial-server-setup-with-ubuntu-20-04">create a non-root user</a>.</p>
-                <p class="language-html">
-                You will also need to have Apache installed in order to work through these steps. If you haven’t already done so, you can get Apache installed on your server through the <strong>apt</strong> package manager:</p> 
+                <p class="language-html">After installing node.js verify and check the installed version. You can find more details about current version on node.js <a class="in-bl" href="https://nodejs.org/download/">Official website</a>.</p>
                 <code class="language-shell">
-                <span class="sudo">sudo</span> apt update<br>
-                <span class="sudo">sudo</span> apt install apache2
+                <span class="sudo">node</span> <span class="flag">-v</span><br>
+                v14.13.1
                 </code>
-                <p class="language-html">If you would like more detailed instructions as well as firewall setup, please refer to our guide <a class="in-bl" href="https://slashflex.io/blog/post/how-to-install-the-apache-web-server-on-ubuntu-20-04">How To Install the Apache Web Server on Ubuntu 20.04</a>.</p>
-                <p class="language-html">For the purposes of this guide, our configuration will make a virtual host for <strong>example.com</strong>. These will be referenced throughout the guide, but you should substitute your own domains or values while following along.</p>
-                <p class="language-html">We will show how to edit your local hosts file later on to test the configuration if you are using test values. This will allow you to  validate your configuration from your home computer, even though your  content won’t be available through the domain name to other visitors.</p>
-                <hr class="separator">
-                <h3 class="language__subtitle">Step One — Create the Directory Structure</h3>
-                <p class="language-html">The first step that we are going to take is to make a directory structure that will hold the site data that we will be serving to  visitors.</p>
-                <p class="language-html">Our <strong>document root</strong> (the top-level directory that Apache looks at to find content to serve) will be set to individual directories under the <strong>/var/www</strong> directory.  We will create a directory here for the virtual host we plan on making.</p>
-                <p class="language-html">Within this directory, we will create a <strong>public_html</strong> folder that will hold our actual files.  This gives us some flexibility in our hosting.</p>
-                <p class="language-html">For instance, for our site, we’re going to make our directory as follows. If you are using actual domain or alternate values, swap out the highlighted text for this.</p>
+                <p class="language-html">Also, check the npm version</p>
                 <code class="language-shell">
-                <span class="sudo">sudo</span> mkdir <span class="flag">-p</span> /var/www/example.com/public_html
+                <span class="sudo">npm</span> <span class="flag">-v</span><br>
+                6.14.8
                 </code>
                 <hr class="separator">
-                <h3 class="language__subtitle">Step Two — Grant Permissions</h3>
-                <p class="language-html">Now we have the directory structure for our files, but they are owned by our root user.  If we want our regular user to be able to modify  files in our web directories, we can change the ownership by doing this:</p>
+                <h3 class="language__subtitle">Step 4 – Create Demo Web Server (Optional)</h3>
+                <p class="language-html">This is an optional step. If you want to test your node.js install. Let’s create a web server with “Hello World!” text. Create a file <strong>server.js</strong></p>
                 <code class="language-shell">
-                <span class="sudo">sudo</span> chown <span class="flag">-R</span> $user:$user /var/www/example.com/public_html
+                <span class="sudo">vim</span> server.js
                 </code>
-                <p class="language-html">The <strong>$user</strong> variable will take the value of the user you are currently logged in as when you press <span class="highlight">ENTER</span>. By doing this, our regular user now owns the <strong>public_html</strong> subdirectories where we will be storing our content.</p>
-                <p class="language-html">We should also modify our permissions to ensure that read access is permitted to the general web directory and all of the files and folders  it contains so that pages can be served correctly:</p>
+                <p class="language-html">and add the following content to the file server.js</p>
+                <code class="language-shell" lang="javascript">
+                <span class="flag">var</span> http = <span class="var">require</span>(<span class="var__string">"http"</span>);<br>
+                http.<span class="var">createServer</span>((<span class="var__param">req, res</span>) <span class="var__function">=></span> {<br>
+                <span class="invisible">tab</span> res.<span class="var">writeHead</span>(<span class="var__param">200</span>, {<span class="var__string">"Content-Type": "text/plain"</span>});<br>
+                <span class="invisible">tab</span> res.<span class="var">end</span>(<span class="var__string">"Hello World\n"</span>);<br>
+                }).<span class="var">listen</span>(<span class="var__param">3000</span>, <span class="var__string">"127.0.0.1"</span>);<br>
+                <span class="flag">console</span>.<span class="var">log</span>(<span class="var__string">"Server running at http://127.0.0.1:3000/"</span>);
+                </code>
+                <p class="language-html">Now start the Node application using the command.</p>
                 <code class="language-shell">
-                <span class="sudo">sudo</span> chmod <span class="flag">-R</span> 755 /var/www
+                <span class="sudo">node</span> server.js<br><br>
+                debugger listening on port 5858<br>
+                Server running at http://127.0.0.1:3000/
                 </code>
-                <p class="language-html">Your web server should now have the permissions it needs to serve content, and your user should be able to create content within the  necessary folders.</p>
-                <hr class="separator">
-                <h3 class="language__subtitle">Step Three — Create a Demo Page for the Virtual Host</h3>
-                <p class="language-html">We now have our directory structure in place. Let’s create some content to serve.</p>
-                <p class="language-html">For demonstration purposes, we’ll make an <strong>index.html</strong> page this site.</p>
-                <p class="language-html">Let’s begin with <strong>example.com</strong>. We can open up an <strong>index.html</strong> file in a text editor, in this case we’ll use nano:</p>
+                <p class="language-html">You can also start the application with debugging enabled with the following commands.</p>
                 <code class="language-shell">
-                <span class="sudo">nano</span> /var/www/example.com/public_html/index.html
+                <span class="sudo">node</span> <span class="flag">--inspect</span><br><br>
+                Debugger listening on ws://127.0.0.1:9229/938cf97a-a9e6-4672-922d-a22479ce4e29<br>
+                For help, see: https://nodejs.org/en/docs/inspector<br>
+                Server running at http://127.0.0.1:3000/
                 </code>
-                <p class="language-html">Within this file, create an HTML document that indicates the site it is connected to, like the following:</p>
-                <img class="img-fluid" src="https://slashflex.io/uploads/images/index-html.webp" alt="html page">
-                <p class="language-html">Save and close the file (in nano, press <span class="highlight">CTRL</span> + <span class="highlight">X</span> then <span class="highlight">Y</span> then <span class="highlight">ENTER</span>) when you are finished.</p>
-                <hr class="separator">
-                <h3 class="language__subtitle">Step Four — Create New Virtual Host Files</h3>
-                <span class="flag">plugins</span>=( [plugins...] zsh-syntax-highlighting)
-                </code>
-                </li>
-                <li>
-                <p class="language-html"><span class="invisible">tab</span>3 - Restart zsh (such as by opening a new instance of your terminal emulator).</p>
-                </li>
-                </ul>
-                <hr class="separator">
-                <h3 class="language__subtitle">References</h3>
-                <ul>
-                <li style="font-size: 1.4rem"><a class="in-bl" href="https://github.com/robbyrussell/oh-my-zsh/wiki" >https://github.com/robbyrussell/oh-my-zsh/wiki</a>
-                </li>
-                <li style="font-size: 1.4rem"><a class="in-bl" href="https://github.com/robbyrussell/oh-my-zsh/wiki/Themes" >https://github.com/robbyrussell/oh-my-zsh/wiki/Themes</a>
-                </li>
-                <li style="font-size: 1.4rem"><a class="in-bl" href="https://github.com/robbyrussell/oh-my-zsh/wiki" >https://github.com/robbyrussell/oh-my-zsh/wiki/Plugins</a>
-                </li>
-                <li style="font-size: 1.4rem"><a class="in-bl" href="https://github.com/zsh-users/zsh-autosuggestions" >https://github.com/zsh-users/zsh-autosuggestions</a> - <a class="in-bl" href="https://github.com/zsh-users/zsh-autosuggestions/blob/master/INSTALL.md" >install.md</a>
-                </li>
-                <li style="font-size: 1.4rem"><a class="in-bl" href="https://github.com/zsh-users/zsh-syntax-highlighting" >https://github.com/zsh-users/zsh-syntax-highlighting</a> - <a class="in-bl" href="https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md" >install.md</a>
-                </li>
-                </ul> 
+                <p class="language-html">The web server has been started on port 3000. Now access <strong>http://127.0.0.1:3000/</strong> URL in your browser. Now you will need to configure a front-end server for your app.</p>
             </div>
         EOT;
 
@@ -803,7 +772,7 @@ class AppFixtures extends Fixture
                     <code class="language-shell">
                     <span class="sudo">python</span> lib/python3.8/site-packages/pgadmin4/pgAdmin4.py
                     </code>
-                    <p class="language-html">Now, access http://localhost:5050/ from any browser. If all the steps are completed properly then the browser will display.</p>
+                    <p class="language-html">Now, access http://localhost:5050/ from any browser. If all the steps are completed properly then the browser will display the administration and development platform for the PostgreSQL database.</p>
                 </div>
             EOT;
 
@@ -833,7 +802,7 @@ class AppFixtures extends Fixture
                     <h3 class="language__subtitle">Creating PostgreSQL users</h3>
                     <p class="language-html">A default PostgresSQL installation always includes the <strong>postgres</strong> superuser. Initially, you must connect to PostgreSQL as the <strong>user</strong> until you create other users (which are also referred to as <em>roles</em>).</p>
                     <p class="language-html">To create a PostgreSQL user, follow these steps:</p>
-                    <p class="language-html"><span class="invisible">tab</span>1 - At the command line, type the following command as the server\’s root user:</p>
+                    <p class="language-html"><span class="invisible">tab</span>1 - At the command line, type the following command as the server’s root user:</p>
                     <code class="language-shell ml-2-rem">
                     <span class="sudo">su</span> <span class="flag">- </span>postgres
                     </code>
@@ -959,8 +928,6 @@ class AppFixtures extends Fixture
                     <code class="language-shell">
                     DocumentRoot /var/www/example.com/public_html
                     </code>
-                    <p class="language-html">When complete, our virtual host file should look like this:</p>
-                    <img class="img-fluid" src="https://slashflex.io/uploads/images/v-host-setup.webp" alt="">
                     <p class="language-html">At this point, save and close the file.</p>
                     <hr class="separator">
                     <h3 class="language__subtitle">Step Five — Enable the New Virtual Host Files</h3>
