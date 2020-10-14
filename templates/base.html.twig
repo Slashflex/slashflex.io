@@ -3,13 +3,13 @@
 {% block body %}{% endblock %}
         {% set discord = '/build/images/discord.webp' %}
         <!-- Discord Chat Window -->
-        <script src="https://cdn.jsdelivr.net/npm/@widgetbot/crate@3" async defer>
+        {# <script src="https://cdn.jsdelivr.net/npm/@widgetbot/crate@3" async defer>
             const crate = new Crate({
                 server: '519861839878815744',
                 channel: '519861839878815746',
                 glyph: ['{{discord}}', '4rem']
             });
-        </script>
+        </script> #}
         <!-- Swiper JS -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/5.3.8/js/swiper.min.js"></script>
         <!-- JQuery -->
@@ -24,16 +24,18 @@
         {{ encore_entry_script_tags('loader') }}
 
         <!-- Bootstrap tooltips -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+        {# <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script> #}
         <!-- Bootstrap core JavaScript -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+        {# <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script> #}
         <!-- GSAP core JavaScript -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.17.0/plugins/CSSPlugin.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.17.0/easing/EasePack.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.17.0/TweenLite.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TimelineLite.min.js"></script>
+        {# <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.17.0/plugins/CSSPlugin.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.17.0/easing/EasePack.min.js"></script> #}
+        {# <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.17.0/TweenLite.min.js"></script> #}
+        <script src="https://cdn.jsdelivr.net/npm/greensock@1.20.2/dist/TweenLite.min.js"></script>
+        {# <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TimelineLite.min.js"></script> #}
         <!-- TweenMax core JS -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.2/TweenMax.min.js"></script>
+        {# <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.2/TweenMax.min.js"></script> #}
+        <script src="https://cdn.jsdelivr.net/npm/greensock@1.20.2/dist/TweenMax.min.js"></script>
         <!-- AOS Core JS -->
         <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
         <script>
@@ -71,6 +73,9 @@
         {% endif %}
         {% if app.request.pathInfo == '/about-me' %}
             {{ encore_entry_script_tags('about') }}
+        {% endif %}
+        {% if app.request.pathInfo == '/contact' %}
+            {{ encore_entry_script_tags('contact') }}
         {% endif %}
         {% if 
             app.request.pathInfo == '/' or 

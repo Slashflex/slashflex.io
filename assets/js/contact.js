@@ -1,15 +1,8 @@
-const yellow = "#ffbe41";
-const black = "#27282c";
-
-$(".button--bubble").css("color", black);
-$(".button").css("background-color", yellow);
-
-$('.round').css('display', 'none');
 // Specific media queries
 if (window.innerHeight > window.innerWidth) {
 	// iphone 5/SE -> portrait
 	if (window.innerWidth <= 320) {
-		$(".round").css("top", "9%");
+		$(".round").css("top", "18%");
 		$(".wrapper__sites").css({
 			fontSize: "8rem",
 			marginBottom: "-14rem"
@@ -17,7 +10,7 @@ if (window.innerHeight > window.innerWidth) {
 	}
 	// iphone 6/7/8 -> portrait
 	if (window.innerWidth >= 321 && window.innerWidth <= 375) {
-		$(".round").css("top", "10.5%");
+		$(".round").css("top", "19.5%");
 		$(".wrapper__sites").css({
 			fontSize: "8.5rem",
 			marginBottom: "-13rem"
@@ -26,7 +19,7 @@ if (window.innerHeight > window.innerWidth) {
 	// iphone 6/7/8 Plus -> portrait
 	if (window.innerWidth >= 376 && window.innerWidth <= 414) {
 		$(".round").css({
-			top: "10.5%",
+			top: "20.5%",
 			marginLeft: "-13.5rem",
 			width: "28rem",
 			height: "28rem",
@@ -64,7 +57,7 @@ if (window.innerHeight > window.innerWidth) {
 	// iphone 5/SE -> landscape
 	if (window.innerWidth <= 568) {
 		$(".round").css({
-			top: "6.2%",
+			top: "17.2%",
 			marginLeft: "-12.8rem",
 			width: "25rem",
 			height: "25rem",
@@ -76,10 +69,10 @@ if (window.innerHeight > window.innerWidth) {
 	// iphone 6/7/8 -> landscape
 	if (window.innerWidth >= 569 && window.innerWidth <= 667) {
 		$(".round").css({
-			top: "7.3%",
-			marginLeft: "-11.5rem",
-			width: "23rem",
-			height: "23rem",
+			top: "14.3%",
+			marginLeft: "-13.5rem",
+			width: "28rem",
+			height: "28rem",
 		});
 		$(".wrapper__sites").css({
 			fontSize: "9rem"
@@ -88,10 +81,10 @@ if (window.innerHeight > window.innerWidth) {
 	// iphone 6/7/8 Plus -> landscape
 	if (window.innerWidth >= 668 && window.innerWidth <= 736) {
 		$(".round").css({
-			top: "7.5%",
-			marginLeft: "-12.5rem",
-			width: "25rem",
-			height: "25rem",
+			top: "14.5%",
+			marginLeft: "-13.5rem",
+			width: "28rem",
+			height: "28rem",
 		});
 		$(".wrapper__sites").css({
 			fontSize: "9rem"
@@ -99,6 +92,7 @@ if (window.innerHeight > window.innerWidth) {
 	}
 	// iphone X -> landscape
 	if (window.innerWidth >= 739 && window.innerWidth <= 812) {
+		console.log('X landscape');
 		$(".round").css({
 			top: "10%",
 			marginLeft: "-12.5rem",
@@ -112,10 +106,10 @@ if (window.innerHeight > window.innerWidth) {
 	// iphone XR -> landscape
 	if (window.innerWidth >= 738 && window.innerWidth <= 896) {
 		$(".round").css({
-			top: "8%",
-			marginLeft: "-12.5rem",
-			width: "25rem",
-			height: "25rem",
+			top: "13%",
+			marginLeft: "-13.5rem",
+			width: "28rem",
+			height: "28rem",
 		});
 		$(".wrapper__sites").css({
 			fontSize: "9rem"

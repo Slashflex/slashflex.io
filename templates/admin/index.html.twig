@@ -124,7 +124,7 @@
 										{% set author = article.users %}
 										<div class="col-sm-6 col-md-6 col-lg-3">
 											<div class="card card__bg m-3">
-												<img src="/uploads/images/{{ article.imageName }}" class="card-img-top" alt="{{ article.title }}">
+												<img src="/build/images/{{ article.imageName }}" class="card-img-top" alt="{{ article.title }}">
 												<div class="card-body">
 													<h5 class="card-title card__title">{{ article.title }}</h5>
 													<p class="card-text card__description">{{ article.introduction|u.truncate(100, ' ...') }}</p>

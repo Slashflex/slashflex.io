@@ -61,7 +61,16 @@
     }
   }
 }
+.model-book {
+  display: block;
+  margin: 0 auto;
+  width: 60%;
+  position: relative;
 
+  @include respond(tab-port) {
+    width: 100%;
+  }
+}
 .model-contact {
   display: block;
   margin: 0 auto;

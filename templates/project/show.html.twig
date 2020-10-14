@@ -6,172 +6,174 @@
 
 {% block body %}
 	<div id="main">
-        {% include "partials/_top_buttons.html.twig" %}
+		{% include "partials/_top_buttons.html.twig" %}
 
-        <!-- Fullscreen Navigation -->
-        {% include "partials/_fullscreen_nav.html.twig" %}
+		<!-- Fullscreen Navigation -->
+		{% include "partials/_fullscreen_nav.html.twig" %}
 
-        {% for message in app.flashes('success') %}
-            <div class="flash-notice">
-                {{ message }}
-            </div>
-        {% endfor %}
+		{% for message in app.flashes('success') %}
+			<div class="flash-notice">
+				{{ message }}
+			</div>
+		{% endfor %}
 
-        <header>
-            <div class="mockup">
-                <img
-                src="{{ asset('build/images/mockup.webp')}}" alt="Laptop mockup"/>
+		<header>
+			<div class="mockup">
+				<img
+				src="{{ asset('build/images/mockup.webp')}}" alt="Laptop mockup"/>
 
-                <!-- Swiper control arrows -->
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
+				<!-- Swiper control arrows -->
+				<div class="swiper-button-next"></div>
+				<div class="swiper-button-prev"></div>
 
-                <!-- Swiper -->
-                <div class="swiper-container">
-                    <div class="swiper-wrapper">
-                        <!-- Loads images from back-end -->
-                        {% for image in project.Attachments %}
-                            <div class="swiper-slide slide{{loop.index0}}" style="background-image: url(/uploads/images/{{ image.fileName }});
-                                                                background-repeat: no-repeat;
-                                                                background-size: cover;
-                                                                background-position: center"></div>
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
-        </header>
+				<!-- Swiper -->
+				<div class="swiper-container">
+					<div
+						class="swiper-wrapper">
+						<!-- Loads images from back-end -->
+						{% for image in project.Attachments %}
+							<div class="swiper-slide slide{{loop.index0}}" style="background-image: url(/uploads/images/{{ image.fileName }});
+								                                                                background-repeat: no-repeat;
+								                                                                background-size: cover;
+								                                                                background-position: center"></div>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+		</header>
 
-        <div class="container works__wrapper">
-            <!-- LightBox -->
-            {% for img in project.Attachments %}
-                <div class="lightbox{{loop.index0}}">
-                    <img src="/uploads/images/{{ img.fileName }}" alt="{{project.title}}" class="project__attachments">
-                </div>
-            {% endfor %}
+		<div
+			class="container works__wrapper">
+			<!-- LightBox -->
+			{% for img in project.Attachments %}
+				<div class="lightbox{{loop.index0}}">
+					<img src="/uploads/images/{{ img.fileName }}" alt="{{project.title}}" class="project__attachments">
+				</div>
+			{% endfor %}
 
-            <h1 class="text-center display-title">
-                {{ project.title|raw|capitalize }}
-            </h1>
+			<h1 class="text-center display-title">
+				{{ project.title|raw|capitalize }}
+			</h1>
 
-            <div class="my-5 display-content">
-                <div class="project__introduction">{{ project.introduction }}</div>
-                {{ project.content|raw }}
-                {# <div class="container">
-                    <div class="row">
-                        <div class="dev__icons mt-5 d-flex justify-content-center mx-auto">
-                            <a href="https://symfony.com/"><i class="devicon-symfony-original mr-5 dev__icons--i"></i></a>
-                            <a href="https://webpack.js.org/"><i class="devicon-webpack-plain mr-5 dev__icons--i"></i></a>
-                            <a href="https://sass-lang.com/"><i class="devicon-sass-original mr-5 dev__icons--i"></i></a>
-                            <a href="https://www.npmjs.com/"><i class="devicon-npm-original-wordmark dev__icons--i"></i></a>
-                        </div>
-                        <div class="dev__icons mt-5 d-flex justify-content-center mx-auto">
-                            <a href="https://www.apache.org/"><i class="devicon-apache-plain-wordmark mr-5 dev__icons--i"></i></a>
-                            <a href="https://getbootstrap.com/"><i class="devicon-bootstrap-plain mr-5 dev__icons--i"></i></a>
-                            <a href="https://www.postgresql.org/"><i class="devicon-postgresql-plain-wordmark mr-5 dev__icons--i"></i></a>
-                            <a href="https://www.doctrine-project.org/"><i class="devicon-doctrine-plain-wordmark dev__icons--i"></i></a>
-                        </div>
-                        <div class="dev__icons mt-5 d-flex justify-content-center mx-auto">
-                            <a href="https://git-scm.com/"><i class="devicon-git-plain mr-5 dev__icons--i"></i></a>
-                            <a href="https://www.php.net/"><i class="devicon-php-plain mr-5 dev__icons--i"></i></a>
-                            <a href="https://javascript.info/"><i class="devicon-javascript-plain mr-5 dev__icons--i"></i></a>
-                            <a href="https://ubuntu.com/"><i class="devicon-ubuntu-plain-wordmark dev__icons--i"></i></a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="d-flex justify-content-center works__links">
-                    <div class="goo-btn ml-4" style="margin-top: -1.4rem">
-                        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="goo">
-                            <defs>
-                                <filter id="goo">
-                                <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
-                                <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo" />
-                                <feComposite in="SourceGraphic" in2="goo"/>
-                                </filter>
-                            </defs>
-                        </svg>
+			<div class="my-5 display-content">
+				<div class="project__introduction">{{ project.introduction }}</div>
+				{{ project.content|raw }}
+				{# <div class="container">
+				                    <div class="row">
+				                        <div class="dev__icons mt-5 d-flex justify-content-center mx-auto">
+				                            <a href="https://symfony.com/"><i class="devicon-symfony-original mr-5 dev__icons--i"></i></a>
+				                            <a href="https://webpack.js.org/"><i class="devicon-webpack-plain mr-5 dev__icons--i"></i></a>
+				                            <a href="https://sass-lang.com/"><i class="devicon-sass-original mr-5 dev__icons--i"></i></a>
+				                            <a href="https://www.npmjs.com/"><i class="devicon-npm-original-wordmark dev__icons--i"></i></a>
+				                        </div>
+				                        <div class="dev__icons mt-5 d-flex justify-content-center mx-auto">
+				                            <a href="https://www.apache.org/"><i class="devicon-apache-plain-wordmark mr-5 dev__icons--i"></i></a>
+				                            <a href="https://getbootstrap.com/"><i class="devicon-bootstrap-plain mr-5 dev__icons--i"></i></a>
+				                            <a href="https://www.postgresql.org/"><i class="devicon-postgresql-plain-wordmark mr-5 dev__icons--i"></i></a>
+				                            <a href="https://www.doctrine-project.org/"><i class="devicon-doctrine-plain-wordmark dev__icons--i"></i></a>
+				                        </div>
+				                        <div class="dev__icons mt-5 d-flex justify-content-center mx-auto">
+				                            <a href="https://git-scm.com/"><i class="devicon-git-plain mr-5 dev__icons--i"></i></a>
+				                            <a href="https://www.php.net/"><i class="devicon-php-plain mr-5 dev__icons--i"></i></a>
+				                            <a href="https://javascript.info/"><i class="devicon-javascript-plain mr-5 dev__icons--i"></i></a>
+				                            <a href="https://ubuntu.com/"><i class="devicon-ubuntu-plain-wordmark dev__icons--i"></i></a>
+				                        </div>
+				                    </div>
+				                </div>
+				                
+				                <div class="d-flex justify-content-center works__links">
+				                    <div class="goo-btn ml-4" style="margin-top: -1.4rem">
+				                        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="goo">
+				                            <defs>
+				                                <filter id="goo">
+				                                <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+				                                <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo" />
+				                                <feComposite in="SourceGraphic" in2="goo"/>
+				                                </filter>
+				                            </defs>
+				                        </svg>
+				
+				                        <span class="button--bubble__container">
+				                            <a href="https://github.com/Slashflex/slashflex.io" class="button button--bubble">
+				                                Source code
+				                            </a>
+				                            <span class="button--bubble__effect-container">
+				                                <span class="circle top-left"></span>
+				                                <span class="circle top-left"></span>
+				                                <span class="circle top-left"></span>
+				
+				                                <span class="button effect-button"></span>
+				
+				                                <span class="circle bottom-right"></span>
+				                                <span class="circle bottom-right"></span>
+				                                <span class="circle bottom-right"></span>
+				                            </span>
+				                        </span>
+				                    </div>
+				
+				                    <div class="goo-btn ml-4" style="margin-top: -1.4rem">
+				                        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="goo">
+				                            <defs>
+				                                <filter id="goo">
+				                                <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+				                                <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo" />
+				                                <feComposite in="SourceGraphic" in2="goo"/>
+				                                </filter>
+				                            </defs>
+				                        </svg>
+				
+				                        <span class="button--bubble__container">
+				                            <a href="https://github.com/Slashflex/slashflex.io" class="button button--bubble">
+				                                Demo
+				                            </a>
+				                            <span class="button--bubble__effect-container">
+				                                <span class="circle top-left"></span>
+				                                <span class="circle top-left"></span>
+				                                <span class="circle top-left"></span>
+				
+				                                <span class="button effect-button"></span>
+				
+				                                <span class="circle bottom-right"></span>
+				                                <span class="circle bottom-right"></span>
+				                                <span class="circle bottom-right"></span>
+				                            </span>
+				                        </span>
+				                    </div>
+				                </div>
+				
+				                <div class="go-home text-center">
+				                    <a href="{{ path('works') }}" class="hero__home"><i class="fas fa-chevron-left"></i> Back</a>
+				                </div> #}
+			</div>
 
-                        <span class="button--bubble__container">
-                            <a href="https://github.com/Slashflex/slashflex.io" class="button button--bubble">
-                                Source code
-                            </a>
-                            <span class="button--bubble__effect-container">
-                                <span class="circle top-left"></span>
-                                <span class="circle top-left"></span>
-                                <span class="circle top-left"></span>
+			<div class="stack__text--1 text-center">
+				<div class="stack__text--projects" data-aos="fade-up">My Other</div>
+				<div class="stack__text--stack" data-aos="fade-up">Works</div>
+			</div>
 
-                                <span class="button effect-button"></span>
-
-                                <span class="circle bottom-right"></span>
-                                <span class="circle bottom-right"></span>
-                                <span class="circle bottom-right"></span>
-                            </span>
-                        </span>
-                    </div>
-
-                    <div class="goo-btn ml-4" style="margin-top: -1.4rem">
-                        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="goo">
-                            <defs>
-                                <filter id="goo">
-                                <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
-                                <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo" />
-                                <feComposite in="SourceGraphic" in2="goo"/>
-                                </filter>
-                            </defs>
-                        </svg>
-
-                        <span class="button--bubble__container">
-                            <a href="https://github.com/Slashflex/slashflex.io" class="button button--bubble">
-                                Demo
-                            </a>
-                            <span class="button--bubble__effect-container">
-                                <span class="circle top-left"></span>
-                                <span class="circle top-left"></span>
-                                <span class="circle top-left"></span>
-
-                                <span class="button effect-button"></span>
-
-                                <span class="circle bottom-right"></span>
-                                <span class="circle bottom-right"></span>
-                                <span class="circle bottom-right"></span>
-                            </span>
-                        </span>
-                    </div>
-                </div>
-
-                <div class="go-home text-center">
-                    <a href="{{ path('works') }}" class="hero__home"><i class="fas fa-chevron-left"></i> Back</a>
-                </div> #}
-            </div>
-
-            <div class="stack__text--1 text-center">
-                <div class="stack__text--projects" data-aos="fade-up">My Other</div>
-                <div class="stack__text--stack" data-aos="fade-up">Works</div>
-            </div>
-
-            <!-- Swiper -->
-            <div class="swiper-container-2">
-                <div class="swiper-wrapper">
-                    {% for img in projects %}
-                        {% if app.request.get('slug') != img.slug %}
-                            <div class="swiper-slide radius">
-                                <div class="picture">
-                                    <a href="{{ path('single_project', {'slug': img.slug})}}" class="picture__link">
-                                        <img class="img-fluid slide-{{ loop.index|first }}" src="/uploads/images/{{img.imageName}}" alt="{{img.title}}">
-                                        <div class="detail">
-                                            <h3>{{ img.title|capitalize }}</h3>
-                                            <span>{{ img.introduction|u.truncate(20, '...')|capitalize }}</span>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                        {% endif %}
-                    {% endfor %}
-                </div>
-                <div class="swiper-button-next next-btn"></div>
-                <div class="swiper-button-prev prev-btn"></div>
-            </div>
-        </div>
+			<!-- Swiper -->
+			<div class="swiper-container-2">
+				<div class="swiper-wrapper">
+					{% for img in projects %}
+						{% if app.request.get('slug') != img.slug %}
+							<div class="swiper-slide radius">
+								<div class="picture">
+									<a href="{{ path('single_project', {'slug': img.slug})}}" class="picture__link">
+										<img class="img-fluid slide-{{ loop.index|first }}" src="/uploads/images/{{img.imageName}}" alt="{{img.title}}">
+										<div class="detail">
+											<h3>{{ img.title|capitalize }}</h3>
+											<span>{{ img.introduction|u.truncate(20, '...')|capitalize }}</span>
+										</div>
+									</a>
+								</div>
+							</div>
+						{% endif %}
+					{% endfor %}
+				</div>
+				<div class="swiper-button-next next-btn"></div>
+				<div class="swiper-button-prev prev-btn"></div>
+			</div>
+		</div>
 	</div>
 
 	<!-- Footer -->

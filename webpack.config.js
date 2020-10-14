@@ -41,10 +41,11 @@ Encore
     .addEntry('upload', './assets/js/upload.js')
     .addEntry('fukc', './assets/js/fukc.js')
     .addEntry('dark-theme', './assets/js/dark-theme.js')
+    .addEntry('contact', './assets/js/contact.js')
     .addEntry('images-collection', './assets/js/images-collection.js')
 
     // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
-    // .splitEntryChunks()
+    .splitEntryChunks()
 
     // will require an extra script tag for runtime.js
     // but, you probably want this, unless you're building a single-page app
@@ -84,10 +85,10 @@ Encore
 
     // uncomment to get integrity="..." attributes on your script & link tags
     // requires WebpackEncoreBundle 1.4 or higher
-    //.enableIntegrityHashes(Encore.isProduction())
+    .enableIntegrityHashes(Encore.isProduction())
 
     // uncomment if you're having problems with a jQuery plugin
-    //.autoProvidejQuery()
+    // .autoProvidejQuery()
 
     // uncomment if you use API Platform Admin (composer req api-admin)
     //.enableReactPreset()

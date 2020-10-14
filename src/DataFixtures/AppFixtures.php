@@ -897,7 +897,7 @@ class AppFixtures extends Fixture
                     <span class="sudo">nano</span> /var/www/example.com/public_html/index.html
                     </code>
                     <p class="language-html">Within this file, create an HTML document that indicates the site it is connected to, like the following:</p>
-                    <img class="img-fluid" src="https://slashflex.io/uploads/images/index-html.webp" alt="html page">
+                    <img class="img-fluid" src="https://slashflex.io/build/images/index-html.webp" alt="html page">
                     <p class="language-html">Save and close the file (in nano, press <span class="highlight">CTRL</span> + <span class="highlight">X</span> then <span class="highlight">Y</span> then <span class="highlight">ENTER</span>) when you are finished.</p>
                     <hr class="separator">
                     <h3 class="language__subtitle">Step Four — Create New Virtual Host Files</h3>
@@ -913,7 +913,7 @@ class AppFixtures extends Fixture
                     <span class="sudo">sudo</span> nano /etc/apache2/sites-available/example.com.conf
                     </code>
                     <p class="language-html">With comments removed, the file will look similar to this:</p>
-                    <img class="img-fluid" src="https://slashflex.io/uploads/images/v-host.webp" alt="basic virtual host configuration">
+                    <img class="img-fluid" src="https://slashflex.io/build/images/v-host.webp" alt="basic virtual host configuration">
                     <p class="language-html">Within this file, we will customize the items for our first domain and add some additional directives. This virtual host section matches <em>any</em> requests that are made on port 80, the default HTTP port.</p>
                     <p class="language-html">First, we need to change the <strong>ServerAdmin</strong> directive to an email that the site administrator can receive emails through.</p>
                     <code class="language-shell">
@@ -972,7 +972,7 @@ class AppFixtures extends Fixture
                     http://example.com
                     </code>
                     <p class="language-html">You should see a page that looks like this:</p>
-                    <img class="img-fluid" src="https://slashflex.io/uploads/images/success-v-host.webp" alt="success page">
+                    <img class="img-fluid" src="https://slashflex.io/build/images/success-v-host.webp" alt="success page">
                     <p class="language-html">If this site work as expected, you’ve successfully configured a virtual host on a server.</p>
                     <p class="language-html">If you adjusted your home computer’s hosts file, you may want to delete the lines you added now that you verified that your configuration works. This will prevent your hosts file from being filled with entries that are no longer necessary.</p>
                     <p class="language-html">If you need to access this long term, consider adding a domain name for each site you need and <a class="in-bl" href="https://www.digitalocean.com/docs/networking/dns/">setting it up to point to your server</a>.</p>
@@ -1016,7 +1016,7 @@ class AppFixtures extends Fixture
                     <code class="language-shell">
                     <span class="sudo">echo</span><span class="flag"> $shell</span>
                     </code>
-                    <img src="https://slashflex.io/uploads/images/echo-shell.webp" class="img-fluid" alt="check current shell used">
+                    <img src="https://slashflex.io/build/images/echo-shell.webp" class="img-fluid" alt="check current shell used">
                     <p class="language-html">The Z shell <strong>zsh</strong> has been installed.</p>
                     <hr class="separator">
                     <h3 class="language__subtitle">Step 2 - Install and configure Oh-my-zsh framework</h3>
@@ -1027,7 +1027,7 @@ class AppFixtures extends Fixture
                     <span class="sudo">sudo</span> <span class="sudo">wget</span> https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh <span class="flag">-O -</span> | <span class="sudo">zsh</span>
                     </code>
                     <p class="language-html">The result/output should be similar to the one shown below.</p>
-                    <img src="https://slashflex.io/uploads/images/oh-my-zsh.webp" class="img-fluid" alt="oh my zsh">
+                    <img src="https://slashflex.io/build/images/oh-my-zsh.webp" class="img-fluid" alt="oh my zsh">
                     <p class="language-html">So, oh-my-zsh is installed in the home directory <strong>~/.oh-my-zsh</strong>.</p>
                     <p class="language-html">Next, we need to create a new configuration for zsh. As with the Bash shell, which has a configuration named <strong>.bashrc</strong>, for zsh, we need a <strong>.zshrc</strong> configuration file. It’s available in the oh-my-zsh templates directory.</p>
                     <p class="language-html">Copy the template <strong>.zshrc.zsh-template</strong> configuration file to the home directory <strong>.zshrc</strong> and apply the configuration by running the source command, as shown below.</p>
@@ -1036,7 +1036,7 @@ class AppFixtures extends Fixture
                     </code>
                     <p class="language-html">Oh-my-zsh is now installed on the system, and the Z shell has been configured for using the oh-my-zsh framework with default configuration.</p>
                     <p class="language-html">The following result is on Ubuntu on my machine with a zsh theme (agnoster).</p>
-                    <img src="https://slashflex.io/uploads/images/my-terminal.webp" class="img-fluid" alt="my oh my zsh terminal">
+                    <img src="https://slashflex.io/build/images/my-terminal.webp" class="img-fluid" alt="my oh my zsh terminal">
                     <hr class="separator">
                     <h3 class="language__subtitle">Step 3 - Change default themes</h3>
                     <p class="language-html">The default .zshrc configuration that’s provided by oh-my-zsh is using <strong>robbyrusell</strong> theme. In this step, we will edit the configuration and change the default theme.</p>
@@ -1046,7 +1046,7 @@ class AppFixtures extends Fixture
                     <code class="language-shell">
                     <span class="sudo">ls</span> <span class="flag">-a</span> ~/.oh-my-zsh/themes/
                     </code>
-                    <img src="https://slashflex.io/uploads/images/oh-my-zsh-themes.webp" class="img-fluid" alt="oh my zsh themes list">
+                    <img src="https://slashflex.io/build/images/oh-my-zsh-themes.webp" class="img-fluid" alt="oh my zsh themes list">
                     <p class="language-html">In order to change the default theme, we need to edit the .zshrc configuration file. Edit the configuration with the <a class="in-bl" href="https://www.howtoforge.com/vim-basics">vim</a> editor.</p>
                     <code class="language-shell">
                     <span class="sudo">vim</span> ~/.zshrc
@@ -1069,7 +1069,7 @@ class AppFixtures extends Fixture
                     <code class="language-shell">
                     <span class="sudo">ls</span> <span class="flag">-a</span> ~/.oh-my-zsh/plugins/
                     </code>
-                    <img src="https://slashflex.io/uploads/images/oh-my-zsh-plugins.webp" class="img-fluid" alt="oh my zsh plugins list">
+                    <img src="https://slashflex.io/build/images/oh-my-zsh-plugins.webp" class="img-fluid" alt="oh my zsh plugins list">
                     <p class="language-html">In this step, we will tweak zsh using the <strong>oh-my-zsh</strong> framework by enabling some plugins. In order to enable the plugins, we need to edit the .zshrc configuration file.</p>
                     <p class="language-html">Edit .zshrc configuration file.</p>
                     <code class="language-shell">
@@ -1326,7 +1326,7 @@ class AppFixtures extends Fixture
                 http://your_server_ip
                 </code>
                 <p class="language-html">You should see the default Ubuntu 20.04 Apache web page:</p>
-                <img class="w-50 img-fluid" src="https://slashflex.io/uploads/images/apache_default.webp" alt="apache default age">
+                <img class="w-50 img-fluid" src="https://slashflex.io/build/images/apache_default.webp" alt="apache default age">
                 <p class="language-html">This page indicates that Apache is working correctly. It also includes some basic information about important Apache files and directory locations.</p>
                 <hr class="separator">
                 <h3 class="language__subtitle">Step 4 - Managing the Apache Process</h3>
@@ -1373,14 +1373,14 @@ class AppFixtures extends Fixture
                 <span class="sudo">sudo</span> nano /var/www/your_domain/index.html
                 </code>
                 <p class="language-html">Inside, add the following sample HTML:</p>
-                <img class="img-fluid" src="https://slashflex.io/uploads/images/index-html.webp" alt="basic html page">
+                <img class="img-fluid" src="https://slashflex.io/build/images/index-html.webp" alt="basic html page">
                 <p class="language-html">Save and close the file when you are finished.</p>
                 <p class="language-html">In order for Apache to serve this content, it’s necessary to create a virtual host file with the correct directives. Instead of modifying the default configuration file located at <strong>/etc/apache2/sites-available/000-default.conf</strong> directly, let’s make a new one at <strong>/etc/apache2/sites-available/your_domain.conf</strong>:</p>
                 <code class="language-shell">
                 <span class="sudo">sudo</span> nano /etc/apache2/sites-available/your_domain.conf
                 </code>
                 <p class="language-html">Paste in the following configuration block, which is similar to the default, but updated for our new directory and domain name:</p>
-                <img class="img-fluid" src="https://slashflex.io/uploads/images/v-host.webp" alt="basic virtual host">
+                <img class="img-fluid" src="https://slashflex.io/build/images/v-host.webp" alt="basic virtual host">
                 <p class="language-html">Notice that we’ve updated the <strong>DocumentRoot</strong> to our new directory and <strong>ServerAdmin</strong> to an email that the <strong>your_domain</strong> site administrator can access. We’ve also added two directives: <strong>ServerName</strong>, which establishes the base domain that should match for this virtual host definition, and <strong>ServerAlias</strong>, which defines further names that should match as if they were the base name.</p>
                 <p class="language-html">Save and close the file when you are finished.</p>
                 <p class="language-html">Let’s enable the file with the <strong>a2ensite</strong> tool:</p>
@@ -1404,7 +1404,7 @@ class AppFixtures extends Fixture
                 <span class="sudo">sudo</span> systemctl restart apache2
                 </code>
                 <p class="language-html">Apache should now be serving your domain name. You can test this by navigating to <strong>http://your_domain</strong>, where you should see something like this:</p>
-                <img class="img-fluid" src="https://slashflex.io/uploads/images/success-v-host.webp" alt="virtual host successfully setup">
+                <img class="img-fluid" src="https://slashflex.io/build/images/success-v-host.webp" alt="virtual host successfully setup">
                 <hr class="separator">
                 <h3 class="language__subtitle">Step 6 - Getting Familiar with Important Apache Files and Directories</h3>
                 <p class="language-html">Now that you know how to manage the Apache service itself, you should take a few minutes to familiarize yourself with a few important directories and files.</p>
