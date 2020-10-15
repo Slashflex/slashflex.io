@@ -9,7 +9,9 @@ use App\Form\CommentType;
 use App\Repository\UserRepository;
 use App\Repository\ArticleRepository;
 use App\Repository\CommentRepository;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -36,12 +38,12 @@ class ArticleController extends AbstractController
 
     /**
      * Shows a single article
-     * 
+     *
      * @Route("/blog/post/{slug}", name="single_article")
      *
      * @param Article $article
      * @param Request $request
-     * @return void
+     * @return RedirectResponse|Response
      */
     public function show(Article $article, Request $request)
     {
@@ -81,10 +83,10 @@ class ArticleController extends AbstractController
 
     /**
      * Shows all blog's posts
-     * 
+     *
      * @Route("/blog", name="blog")
      *
-     * @return void
+     * @return Response
      */
     public function index()
     {
@@ -98,12 +100,12 @@ class ArticleController extends AbstractController
 
     /**
      * Create a new article
-     * 
+     *
      * @Route("/admin/blog/new-post", name="new_article")
      * @IsGranted("ROLE_ADMIN")
      *
      * @param Request $request
-     * @return void
+     * @return RedirectResponse|Response
      */
     public function newArticle(Request $request)
     {
@@ -141,13 +143,13 @@ class ArticleController extends AbstractController
 
     /**
      * Edit an article
-     * 
+     *
      * @Route("/admin/blog/post/{slug}/edit", name="edit_article")
      * @IsGranted("ROLE_ADMIN")
      *
      * @param Article $article
      * @param Request $request
-     * @return void
+     * @return RedirectResponse|Response
      */
     public function editArticle(Article $article, Request $request)
     {
@@ -158,8 +160,7 @@ class ArticleController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             // Retrieve updated slug on form submission
-            $title = $request->request->get('article')['title'];
-            $article->updateSlug($title);
+            $article->updateSlug();
 
             $manager->persist($article);
             $manager->flush();
@@ -183,12 +184,12 @@ class ArticleController extends AbstractController
 
     /**
      * Delete an article
-     * 
+     *
      * @Route("/admin/blog/post/{slug}/delete", name="delete_article")
      * @IsGranted("ROLE_ADMIN")
      *
      * @param Article $article
-     * @return void
+     * @return RedirectResponse
      */
     public function deleteArticle(Article $article)
     {

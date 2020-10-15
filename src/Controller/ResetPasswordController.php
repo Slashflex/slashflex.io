@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Repository\UserRepository;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mime\Address;
 use App\Form\ChangePasswordFormType;
 use App\Form\ResetPasswordRequestFormType;
@@ -43,6 +44,7 @@ class ResetPasswordController extends AbstractController
      * @param Request $request
      * @param MailerInterface $mailer
      * @return Response
+     * @throws TransportExceptionInterface
      */
     public function request(Request $request, MailerInterface $mailer): Response
     {
@@ -89,7 +91,7 @@ class ResetPasswordController extends AbstractController
      *
      * @param Request $request
      * @param UserPasswordEncoderInterface $passwordEncoder
-     * @param string $token
+     * @param string|null $token
      * @return Response
      */
     public function reset(Request $request, UserPasswordEncoderInterface $passwordEncoder, string $token = null): Response
@@ -158,6 +160,7 @@ class ResetPasswordController extends AbstractController
      * @param string $emailFormData
      * @param MailerInterface $mailer
      * @return RedirectResponse
+     * @throws TransportExceptionInterface
      */
     private function processSendingPasswordResetEmail(string $emailFormData, MailerInterface $mailer): RedirectResponse
     {

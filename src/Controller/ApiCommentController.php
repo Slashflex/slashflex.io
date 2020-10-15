@@ -3,9 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Comment;
-use App\Entity\User;
 use App\Repository\CommentRepository;
-use App\Repository\ReplyRepository;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
@@ -25,7 +24,7 @@ class ApiCommentController extends AbstractController
      * 
      * @Route("/api/comments", name="api_comment_index", methods={"GET"})
      *
-     * @return void
+     * @return JsonResponse
      */
     public function getComments()
     {
@@ -37,7 +36,7 @@ class ApiCommentController extends AbstractController
      *
      * @param Request $request
      * @param SerializerInterface $serializer
-     * @return void
+     * @return JsonResponse
      */
     public function store(Request $request, SerializerInterface $serializer)
     {

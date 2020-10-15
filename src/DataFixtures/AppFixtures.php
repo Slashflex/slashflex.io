@@ -72,9 +72,9 @@ class AppFixtures extends Fixture
         $article9 = new Article();
         $article10 = new Article();
         $user = "$" . "USER";
-        $zshPath = "$" . "ZSH_CUSTOM/plugins";
-        $zshCustom = "$" . "{ZSH_CUSTOM:-~/.oh-my-zsh/custom}";
-        $shell = "$" . "SHELL";
+//        $zshPath = "$" . "ZSH_CUSTOM/plugins";
+//        $zshCustom = "$" . "{ZSH_CUSTOM:-~/.oh-my-zsh/custom}";
+//        $shell = "$" . "SHELL";
         // How To Secure Apache with Let’s Encrypt on Ubuntu 20.04
         $content1 = <<<EOT
             <div class="article__content">

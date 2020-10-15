@@ -6,7 +6,9 @@ use App\Entity\Project;
 use App\Form\ProjectType;
 use App\Repository\UserRepository;
 use App\Repository\ProjectRepository;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -21,13 +23,14 @@ class ProjectController extends AbstractController
         $this->projectRepository = $projectRepository;
         $this->userRepository = $userRepository;
     }
+
     /**
      * Shows a single project
-     * 
+     *
      * @Route("/works/{slug}", name="single_project")
      *
      * @param Project $project
-     * @return void
+     * @return Response
      */
     public function show(Project $project)
     {
@@ -42,10 +45,10 @@ class ProjectController extends AbstractController
 
     /**
      * Shows all work
-     * 
+     *
      * @Route("/works", name="works")
      *
-     * @return void
+     * @return Response
      */
     public function index()
     {
@@ -59,12 +62,12 @@ class ProjectController extends AbstractController
 
     /**
      * Create a new project
-     * 
+     *
      * @Route("/admin/works/new", name="new_project")
      * @IsGranted("ROLE_ADMIN")
      *
      * @param Request $request
-     * @return void
+     * @return RedirectResponse|Response
      */
     public function newProject(Request $request)
     {
@@ -106,13 +109,13 @@ class ProjectController extends AbstractController
 
     /**
      * Edit a project
-     * 
+     *
      * @Route("/admin/works/{slug}/edit", name="edit_project")
      * @IsGranted("ROLE_ADMIN")
      *
      * @param Project $project
      * @param Request $request
-     * @return void
+     * @return RedirectResponse|Response
      */
     public function editProject(Project $project, Request $request)
     {
@@ -123,9 +126,7 @@ class ProjectController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             // Retrieve updated slug on form submission
-            $title = $request->request->get('project')['title'];
-
-            $project->updateSlug($title);
+            $project->updateSlug();
 
             foreach ($project->getAttachments() as $image) {
                 $image->setproject($project);
@@ -154,12 +155,12 @@ class ProjectController extends AbstractController
 
     /**
      * Delete a project
-     * 
+     *
      * @Route("/admin/works/{slug}/delete", name="delete_project")
      * @IsGranted("ROLE_ADMIN")
      *
      * @param Project $project
-     * @return void
+     * @return RedirectResponse
      */
     public function deleteProject(Project $project)
     {

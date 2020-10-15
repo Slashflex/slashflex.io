@@ -7,7 +7,10 @@ use App\Form\ContactType;
 use App\Repository\UserRepository;
 use App\Repository\ProjectRepository;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -26,7 +29,7 @@ class HomeController extends AbstractController
     /**
      * @Route("/", name="home")
      *
-     * @return void
+     * @return Response
      */
     public function index()
     {
@@ -41,10 +44,10 @@ class HomeController extends AbstractController
 
     /**
      * Page not found or access denied (non admin)
-     * 
+     *
      * @Route("/404", name="not_found")
      *
-     * @return void
+     * @return Response
      */
     public function notFound()
     {
@@ -58,7 +61,7 @@ class HomeController extends AbstractController
      * 
      * @Route("/500", name="internal_server_error")
      *
-     * @return void
+     * @return Response
      */
     public function internalServerError()
     {
@@ -80,10 +83,10 @@ class HomeController extends AbstractController
 
     /**
      * About path
-     * 
+     *
      * @Route("/about-me", name="about")
      *
-     * @return void
+     * @return Response
      */
     public function about()
     {
@@ -98,12 +101,13 @@ class HomeController extends AbstractController
 
     /**
      * Contact page
-     * 
+     *
      * @Route("/contact", name="contact")
      *
      * @param Request $request
      * @param MailerInterface $mailer
-     * @return void
+     * @return RedirectResponse|Response
+     * @throws TransportExceptionInterface
      */
     public function contact(Request $request, MailerInterface $mailer)
     {
@@ -156,10 +160,10 @@ class HomeController extends AbstractController
 
     /**
      * Terms of use path
-     * 
+     *
      * @Route("/terms-of-use", name="terms")
      *
-     * @return void
+     * @return Response
      */
     public function terms()
     {

@@ -6,6 +6,8 @@ use App\Entity\User;
 use App\Repository\UserRepository;
 use App\Repository\ArticleRepository;
 use App\Repository\ProjectRepository;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -52,7 +54,7 @@ class AdminController extends AbstractController
      * @Route("/admin/sign-in", name="admin_signin")
      *
      * @param AuthenticationUtils $authenticationUtils
-     * @return void
+     * @return Response
      */
     public function adminLogin(AuthenticationUtils $authenticationUtils)
     {
@@ -72,7 +74,7 @@ class AdminController extends AbstractController
      * @IsGranted("ROLE_ADMIN")
      *
      * @param User $user
-     * @return void
+     * @return RedirectResponse
      */
     public function deleteUser(User $user)
     {

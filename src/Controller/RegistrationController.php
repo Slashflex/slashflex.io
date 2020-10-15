@@ -9,6 +9,7 @@ use App\Form\RegistrationFormType;
 use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -28,14 +29,14 @@ class RegistrationController extends AbstractController
 
     /**
      * Register a new user and sends an email including a token inside a link
-     * 
+     *
      * @Route("/register", name="app_register")
      *
      * @param AuthenticationUtils $authenticationUtils
      * @param Request $request
      * @param UserPasswordEncoderInterface $passwordEncoder
-     * @param MailerService $mailerService
      * @return Response
+     * @throws TransportExceptionInterface
      */
     public function register(AuthenticationUtils $authenticationUtils, Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
@@ -99,10 +100,9 @@ class RegistrationController extends AbstractController
 
     /**
      * Confirm account once user has clicked on link received by email
-     * 
+     *
      * @Route("/account/confirm/{token}", name="confirm_account")
      * @param $token
-     * @param $login
      * @return Response
      */
     public function confirmAccount($token): Response
@@ -126,11 +126,12 @@ class RegistrationController extends AbstractController
 
     /**
      * Sends a new token to user's input email
-     * 
+     *
      * @Route("/send-confirmation-token", name="send_confirmation_token")
      *
      * @param Request $request
      * @return RedirectResponse
+     * @throws TransportExceptionInterface
      */
     public function sendConfirmationToken(Request $request): RedirectResponse
     {
@@ -140,7 +141,7 @@ class RegistrationController extends AbstractController
         $user = $this->userRepository->findOneBy(['email' => $email]);
 
         if ($user === null) {
-            $this->addFlash('error', 'utilisateur non trouvé');
+            $this->addFlash('error', 'User not found');
             return $this->redirectToRoute('resend_confirmation_token');
         }
 
@@ -161,7 +162,8 @@ class RegistrationController extends AbstractController
      *
      * @param AuthenticationUtils $authenticationUtils
      * @param Request $request
-     * @return void
+     * @return RedirectResponse|Response
+     * @throws TransportExceptionInterface
      */
     public function resendConfirmationToken(AuthenticationUtils $authenticationUtils, Request $request)
     {

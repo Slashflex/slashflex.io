@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Comment;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -11,12 +12,12 @@ class CommentController extends AbstractController
 {
     /**
      * Delete a given comment
-     * 
+     *
      * @Route("/comment/{id}/delete", name="delete_comment")
      *
      * @param Comment $comment
      * @param Request $request
-     * @return void
+     * @return RedirectResponse
      */
     public function delete(Comment $comment, Request $request)
     {

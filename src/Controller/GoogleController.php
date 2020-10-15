@@ -6,7 +6,7 @@ namespace App\Controller;
 use KnpU\OAuth2ClientBundle\Client\ClientRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Annotation\Route;
 
 class GoogleController extends AbstractController
@@ -16,7 +16,7 @@ class GoogleController extends AbstractController
      *
      * @Route("/connect/google", name="connect_google")
      * @param ClientRegistry $clientRegistry
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @return RedirectResponse
      */
     public function connectAction(ClientRegistry $clientRegistry)
     {
@@ -29,10 +29,9 @@ class GoogleController extends AbstractController
      * Facebook redirects to back here afterward
      *
      * @Route("/connect/google/check", name="connect_google_check")
-     * @param Request $request
-     * @return JsonResponse|\Symfony\Component\HttpFoundation\RedirectResponse
+     * @return JsonResponse|RedirectResponse
      */
-    public function connectCheckAction(Request $request)
+    public function connectCheckAction()
     {
         if (!$this->getUser()) {
             return new JsonResponse(array('status' => false, 'message' => "User not found!"));

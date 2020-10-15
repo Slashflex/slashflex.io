@@ -3,12 +3,16 @@
 namespace App\Entity;
 
 use Cocur\Slugify\Slugify;
+use DateTime;
+use DateTimeImmutable;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ArticleRepository;
 use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
@@ -89,51 +93,73 @@ class Article
     public function prePersist()
     {
         if (empty($this->createdAt)) {
-            $this->createdAt = new \DateTime();
+            $this->createdAt = new DateTime();
         }
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
+    /**
+     * @return DateTimeInterface|null
+     */
+    public function getCreatedAt(): ?DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    /**
+     * @param DateTimeInterface $createdAt
+     * @return $this
+     */
+    public function setCreatedAt(DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
 
         return $this;
     }
 
+    /**
+     * @return string
+     */
     public function getDate()
     {
         $date = $this->getCreatedAt();
 
-        $result = "{$date->format('\o\n l jS F Y')} at {$date->format('H:i')}";
-        return $result;
+        return "{$date->format('\o\n l jS F Y')} at {$date->format('H:i')}";
     }
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     * @var \DateTimeInterface
+     * @var DateTimeInterface
      */
     private $updatedAt;
 
+    /**
+     * Article constructor.
+     */
     public function __construct()
     {
         $this->comments = new ArrayCollection();
     }
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return string|null
+     */
     public function getTitle(): ?string
     {
         return $this->title;
     }
 
+    /**
+     * @param string $title
+     * @return $this
+     */
     public function setTitle(string $title): self
     {
         $this->title = $title;
@@ -141,11 +167,18 @@ class Article
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getIntroduction(): ?string
     {
         return $this->introduction;
     }
 
+    /**
+     * @param string $introduction
+     * @return $this
+     */
     public function setIntroduction(string $introduction): self
     {
         $this->introduction = $introduction;
@@ -153,11 +186,18 @@ class Article
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getContent(): ?string
     {
         return $this->content;
     }
 
+    /**
+     * @param string $content
+     * @return $this
+     */
     public function setContent(string $content): self
     {
         $this->content = $content;
@@ -176,6 +216,9 @@ class Article
         }
     }
 
+    /**
+     *
+     */
     public function updateSlug()
     {
         if (!empty($this->slug)) {
@@ -184,16 +227,26 @@ class Article
         }
     }
 
+    /**
+     * @return string|null
+     */
     public function getSlug(): ?string
     {
         return $this->slug;
     }
 
+    /**
+     * @return string|null
+     */
     public function __toString(): ?string
     {
         return $this->slug;
     }
 
+    /**
+     * @param string $slug
+     * @return $this
+     */
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
@@ -201,11 +254,18 @@ class Article
         return $this;
     }
 
+    /**
+     * @return User|null
+     */
     public function getUsers(): ?User
     {
         return $this->users;
     }
 
+    /**
+     * @param User|null $users
+     * @return $this
+     */
     public function setUsers(?User $users): self
     {
         $this->users = $users;
@@ -220,7 +280,7 @@ class Article
      * must be able to accept an instance of 'File' as the bundle will inject one here
      * during Doctrine hydration.
      *
-     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile|null $imageFile
+     * @param File|UploadedFile|null $imageFile
      */
     public function setImageFile(?File $imageFile = null): void
     {
@@ -229,20 +289,29 @@ class Article
         if (null !== $imageFile) {
             // It is required that at least one field changes if you are using doctrine
             // otherwise the event listeners won't be called and the file is lost
-            $this->updatedAt = new \DateTimeImmutable();
+            $this->updatedAt = new DateTimeImmutable();
         }
     }
 
+    /**
+     * @return File|null
+     */
     public function getImageFile(): ?File
     {
         return $this->imageFile;
     }
 
+    /**
+     * @param string|null $imageName
+     */
     public function setImageName(?string $imageName): void
     {
         $this->imageName = $imageName;
     }
 
+    /**
+     * @return string|null
+     */
     public function getImageName(): ?string
     {
         return $this->imageName;
@@ -256,6 +325,10 @@ class Article
         return $this->comments;
     }
 
+    /**
+     * @param Comment $comment
+     * @return $this
+     */
     public function addComment(Comment $comment): self
     {
         if (!$this->comments->contains($comment)) {
@@ -266,6 +339,10 @@ class Article
         return $this;
     }
 
+    /**
+     * @param Comment $comment
+     * @return $this
+     */
     public function removeComment(Comment $comment): self
     {
         if ($this->comments->contains($comment)) {

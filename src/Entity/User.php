@@ -2,20 +2,15 @@
 
 namespace App\Entity;
 
-use DateTime;
-use App\Entity\Role;
-use DateTimeInterface;
-use App\Entity\Article;
-use App\Entity\Comment;
-use App\Entity\Project;
 use Cocur\Slugify\Slugify;
+use DateTime;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
-use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -151,27 +146,41 @@ class User implements UserInterface
     public function prePersist()
     {
         if (empty($this->createdAt)) {
-            $this->createdAt = new \DateTime();
+            $this->createdAt = new DateTime();
         }
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
+    /**
+     * @return DateTimeInterface|null
+     */
+    public function getCreatedAt(): ?DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    /**
+     * @param DateTimeInterface $createdAt
+     * @return $this
+     */
+    public function setCreatedAt(DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
 
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
     public function getAvatar()
     {
         return $this->avatar;
     }
 
+    /**
+     * @param $avatar
+     * @return $this
+     */
     public function setAvatar($avatar)
     {
         $this->avatar = $avatar;
@@ -179,6 +188,9 @@ class User implements UserInterface
         return $this;
     }
 
+    /**
+     * User constructor.
+     */
     public function __construct()
     {
         $this->roleUser = new ArrayCollection();
@@ -189,21 +201,34 @@ class User implements UserInterface
         $this->replyToReplies = new ArrayCollection();
     }
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
         return ucfirst($this->firstname) . ' ' . ucfirst($this->lastname);
     }
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return string|null
+     */
     public function getEmail(): ?string
     {
         return $this->email;
     }
 
+    /**
+     * @param string $email
+     * @return $this
+     */
     public function setEmail(string $email): self
     {
         $this->email = $email;
@@ -234,6 +259,10 @@ class User implements UserInterface
         return $roles;
     }
 
+    /**
+     * @param array $roles
+     * @return $this
+     */
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
@@ -249,6 +278,10 @@ class User implements UserInterface
         return (bool) $this->tokenEnabled;
     }
 
+    /**
+     * @param bool $tokenEnabled
+     * @return $this
+     */
     public function setTokenEnabled(bool $tokenEnabled): self
     {
         $this->tokenEnabled = $tokenEnabled;
@@ -256,11 +289,18 @@ class User implements UserInterface
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getConfirmationToken(): ?string
     {
         return $this->confirmationToken;
     }
 
+    /**
+     * @param string|null $confirmationToken
+     * @return $this
+     */
     public function setConfirmationToken(?string $confirmationToken): self
     {
         $this->confirmationToken = $confirmationToken;
@@ -276,6 +316,10 @@ class User implements UserInterface
         return (string) $this->password;
     }
 
+    /**
+     * @param string $password
+     * @return $this
+     */
     public function setPassword(string $password): self
     {
         $this->password = $password;
@@ -300,11 +344,18 @@ class User implements UserInterface
         // $this->plainPassword = null;
     }
 
+    /**
+     * @return string|null
+     */
     public function getFirstname(): ?string
     {
         return $this->firstname;
     }
 
+    /**
+     * @param string $firstname
+     * @return $this
+     */
     public function setFirstname(string $firstname): self
     {
         $this->firstname = $firstname;
@@ -312,11 +363,18 @@ class User implements UserInterface
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getLastname(): ?string
     {
         return $this->lastname;
     }
 
+    /**
+     * @param string $lastname
+     * @return $this
+     */
     public function setLastname(string $lastname): self
     {
         $this->lastname = $lastname;
@@ -324,11 +382,18 @@ class User implements UserInterface
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getDescription(): ?string
     {
         return $this->description;
     }
 
+    /**
+     * @param string $description
+     * @return $this
+     */
     public function setDescription(string $description): self
     {
         $this->description = $description;
@@ -336,11 +401,18 @@ class User implements UserInterface
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getLogin(): ?string
     {
         return $this->login;
     }
 
+    /**
+     * @param string $login
+     * @return $this
+     */
     public function setLogin(string $login): self
     {
         $this->login = $login;
@@ -356,6 +428,10 @@ class User implements UserInterface
         return $this->roleUser;
     }
 
+    /**
+     * @param Role $roleUser
+     * @return $this
+     */
     public function addRoleUser(Role $roleUser): self
     {
         if (!$this->roleUser->contains($roleUser)) {
@@ -366,6 +442,10 @@ class User implements UserInterface
         return $this;
     }
 
+    /**
+     * @param Role $roleUser
+     * @return $this
+     */
     public function removeRoleUser(Role $roleUser): self
     {
         if ($this->roleUser->contains($roleUser)) {
@@ -387,6 +467,9 @@ class User implements UserInterface
         }
     }
 
+    /**
+     *
+     */
     public function updateSlug()
     {
         if (!empty($this->slug)) {
@@ -395,11 +478,18 @@ class User implements UserInterface
         }
     }
 
+    /**
+     * @return string|null
+     */
     public function getSlug(): ?string
     {
         return $this->slug;
     }
 
+    /**
+     * @param string $slug
+     * @return $this
+     */
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
@@ -415,6 +505,10 @@ class User implements UserInterface
         return $this->articles;
     }
 
+    /**
+     * @param Article $article
+     * @return $this
+     */
     public function addArticle(Article $article): self
     {
         if (!$this->articles->contains($article)) {
@@ -425,6 +519,10 @@ class User implements UserInterface
         return $this;
     }
 
+    /**
+     * @param Article $article
+     * @return $this
+     */
     public function removeArticle(Article $article): self
     {
         if ($this->articles->contains($article)) {
@@ -446,6 +544,10 @@ class User implements UserInterface
         return $this->projects;
     }
 
+    /**
+     * @param Project $project
+     * @return $this
+     */
     public function addProject(Project $project): self
     {
         if (!$this->projects->contains($project)) {
@@ -456,6 +558,10 @@ class User implements UserInterface
         return $this;
     }
 
+    /**
+     * @param Project $project
+     * @return $this
+     */
     public function removeProject(Project $project): self
     {
         if ($this->projects->contains($project)) {
@@ -477,6 +583,10 @@ class User implements UserInterface
         return $this->comments;
     }
 
+    /**
+     * @param Comment $comment
+     * @return $this
+     */
     public function addComment(Comment $comment): self
     {
         if (!$this->comments->contains($comment)) {
@@ -487,6 +597,10 @@ class User implements UserInterface
         return $this;
     }
 
+    /**
+     * @param Comment $comment
+     * @return $this
+     */
     public function removeComment(Comment $comment): self
     {
         if ($this->comments->contains($comment)) {
@@ -500,11 +614,13 @@ class User implements UserInterface
         return $this;
     }
 
+    /**
+     * @return string
+     */
     public function getDate()
     {
         $date = $this->getCreatedAt();
 
-        $result = "{$date->format('\o\n l jS F Y')} at {$date->format('H:i')}";
-        return $result;
+        return "{$date->format('\o\n l jS F Y')} at {$date->format('H:i')}";
     }
 }

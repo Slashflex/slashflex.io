@@ -50,7 +50,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
 
     /**
      * @param Request $request
-     * @return void
+     * @return bool
      */
     public function supports(Request $request)
     {
@@ -62,7 +62,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
      * Get user's credentials
      *
      * @param Request $request
-     * @return void
+     * @return array
      */
     public function getCredentials(Request $request)
     {
@@ -84,7 +84,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
      *
      * @param [type] $credentials
      * @param UserProviderInterface $userProvider
-     * @return void
+     * @return User
      */
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
@@ -104,12 +104,12 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
     }
 
     /**
-     * Verify user password and check if token is enabled or not 
+     * Verify user password and check if token is enabled or not
      * eg. if he has clicked on the confirmation link received by mail on sign up
      *
      * @param [type] $credentials
      * @param UserInterface $user
-     * @return void
+     * @return bool|RedirectResponse
      */
     public function checkCredentials($credentials, UserInterface $user)
     {
@@ -140,7 +140,8 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
      *
      * @param Request $request
      * @param TokenInterface $token
-     * @return void
+     * @param $providerKey
+     * @return RedirectResponse
      */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
@@ -154,7 +155,7 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
     /**
      * Generates user login route
      *
-     * @return void
+     * @return string
      */
     protected function getLoginUrl()
     {
