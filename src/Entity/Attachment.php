@@ -2,9 +2,9 @@
 
 namespace App\Entity;
 
-use App\Entity\Project;
+use DateTime;
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
-use App\Repository\AttachmentRepository;
 use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\Common\Collections\ArrayCollection;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
@@ -45,7 +45,7 @@ class Attachment
 
     /**
      * @ORM\Column(name="updated_at", type="datetime")
-     * @var \DateTime $updatedAt
+     * @var DateTime $updatedAt
      */
     private $updatedAt;
 
@@ -69,15 +69,15 @@ class Attachment
     }
 
     /**
-     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $file
+     * @param File|null $file
      *
-     * @return Documentation
+     * @return Attachment
      */
     public function setFile(File $file = null)
     {
         $this->file = $file;
         if ($file) {
-            $this->updatedAt = new \DateTimeImmutable();
+            $this->updatedAt = new DateTimeImmutable();
         }
         return $this;
     }
@@ -93,9 +93,9 @@ class Attachment
     /**
      * @param string $fileName
      *
-     * @return Documentation
+     * @return Attachment
      */
-    public function setFileName($fileName)
+    public function setFileName(string $fileName)
     {
         $this->fileName = $fileName;
 
@@ -113,11 +113,11 @@ class Attachment
     /**
      * Set updatedAt
      *
-     * @param \DateTime $updatedAt
+     * @param DateTime $updatedAt
      *
-     * @return Documentation
+     * @return Attachment
      */
-    public function setUpdatedAt($updatedAt)
+    public function setUpdatedAt(DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
 
@@ -127,7 +127,7 @@ class Attachment
     /**
      * Get updatedAt
      *
-     * @return \DateTime
+     * @return DateTime
      */
     public function getUpdatedAt()
     {
@@ -136,10 +136,8 @@ class Attachment
 
     /**
      * Set project
-     *
-     * @param \AppBundle\Entity\Project $project
-     *
-     * @return Documentation
+     * @param Project|null $project
+     * @return $this
      */
     public function setProject(Project $project = null)
     {
@@ -151,7 +149,7 @@ class Attachment
     /**
      * Get project
      *
-     * @return \AppBundle\Entity\Project
+     * @return mixed
      */
     public function getProject()
     {

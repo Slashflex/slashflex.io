@@ -2,13 +2,15 @@
 
 namespace App\Entity;
 
-use App\Entity\Attachment;
 use Cocur\Slugify\Slugify;
+use DateTime;
+use DateTimeImmutable;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
-use App\Repository\ProjectRepository;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
@@ -63,19 +65,26 @@ class Project
     public function prePersist()
     {
         if (empty($this->createdAt)) {
-            $this->createdAt = new \DateTime();
+            $this->createdAt = new DateTime();
         }
         if (empty($this->updatedAt)) {
-            $this->updatedAt = new \DateTime();
+            $this->updatedAt = new DateTime();
         }
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
+    /**
+     * @return DateTimeInterface|null
+     */
+    public function getCreatedAt(): ?DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    /**
+     * @param DateTimeInterface $createdAt
+     * @return $this
+     */
+    public function setCreatedAt(DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
 
@@ -101,7 +110,7 @@ class Project
     /**
      * @ORM\Column(type="datetime")
      *
-     * @var \DateTimeInterface|null
+     * @var DateTimeInterface|null
      */
     private $updatedAt;
 
@@ -110,6 +119,9 @@ class Project
      */
     private $users;
 
+    /**
+     * Project constructor.
+     */
     public function __construct()
     {
         $this->imageName = new ArrayCollection();
@@ -119,7 +131,7 @@ class Project
     /**
      * Add attachment
      *
-     * @param \AppBundle\Entity\Attachment $attachment
+     * @param Attachment $attachment
      *
      * @return Project
      */
@@ -134,7 +146,7 @@ class Project
     /**
      * Remove attachment
      *
-     * @param \AppBundle\Entity\Attachment $attachment
+     * @param Attachment $attachment
      */
     public function removeAttachment(Attachment $attachment)
     {
@@ -150,16 +162,26 @@ class Project
         return $this->attachments;
     }
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return string|null
+     */
     public function getTitle(): ?string
     {
         return $this->title;
     }
 
+    /**
+     * @param string $title
+     * @return $this
+     */
     public function setTitle(string $title): self
     {
         $this->title = $title;
@@ -167,11 +189,18 @@ class Project
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getIntroduction(): ?string
     {
         return $this->introduction;
     }
 
+    /**
+     * @param string $introduction
+     * @return $this
+     */
     public function setIntroduction(string $introduction): self
     {
         $this->introduction = $introduction;
@@ -179,11 +208,18 @@ class Project
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getContent(): ?string
     {
         return $this->content;
     }
 
+    /**
+     * @param string $content
+     * @return $this
+     */
     public function setContent(string $content): self
     {
         $this->content = $content;
@@ -201,6 +237,10 @@ class Project
             $this->slug = $slug->slugify($this->title);
         }
     }
+
+    /**
+     *
+     */
     public function updateSlug()
     {
         if (!empty($this->slug)) {
@@ -208,10 +248,19 @@ class Project
             $this->slug = $slug->slugify($this->title);
         }
     }
+
+    /**
+     * @return string|null
+     */
     public function getSlug(): ?string
     {
         return $this->slug;
     }
+
+    /**
+     * @param string $slug
+     * @return $this
+     */
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
@@ -219,16 +268,26 @@ class Project
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function __toString()
     {
         return $this->getTitle();
     }
 
+    /**
+     * @return User|null
+     */
     public function getUsers(): ?User
     {
         return $this->users;
     }
 
+    /**
+     * @param User|null $users
+     * @return $this
+     */
     public function setUsers(?User $users): self
     {
         $this->users = $users;
@@ -243,7 +302,7 @@ class Project
      * must be able to accept an instance of 'File' as the bundle will inject one here
      * during Doctrine hydration.
      *
-     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile|null $imageFile
+     * @param File|UploadedFile|null $imageFile
      */
     public function setImageFile(?File $imageFile = null): void
     {
@@ -252,30 +311,41 @@ class Project
         if (null !== $imageFile) {
             // It is required that at least one field changes if you are using doctrine
             // otherwise the event listeners won't be called and the file is lost
-            $this->updatedAt = new \DateTimeImmutable();
+            $this->updatedAt = new DateTimeImmutable();
         }
     }
 
+    /**
+     * @return File|null
+     */
     public function getImageFile(): ?File
     {
         return $this->imageFile;
     }
 
+    /**
+     * @param string|null $imageName
+     */
     public function setImageName(?string $imageName): void
     {
         $this->imageName = $imageName;
     }
 
+    /**
+     * @return string|null
+     */
     public function getImageName(): ?string
     {
         return $this->imageName;
     }
 
+    /**
+     * @return string
+     */
     public function getDate()
     {
         $date = $this->getCreatedAt();
 
-        $result = "{$date->format('\o\n l jS F Y')} at {$date->format('H:i')}";
-        return $result;
+        return "{$date->format('\o\n l jS F Y')} at {$date->format('H:i')}";
     }
 }

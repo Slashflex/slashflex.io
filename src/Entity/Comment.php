@@ -3,9 +3,7 @@
 namespace App\Entity;
 
 use DateTime;
-use App\Entity\User;
 use DateTimeInterface;
-use App\Entity\Article;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\CommentRepository;
 use ApiPlatform\Core\Annotation\ApiFilter;
@@ -86,27 +84,43 @@ class Comment
      */
     private $children;
 
+    /**
+     * Comment constructor.
+     */
     public function __construct()
     {
         $this->createdAt = new DateTime();
         $this->children = new ArrayCollection();
     }
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return string|null
+     */
     public function getContent(): ?string
     {
         return $this->content;
     }
 
+    /**
+     * @return mixed
+     */
     public function __toString()
     {
         return $this->content;
     }
 
+    /**
+     * @param string $content
+     * @return $this
+     */
     public function setContent(string $content): self
     {
         $this->content = $content;
@@ -114,11 +128,18 @@ class Comment
         return $this;
     }
 
+    /**
+     * @return Article|null
+     */
     public function getArticle(): ?Article
     {
         return $this->article;
     }
 
+    /**
+     * @param Article|null $article
+     * @return $this
+     */
     public function setArticle(?Article $article): self
     {
         $this->article = $article;
@@ -126,11 +147,18 @@ class Comment
         return $this;
     }
 
+    /**
+     * @return User|null
+     */
     public function getUsers(): ?User
     {
         return $this->users;
     }
 
+    /**
+     * @param User|null $users
+     * @return $this
+     */
     public function setUsers(?User $users): self
     {
         $this->users = $users;
@@ -145,10 +173,13 @@ class Comment
     public function prePersist()
     {
         if (empty($this->createdAt)) {
-            $this->createdAt = new \DateTime();
+            $this->createdAt = new DateTime();
         }
     }
 
+    /**
+     * @return string
+     */
     public function getDate()
     {
         $date = $this->getCreatedAt();
@@ -157,23 +188,37 @@ class Comment
         return $result;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
+    /**
+     * @return DateTimeInterface|null
+     */
+    public function getCreatedAt(): ?DateTimeInterface
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    /**
+     * @param DateTimeInterface $createdAt
+     * @return $this
+     */
+    public function setCreatedAt(DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
 
         return $this;
     }
 
+    /**
+     * @return $this|null
+     */
     public function getParent(): ?self
     {
         return $this->parent;
     }
 
+    /**
+     * @param Comment|null $parent
+     * @return $this
+     */
     public function setParent(?self $parent): self
     {
         $this->parent = $parent;
@@ -189,6 +234,10 @@ class Comment
         return $this->children;
     }
 
+    /**
+     * @param Comment $child
+     * @return $this
+     */
     public function addParentChild(self $child): self
     {
         if (!$this->children->contains($child)) {
@@ -199,6 +248,10 @@ class Comment
         return $this;
     }
 
+    /**
+     * @param Comment $child
+     * @return $this
+     */
     public function removeChild(self $child): self
     {
         if ($this->children->contains($child)) {

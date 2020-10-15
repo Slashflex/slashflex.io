@@ -83,7 +83,7 @@ class RoutesTest extends WebTestCase
         $userEmail = 'pro.davidsaoud@gmail.com';
 
         $client = static::createClient();
-        $crawler = $client->request('GET', 'http://slashflex.io.test/login');
+        $crawler = $client->request('GET', 'https://slashflex.io/login');
 
         $form = $crawler->selectButton('Login')->form();
         $form['_username'] = $userEmail;
@@ -100,7 +100,7 @@ class RoutesTest extends WebTestCase
         $adminEmail = 'pro.davidsaoud@gmail.com';
 
         $client = static::createClient();
-        $crawler = $client->request('GET', 'http://slashflex.io.test/admin/sign-in');
+        $crawler = $client->request('GET', 'https://slashflex.io/admin/sign-in');
 
         $form = $crawler->selectButton('Login')->form();
         $form['_username'] = $adminEmail;
@@ -120,7 +120,7 @@ class RoutesTest extends WebTestCase
         $userEmail = 'supraderp@gmail.com';
 
         $client = static::createClient();
-        $crawler = $client->request('GET', 'http://slashflex.io.test/admin/sign-in');
+        $crawler = $client->request('GET', 'https://slashflex.io/admin/sign-in');
 
         $form = $crawler->selectButton('Login')->form();
         $form['_username'] = $userEmail;

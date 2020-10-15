@@ -21,12 +21,12 @@ class PDFController extends AbstractController
 
     /**
      * Generates a pdf document out of a post
-     * 
+     *
      * @Route("/blog/post/{slug}/pdf", name="article_to_pdf")
      *
      * @param Pdf $snappy
      * @param Article $article
-     * @return void
+     * @return Response
      */
     public function indexAction(Pdf $snappy, Article $article)
     {
@@ -50,11 +50,11 @@ class PDFController extends AbstractController
 
     /**
      * Generates a pdf document out of an html page (resume)
-     * 
+     *
      * @Route("/about-me/resume/pdf", name="resume_to_pdf")
      *
      * @param Pdf $snappy
-     * @return void
+     * @return Response
      */
     public function resumeToPdf(Pdf $snappy)
     {
@@ -76,10 +76,10 @@ class PDFController extends AbstractController
 
     /**
      * Generates a pdf document out of an post
-     * 
+     *
      * @Route("/about-me/resume", name="show_resume")
      *
-     * @return void
+     * @return Response
      */
     public function showResume()
     {
@@ -90,11 +90,11 @@ class PDFController extends AbstractController
 
     /**
      * Generates a pdf document out of an html page (resume)
-     * 
+     *
      * @Route("/about-me/resume-fr/pdf", name="resume_to_pdf_fr")
      *
      * @param Pdf $snappy
-     * @return void
+     * @return Response
      */
     public function resumeToPdfFr(Pdf $snappy)
     {
@@ -116,10 +116,10 @@ class PDFController extends AbstractController
 
     /**
      * Generates a pdf document out of an post
-     * 
+     *
      * @Route("/about-me/resume-fr", name="show_resume_fr")
      *
-     * @return void
+     * @return Response
      */
     public function showResumeFr()
     {

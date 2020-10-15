@@ -114,9 +114,10 @@ class UserController extends AbstractController
 
     /**
      * User edit form
-     * 
+     *
      * @Route("/me/{slug}/edit", name="edit_me")
      *
+     * @param AuthenticationUtils $authenticationUtils
      * @param User $user
      * @param Request $request
      * @param SluggerInterface $slugger

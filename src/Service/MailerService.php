@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,11 +19,13 @@ class MailerService extends AbstractController
     {
         $this->mailer = $mailer;
     }
+
     /**
      * @param $token
      * @param $login
      * @param $template
      * @param $to
+     * @throws TransportExceptionInterface
      */
     public function sendToken($token, $to, $login, $template)
     {
