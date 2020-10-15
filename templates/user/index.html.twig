@@ -31,7 +31,7 @@
                 {% else %}
                     <img src="/uploads/avatars/{{ user.avatar }}" alt="{{ user.__toString }}'s avatar" class="avatar__image">
                 {% endif %}
-                <p class="project__introduction">Email : {{ user.email }}</br>Your account was created {{ user.getDate }}</p>
+                <p class="project__introduction">Email : {{ user.email }}<br>Your account was created {{ user.getDate }}</p>
             </div>
             
             <a href="{{ path('edit_me', {'slug': user.slug}) }}" class="button__login">Edit</a>

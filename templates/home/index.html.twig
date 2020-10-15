@@ -53,6 +53,23 @@
 
 {% block javascripts %}
 	<script>
-	  (function(){for(let i=1;i<={{projects|length}};i++){var img=$(`.slide${[i]}`);img.css('background-image',function(){var bg=('url(/uploads/images'+$(this).data('background')+')');return bg});img.css('background-size',function(){var cover='cover';return cover});img.css('background-position',function(){var position='center';return position});img.css('background-repeat',function(){var position='no-repeat';return position});img.css('width',function(){var position='348px';return position})}})()
+	  (function(){for(let i=1;i<={{projects|length}};i++){
+		  const img = $(`.slide${[i]}`);img.css('background-image',function(){
+			  return ('url(/uploads/images' + $(this).data('background') + ')')
+		  });
+		  img.css('background-size', function () {
+			  return 'cover'
+		  });
+		  img.css('background-position', function () {
+			  return 'center'
+		  });
+		  img.css('background-repeat', function () {
+			  return 'no-repeat'
+		  });
+		  img.css('width', function () {
+			  return '348px'
+		  })
+	  }
+	  })()
 	</script>
 {% endblock %}
