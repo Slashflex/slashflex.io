@@ -4,9 +4,7 @@
     display: none;
   }
   .info-circle-section {
-    background: #fff;
-    background-repeat: no-repeat;
-    background-position: bottom;
+    background: #fff no-repeat bottom;
     margin-top: 3rem;
     padding-top: 3.5rem;
     @include respond(tab-port) {
@@ -17,10 +15,7 @@
     display: block;
     border-radius: 50%;
     position: relative;
-    width: 80%;
-    height: 0;
     padding-bottom: 80%;
-    margin: 7rem auto;
     border: 2px solid var(--plain);
     box-sizing: content-box;
     margin: 18rem auto;
@@ -40,8 +35,6 @@
       margin: auto;
       border: 2px dashed var(--dashed);
       border-radius: 50%;
-      width: 45rem;
-      height: 45rem;
       opacity: 0.6;
       width: 64rem;
       height: 64rem;
@@ -60,7 +53,7 @@
     z-index: 1;
     margin: auto;
     color: #fff;
-    box-shadow: 0px 1.1rem 1.8rem 0 rgba($color-secondary, 0.05);
+    box-shadow: 0 1.1rem 1.8rem 0 rgba($color-secondary, 0.05);
     background-color: var(--about-circle);
     border-radius: 50%;
     transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -81,7 +74,7 @@
       }
     }
     &:hover {
-      box-shadow: 0px 1.1rem 1.3rem 0 var(--text-alpha);
+      box-shadow: 0 1.1rem 1.3rem 0 var(--text-alpha);
       background-color: $color-tertiary;
       width: 6.5rem;
       height: 6.5rem;
@@ -91,7 +84,7 @@
     }
   }
   .info-sub-circle.active {
-    box-shadow: 0px 1.1rem 1.3rem 0 var(--text-alpha);
+    box-shadow: 0 1.1rem 1.3rem 0 var(--text-alpha);
     background-color: $color-tertiary;
     i {
       color: $color-secondary;
@@ -133,8 +126,6 @@
       letter-spacing: 0.32rem;
       color: var(--color-headings);
       line-height: normal;
-      margin-bottom: 0;
-      font-size: 1.4rem;
       text-align: center;
       font-size: 1.6rem;
       margin-bottom: 4rem;
@@ -150,7 +141,6 @@
       letter-spacing: 0.3px;
       line-height: 1.88;
       text-align: center;
-      font-size: 1.2rem;
       font-size: 1.6rem;
     }
   }
@@ -158,9 +148,6 @@
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
-    -webkit-animation: focus-in-contract 0.4s
-      cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-    animation: focus-in-contract 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
     -webkit-animation: fade-in 1.2s cubic-bezier(0.39, 0.575, 0.565, 1) both;
     animation: fade-in 1.2s cubic-bezier(0.39, 0.575, 0.565, 1) both;
   }
@@ -208,7 +195,7 @@
     }
     .info-circle-content-item {
       span.title {
-        margin-bottom: 0rem;
+        margin-bottom: 0;
         line-height: 1;
       }
       p.description {
@@ -237,7 +224,7 @@
     }
     .info-circle-content-item {
       span.title {
-        margin-bottom: 0rem;
+        margin-bottom: 0;
         line-height: 1;
       }
       p.description {
@@ -291,10 +278,10 @@
   }
 
   &__title {
-    font-family: Montserrat,Sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 2.2rem;
     font-weight: 800;
-    margin-bottom: 0rem;
+    margin-bottom: 0;
     color: var(--links);
     align-self: center;
   }
@@ -313,7 +300,6 @@
     border-radius: 50%;
     width: 5rem;
     height: 5rem;
-    border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;

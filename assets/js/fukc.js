@@ -7,9 +7,9 @@ $("#wrapper").mousemove((e) => {
 });
 
 const parallaxIt = (e, target, movement) => {
-  var wrapper = $("#wrapper");
-  var relX = e.pageX - wrapper.offset().left;
-  var relY = e.pageY - wrapper.offset().top;
+  const wrapper = $("#wrapper");
+  const relX = e.pageX - wrapper.offset().left;
+  const relY = e.pageY - wrapper.offset().top;
 
   TweenMax.to(target, 1, {
     x: ((relX - wrapper.width() / 2) / wrapper.width()) * movement,

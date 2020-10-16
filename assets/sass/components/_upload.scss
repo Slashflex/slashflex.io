@@ -2,7 +2,6 @@
   background: $color-tertiary;
   text-align: center;
   width: 16rem;
-  display: inline-block;
   transition: 0.2s;
   position: relative;
   overflow: hidden;
@@ -21,7 +20,6 @@
   white-space: nowrap;
   input {
     position: absolute;
-    width: 100%;
     left: 0;
     top: 0;
     width: 100%;

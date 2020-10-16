@@ -1,11 +1,11 @@
-var btnUpload = $("#avatar_upload_avatar");
-var btnUploadImageFile = $("#project_imageFile_file");
-var btnOuter = $(".button_outer");
+const btnUpload = $("#avatar_upload_avatar");
+const btnUploadImageFile = $("#project_imageFile_file");
+const btnOuter = $(".button_outer");
 
 btnUpload.on("change", function (e) {
-  var ext = btnUpload.val().split(".").pop().toLowerCase();
+  const ext = btnUpload.val().split(".").pop().toLowerCase();
 
-  if ($.inArray(ext, ["gif", "webp", "png", "jpg", "jpeg"]) == -1) {
+  if ($.inArray(ext, ["gif", "webp", "png", "jpg", "jpeg"]) === -1) {
     $(".error_msg").text("Please upload a valid document (jpg, jpeg, gif, webp or png)");
   } else {
     $(".error_msg").text("");
@@ -15,19 +15,19 @@ btnUpload.on("change", function (e) {
       btnOuter.addClass("file_uploaded");
     }, 3000);
 
-    var uploadedFile = URL.createObjectURL(e.target.files[0]);
+    const uploadedFile = URL.createObjectURL(e.target.files[0]);
     setTimeout(function () {
       $("#uploaded_view")
-        .append('<img src="' + uploadedFile + '" />')
+        .append('<img src="' + uploadedFile + '"  alt="uploaded image"/>')
         .addClass("show");
     }, 3500);
   }
 });
 
 btnUploadImageFile.on("change", function (e) {
-  var ext = btnUploadImageFile.val().split(".").pop().toLowerCase();
+  const ext = btnUploadImageFile.val().split(".").pop().toLowerCase();
 
-  if ($.inArray(ext, ["gif", "webp", "png", "jpg", "jpeg"]) == -1) {
+  if ($.inArray(ext, ["gif", "webp", "png", "jpg", "jpeg"]) === -1) {
     $(".error_msg").text("Please upload a valid document (jpg, jpeg, gif, webp or png)");
   } else {
     $(".error_msg").text("");
@@ -37,16 +37,16 @@ btnUploadImageFile.on("change", function (e) {
       btnOuter.addClass("file_uploaded");
     }, 3000);
 
-    var uploadedFile = URL.createObjectURL(e.target.files[0]);
+    const uploadedFile = URL.createObjectURL(e.target.files[0]);
     setTimeout(function () {
       $("#uploaded_view")
-        .append('<img src="' + uploadedFile + '" />')
+        .append('<img src="' + uploadedFile + '"  alt="uploaded image"/>')
         .addClass("show");
     }, 3500);
   }
 });
 
-$(".file_remove").on("click", function (e) {
+$(".file_remove").on("click", function () {
   $("#uploaded_view").removeClass("show");
   $("#uploaded_view").find("img").remove();
   btnOuter.removeClass("file_uploading");

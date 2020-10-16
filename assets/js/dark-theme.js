@@ -22,14 +22,14 @@ const themeSwitch = document.getElementById("switch");
 if (themeSwitch) {
   initTheme(); // on page load, if user has already selected a specific theme -> apply it
 
-  themeSwitch.addEventListener("change", function (event) {
+  themeSwitch.addEventListener("change", function () {
     resetTheme(); // update color theme
   });
 
   function initTheme() {
-    var darkThemeSelected =
-      localStorage.getItem("switch") !== null &&
-      localStorage.getItem("switch") === "dark";
+    const darkThemeSelected =
+        localStorage.getItem("switch") !== null &&
+        localStorage.getItem("switch") === "dark";
     // update checkbox
     themeSwitch.checked = darkThemeSelected;
     // update body data-theme attribute

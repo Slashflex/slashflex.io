@@ -21,7 +21,7 @@
     }
 
     @include respond(phone-small) {
-      margin-bottom: 0rem;
+      margin-bottom: 0;
     }
 
     &--recent {
@@ -47,7 +47,7 @@
     &--works {
       font-size: 4.5rem;
       font-weight: 800;
-      font-family: "Montserrat", Sans-serif;
+      font-family: "Montserrat", sans-serif;
       margin-bottom: -7.2rem;
       position: relative;
       color: var(--links);
@@ -85,12 +85,12 @@
   margin-left: 10vw;
 
   @include respond(phone) {
-    margin-left: 0px;
+    margin-left: 0;
     margin-top: 12rem;
     background-color: $color-white;
   }
   @include respond(phone-small) {
-    margin-left: 0px;
+    margin-left: 0;
     margin-top: 21rem;
     background-color: $color-white;
   }
@@ -106,12 +106,12 @@
   margin-right: 10vw;
 
   @include respond(phone) {
-    margin-right: 0px;
+    margin-right: 0;
     margin-top: 12rem;
     background-color: $color-white;
   }
   @include respond(phone-small) {
-    margin-right: 0px;
+    margin-right: 0;
     margin-top: 21rem;
     background-color: $color-white;
   }

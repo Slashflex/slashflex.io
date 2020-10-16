@@ -110,7 +110,6 @@
 
   &:before {
     position: absolute;
-    top: 2.5rem;
     right: 2rem;
     background: var(--links);
     width: 3rem;
@@ -119,13 +118,12 @@
     cursor: pointer;
     z-index: 1;
     content: " ";
-    top: 10px;
+    top: 1rem;
     left: 0;
   }
 
   &:after {
     position: absolute;
-    top: 2.5rem;
     right: 2rem;
     background: var(--links);
     width: 3rem;
@@ -134,7 +132,7 @@
     cursor: pointer;
     z-index: 1;
     content: " ";
-    top: 20px;
+    top: 2rem;
     left: 0;
   }
 }

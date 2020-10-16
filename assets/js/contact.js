@@ -30,7 +30,7 @@ if (window.innerHeight > window.innerWidth) {
 		});
 	}
 	// iphone X -> portrait
-	if (window.innerWidth == 375 && window.innerHeight == 812) {
+	if (window.innerWidth === 375 && window.innerHeight === 812) {
 		$(".round").css({
 			top: "12.2%",
 			marginLeft: "-13.8rem",
@@ -42,7 +42,7 @@ if (window.innerHeight > window.innerWidth) {
 		});
 	}
 	// iphone XR -> portrait
-	if (window.innerWidth == 414 && window.innerHeight == 896) {
+	if (window.innerWidth === 414 && window.innerHeight === 896) {
 		$(".round").css({
 			top: "12.8%",
 			marginLeft: "-13.8rem",
@@ -92,7 +92,6 @@ if (window.innerHeight > window.innerWidth) {
 	}
 	// iphone X -> landscape
 	if (window.innerWidth >= 739 && window.innerWidth <= 812) {
-		console.log('X landscape');
 		$(".round").css({
 			top: "10%",
 			marginLeft: "-12.5rem",

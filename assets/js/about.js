@@ -25,7 +25,7 @@ if (window.innerHeight > window.innerWidth) {
 		});
 	}
 	// iphone X -> portrait
-	if (window.innerWidth == 375 && window.innerHeight == 812) {
+	if (window.innerWidth === 375 && window.innerHeight === 812) {
 		$(".round").css({
 			top: "12.2%",
 			marginLeft: "-13.8rem",
@@ -37,7 +37,7 @@ if (window.innerHeight > window.innerWidth) {
 		});
 	}
 	// iphone XR -> portrait
-	if (window.innerWidth == 414 && window.innerHeight == 896) {
+	if (window.innerWidth === 414 && window.innerHeight === 896) {
 		$(".round").css({
 			top: "15.8%",
 			marginLeft: "-13.8rem",
@@ -98,7 +98,7 @@ if (window.innerHeight > window.innerWidth) {
 		});
 	}
 	// iphone XR -> landscape
-	if (window.innerWidth == 896 && window.innerHeight == 414) {
+	if (window.innerWidth === 896 && window.innerHeight === 414) {
 		$(".round").css({
 			top: "10.5%",
 			marginLeft: "-13.8rem",
@@ -115,39 +115,39 @@ if (window.innerHeight > window.innerWidth) {
 jQuery(function ($) {
 	"use strict";
 	// Active class toggle methods
-	var removeClasses = function removeClasses(nodes, value) {
+	const removeClasses = function removeClasses(nodes, value) {
 		if (nodes)
 			return nodes.forEach(function (node) {
 				return node.classList.contains(value) && node.classList.remove(value);
 			});
 		else return false;
 	};
-	var addClass = function addClass(nodes, index, value) {
+	const addClass = function addClass(nodes, index, value) {
 		return nodes ? nodes[index].classList.add(value) : 0;
 	};
-	var App = {
+	const App = {
 
 		initServicesCircle: function initServicesCircle() {
 			// Info circle
-			var circles = document.querySelectorAll(".info-sub-circle");
-			var circleContents = document.querySelectorAll(".info-circle-content-item");
-			var parent = document.querySelector(".info-circle");
+			const circles = document.querySelectorAll(".info-sub-circle");
+			const circleContents = document.querySelectorAll(".info-circle-content-item");
+			let parent = document.querySelector(".info-circle");
 			if (parent) {
-				var spreadCircles = function spreadCircles() {
+				const spreadCircles = function spreadCircles() {
 					// Spread the sub-circles around the circle
 					parent = document
 						.querySelector(".info-circle")
 						.getBoundingClientRect();
-					var centerX = 0;
-					var centerY = 0;
+					const centerX = 0;
+					const centerY = 0;
 					Array.from(circles)
 						.reverse()
 						.forEach(function (circle, index) {
-							var angle = index * (360 / circles.length);
-							var x =
+							const angle = index * (360 / circles.length);
+							const x =
 								centerX +
 								(parent.width / 2) * Math.cos((angle * Math.PI) / 180);
-							var y =
+							const y =
 								centerY +
 								(parent.height / 2) * Math.sin((angle * Math.PI) / 180);
 							circle.style.transform =
@@ -159,16 +159,16 @@ jQuery(function ($) {
 						});
 				};
 				spreadCircles();
-				var resizeTimer = void 0;
+				let resizeTimer = void 0;
 				window.addEventListener("resize", function () {
 					clearTimeout(resizeTimer);
 					resizeTimer = setTimeout(function () {
 						spreadCircles();
 					}, 50);
 				});
-				circles.forEach(function (circle, index) {
-					var circlesToggleFnc = function circlesToggleFnc() {
-						var index = circle.dataset.circleIndex;
+				circles.forEach(function (circle) {
+					const circlesToggleFnc = function circlesToggleFnc() {
+						const index = circle.dataset.circleIndex;
 						if (!circle.classList.contains("active")) {
 							removeClasses(circles, "active");
 							removeClasses(circleContents, "active");

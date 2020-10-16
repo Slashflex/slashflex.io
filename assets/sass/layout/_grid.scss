@@ -14,11 +14,9 @@
 
   @include clearfix;
 
-  // select all elements with attributes starting with "col-"
+  // select all elements with attributes starting with "card-"
   [class^="card-"] {
     float: left;
-    margin-left: $gutter-horizontal-sm;
-    margin-right: $gutter-horizontal-sm;
     margin: 2rem;
 
     @include respond(tab-port) {

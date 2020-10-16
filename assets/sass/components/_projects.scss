@@ -157,7 +157,7 @@ div[class^="key"] {
   position: absolute;
   font-size: 12rem;
   color: $color-tertiary;
-  font-family: "Montserrat", Sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 800;
   animation: movingH1 20s infinite;
   z-index: 2;
@@ -191,7 +191,7 @@ div[class^="key"] {
   }
 
   &__title {
-    font-family: "Montserrat", Sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-size: 3.5rem;
     font-weight: 800;
     margin-bottom: 2rem;
@@ -200,7 +200,7 @@ div[class^="key"] {
 
   &__introduction {
     color: $color-gray;
-    font-family: "Montserrat", Sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-size: 2.1rem;
     font-weight: 400;
     margin-bottom: 5rem;
