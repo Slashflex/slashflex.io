@@ -11,7 +11,7 @@ $(document).ready(() => {
   });
 
   // Swiper
-  var swiper = new Swiper(".swiper-container", {
+  const swiper = new Swiper(".swiper-container", {
     loop: true,
     grabCursor: true,
     pagination: {
@@ -137,7 +137,7 @@ window.cookieconsent.initialise({
 });
 
 if (
-  window.location.pathname == "/" ||
+  window.location.pathname === "/" ||
   window.location.pathname.includes("/works/")
 ) {
   // Prevents text/image selection after a double click
@@ -154,12 +154,12 @@ if (
 
 // Gooey button
 $(".button--bubble").each(function () {
-  var $circlesTopLeft = $(this).parent().find(".circle.top-left");
-  var $circlesBottomRight = $(this).parent().find(".circle.bottom-right");
+  const $circlesTopLeft = $(this).parent().find(".circle.top-left");
+  const $circlesBottomRight = $(this).parent().find(".circle.bottom-right");
 
-  var tl = new TimelineLite();
-  var tl2 = new TimelineLite();
-  var btTl = new TimelineLite({
+  const tl = new TimelineLite();
+  const tl2 = new TimelineLite();
+  const btTl = new TimelineLite({
     paused: true,
   });
 
@@ -221,8 +221,8 @@ $(".button--bubble").each(function () {
     "-=1"
   );
 
-  var tlBt1 = new TimelineLite();
-  var tlBt2 = new TimelineLite();
+  const tlBt1 = new TimelineLite();
+  const tlBt2 = new TimelineLite();
 
   tlBt1.set($circlesTopLeft, {
     x: 0,

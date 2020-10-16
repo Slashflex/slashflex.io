@@ -34,7 +34,7 @@ if (window.innerHeight > window.innerWidth) {
     });
   }
   // iphone X -> portrait
-  if (window.innerWidth == 375 && window.innerHeight == 812) {
+  if (window.innerWidth === 375 && window.innerHeight === 812) {
     $(".round").css({
       top: "12.2%",
       marginLeft: "-13.8rem",

@@ -58,7 +58,7 @@
   }
 
   &__oops {
-    font-family: "Montserrat", Sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-weight: 800;
     font-size: 10rem;
     color: var(--links);
@@ -94,7 +94,7 @@
   }
 
   &__text {
-    font-family: "Montserrat", Sans-serif;
+    font-family: "Montserrat", sans-serif;
     font-stretch: expanded;
     font-size: 13rem;
     font-weight: 900;
@@ -118,7 +118,6 @@
     height: 56vh;
     background-image: url(/build/images/chess_1.webp);
     background-repeat: no-repeat;
-    background-position: center;
     background-position: 50% 50%;
     background-size: 38%;
     top: 95%;
@@ -133,7 +132,6 @@
     height: 56vh;
     background-image: url(/build/images/chess_2-1.webp);
     background-repeat: no-repeat;
-    background-position: center;
     background-position: 38% 61%;
     background-size: 40%;
     bottom: 200%;
@@ -148,7 +146,6 @@
     height: 90vh;
     background-image: url(/build/images/chess_3-1.webp);
     background-repeat: no-repeat;
-    background-position: center;
     background-position: 50% 50%;
     background-size: 40%;
     bottom: 400%;
