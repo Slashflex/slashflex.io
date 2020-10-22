@@ -29,7 +29,7 @@
 	<header class="intro">
 		<div class="hero">
 			<h1 class="hero__text">Slashflex</h1>
-            <img src="/build/images/model.webp" class="model-human--base img-fluid" alt="model">
+			<img src="/build/images/model.webp" class="model-human--base img-fluid" alt="model">
 
 			<!-- Chess pieces animation on mouse mouve -->
 			<div class="hero__chess1"></div>
@@ -54,22 +54,22 @@
 {% block javascripts %}
 	<script>
 	  (function(){for(let i=1;i<={{projects|length}};i++){
-		  const img = $(`.slide${[i]}`);img.css('background-image',function(){
-			  return ('url(/uploads/images' + $(this).data('background') + ')')
-		  });
-		  img.css('background-size', function () {
-			  return 'cover'
-		  });
-		  img.css('background-position', function () {
-			  return 'center'
-		  });
-		  img.css('background-repeat', function () {
-			  return 'no-repeat'
-		  });
-		  img.css('width', function () {
-			  return '348px'
-		  })
-	  }
+		const img = $(`.slide${[i]}`);img.css('background-image',function(){
+			return ('url(/uploads/images' + $(this).data('background') + ')')
+		});
+		img.css('background-size', function () {
+			return 'cover'
+		});
+		img.css('background-position', function () {
+			return 'center'
+		});
+		img.css('background-repeat', function () {
+			return 'no-repeat'
+		});
+		img.css('width', function () {
+			return '348px'
+		})
+	  	}
 	  })()
 	</script>
 {% endblock %}

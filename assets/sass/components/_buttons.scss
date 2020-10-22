@@ -222,7 +222,7 @@
 
 .toggle-container {
   position: fixed;
-  top: 3rem;
+  top: 2.3rem;
   left: 48%;
   z-index: 9999999999;
 
@@ -233,6 +233,6 @@
 
   @include respond(phone-small) {
     top: 2.5rem;
-    left: 44%;
+    left: 45%;
   }
 }
