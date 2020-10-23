@@ -48,7 +48,7 @@ class ArticleController extends AbstractController
     public function show(Article $article, Request $request)
     {
         $manager = $this->getDoctrine()->getMAnager();
-        
+
         $comment = new Comment();
 
         $form = $this->createForm(CommentType::class, $comment);
@@ -74,7 +74,7 @@ class ArticleController extends AbstractController
             return $this->redirect($referer);
         }
         return $this->render('article/show.html.twig', [
-            'title' => '/FLX | ' . ucfirst($article->getTitle()),
+            'title' => '/ FLX ' . ucfirst($article->getTitle()),
             'article' => $article,
             'form' => $form->createView(),
             'comments' => $comments
@@ -93,7 +93,7 @@ class ArticleController extends AbstractController
         $articles = $this->articleRepository->findAll();
 
         return $this->render('article/index.html.twig', [
-            'title' => '/FLX | Blog',
+            'title' => '/ FLX Blog',
             'articles' => $articles
         ]);
     }
@@ -136,7 +136,7 @@ class ArticleController extends AbstractController
         }
 
         return $this->render('article/new.html.twig', [
-            'title' => '/FLX | New Article',
+            'title' => '/ FLX New Article',
             'form' => $form->createView()
         ]);
     }
@@ -176,7 +176,7 @@ class ArticleController extends AbstractController
         }
 
         return $this->render('article/edit.html.twig', [
-            'title' => '/FLX | ' . ucfirst($article->getTitle()),
+            'title' => '/ FLX ' . ucfirst($article->getTitle()),
             'form' => $form->createView(),
             'article' => $article
         ]);

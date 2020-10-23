@@ -159,7 +159,7 @@ div[class^="key"] {
   color: $color-tertiary;
   font-family: "Montserrat", sans-serif;
   font-weight: 800;
-  animation: movingH1 20s infinite;
+  // animation: movingH1 20s infinite;
   z-index: 2;
   margin-top: 2.5rem;
 
@@ -217,4 +217,18 @@ div[class^="key"] {
 }
 .radius {
   border-radius: 2rem;
+}
+
+
+#tooltip {
+  background-color: var(--bg);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 13px;
+  display: none;
+}
+
+#tooltip[data-show] {
+  display: block;
 }

@@ -37,7 +37,7 @@ class ProjectController extends AbstractController
         $projects = $this->projectRepository->findAll();
 
         return $this->render('project/show.html.twig', [
-            'title' => '/FLX | ' . ucfirst($project->getTitle()),
+            'title' => '/ FLX ' . ucfirst($project->getTitle()),
             'project' => $project,
             'projects' => $projects
         ]);
@@ -55,7 +55,7 @@ class ProjectController extends AbstractController
         $projects = $this->projectRepository->findAll();
 
         return $this->render('project/index.html.twig', [
-            'title' => '/FLX | Works',
+            'title' => '/ FLX Works',
             'projects' => $projects
         ]);
     }
@@ -72,7 +72,7 @@ class ProjectController extends AbstractController
     public function newProject(Request $request)
     {
         $manager = $this->getDoctrine()->getManager();
-        
+
         $project = new Project();
 
         $form = $this->createForm(ProjectType::class, $project);
@@ -102,7 +102,7 @@ class ProjectController extends AbstractController
         }
 
         return $this->render('project/new.html.twig', [
-            'title' => '/FLX | New work',
+            'title' => '/ FLX New work',
             'form' => $form->createView()
         ]);
     }
@@ -120,7 +120,7 @@ class ProjectController extends AbstractController
     public function editProject(Project $project, Request $request)
     {
         $manager = $this->getDoctrine()->getManager();
-        
+
         $form = $this->createForm(ProjectType::class, $project);
         $form->handleRequest($request);
 
@@ -147,7 +147,7 @@ class ProjectController extends AbstractController
         }
 
         return $this->render('project/edit.html.twig', [
-            'title' => '/FLX | ' . ucfirst($project->getTitle()),
+            'title' => '/ FLX ' . ucfirst($project->getTitle()),
             'form' => $form->createView(),
             'project' => $project
         ]);
@@ -165,7 +165,7 @@ class ProjectController extends AbstractController
     public function deleteProject(Project $project)
     {
         $manager = $this->getDoctrine()->getManager();
-        
+
         $manager->remove($project);
         $manager->flush();
 

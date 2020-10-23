@@ -40,7 +40,7 @@ class UserController extends AbstractController
         $user = $this->getUser();
 
         return $this->render('user/index.html.twig', [
-            'title' => '/FLX | Profile',
+            'title' => '/ FLX Profile',
             'user' => $user
         ]);
     }
@@ -61,7 +61,7 @@ class UserController extends AbstractController
         $error = $authenticationUtils->getLastAuthenticationError();
 
         return $this->render('user/sign-in.html.twig', [
-            'title' => '/FLX | Login',
+            'title' => '/ FLX Login',
             'error' => $error,
             'user' => $user
         ]);
@@ -106,7 +106,7 @@ class UserController extends AbstractController
         }
 
         return $this->render('admin/edit_user.html.twig', [
-            'title' => '/FLX | ' . $user->getSlug(),
+            'title' => '/ FLX ' . $user->getSlug(),
             'form' => $form->createView(),
             'user' => $user
         ]);
@@ -126,9 +126,9 @@ class UserController extends AbstractController
     public function editUser(AuthenticationUtils $authenticationUtils, User $user, Request $request, SluggerInterface $slugger): Response
     {
         $manager = $this->getDoctrine()->getManager();
-        
+
         $error = $authenticationUtils->getLastAuthenticationError();
-        
+
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
@@ -166,7 +166,7 @@ class UserController extends AbstractController
         }
 
         return $this->render('user/edit_me.html.twig', [
-            'title' => '/FLX | ' . $user->getSlug(),
+            'title' => '/ FLX ' . $user->getSlug(),
             'form' => $form->createView(),
             'user' => $user,
             'error' => $error,
@@ -186,7 +186,7 @@ class UserController extends AbstractController
     public function addUserAvatar(User $user, Request $request, SluggerInterface $slugger): Response
     {
         $manager = $this->getDoctrine()->getManager();
-        
+
         $form = $this->createForm(AvatarUploadType::class, $user);
         $form->handleRequest($request);
 
@@ -251,7 +251,7 @@ class UserController extends AbstractController
         }
 
         return $this->render('user/upload.html.twig', [
-            'title' => '/FLX | ' . $user->__toString(),
+            'title' => '/ FLX ' . $user->__toString(),
             'form' => $form->createView(),
             'user' => $user
         ]);

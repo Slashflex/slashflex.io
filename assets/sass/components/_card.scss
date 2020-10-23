@@ -34,10 +34,14 @@
     text-align: center;
     padding: 4rem;
 
-    & .front-h2 {
-      font-size: 2.5rem;
+    & .front-h2 i {
+      font-size: 3.5rem;
       margin-bottom: 0.5rem;
-      color: var(--card-p);
+      color: var(--bg);
+
+      &:not(:last-child) {
+        margin-right: .4rem;
+      }
     }
 
     & .back-h2 {
@@ -47,9 +51,9 @@
     }
 
     & .front-p {
-      color: var(--card-p);
+      color: var(--bg);
       word-break: break-word;
-      font-size: 1.3rem;
+      font-size: 2rem;
     }
 
     & .back-p {

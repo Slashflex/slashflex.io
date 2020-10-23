@@ -40,7 +40,7 @@ class AdminController extends AbstractController
         $admin = $this->getUser();
 
         return $this->render('admin/index.html.twig', [
-            'title' => '/FLX | Admin dashboard',
+            'title' => '/ FLX Admin dashboard',
             'users' => $users,
             'projects' => $projects,
             'articles' => $articles,
@@ -62,7 +62,7 @@ class AdminController extends AbstractController
         $error = $authenticationUtils->getLastAuthenticationError();
 
         return $this->render('admin/sign-in.html.twig', [
-            'title' => '/FLX | Admin Sign-in',
+            'title' => '/ FLX Admin Sign-in',
             'error' => $error
         ]);
     }

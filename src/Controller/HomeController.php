@@ -37,7 +37,7 @@ class HomeController extends AbstractController
         $projects = $this->projectRepository->findAll();
 
         return $this->render('home/index.html.twig', [
-            'title' => '/FLX | Home',
+            'title' => '/ FLX Home',
             'projects' => $projects
         ]);
     }
@@ -52,7 +52,7 @@ class HomeController extends AbstractController
     public function notFound()
     {
         return $this->render('bundles/TwigBundle/Exception/error404.html.twig', [
-            'title' => '/FLX | Page not found',
+            'title' => '/ FLX Page not found',
         ]);
     }
 
@@ -66,7 +66,7 @@ class HomeController extends AbstractController
     public function internalServerError()
     {
         return $this->render('bundles/TwigBundle/Exception/error.html.twig', [
-            'title' => '/FLX | Internal Server Error',
+            'title' => '/ FLX Internal Server Error',
         ]);
     }
 
@@ -94,7 +94,7 @@ class HomeController extends AbstractController
         $user = $this->userRepository->findOneBy(['email' => $_ENV['DB_EMAIL']]);
 
         return $this->render('user/about.html.twig', [
-            'title' => '/FLX | About me',
+            'title' => '/ FLX About me',
             'user' => $user
         ]);
     }
@@ -152,7 +152,7 @@ class HomeController extends AbstractController
         $user = $this->userRepository->findOneBy(['email' => $_ENV['DB_EMAIL']]);
 
         return $this->render('user/contact.html.twig', [
-            'title' => '/FLX | Contact me',
+            'title' => '/ FLX Contact me',
             'user' => $user,
             'form' => $form->createView()
         ]);
@@ -168,7 +168,7 @@ class HomeController extends AbstractController
     public function terms()
     {
         return $this->render('user/terms.html.twig', [
-            'title' => '/FLX | Terms of use'
+            'title' => '/ FLX Terms of use'
         ]);
     }
 }
