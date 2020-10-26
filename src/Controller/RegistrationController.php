@@ -47,48 +47,55 @@ class RegistrationController extends AbstractController
         $lastUsername = $authenticationUtils->getLastUsername();
         $user = new User();
 
+
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // encode the plain password
-            $user->setPassword(
-                $passwordEncoder->encodePassword(
-                    $user,
-                    $form->get('password')->getData()
-                )
-            )->initializeSlug();
+            $submittedToken = $request->request->get('token');
 
-            $user->setConfirmationToken($this->generateToken());
+            if ($this->isCsrfTokenValid('register_user', $submittedToken)) {
 
-            $path = 'uploads/avatars/' . $user->getSlug();
-            // Create dedicated folder for the registered user
-            $user->setAvatar('avatar.png');
+                // encode the plain password
+                $user->setPassword(
+                    $passwordEncoder->encodePassword(
+                        $user,
+                        $form->get('password')->getData()
+                    )
+                )->initializeSlug();
 
-            // Create a user folder with increment when 2 users register having same first and last names
-            $count = 0;
+                $user->setConfirmationToken($this->generateToken());
 
-            if (file_exists($path)) {
-                mkdir($path . '-' . $count++);
-                copy('uploads/avatars/avatar.png', $path . '/avatar.png');
+                $path = 'uploads/avatars/' . $user->getSlug();
+                // Create dedicated folder for the registered user
+                $user->setAvatar('avatar.png');
+
+                // Create a user folder with increment when 2 users register having same first and last names
+                $count = 0;
+
+                if (file_exists($path)) {
+                    mkdir($path . '-' . $count++);
+                    copy('uploads/avatars/avatar.png', $path . '/avatar.png');
+                } else {
+                    mkdir($path);
+                    copy('uploads/avatars/avatar.png', $path . '/avatar.png');
+                }
+
+                $manager->persist($user);
+                $manager->flush();
+
+                $token = $user->getConfirmationToken();
+                $email = $request->request->get('registration_form')['email'];
+                $firstname = $request->request->get('registration_form')['firstname'];
+                $lastname = $request->request->get('registration_form')['lastname'];
+                $fullname = ucfirst($firstname) . ' ' . ucfirst($lastname);
+
+                $this->mailerService->sendToken($token, $email, $fullname, 'confirm.html.twig');
+                $this->addFlash('success', 'Your account has been successfully created, please check your inbox to confirm your registration');
+                return $this->redirectToRoute('home');
             } else {
-                mkdir($path);
-                copy('uploads/avatars/avatar.png', $path . '/avatar.png');
+                return $this->redirectToRoute('internal_server_error');
             }
-
-            $manager->persist($user);
-            $manager->flush();
-
-            $token = $user->getConfirmationToken();
-            $email = $request->request->get('registration_form')['email'];
-            $login = $request->request->get('registration_form')['login'];
-            $firstname = $request->request->get('registration_form')['firstname'];
-            $lastname = $request->request->get('registration_form')['lastname'];
-            $fullname = ucfirst($firstname) . ' ' . ucfirst($lastname);
-
-            $this->mailerService->sendToken($token, $email, $fullname, 'confirm.html.twig');
-            $this->addFlash('success', 'Your account has been successfully created, please check your inbox to confirm your registration');
-            return $this->redirectToRoute('home');
         }
         return $this->render('registration/register.html.twig', [
             'title' => '/ FLX | Sign up',
@@ -121,7 +128,7 @@ class RegistrationController extends AbstractController
                 'You have successfully confirmed your account. You can now log in'
             );
             return $this->redirectToRoute('home');
-        } 
+        }
     }
 
     /**
