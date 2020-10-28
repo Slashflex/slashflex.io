@@ -2,13 +2,13 @@
 $("#wrapper").mousemove((e) => {
   parallaxIt(e, ".keyF", -40);
   parallaxIt(e, ".keyU", 100);
-  parallaxIt(e, ".keyK", 45);
+  parallaxIt(e, ".keyK", -90);
   parallaxIt(e, ".keyC", -25);
   parallaxIt(e, ".wrapper__sites", -45);
 });
 
 $('.hero__projects').mousemove((e) => {
-  parallaxIt(e, ".model-human", 45);
+  parallaxIt(e, ".model-human, .model-book, .model-laptop, .model-contact", 45);
 });
 
 const parallaxIt = (e, target, movement) => {
