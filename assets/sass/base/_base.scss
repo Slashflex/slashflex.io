@@ -81,11 +81,12 @@ html {
 .flash-notice,
 .flash-notice-error {
   text-align: center;
-  padding: 1rem;
-  z-index: 1;
+  padding: 2.5rem;
+  position: fixed;
+  top: 0;
   margin: 0 auto;
   width: 100%;
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   color: $color-secondary;
   background-color: $color-tertiary;
   border-color: var(--color-headings);
