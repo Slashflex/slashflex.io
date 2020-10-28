@@ -36,10 +36,6 @@
 							<label for="content" class="form__label">Content</label>
 						</div>
 
-						{# <div class="form__group">
-							{{ form_widget(form, {'attr': { 'class': 'form__input', 'id': 'image_file' }}) }}
-							<label for="image_file" class="form__label">Image file</label>
-						</div> #}
 						{% block project_attachments_widget %}
 							{{ form_widget(form) }}
 						{% endblock %}
