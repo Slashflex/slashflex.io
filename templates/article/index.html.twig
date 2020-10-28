@@ -1,15 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ title }}
+{% block title %}
+	{{ title }}
 {% endblock %}
 
 {% block body %}
 	<div id="main">
-		<!-- Logo and Nav -->
-		{% include "partials/_top_buttons.html.twig" %}
-
-		<!-- Fullscreen Navigation -->
-		{% include "partials/_fullscreen_nav.html.twig" %}
+		{% include "partials/_nav_bar.html.twig" %}
 
 		<header class="header__projects">
 			<div class="hero__projects">
@@ -25,12 +22,14 @@
 				</div>
 			</div>
 		</header>
-		
+
 		<section class="project">
 			<div class="container">
 				<h1 class="project__title gs_reveal gs_reveal_fromLeft">Read. Install. Enjoy!</h1>
 				<p class="project__introduction gs_reveal gs_reveal_fromBottom">A place where i can share my personal resources on installing tools and software related to web application development. These tools help me on a daily basis and I will make sure to add more regularly. They will deal with web application development and web programming in general. They take the form of easy-to-follow and self-tested tutorials.</p>
-				<p class="project__introduction gs_reveal gs_reveal_fromBottom">If you find any inconsistencies or mistakes, do not hesitate to <a href="{{path('contact')}}" class="in-bl">contact me.</a></p>
+				<p class="project__introduction gs_reveal gs_reveal_fromBottom">If you find any inconsistencies or mistakes, do not hesitate to
+					<a href="{{path('contact')}}" class="in-bl">contact me.</a>
+				</p>
 			</div>
 
 			<div class="stack__text">
@@ -38,12 +37,12 @@
 				<div class="stack__text--stack gs_reveal gs_reveal_fromBottom">POSTS</div>
 			</div>
 		</section>
-		
+
 		<div class="container">
 			<div class="row cards">
 				{% for article in articles %}
-				{% set auteur = article.users %}
-					<div class="col-12 col-lg-6"> 
+					{% set auteur = article.users %}
+					<div class="col-12 col-lg-6">
 						<div class="card{{loop.index}} gs_reveal gs_reveal_fromLeft">
 							<div class="flips">
 								<div class="front{{loop.index}} vertical">
@@ -52,15 +51,16 @@
 								<div class="back{{loop.index}} vertical">
 									<div class="card-content">
 										<h2 class="mb-5">{{ article.title|capitalize }}</h2>
-										<div class="form-group">
+										<div
+											class="form-group">
 											{# <a href="{{ path('single_article', { 'slug': article.slug }) }}" class="button__login--showcase">Read</a> #}
 											<div class="goo-btn">
 												<svg xmlns="http://www.w3.org/2000/svg" class="goo">
 													<defs>
 														<filter id="goo">
-														<feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
-														<feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo" />
-														<feComposite in="SourceGraphic" in2="goo"/>
+															<feGaussianBlur in="SourceGraphic" stddeviation="10" result="blur"/>
+															<feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo"/>
+															<feComposite in="SourceGraphic" in2="goo"/>
 														</filter>
 													</defs>
 												</svg>
@@ -96,4 +96,3 @@
 	<!-- Footer -->
 	{% include "partials/_footer.html.twig" %}
 {% endblock %}
-

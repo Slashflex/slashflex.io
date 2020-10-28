@@ -6,10 +6,7 @@
 
 {% block body %}
 	<div id="main">
-		{% include "partials/_top_buttons.html.twig" %}
-
-		<!-- Fullscreen Navigation -->
-		{% include "partials/_fullscreen_nav.html.twig" %}
+		{% include "partials/_nav_bar.html.twig" %}
 
 		{% for message in app.flashes('success') %}
 			<div class="flash-notice">
@@ -33,9 +30,9 @@
 						<!-- Loads images from back-end -->
 						{% for image in project.Attachments %}
 							<div class="swiper-slide slide{{loop.index0}}" style="background-image: url(/uploads/images/{{ image.fileName }});
-								                                                                background-repeat: no-repeat;
-								                                                                background-size: cover;
-								                                                                background-position: center"></div>
+																                                                                background-repeat: no-repeat;
+																                                                                background-size: cover;
+																                                                                background-position: center"></div>
 						{% endfor %}
 					</div>
 				</div>
@@ -97,8 +94,38 @@
 {% block javascripts %}
 	<script>
 		// LightBox
-        for(let i=0;i<{{project.Attachments|length}};i++){let slides=document.querySelectorAll(`.slide${[i]}`);let lightbox=document.querySelector(`.lightbox${[i]}`);for(const slide of slides){slide.addEventListener('click',()=>{lightbox.style.display='block';lightbox.classList.add('ligthbox-open')})}
-        lightbox.addEventListener('click',()=>{lightbox.style.display='none';lightbox.classList.remove('ligthbox-open')})}
-        let swipes=new Swiper('.swiper-container-2',{effect:"coverflow",grabCursor:!0,centeredSlides:!0,slidesPerView:"auto",coverflowEffect:{rotate:20,stretch:0,depth:350,modifier:1,slideShadows:!0},navigation:{nextEl:'.swiper-button-next',prevEl:'.swiper-button-prev'}})
+		for (let i = 0; i < {{ project.Attachments|length }}; i++) {
+			let slides = document.querySelectorAll (`.slide${[i]}`);
+			let lightbox = document.querySelector (`.lightbox${[i]}`);
+			
+			for (const slide of slides) {
+				slide.addEventListener('click', () => {
+					lightbox.style.display = 'block';
+					lightbox.classList.add('ligthbox-open')
+				})
+			}
+			lightbox.addEventListener('click', () => {
+				lightbox.style.display = 'none';
+				lightbox.classList.remove('ligthbox-open')
+			})
+		}
+
+		let swipes = new Swiper('.swiper-container-2', {
+				effect: "coverflow",
+				grabCursor: !0,
+				centeredSlides: !0,
+				slidesPerView: "auto",
+				coverflowEffect: {
+				rotate: 20,
+				stretch: 0,
+				depth: 350,
+				modifier: 1,
+				slideShadows: !0
+			},
+				navigation: {
+				nextEl: '.swiper-button-next',
+				prevEl: '.swiper-button-prev'
+			}
+		})
 	</script>
 {% endblock %}

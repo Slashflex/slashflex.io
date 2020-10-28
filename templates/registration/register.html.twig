@@ -6,11 +6,7 @@
 
 {% block body %}
 	<div id="main">
-		<!-- Logo -->
-		{% include "partials/_top_buttons.html.twig" %}
-
-		<!-- Fullscreen Navigation -->
-		{% include "partials/_fullscreen_nav.html.twig" %}
+		{% include "partials/_nav_bar.html.twig" %}
 
 		<div class="create container">
 			<div class="create__form mx-auto pt-5 mt-5">
@@ -66,7 +62,7 @@
 						<div class="form__group">
 							{{ form_widget(registrationForm.login, {'attr': { 'type': 'text', 'class': 'form__input', 'placeholder': 'Nickname', 'id': 'nickname' }}) }}
 							<label for="nickname" class="form__label">Nickname</label>
-						</div> 
+						</div>
 
 						<div class="form__group">
 							<div class="form__errors-1">
@@ -78,15 +74,21 @@
 							<div class="form__radio-group">
 								{{ form_widget(registrationForm.agreeTerms, {'attr': { 'class': 'form__radio-input', 'id': 'registration_form_agreeTerms' }}) }}
 								<label for="registration_form_agreeTerms" class="form__radio-label">
-									<span class="form__radio-button"></span>Accept 
+									<span class="form__radio-button"></span>Accept
 									<a href="{{ path('terms') }}" class="in-bl">terms of use</a>
 								</label>
 							</div>
-							<p class="language-html">This site is protected by reCAPTCHA and the Google <a class="in-bl" href="https://policies.google.com/privacy">Privacy Policy</a> and <a class="in-bl" href="https://policies.google.com/terms">Terms of Service</a> apply.</p>
+							<p class="language-html">This site is protected by reCAPTCHA and the Google
+								<a class="in-bl" href="https://policies.google.com/privacy">Privacy Policy</a>
+								and
+								<a class="in-bl" href="https://policies.google.com/terms">Terms of Service</a>
+								apply.</p>
 						</div>
 					</div>
 				</div>
-				<p class="language-html text-center" style="font-size: 1.9rem; margin-bottom: 3rem">Already have an account ? <a href="{{ path('user_signin') }}" class="in-bl">login</a></p>
+				<p class="language-html text-center" style="font-size: 1.9rem; margin-bottom: 3rem">Already have an account ?
+					<a href="{{ path('user_signin') }}" class="in-bl">login</a>
+				</p>
 				<div class="form-group">
 					<button type="submit" class="button__login mx-auto d-block">Register</button>
 				</div>
@@ -101,7 +103,7 @@
 
 {% block javascripts %}
 	<script type="text/javascript">
-	let message = "{{registrationForm.agreeTerms.vars.errors.form.config.options.constraints[0].message}}";
-	window.localStorage.setItem('agree', message);
+		let message = "{{ registrationForm.agreeTerms.vars.errors.form.config.options.constraints[0].message }}";
+window.localStorage.setItem('agree', message);
 	</script>
 {% endblock %}

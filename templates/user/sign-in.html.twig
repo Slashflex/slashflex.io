@@ -5,13 +5,8 @@
 {% endblock %}
 
 {% block body %}
-    <div id="main">
-		
-		<!-- Logo -->
-		{% include "partials/_top_buttons.html.twig" %}
-
-		<!-- Fullscreen Navigation -->
-		{% include "partials/_fullscreen_nav.html.twig" %}
+	<div id="main">
+		{% include "partials/_nav_bar.html.twig" %}
 
 		{% for message in app.flashes('success') %}
 			<div class="flash-notice">
@@ -24,7 +19,7 @@
 				{{ message }}
 			</div>
 		{% endfor %}
-		
+
 		<div class="create container">
 			<div class="pt-5 mt-5">
 				<div class="stack__text">
@@ -54,19 +49,24 @@
 					</div>
 
 					<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-					
+
 					<div class="form-group d-flex">
 						<button type="submit" class="button__login mx-auto d-block">Login</button>
-						<a href="{{ path('connect_google') }}" class="button__login mx-auto d-block"><i class="fab fa-google"></i>oogle</a>
+						<a href="{{ path('connect_google') }}" class="button__login mx-auto d-block">
+							<i class="fab fa-google"></i>oogle</a>
 					</div>
 
 					<div class="form__group mt-5 text-center">
-						<p class="language-html text-center">Forgot your password ? <a href="{{ path('app_forgot_password_request') }}" class="forgot_password_request in-bl">Click here</a></p> 
+						<p class="language-html text-center">Forgot your password ?
+							<a href="{{ path('app_forgot_password_request') }}" class="forgot_password_request in-bl">Click here</a>
+						</p>
 					</div>
 
 					{% if user != null %}
 						<div class="form__group mt-5 text-center">
-							<p class="language-html text-center">You didn't received the confirmation email ? <a href="{{ path('resend_confirmation_token') }}" class="forgot_password_request in-bl">Request a new one here</a></p> 
+							<p class="language-html text-center">You didn't received the confirmation email ?
+								<a href="{{ path('resend_confirmation_token') }}" class="forgot_password_request in-bl">Request a new one here</a>
+							</p>
 						</div>
 					{% endif %}
 				</form>

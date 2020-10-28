@@ -6,11 +6,7 @@
 
 {% block body %}
 	<div id="main">
-		<!-- Logo and Nav -->
-		{% include "partials/_top_buttons.html.twig" %}
-
-		<!-- Fullscreen Navigation -->
-		{% include "partials/_fullscreen_nav.html.twig" %}
+		{% include "partials/_nav_bar.html.twig" %}
 
 		<div class="create container mt-5">
 			<div class="create__form mx-auto pt-5 pb-5">
@@ -41,25 +37,25 @@
 							<label for="image_file" class="form__label">Image file</label>
 						</div>
 						{# <div class="button_outer">
-							<div class="btn_upload">
-								{{ form_widget(form.imageFile, {'attr': { 'class': 'form__input' }}) }}
-								Upload image
-							</div>
-							<div class="processing_bar"></div>
-							<div class="success_box"></div>
-						</div>
-						<div class="error_msg"></div>
-						<div class="uploaded_file_view" id="uploaded_view">
-							<span class="file_remove">X</span>
-						</div> #}
+													<div class="btn_upload">
+														{{ form_widget(form.imageFile, {'attr': { 'class': 'form__input' }}) }}
+														Upload image
+													</div>
+													<div class="processing_bar"></div>
+													<div class="success_box"></div>
+												</div>
+												<div class="error_msg"></div>
+												<div class="uploaded_file_view" id="uploaded_view">
+													<span class="file_remove">X</span>
+												</div> #}
 
 						{# <div class="form__group">
-							{{ form_widget(form.attachments, {'attr': { 'class': 'form__input', 'id': 'image_file' }}) }}
-							<a href="#" id="add_attachment" data-prototype-add="div#project_attachments" class="btn btn-default btn-collection-add">
-								<i class="fa fa-plus" aria-hidden="true"></i> Add an image
-							</a>
-							<button type="button" data-action="delete">Delete</button>
-						</div> #}
+													{{ form_widget(form.attachments, {'attr': { 'class': 'form__input', 'id': 'image_file' }}) }}
+													<a href="#" id="add_attachment" data-prototype-add="div#project_attachments" class="btn btn-default btn-collection-add">
+														<i class="fa fa-plus" aria-hidden="true"></i> Add an image
+													</a>
+													<button type="button" data-action="delete">Delete</button>
+												</div> #}
 						{% block project_attachments_widget %}
 							{{ form_widget(form) }}
 						{% endblock %}

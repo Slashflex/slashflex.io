@@ -78,13 +78,21 @@ $(document).ready(() => {
     $("#menu").toggleClass("open");
   });
 
+
+  // Hides navbar if flash-notice is active
+  if ($('.flash-notice').css('display') == 'block') {
+    $('.navBar').css('opacity', 0);
+  } 
+  
   // Flash message
   setInterval(() => {
     $(".flash-notice").slideUp().fadeOut();
+    $('.navBar').css({opacity: 1, transition: 'opacity 3s'});
   }, 8000);
 
   setInterval(() => {
     $(".flash-notice-error").slideUp().fadeOut();
+    $('.navBar').css({opacity: 1, transition: 'opacity 3s'});
   }, 8000);
 });
 
@@ -365,4 +373,20 @@ document.addEventListener("DOMContentLoaded", function() {
       onLeave: function() { hide(elem) } // assure that the element is hidden when scrolled into view
     });
   });
+});
+
+let navBar = document.querySelector('.navBar');
+
+if (window.location.pathname.includes('/blog/post')) {
+  navBar.style.backgroundColor = 'transparent';
+}
+
+window.addEventListener('scroll', () => {
+  if (window.scrollY >= 20) {
+    navBar.style.backgroundColor = 'var(--bg)';
+    navBar.style.boxShadow = '-1px 4px .9rem -4px rgba(0,0,0,0.75)';
+  } else {
+    navBar.style.backgroundColor = 'transparent';
+    navBar.style.boxShadow = 'none';
+  }
 });

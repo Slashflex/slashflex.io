@@ -5,13 +5,8 @@
 {% endblock %}
 
 {% block body %}
-    <div id="main">
-		
-		<!-- Logo -->
-		{% include "partials/_top_buttons.html.twig" %}
-
-		<!-- Fullscreen Navigation -->
-		{% include "partials/_fullscreen_nav.html.twig" %}
+	<div id="main">
+		{% include "partials/_nav_bar.html.twig" %}
 
 		{% for message in app.flashes('success') %}
 			<div class="flash-notice">
@@ -24,7 +19,7 @@
 				{{ message }}
 			</div>
 		{% endfor %}
-		
+
 		<div class="create container">
 			<div class="pt-5 mt-5">
 				<div class="stack__text">
@@ -47,9 +42,9 @@
 						<input type="email" name="resend_token_form[email]" class="form__input" placeholder="Email address" id="email" required>
 						<label for="email" class="form__label">Email address</label>
 					</div>
-                    
+
 					{# <input type="hidden" name="_csrf_token"value="{{ csrf_token('authenticate') }}"> #}
-					
+
 					<div class="form-group">
 						<button type="submit" class="button__login mx-auto d-block">Submit</button>
 					</div>

@@ -5,71 +5,71 @@
 {% endblock %}
 
 {% block body %}
-<div id="main">
+	<div id="main">
+		{% include "partials/_nav_bar.html.twig" %}
 
-    <!-- Logo -->
-	{% include "partials/_top_buttons.html.twig" %}
+		{% for message in app.flashes('success') %}
+			<div class="flash-notice">
+				{{ message }}
+			</div>
+		{% endfor %}
 
-	<!-- Fullscreen Navigation -->
-	{% include "partials/_fullscreen_nav.html.twig" %}
+		{% for message in app.flashes('error') %}
+			<div class="flash-notice-error">
+				{{ message }}
+			</div>
+		{% endfor %}
 
-	{% for message in app.flashes('success') %}
-		<div class="flash-notice">
-			{{ message }}
-		</div>
-	{% endfor %}
+		<!-- Header -->
+		<header class="intro">
+			<div class="hero">
+				<h1 class="hero__text">Slashflex</h1>
+				<img
+				src="/build/images/model.webp" class="model-human--base img-fluid" alt="model">
 
-	{% for message in app.flashes('error') %}
-		<div class="flash-notice-error">
-			{{ message }}
-		</div>
-	{% endfor %}
-	
-	<!-- Header -->
-	<header class="intro">
-		<div class="hero">
-			<h1 class="hero__text">Slashflex</h1>
-			<img src="/build/images/model.webp" class="model-human--base img-fluid" alt="model">
+				<!-- Chess pieces animation on mouse mouve -->
+				<div class="hero__chess1"></div>
+				<div class="hero__chess2"></div>
+				<div class="hero__chess3"></div>
+			</div>
+		</header>
 
-			<!-- Chess pieces animation on mouse mouve -->
-			<div class="hero__chess1"></div>
-			<div class="hero__chess2"></div>
-			<div class="hero__chess3"></div>
-		</div>
-	</header>
+		<!-- Section About -->
+		{% include "partials/_section_about.html.twig" %}
 
-	<!-- Section About -->
-	{% include "partials/_section_about.html.twig" %}
+		<!-- Section Stack -->
+		{% include "partials/_section_stack.html.twig" %}
 
-	<!-- Section Stack -->
-	{% include "partials/_section_stack.html.twig" %}
-
-	<!-- Section Works -->
-	{% include "partials/_section_works.html.twig" %}
-</div>
+		<!-- Section Works -->
+		{% include "partials/_section_works.html.twig" %}
+	</div>
 	<!-- Footer -->
 	{% include "partials/_footer.html.twig" %}
 {% endblock %}
 
 {% block javascripts %}
 	<script>
-	  (function(){for(let i=1;i<={{projects|length}};i++){
-		const img = $(`.slide${[i]}`);img.css('background-image',function(){
-			return ('url(/uploads/images' + $(this).data('background') + ')')
-		});
-		img.css('background-size', function () {
-			return 'cover'
-		});
-		img.css('background-position', function () {
-			return 'center'
-		});
-		img.css('background-repeat', function () {
-			return 'no-repeat'
-		});
-		img.css('width', function () {
-			return '348px'
-		})
-	  	}
-	  })()
+		(function () {
+for (let i = 1; i <= {{ projects|length }}; i++) {
+const img = $ (`.slide${
+[i]
+}`);
+img.css('background-image', function () {
+return('url(/uploads/images' + $(this).data('background') + ')')
+});
+img.css('background-size', function () {
+return 'cover'
+});
+img.css('background-position', function () {
+return 'center'
+});
+img.css('background-repeat', function () {
+return 'no-repeat'
+});
+img.css('width', function () {
+return '348px'
+})
+}
+})()
 	</script>
 {% endblock %}

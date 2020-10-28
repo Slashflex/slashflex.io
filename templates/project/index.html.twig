@@ -1,14 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ title }}{% endblock %}
+{% block title %}
+	{{ title }}
+{% endblock %}
 
 {% block body %}
 	<div id="main">
-		<!-- Logo and Nav -->
-		{% include "partials/_top_buttons.html.twig" %}
-
-		<!-- Fullscreen Navigation -->
-		{% include "partials/_fullscreen_nav.html.twig" %}
+		{% include "partials/_nav_bar.html.twig" %}
 
 		<header class="header__projects">
 			<div class="hero__projects">
@@ -24,7 +22,7 @@
 				</div>
 			</div>
 		</header>
-		
+
 		<section class="project">
 			<div class="container">
 				<h1 class="project__title gs_reveal gs_reveal_fromLeft">Think. Design. Create!</h1>
@@ -37,12 +35,12 @@
 				<div class="stack__text--stack gs_reveal gs_reveal_fromBottom">WORKS</div>
 			</div>
 		</section>
-		
+
 		<div class="container">
 			<div class="row cards">
 				{% for project in projects %}
-				{% set auteur = project.users %}
-					<div class="col-12 col-lg-6"> 
+					{% set auteur = project.users %}
+					<div class="col-12 col-lg-6">
 						<div class="card{{loop.index}} gs_reveal gs_reveal_fromBottom">
 							<div class="flips">
 								<div class="front{{loop.index}} vertical">

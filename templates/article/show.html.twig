@@ -6,11 +6,7 @@
 
 {% block body %}
 	<div id="main">
-		<!-- Logo -->
-		{% include "partials/_top_buttons.html.twig" %}
-
-		<!-- Fullscreen Navigation -->
-		{% include "partials/_fullscreen_nav.html.twig" %}
+		{% include "partials/_nav_bar.html.twig" %}
 
 		{% for message in app.flashes('success') %}
 			<div class="flash-notice">
@@ -18,8 +14,7 @@
 			</div>
 		{% endfor %}
 
-		<header class="header__blog" style="background-image: url('/build/images/{{ article.imageName }}');">
-		</header>
+		<header class="header__blog" style="background-image: url('/build/images/{{ article.imageName }}');"></header>
 
 		<div class="container">
 			<div class="row mt-5 mb-5">
@@ -35,13 +30,21 @@
 
 					{% if not app.user %}
 						<h4 class="comments-section-title">
-							Please <a class="please-login in-bl" href="{{ path('user_signin') }}">Log In</a> to post.
+							Please
+							<a class="please-login in-bl" href="{{ path('user_signin') }}">Log In</a>
+							to post.
 						</h4>
 					{% else %}
 						{% if article.comments|length == 1 %}
-							<p class="text-center comments-number">There is <strong class="count-up">{{ article.comments|length }} comment</strong> about this post</p>
+							<p class="text-center comments-number">There is
+								<strong class="count-up">{{ article.comments|length }}
+									comment</strong>
+								about this post</p>
 						{% elseif article.comments|length >= 2 %}
-							<p class="text-center comments-number">There are <strong class="count-up">{{ article.comments|length }} comments</strong> about this post</p>
+							<p class="text-center comments-number">There are
+								<strong class="count-up">{{ article.comments|length }}
+									comments</strong>
+								about this post</p>
 						{% else %}
 							<p class="text-center none-yet">No comment yet! Post the first one.</p>
 						{% endif %}
@@ -55,15 +58,15 @@
 
 			{% if app.user %}
 				{{ form_start(form, {'attr': {'class': 'py-5'}}) }}
-					<div class="form__group">
-						{{ form_widget(form.content, {'attr': { 'class': 'form__input comment-block d-block', 'placeholder': 'Add comment...', 'cols': '10', 'rows': '5' }}) }}
-						<label for="content" class="form__label">Comment</label>
-						<span class="textRequired form__label"></span>
-					</div>
+				<div class="form__group">
+					{{ form_widget(form.content, {'attr': { 'class': 'form__input comment-block d-block', 'placeholder': 'Add comment...', 'cols': '10', 'rows': '5' }}) }}
+					<label for="content" class="form__label">Comment</label>
+					<span class="textRequired form__label"></span>
+				</div>
 
-					<div class="form-group">
-						<button type="button" class="button__login mx-auto d-block postComment">Publish</button>
-					</div>
+				<div class="form-group">
+					<button type="button" class="button__login mx-auto d-block postComment">Publish</button>
+				</div>
 				{{ form_end(form) }}
 			{% endif %}
 		</div>
@@ -75,27 +78,26 @@
 
 {% block javascripts %}
 	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-   	<script language="javascript">
+	<script language="javascript">
 		// Hides loader when printing as PDF
 		$(".generate-pdf").click(async function () {
 			$("#loading").hide();
 
-			await $('.pdf-btn').text('processing...') && $('.pdf-btn').append(' <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>')
+			await $('.pdf-btn').text('processing...') && $('.pdf-btn').append(' <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>');
 		});
 
-        let commentaire = '';
-		let author = "<br><span class='article__author'>Published by {{article.users.login}} {{article.createdAt|ago}}</span>";
+		let commentaire = '';
+		let author = "<br><span class='article__author'>Published by  {{ article.users.login }} {{ article.createdAt|ago }}</span>";
 
-		$('.language__title').append(author)
-
+		$('.language__title').append(author);
+		
 		{% for comment in comments %}
-            {% set idParent = "-1" %}
-            
-            {% if comment.parent is not null %}
-                {% set idParent = comment.parent.id %}
-            {% endif %}
-        
-            commentaire = `
+			{% set idParent = "-1" %}
+
+			{% if comment.parent is not null %}
+				{% set idParent = comment.parent.id %}
+			{% endif %}
+			commentaire = `
                 <li>
                     <div class="comment-wrap">
                         <div class="photo">
@@ -135,28 +137,26 @@
             `;
 
 			// Renders all comments if null
-            if ("{{idParent}}" == "-1") {
+			if ("{{ idParent }}" == "-1") {
 				$('.commentaire').append(commentaire);
-            } else {
-				// Renders all comments and their childrens (replies to given comments)
-                $(".reply-{{idParent}}").append(commentaire);
-            }
+			} else { // Renders all comments and their childrens (replies to given comments)
+				$(".reply- {{ idParent }}").append(commentaire);
+			}
 
 			{% if app.user %}
-				$('#loadComments-{{ comment.id }}').on('click', () => {
-					$('#reply-comment-{{ comment.id }}').toggle();
-					$('#commentID-{{ comment.id }}').focus();
+				$('#loadComments- {{ comment.id }}').on('click', () => {
+					$('#reply-comment- {{ comment.id }}').toggle();
+					$('#commentID- {{ comment.id }}').focus();
 				});
 
-				$('#postComment-{{comment.id}}').on('click', () => {
-					if ($("#commentID-{{comment.id}}").val() != '') {
+				$('#postComment- {{ comment.id }}').on('click', () => {
+					if ($("#commentID- {{ comment.id }}").val() != '') {
 						axios.post('/api/comments', {
-							content: $('#commentID-{{comment.id}}').val().replace(/</g, "&lt;").replace(/>/g, "&gt;"),
-							users: "/api/users/{{app.user.id}}",
-							article: "/api/articles/{{article.id}}",
-							parent: "/api/comments/{{comment.id}}"
-						})
-						.then(res => {
+							content: $('#commentID- {{ comment.id }}').val().replace(/</g, "&lt;").replace(/>/g, "&gt;"),
+							users: "/api/users/ {{ app.user.id }}",
+							article: "/api/articles/ {{ article.id }}",
+							parent: "/api/comments/ {{ comment.id }}"
+						}).then(res => {
 							let userData = res.data.users;
 							let idComment = res.data.id;
 							let first = userData.firstname.charAt(0).toLowerCase() + userData.firstname.slice(1);
@@ -198,9 +198,9 @@
 							`;
 
 							axios.get('/api/comments').then(result => {
-								let commentsNumber = '{{article.comments|length}}';
+								let commentsNumber = '{{ article.comments|length }}';
 								let total = parseInt(commentsNumber) + count;
-								
+
 								$('.none-yet').hide()
 								if (result.data.length >= 2) {
 									document.querySelector('.comments-number').innerHTML = `There are <strong class="count-up">${result.data.length} comments</strong> about this post`;
@@ -210,90 +210,85 @@
 							});
 
 							// Empty textarea
-							$("#commentID-{{comment.id}}").val('');
-							$('.reply-{{comment.id}}').append(postComment);
-							$('#reply-comment-{{comment.id}}').hide();
+							$("#commentID- {{ comment.id }}").val('');
+							$('.reply- {{ comment.id }}').append(postComment);
+							$('#reply-comment- {{ comment.id }}').hide();
 						});
 					}
 				});
 			{% endif %}
-        {% endfor %}
+		{% endfor %}
 
 		{% if app.user %}
 			// Update Comment counter
 			let text = "";
 			let count = 0;
-				
+
 			// Update comment Counter by retrieving all comments
 			axios.get('/api/comments').then(result => {
-				$('.toggle__first-one').replaceWith(`
-					<p class="text-center singular">No comment yet! Publish the first one</p>
-				`);				
+				$('.toggle__first-one').replaceWith(`<p class="text-center singular">No comment yet! Publish the first one</p>`);
 			});
 
 			$('.postComment').on('click', () => {
 				count++;
-        		let commentCount = document.querySelector('.comment__count');
+				let commentCount = document.querySelector('.comment__count');
 				// Prevents from submitting an empty field
-				if ($("#comment_content").val() != '') {
-					// Post Request to custom API
+				if ($("#comment_content").val() != '') { // Post Request to custom API
 					axios.post('/api/comments', {
 						content: $("#comment_content").val().replace(/</g, "&lt;").replace(/>/g, "&gt;"),
-						users: "/api/users/{{app.user.id}}",
-						article: "/api/articles/{{article.id}}"
-					})
-					.then(res => {
-						// Retrieves data as a response from the api call
+						users: "/api/users/ {{ app.user.id }}",
+						article: "/api/articles/ {{ article.id }}"
+					}).then(res => { // Retrieves data as a response from the api call
 						let userData = res.data.users;
 						let idComment = res.data.id;
 						let first = userData.firstname.charAt(0).toLowerCase() + userData.firstname.slice(1);
 						let last = userData.lastname.charAt(0).toLowerCase() + userData.lastname.slice(1);
 						let name = `${userData.firstname} ${userData.lastname}`;
 						let content = res.data.content.charAt(0).toUpperCase() + res.data.content.slice(1);
-						
+
 						// Converts JS variables to use them inside Twig conditions
 						{% set user = "userData" %}
-						let postComment = `
-							<li>
-								<div class="comment-wrap">
-									<div class="photo">
-										<div class="avatar" style="background-image: url(/uploads/avatars/${userData.slug}/${userData.avatar})"></div>
-									</div>
-									<div class="comment-block">
-										<div class="comment-tile">${name}</div>
-										<p class="comment-text">${content}</p>
-										<div class="bottom-comment">
-											<div class="comment-date">
-												about now
+							let postComment = `
+								<li>
+									<div class="comment-wrap">
+										<div class="photo">
+											<div class="avatar" style="background-image: url(/uploads/avatars/${userData.slug}/${userData.avatar})"></div>
+										</div>
+										<div class="comment-block">
+											<div class="comment-tile">${name}</div>
+											<p class="comment-text">${content}</p>
+											<div class="bottom-comment">
+												<div class="comment-date">
+													about now
+												</div>
+												<span class="d-flex justify-content-end float-right">
+													<a href="/comment/${idComment}/delete" class="button__login--del"><i class="fas fa-trash-alt"></i></a>
+												</span>
 											</div>
-											<span class="d-flex justify-content-end float-right">
-												<a href="/comment/${idComment}/delete" class="button__login--del"><i class="fas fa-trash-alt"></i></a>
-											</span>
 										</div>
 									</div>
-								</div>
 
-								<!-- Reply to Comment with given ID -->
-								<form action="" style="display: none" id="reply-comment-${idComment}">
-									<textarea type="text" name="comment[content]" id="commentID-${idComment}" style="width: 93%; float: right;" class="form__input d-block comment-block" ></textarea>
-									<label for="message" class="form__label">Message</label>
+									<!-- Reply to Comment with given ID -->
+									<form action="" style="display: none" id="reply-comment-${idComment}">
+										<textarea type="text" name="comment[content]" id="commentID-${idComment}" style="width: 93%; float: right;" class="form__input d-block comment-block" ></textarea>
+										<label for="message" class="form__label">Message</label>
 
-									<div class="form-group pt-2 pb-3">
-										<button type="button" id="postComment-${idComment}" class="button__login mx-auto d-block">Reply</button>
-									</div>
-								</form>
-								<ul class="reply-${idComment}" style="width: 98%; float: right"></ul>
-							</li>
-						`;
-						
+										<div class="form-group pt-2 pb-3">
+											<button type="button" id="postComment-${idComment}" class="button__login mx-auto d-block">Reply</button>
+										</div>
+									</form>
+									<ul class="reply-${idComment}" style="width: 98%; float: right"></ul>
+								</li>
+							`;
+
 						// Empty textarea
 						$("#comment_content").val('');
 						$('.commentaire').append(postComment);
 
 						axios.get('/api/comments').then(result => {
-							let commentsNumber = '{{article.comments|length}}';
+							let commentsNumber = '{{ article.comments|length }}';
 							let total = parseInt(commentsNumber) + count;
-							
+
 							$('.none-yet').hide()
 							if (result.data.length >= 2) {
 								document.querySelector('.comments-number').innerHTML = `There are <strong class="count-up">${total} comments</strong> about this post`;
@@ -304,12 +299,12 @@
 					});
 				} else {
 					$('.textRequired').text('This field is required')
-					
+
 					$("#comment_content").on('keypress', (e) => {
 						$('.textRequired').css('display', 'none')
 					});
 				}
 			});
 		{% endif %}
-    </script>
+	</script>
 {% endblock %}

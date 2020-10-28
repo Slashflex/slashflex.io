@@ -83,6 +83,7 @@
 .swiper-button-prev {
   color: var(--color-headings);
   margin-left: 10vw;
+  z-index: 9;
 
   @include respond(phone) {
     margin-left: 0;
@@ -102,8 +103,8 @@
 
 .swiper-button-next {
   color: var(--color-headings);
-
   margin-right: 10vw;
+  z-index: 9;
 
   @include respond(phone) {
     margin-right: 0;
@@ -213,7 +214,7 @@
 .mockup {
   position: relative;
   width: 100%;
-  margin: 4rem auto;
+  margin: 7rem auto;
 
   img {
     display: block;
