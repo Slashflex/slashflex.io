@@ -21,14 +21,13 @@
         <div class="create container">
             <div class="pt-5 mt-5">
                 <div class="stack__text">
-                    <div class="stack__text--projects fs-1" data-aos="fade-up">Reset your</div>
-                    <div class="stack__text--stack mb-2 fs-2" data-aos="fade-up">PASSWORD</div>
+                    <div class="stack__text--projects fs-1 gs_reveal gs_reveal_fromLeft">Reset your</div>
+                    <div class="stack__text--stack mb-2 fs-2 gs_reveal gs_reveal_fromBottom">PASSWORD</div>
                 </div>
 
                 {{ form_start(requestForm, { 'attr': {'class': 'form pb-5' }}) }}
                     <div class="form__group">
                         {{ form_row(requestForm.email, { 'attr': {'class': 'form__input', 'id': 'test' }}) }}
-                        {# <input type="email" name="reset_password_request_form[email]" class="form__input" placeholder="Email address" id="email" required> #}
                         <label for="test" class="form__label">Email address</label>
                     </div>
 

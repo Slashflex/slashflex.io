@@ -21,12 +21,11 @@
         <div class="create container">
             <div class="pt-5 mt-5">
                 <div class="stack__text">
-                    <div class="stack__text--projects fs-1" data-aos="fade-up">Reset your</div>
-                    <div class="stack__text--stack mb-2 fs-2" data-aos="fade-up">PASSWORD</div>
+                    <div class="stack__text--projects fs-1 gs_reveal gs_reveal_fromLeft">Reset your</div>
+                    <div class="stack__text--stack mb-2 fs-2 gs_reveal gs_reveal_fromBottom">PASSWORD</div>
                 </div>
 
                 {{ form_start(resetForm, { 'attr': {'class': 'form pb-5' }}) }}
-                    {# {{ form_row(resetForm.plainPassword.first) }} #}
                     <div class="form__group">
                         <div class="form__errors">
                             {{ form_errors(resetForm, {'attr': {'class': 'form__errors'}})}}

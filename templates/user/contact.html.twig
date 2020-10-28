@@ -31,36 +31,36 @@
 		<section class="project">
 			<div class="container">
 				<div class="stack__text mb-5">
-					<div class="stack__text--projects" data-aos="fade-up">Contact me</div>
-					<div class="stack__text--stack mb-2" data-aos="fade-up-right">RIGHT NOW</div>
+					<div class="stack__text--projects gs_reveal gs_reveal_fromLeft">Contact me</div>
+					<div class="stack__text--stack mb-2 gs_reveal gs_reveal_fromBottom">RIGHT NOW</div>
 				</div>
 
 				<div class="row">
 					<div class="col-lg-6">
 						{{ form_start(form, {'attr': {'class': 'form__contact pb-5'}}) }}
-						<div class="mx-auto">
+						<div class="mx-auto gs_reveal gs_reveal_fromBottom">
 							<div class="form__group">
 								{{ form_widget(form.firstname, {'attr': { 'type': 'text', 'class': 'form__input', 'placeholder': 'Firstname', 'id': 'firstname' }}) }}
 								<label for="firstname" class="form__label">Firstname</label>
 							</div>
 
-							<div class="form__group">
+							<div class="form__group gs_reveal gs_reveal_fromBottom">
 								{{ form_widget(form.lastname, {'attr': { 'type': 'text', 'class': 'form__input', 'placeholder': 'Lastname', 'id': 'lastname' }}) }}
 								<label for="lastname" class="form__label">Lastname</label>
 							</div>
 
-							<div class="form__group">
+							<div class="form__group gs_reveal gs_reveal_fromBottom">
 								{{ form_widget(form.email, {'attr': { 'type': 'email', 'class': 'form__input', 'placeholder': 'Email', 'id': 'email' }}) }}
 								<label for="email" class="form__label">Email</label>
 							</div>
 
-							<div class="form__group">
+							<div class="form__group gs_reveal gs_reveal_fromBottom">
 								{{ form_widget(form.subject, {'attr': { 'class': 'form__input fake-input', 'placeholder': 'Your message...', 'id': 'subject' }}) }}
 								<label for="subject" class="form__label">Message</label>
 							</div>
 						</div>
 
-						<div class="form-group">
+						<div class="form-group gs_reveal gs_reveal_fromBottom">
 							<button type="submit" class="button__login mx-auto d-block">Send</button>
 						</div>
 						{{ form_end(form) }}
@@ -70,7 +70,7 @@
 						<div class="row">
 							<div class="col-1"></div>
 
-							<div class="col-5">
+							<div class="col-5 gs_reveal gs_reveal_fromBottom">
 								<div class="card1">
 									<div class="flips">
 										<div class="front1 vertical contact-front-1">
@@ -90,7 +90,7 @@
 								</div>
 							</div>
 
-							<div class="col-5">
+							<div class="col-5 gs_reveal gs_reveal_fromBottom">
 								<div class="card2">
 									<div class="flips">
 										<div class="front2 vertical contact-front-2">
@@ -116,7 +116,7 @@
 						<div class="row">
 							<div class="col-1"></div>
 
-							<div class="col-5">
+							<div class="col-5 gs_reveal gs_reveal_fromBottom">
 								<div class="card3">
 									<div class="flips">
 										<div class="front3 vertical contact-front-3">
@@ -136,7 +136,7 @@
 								</div>
 							</div>
 
-							<div class="col-5">
+							<div class="col-5 gs_reveal gs_reveal_fromBottom">
 								<div class="card4">
 									<div class="flips">
 										<div class="front4 vertical contact-front-4">

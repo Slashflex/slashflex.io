@@ -28,14 +28,14 @@
 		
 		<section class="project">
 			<div class="container">
-				<h1 class="project__title" data-aos="fade-right">Read. Install. Enjoy!</h1>
-				<p class="project__introduction" data-aos="fade-right">A place where i can share my personal resources on installing tools and software related to web application development. These tools help me on a daily basis and I will make sure to add more regularly. They will deal with web application development and web programming in general. They take the form of easy-to-follow and self-tested tutorials.</p>
-				<p class="project__introduction" data-aos="fade-right">If you find any inconsistencies or mistakes, do not hesitate to <a href="{{path('contact')}}" class="in-bl">contact me.</a></p>
+				<h1 class="project__title gs_reveal gs_reveal_fromLeft">Read. Install. Enjoy!</h1>
+				<p class="project__introduction gs_reveal gs_reveal_fromBottom">A place where i can share my personal resources on installing tools and software related to web application development. These tools help me on a daily basis and I will make sure to add more regularly. They will deal with web application development and web programming in general. They take the form of easy-to-follow and self-tested tutorials.</p>
+				<p class="project__introduction gs_reveal gs_reveal_fromBottom">If you find any inconsistencies or mistakes, do not hesitate to <a href="{{path('contact')}}" class="in-bl">contact me.</a></p>
 			</div>
 
 			<div class="stack__text">
-				<div class="stack__text--projects" data-aos="fade-right">My recent</div>
-				<div class="stack__text--stack" data-aos="fade-up-right">POSTS</div>
+				<div class="stack__text--projects gs_reveal gs_reveal_fromLeft">My recent</div>
+				<div class="stack__text--stack gs_reveal gs_reveal_fromBottom">POSTS</div>
 			</div>
 		</section>
 		
@@ -44,7 +44,7 @@
 				{% for article in articles %}
 				{% set auteur = article.users %}
 					<div class="col-12 col-lg-6"> 
-						<div class="card{{loop.index}}" data-aos="fade-up-right">
+						<div class="card{{loop.index}} gs_reveal gs_reveal_fromLeft">
 							<div class="flips">
 								<div class="front{{loop.index}} vertical">
 									<div class="card-content--image-1" style="background-image: url(/build/images/{{ article.imageName }})"></div>
