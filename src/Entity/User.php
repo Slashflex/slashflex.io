@@ -37,11 +37,11 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-     * @Assert\Email(
-     *     message = "The email '{{ value }}' is not a valid email."
-     * )
      * @Assert\NotBlank(
-     *     message = "You have enter an email address." 
+     *     message="You have to enter an email address." 
+     * )
+     * @Assert\Email(
+     *     message="The email '{{ value }}' is not a valid email."
      * )
      */
     private $email;
@@ -49,12 +49,24 @@ class User implements UserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * @Assert\NotBlank(
+     *      message="You have to enter a password."
+     * )
+     * @Assert\Length(
+     *      min=8,
+     *      max=20,
+     *      minMessage="You password should contain at least {{ limit }} characters",
+     *      maxMessage="You password should contain at most {{ limit }} characters"
+     * )
      */
     private $password;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"read:comment"})
+     * @Assert\NotBlank(
+     *      message="You have to enter a first name."
+     * )
      * @Assert\Length(
      *      min=3,
      *      max=20,
@@ -67,6 +79,9 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=255) 
      * @Groups({"read:comment"})
+     * @Assert\NotBlank(
+     *      message="You have to enter a last name."
+     * )
      * @Assert\Length(
      *      min=3,
      *      max=20,
@@ -99,6 +114,9 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(
+     *      message="You have to enter a nickname."
+     * )
      * @Assert\Length(
      *      min=3,
      *      max=20,
@@ -197,8 +215,6 @@ class User implements UserInterface
         $this->articles = new ArrayCollection();
         $this->projects = new ArrayCollection();
         $this->comments = new ArrayCollection();
-        $this->replies = new ArrayCollection();
-        $this->replyToReplies = new ArrayCollection();
     }
 
     /**
