@@ -22,7 +22,7 @@ class ApiCommentController extends AbstractController
     /**
      * Retrieve all comments with nested replies 
      * 
-     * @Route("/api/comments", name="api_comment_index", methods={"GET"})
+     * @Route("/api/v1/comments", name="api_comment_index", methods={"GET"})
      *
      * @return JsonResponse
      */
@@ -32,7 +32,7 @@ class ApiCommentController extends AbstractController
     }
 
     /**
-     * @Route("/api/comments", name="api_comment_store", methods={"POST"})
+     * @Route("/api/v1/comments", name="api_comment_store", methods={"POST"})
      *
      * @param Request $request
      * @param SerializerInterface $serializer

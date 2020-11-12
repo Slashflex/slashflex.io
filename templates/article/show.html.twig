@@ -87,7 +87,7 @@
 		});
 
 		let commentaire = '';
-		let author = "<br><span class='article__author'>Published by  {{ article.users.login }} {{ article.createdAt|ago }}</span>";
+		let author = "<br><span class='article__author'>Published by {{ article.users.login }} {{ article.createdAt|ago }}</span>";
 
 		$('.language__title').append(author);
 		
@@ -140,22 +140,22 @@
 			if ("{{ idParent }}" == "-1") {
 				$('.commentaire').append(commentaire);
 			} else { // Renders all comments and their childrens (replies to given comments)
-				$(".reply- {{ idParent }}").append(commentaire);
+				$(".reply-{{ idParent }}").append(commentaire);
 			}
 
 			{% if app.user %}
-				$('#loadComments- {{ comment.id }}').on('click', () => {
-					$('#reply-comment- {{ comment.id }}').toggle();
-					$('#commentID- {{ comment.id }}').focus();
+				$('#loadComments-{{ comment.id }}').on('click', () => {
+					$('#reply-comment-{{ comment.id }}').toggle();
+					$('#commentID-{{ comment.id }}').focus();
 				});
 
-				$('#postComment- {{ comment.id }}').on('click', () => {
-					if ($("#commentID- {{ comment.id }}").val() != '') {
-						axios.post('/api/comments', {
-							content: $('#commentID- {{ comment.id }}').val().replace(/</g, "&lt;").replace(/>/g, "&gt;"),
-							users: "/api/users/ {{ app.user.id }}",
-							article: "/api/articles/ {{ article.id }}",
-							parent: "/api/comments/ {{ comment.id }}"
+				$('#postComment-{{ comment.id }}').on('click', () => {
+					if ($("#commentID-{{ comment.id }}").val() != '') {
+						axios.post('/api/v1/comments', {
+							content: $('#commentID-{{ comment.id }}').val().replace(/</g, "&lt;").replace(/>/g, "&gt;"),
+							users: "/api/v1/users/{{ app.user.id }}",
+							article: "/api/v1/articles/{{ article.id }}",
+							parent: "/api/v1/comments/{{ comment.id }}"
 						}).then(res => {
 							let userData = res.data.users;
 							let idComment = res.data.id;
@@ -197,7 +197,7 @@
 								</li>
 							`;
 
-							axios.get('/api/comments').then(result => {
+							axios.get('/api/v1/comments').then(result => {
 								let commentsNumber = '{{ article.comments|length }}';
 								let total = parseInt(commentsNumber) + count;
 
@@ -205,14 +205,14 @@
 								if (result.data.length >= 2) {
 									document.querySelector('.comments-number').innerHTML = `There are <strong class="count-up">${result.data.length} comments</strong> about this post`;
 								} else {
-									$('.comments-counter').append(`<p class="text-center comments-number">There is <strong class="count-up">${result.data.length} comment</strong> about this post</p>`);
+								$('.comments-counter').append(`<p class="text-center comments-number">There is <strong class="count-up">${result.data.length} comment</strong> about this post</p>`);
 								}
 							});
 
 							// Empty textarea
-							$("#commentID- {{ comment.id }}").val('');
-							$('.reply- {{ comment.id }}').append(postComment);
-							$('#reply-comment- {{ comment.id }}').hide();
+							$("#commentID-{{ comment.id }}").val('');
+							$('.reply-{{ comment.id }}').append(postComment);
+							$('#reply-comment-{{ comment.id }}').hide();
 						});
 					}
 				});
@@ -225,7 +225,7 @@
 			let count = 0;
 
 			// Update comment Counter by retrieving all comments
-			axios.get('/api/comments').then(result => {
+			axios.get('/api/v1/comments').then(result => {
 				$('.toggle__first-one').replaceWith(`<p class="text-center singular">No comment yet! Publish the first one</p>`);
 			});
 
@@ -234,10 +234,10 @@
 				let commentCount = document.querySelector('.comment__count');
 				// Prevents from submitting an empty field
 				if ($("#comment_content").val() != '') { // Post Request to custom API
-					axios.post('/api/comments', {
+					axios.post('/api/v1/comments', {
 						content: $("#comment_content").val().replace(/</g, "&lt;").replace(/>/g, "&gt;"),
-						users: "/api/users/ {{ app.user.id }}",
-						article: "/api/articles/ {{ article.id }}"
+						users: "/api/v1/users/{{ app.user.id }}",
+						article: "/api/v1/articles/{{ article.id }}"
 					}).then(res => { // Retrieves data as a response from the api call
 						let userData = res.data.users;
 						let idComment = res.data.id;
@@ -285,7 +285,7 @@
 						$("#comment_content").val('');
 						$('.commentaire').append(postComment);
 
-						axios.get('/api/comments').then(result => {
+						axios.get('/api/v1/comments').then(result => {
 							let commentsNumber = '{{ article.comments|length }}';
 							let total = parseInt(commentsNumber) + count;
 

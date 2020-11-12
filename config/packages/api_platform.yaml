@@ -1,4 +1,5 @@
 api_platform:
+    title: 'Slashflex.io'
     mapping:
         paths: ['%kernel.project_dir%/src/Entity']
     patch_formats:
@@ -6,3 +7,4 @@ api_platform:
     swagger:
         versions: [3]
     show_webby: false
+    version: 1.0.0
