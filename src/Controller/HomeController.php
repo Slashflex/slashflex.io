@@ -7,13 +7,13 @@ use App\Form\ContactType;
 use App\Repository\UserRepository;
 use App\Repository\ProjectRepository;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 
 class HomeController extends AbstractController
 {
@@ -120,7 +120,6 @@ class HomeController extends AbstractController
             $mail = $request->request->get('contact')['email'];
             $subject = $request->request->get('contact')['subject'];
             $fullname = ucfirst($firstname) . ' ' . ucfirst($lastname);
-
             $admin = $_ENV['DB_FIRSTNAME'] . ' ' . $_ENV['DB_LASTNAME'];
             $date = new DateTime('NOW');
 

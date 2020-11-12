@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Role;
 use App\Entity\User;
 use App\Service\MailerService;
 use App\Form\ResendTokenFormType;
