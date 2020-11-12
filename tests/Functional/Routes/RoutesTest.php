@@ -4,11 +4,15 @@ namespace App\Tests\Functional\Routes;
 
 use App\Entity\Article;
 use App\Entity\Project;
+use App\Entity\User;
 use App\Repository\UserRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class RoutesTest extends WebTestCase
 {
+
     /**
      * @dataProvider getPublicUrls
      *
@@ -83,7 +87,7 @@ class RoutesTest extends WebTestCase
         $userEmail = 'pro.davidsaoud@gmail.com';
 
         $client = static::createClient();
-        $crawler = $client->request('GET', 'https://slashflex.io/login');
+        $crawler = $client->request('GET', 'http://slashflex.io.test/login');
 
         $form = $crawler->selectButton('Login')->form();
         $form['_username'] = $userEmail;
@@ -100,7 +104,7 @@ class RoutesTest extends WebTestCase
         $adminEmail = 'pro.davidsaoud@gmail.com';
 
         $client = static::createClient();
-        $crawler = $client->request('GET', 'https://slashflex.io/admin/sign-in');
+        $crawler = $client->request('GET', 'http://slashflex.io.test/admin/sign-in');
 
         $form = $crawler->selectButton('Login')->form();
         $form['_username'] = $adminEmail;
@@ -120,18 +124,37 @@ class RoutesTest extends WebTestCase
         $userEmail = 'supraderp@gmail.com';
 
         $client = static::createClient();
-        $crawler = $client->request('GET', 'https://slashflex.io/admin/sign-in');
+        $crawler = $client->request('GET', 'http://slashflex.io.test/admin/sign-in');
 
         $form = $crawler->selectButton('Login')->form();
         $form['_username'] = $userEmail;
         $form['_password'] = 'pass1234';
 
-        $crawler = $client->submit($form);
-
+        $client->submit($form);
         $user = self::$container->get(UserRepository::class)->findOneByEmail($userEmail);
 
-        if ($user->getRoles()[0] != 'ROLE_ADMIN') {
-            $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        if ($user->getRoles() != 'ROLE_ADMIN' && $form['_username'] != $_ENV['DB_EMAIL']) {
+            $this->assertEquals(Response::HTTP_FOUND, $client->getResponse()->getStatusCode());
+            $this->assertResponseRedirects('http://slashflex.io.test/admin/sign-in', Response::HTTP_FOUND);
         }
+    }
+
+    public function testPosts()
+    {
+        $client = static::createClient();
+        $crawler = $client->request('GET', 'http://slashflex.ios/blog');
+
+        $this->assertCount(9, $crawler->filter('a.button--bubble'));
+        $this->assertSame([
+            'how-to-secure-apache-with-let-s-encrypt-on-ubuntu-20-04',
+            'how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-20-04',
+            'how-to-install-nginx-on-ubuntu-20-04',
+            'how-to-install-latest-node-js-and-npm-on-ubuntu-with-ppa',
+            'how-to-install-pgadmin4-on-ubuntu-20-04-foca-fossa',
+            'how-to-install-postgresql-on-ubuntu-20-04-lts',
+            'how-to-set-up-apache-virtual-hosts-on-ubuntu-20-04',
+            'initial-server-setup-with-ubuntu-20-04',
+            'how-to-install-the-apache-web-server-on-ubuntu-20-04'
+        ], $crawler->filter('div.col-12.col-lg-6')->extract(['id']));
     }
 }
