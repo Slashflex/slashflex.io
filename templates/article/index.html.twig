@@ -42,7 +42,7 @@
 			<div class="row cards">
 				{% for article in articles %}
 					{% set auteur = article.users %}
-					<div class="col-12 col-lg-6">
+					<div class="col-12 col-lg-6" id="{{article.slug}}">
 						<div class="card{{loop.index}} gs_reveal gs_reveal_fromLeft">
 							<div class="flips">
 								<div class="front{{loop.index}} vertical">
@@ -51,9 +51,7 @@
 								<div class="back{{loop.index}} vertical">
 									<div class="card-content">
 										<h2 class="mb-5">{{ article.title|capitalize }}</h2>
-										<div
-											class="form-group">
-											{# <a href="{{ path('single_article', { 'slug': article.slug }) }}" class="button__login--showcase">Read</a> #}
+										<div class="form-group">
 											<div class="goo-btn">
 												<svg xmlns="http://www.w3.org/2000/svg" class="goo">
 													<defs>
@@ -65,10 +63,8 @@
 													</defs>
 												</svg>
 
-												<span class="button--bubble__container" data-aos="fade-right">
-													<a href="{{ path('single_article', { 'slug': article.slug }) }}" class="button button--bubble">
-														Read
-													</a>
+												<span class="button--bubble__container">
+													<a href="{{ path('single_article', { 'slug': article.slug }) }}" class="button button--bubble">Read</a>
 													<span class="button--bubble__effect-container">
 														<span class="circle top-left"></span>
 														<span class="circle top-left"></span>
