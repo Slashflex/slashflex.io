@@ -115,3 +115,15 @@ if (window.innerHeight > window.innerWidth) {
 		});
 	}
 }
+
+let navBar = document.querySelector('.navBar');
+
+window.addEventListener('scroll', () => {
+	if (window.scrollY >= 20) {
+		navBar.style.backgroundColor = 'var(--bg)';
+		navBar.style.boxShadow = '-1px 4px .9rem -4px rgba(0,0,0,0.75)';
+	} else {
+		navBar.style.backgroundColor = 'transparent';
+		navBar.style.boxShadow = 'none';
+	}
+});
