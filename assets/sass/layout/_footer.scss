@@ -1,4 +1,11 @@
 /* Footer */
+.hidden-footer {
+  position: fixed;
+  bottom: 18%;
+  left: 0;
+  right: 0;
+  padding-top: 2rem;
+}
 .footer {
   //position: fixed;
   //bottom: 0;
@@ -97,7 +104,8 @@
   left: 0;
   right: 0;
 }
-.menu-footer, .menu-footer-1 {
+.menu-footer,
+.menu-footer-1 {
   .footer-nav {
     &__list {
       display: flex;
