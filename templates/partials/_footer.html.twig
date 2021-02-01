@@ -1,20 +1,22 @@
-<footer class="footer" id="footer">
-	<div class="container" style="
-							position: fixed;
-							bottom: 20%;
-							left: 0;
-							right: 0;
-							">
+<footer class="footer" id="footer" 
+	{% if app.request.pathInfo == '/login' or 
+		app.request.pathInfo == '/me' or 
+		app.request.pathInfo == '/admin/sign-in' %} 
+			style="position: fixed; bottom: 0;" 
+		{% endif %} 
+		{% if app.user %} 
+			{% if app.request.pathInfo == '/me/' ~ app.user.slug ~ '/edit' or 
+				  app.request.pathInfo == '/me/' ~ app.user.slug ~ '/upload' %} 
+				  style="position: fixed; bottom: 0;" 
+			{% endif %} 
+		{% endif %}>
+	<div class="container hidden-footer">
 		<div class="row mt-5">
 			<div class="col-12" id="large-mobile">
 				<a class="footer__link" href="{{ path('home') }}">
 					<span class="footer__slashflex">/ FLX</span>
 				</a>
 				<p class="language-html" style="text-align: justify;">I am always open to new interesting ideas and startups. If you need some help with your project – please do not hesitate to contact me right now!</p>
-
-				{#				<div class="btn__footer">#}
-			{#					<a href="mailto:pro.davidsaoud@gmail.com" class="button__login--text">Text Me</a>#}
-				{#				</div>#}
 			</div>
 		</div>
 

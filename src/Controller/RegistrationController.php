@@ -2,12 +2,12 @@
 
 namespace App\Controller;
 
-use App\Entity\Role;
 use App\Entity\User;
 use App\Service\MailerService;
 use App\Form\ResendTokenFormType;
 use App\Form\RegistrationFormType;
 use App\Repository\UserRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
@@ -21,15 +21,18 @@ class RegistrationController extends AbstractController
 {
     private $userRepository;
     private $mailerService;
+    private $manager;
 
-    public function __construct(UserRepository $userRepository, MailerService $mailerService)
+    // Dependency Injection
+    public function __construct(UserRepository $userRepository, MailerService $mailerService, EntityManagerInterface $manager)
     {
         $this->userRepository = $userRepository;
         $this->mailerService = $mailerService;
+        $this->manager = $manager;
     }
 
     /**
-     * Register a new user and sends an email including a token inside a link
+     * Register a new user and sends an email including a token
      *
      * @Route("/register", name="app_register")
      *
@@ -41,13 +44,11 @@ class RegistrationController extends AbstractController
      */
     public function register(AuthenticationUtils $authenticationUtils, Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
-        $manager = $this->getDoctrine()->getManager();
-        // get the login error if there is one
+        // Get the last error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
-        // last username entered by the user
+        // Extracts Security Errors from Request
         $lastUsername = $authenticationUtils->getLastUsername();
         $user = new User();
-
 
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
@@ -56,8 +57,7 @@ class RegistrationController extends AbstractController
             $submittedToken = $request->request->get('token');
 
             if ($this->isCsrfTokenValid('register_user', $submittedToken)) {
-
-                // encode the plain password
+                // Encode the plain password submitted
                 $user->setPassword(
                     $passwordEncoder->encodePassword(
                         $user,
@@ -71,28 +71,32 @@ class RegistrationController extends AbstractController
                 // Create dedicated folder for the registered user
                 $user->setAvatar('avatar.png');
 
-                // Create a user folder with increment when 2 users register having same first and last names
+                // Create a user folder with increment when 2 users register and having same first and last names
                 $count = 0;
 
                 if (file_exists($path)) {
                     mkdir($path . '-' . $count++);
-                    copy('uploads/avatars/avatar.png', $path . '/avatar.png');
+                    copy('uploads/avatars/avatar.png', $path . '-' . $count . '/avatar.png');
                 } else {
                     mkdir($path);
                     copy('uploads/avatars/avatar.png', $path . '/avatar.png');
                 }
 
-                $manager->persist($user);
-                $manager->flush();
+                $this->manager->persist($user);
+                $this->manager->flush();
 
                 $token = $user->getConfirmationToken();
+                // Retrieves form data submitted by user
                 $email = $request->request->get('registration_form')['email'];
                 $firstname = $request->request->get('registration_form')['firstname'];
                 $lastname = $request->request->get('registration_form')['lastname'];
-                $fullname = ucfirst($firstname) . ' ' . ucfirst($lastname);
+                $fullName = ucfirst($firstname) . ' ' . ucfirst($lastname);
 
-                $this->mailerService->sendToken($token, $email, $fullname, 'confirm.html.twig');
-                $this->addFlash('success', 'Your account has been successfully created, please check your inbox to confirm your registration');
+                $this->mailerService->sendToken($token, $email, $fullName, 'confirm.html.twig');
+                $this->addFlash(
+                    'success',
+                    'Your account has been successfully created, please check your inbox to confirm your registration'
+                );
                 return $this->redirectToRoute('home');
             } else {
                 return $this->redirectToRoute('internal_server_error');
@@ -107,7 +111,7 @@ class RegistrationController extends AbstractController
     }
 
     /**
-     * Confirm account once user has clicked on link received by email
+     * Confirm account once user has clicked on the link received by email
      *
      * @Route("/account/confirm/{token}", name="confirm_account")
      * @param $token

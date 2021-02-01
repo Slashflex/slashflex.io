@@ -190,7 +190,7 @@ class UserController extends AbstractController
         $form = $this->createForm(AvatarUploadType::class, $user);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted()) {
             /** @var UploadedFile $avatarFile */
             $avatarFile = $form->get('avatar')->getData();
 

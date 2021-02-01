@@ -69,12 +69,14 @@ class RegistrationFormType extends AbstractType
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue([
-                        'message' => 'You have to agree to terms of use.',
+                        'message' => 'You have to agree to the terms of use.',
                     ]),
                 ],
             ])
             ->add('captcha', Recaptcha3Type::class, [
-                'constraints' => new Recaptcha3(['message' => 'There were problems with your captcha. Please try again or contact with support and provide following code(s): {{ errorCodes }}']),
+                'constraints' => new Recaptcha3([
+                    'message' => 'There were problems with your captcha. Please try again or contact with support and provide following code(s): {{ errorCodes }}'
+                ]),
                 'action_name' => 'contact',
                 // 'script_nonce_csp' => $nonceCSP,
             ]);

@@ -7,6 +7,7 @@ use App\Entity\Project;
 use App\Entity\User;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Generator;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
@@ -61,7 +62,7 @@ class RoutesTest extends WebTestCase
         $this->assertTrue($client->getResponse()->isNotFound());
     }
 
-    public function getPublicUrls(): ?\Generator
+    public function getPublicUrls(): ?Generator
     {
         yield ['/'];
         yield ['/blog'];
@@ -73,7 +74,7 @@ class RoutesTest extends WebTestCase
         yield ['/reset-password'];
     }
 
-    public function notFoundUrls(): ?\Generator
+    public function notFoundUrls(): ?Generator
     {
         yield ['/sdfdsf'];
         yield ['/blog/1'];
@@ -110,7 +111,7 @@ class RoutesTest extends WebTestCase
         $form['_username'] = $adminEmail;
         $form['_password'] = 'pass1234';
 
-        $crawler = $client->submit($form);
+        $client->submit($form);
 
         $user = self::$container->get(UserRepository::class)->findOneByEmail($adminEmail);
 

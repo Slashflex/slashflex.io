@@ -62,6 +62,7 @@ class SecurityControllerTest extends PantherTestCase
         // ACT
         $userEmail = 'john@doe.com';
         $client = static::createPantherClient();
+        $client->manage()->window()->maximize();
         $crawler = $client->request('GET', '/register');
         $crawler->selectButton('Register')->form([
             'registration_form[email]' => $userEmail,
