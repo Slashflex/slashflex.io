@@ -1,7 +1,8 @@
 <footer class="footer" id="footer" 
 	{% if app.request.pathInfo == '/login' or 
 		app.request.pathInfo == '/me' or 
-		app.request.pathInfo == '/admin/sign-in' %} 
+		app.request.pathInfo == '/admin/sign-in' or 
+		app.request.pathInfo == '/admin' %} 
 			style="position: fixed; bottom: 0;" 
 		{% endif %} 
 		{% if app.user %} 

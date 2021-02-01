@@ -95,7 +95,7 @@ class Attachment
      *
      * @return Attachment
      */
-    public function setFileName(string $fileName)
+    public function setFileName(?string $fileName)
     {
         $this->fileName = $fileName;
 

@@ -171,7 +171,7 @@ class ProjectController extends AbstractController
 
         $this->addFlash(
             'success',
-            'The work ' . ucfirst($project->getTitle()) . ' has been deleted'
+            'The project ' . ucfirst($project->getTitle()) . ' has been deleted'
         );
 
         return $this->redirectToRoute('admin');
